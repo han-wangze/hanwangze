@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WeSchedule · 把微信群消息一键变成日程</title>
+<meta name="description" content="WeSchedule：微信小程序 MVP，将群聊消息一键转为手机日程。87 人调研、87.4% 接受度，端到端解析准确率 75%。" />
+<style>
+  :root{
+    --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
+    --primary:#4f46e5; --primary-d:#4338ca; --accent:#0ea5e9;
+    --ok:#16a34a; --warn:#f59e0b; --line:#e5e7eb;
+    --shadow:0 1px 3px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(12px);
+    background:rgba(247,248,251,.82);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--primary),var(--accent))}
+  .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted)}
+  .navlinks a:hover{color:var(--primary)}
+  @media(max-width:640px){.navlinks{display:none}}
+  /* hero */
+  header.hero{padding:72px 0 56px;background:
+    radial-gradient(1200px 400px at 80% -10%,rgba(79,70,229,.12),transparent),
+    radial-gradient(900px 360px at 0% 0%,rgba(14,165,233,.10),transparent);}
+  .hero h1{font-size:42px;line-height:1.18;font-weight:800;letter-spacing:-.5px}
+  .hero h1 .grad{background:linear-gradient(120deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.sub{margin-top:16px;font-size:18px;color:var(--muted);max-width:640px}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
+    padding:8px 14px;font-size:13px;box-shadow:var(--shadow);display:flex;gap:8px;align-items:center}
+  .badge b{color:var(--primary)}
+  .cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:600;font-size:15px;transition:.15s}
+  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(79,70,229,.35)}
+  .btn.primary:hover{background:var(--primary-d)}
+  .btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--primary);color:var(--primary)}
+  /* sections */
+  section{padding:56px 0}
+  .sec-head{margin-bottom:28px}
+  .sec-head .k{font-size:13px;font-weight:700;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase}
+  .sec-head h2{font-size:28px;font-weight:800;margin-top:6px;letter-spacing:-.3px}
+  .sec-head p{color:var(--muted);margin-top:8px;max-width:680px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media(max-width:720px){.grid3,.grid2{grid-template-columns:1fr}}
+  .stat .n{font-size:34px;font-weight:800;color:var(--primary);line-height:1}
+  .stat .l{margin-top:8px;font-size:14px;color:var(--muted)}
+  .stat .d{margin-top:6px;font-size:12px;color:#9ca3af}
+  /* architecture */
+  .arch{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);overflow-x:auto}
+  .arch svg{width:100%;height:auto;min-width:640px}
+  .flow-step{fill:#eef2ff;stroke:var(--primary);stroke-width:1.5}
+  .flow-step.t{fill:#ecfeff;stroke:var(--accent)}
+  .flow-arrow{stroke:#94a3b8;stroke-width:2;fill:none}
+  .flow-label{font-size:13px;fill:var(--ink);font-weight:600}
+  .flow-sub{font-size:11px;fill:var(--muted)}
+  /* tech */
+  .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+  @media(max-width:720px){.metric-row{grid-template-columns:repeat(2,1fr)}}
+  .metric{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;box-shadow:var(--shadow)}
+  .metric .n{font-size:26px;font-weight:800;color:var(--primary)}
+  .metric .l{font-size:12px;color:var(--muted);margin-top:4px}
+  .chart-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+  .chart-card svg{width:100%;height:auto}
+  .legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-top:10px;flex-wrap:wrap}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+  /* video */
+  .video-box{background:#0f172a;border-radius:16px;overflow:hidden;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#cbd5e1;position:relative}
+  .video-box iframe{width:100%;height:100%;border:0}
+  .video-ph{text-align:center;padding:30px}
+  .video-ph .ic{font-size:40px}
+  .video-ph .t{margin-top:10px;font-weight:700;color:#fff}
+  .video-ph .s{font-size:13px;color:#94a3b8;margin-top:6px}
+  /* links */
+  .links{display:flex;flex-wrap:wrap;gap:12px}
+  .link{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:14px 18px;font-weight:600;box-shadow:var(--shadow);transition:.15s}
+  .link:hover{border-color:var(--primary);transform:translateY(-1px)}
+  .link .em{font-size:20px}
+  /* devlog */
+  .log{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .log li{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--primary);
+    border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
+  .log li b{color:var(--primary)}
+  .log li .meta{font-size:12px;color:#9ca3af;margin-top:4px}
+  footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
+  .pill{display:inline-block;font-size:11px;background:#eef2ff;color:var(--primary);border-radius:999px;padding:3px 9px;margin-left:6px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>WeSchedule</div>
+    <div class="navlinks">
+      <a href="#why">痛点</a>
+      <a href="#arch">架构</a>
+      <a href="#tech">技术亮点</a>
+      <a href="#demo">Demo</a>
+      <a href="#links">链接</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>把微信群消息<br><span class="grad">一键变成手机日程</span></h1>
+    <p class="sub">复制群聊消息 → 打开小程序自动读剪贴板 → AI 解析 → 确认卡片可编辑 → 微信订阅消息到点提醒。告别信息过载与手动录入。</p>
+    <div class="badges">
+      <span class="badge"><b>87</b> 人校园调研</span>
+      <span class="badge"><b>87.4%</b> 愿意使用</span>
+      <span class="badge"><b>75%</b> 端到端解析准确率</span>
+      <span class="badge"><b>DeepSeek</b> 驱动</span>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="#demo">▶ 看 Demo</a>
+      <a class="btn ghost" href="https://github.com/Hanwz5411" target="_blank" rel="noopener">源码 / GitHub</a>
+    </div>
+  </div>
+</header>
+
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Why · 痛点与市场</div>
+      <h2>群消息太多，日程总漏</h2>
+      <p>面向 87 名西交大学生的调研显示：信息过载导致遗漏是最高频痛点，手动录入繁琐且被动。一款"复制即转日程"的工具接受度高达 87.4%。</p>
+    </div>
+    <div class="grid3">
+      <div class="card stat">
+        <div class="n">80%</div>
+        <div class="l">因信息过载而遗漏重要事项</div>
+        <div class="d">调研第一痛点</div>
+      </div>
+      <div class="card stat">
+        <div class="n">45.6%</div>
+        <div class="l">认为手动录入日程繁琐</div>
+        <div class="d">第二大痛点</div>
+      </div>
+      <div class="card stat">
+        <div class="n">87.4%</div>
+        <div class="l">对"微信消息转日程"表示愿意使用</div>
+        <div class="d">市场验证</div>
+      </div>
+    </div>
+    <p class="l" style="margin-top:14px;color:var(--muted);font-size:13px">注：微信不支持"转发进小程序"，故采用"复制 → 打开 → 读剪贴板"链路；对外统一表述为"复制"。</p>
+  </div>
+</section>
+
+<section id="arch" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">How · 方案架构</div>
+      <h2>一条自动化的解析链路</h2>
+      <p>小程序端捕获剪贴板，云函数调用 DeepSeek 完成结构化解析，落库后通过微信订阅消息实现到点提醒。</p>
+    </div>
+    <div class="arch">
+      <svg viewBox="0 0 920 250" role="img" aria-label="WeSchedule 架构流程图">
+        <!-- 步骤框 -->
+        <g>
+          <rect class="flow-step" x="10" y="95" width="150" height="60" rx="12"/>
+          <text class="flow-label" x="85" y="120" text-anchor="middle">复制群消息</text>
+          <text class="flow-sub" x="85" y="140" text-anchor="middle">用户操作</text>
+
+          <rect class="flow-step" x="200" y="95" width="150" height="60" rx="12"/>
+          <text class="flow-label" x="275" y="120" text-anchor="middle">读剪贴板</text>
+          <text class="flow-sub" x="275" y="140" text-anchor="middle">小程序 onShow</text>
+
+          <rect class="flow-step t" x="390" y="95" width="150" height="60" rx="12"/>
+          <text class="flow-label" x="465" y="120" text-anchor="middle">parse 云函数</text>
+          <text class="flow-sub" x="465" y="140" text-anchor="middle">调 DeepSeek</text>
+
+          <rect class="flow-step" x="580" y="95" width="150" height="60" rx="12"/>
+          <text class="flow-label" x="655" y="120" text-anchor="middle">确认卡片</text>
+          <text class="flow-sub" x="655" y="140" text-anchor="middle">可编辑保存</text>
+
+          <rect class="flow-step t" x="770" y="95" width="140" height="60" rx="12"/>
+          <text class="flow-label" x="840" y="120" text-anchor="middle">订阅消息</text>
+          <text class="flow-sub" x="840" y="140" text-anchor="middle">到点提醒</text>
+        </g>
+        <!-- 箭头 -->
+        <path class="flow-arrow" d="M160 125 H198"/>
+        <path class="flow-arrow" d="M350 125 H388"/>
+        <path class="flow-arrow" d="M540 125 H578"/>
+        <path class="flow-arrow" d="M730 125 H768"/>
+        <!-- 落库标注 -->
+        <text class="flow-sub" x="655" y="185" text-anchor="middle">↓ 保存至 events 集合（云开发数据库）</text>
+        <!-- 数据层 -->
+        <rect x="580" y="195" width="150" height="34" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/>
+        <text class="flow-sub" x="655" y="216" text-anchor="middle" style="fill:#475569;font-weight:600">云开发 DB · events</text>
+      </svg>
+    </div>
+    <p class="l" style="margin-top:14px;color:var(--muted);font-size:13px">
+      技术栈：微信小程序（WXML/WXSS/JS）· 微信云开发（云函数 + 云数据库）· DeepSeek <code>deepseek-chat</code>（temperature=0，JSON 模式）· 微信订阅消息。
+      个人主体小程序，类目"工具-效率"；系统日历写入经真机验证不可用，故采用"小程序内日程 + 订阅消息提醒"方案。
+    </p>
+  </div>
+</section>
+
+<section id="tech">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Tech · 技术亮点</div>
+      <h2>用评测闭环驱动 prompt 迭代</h2>
+      <p>没有"感觉准了"，只有"测出来准了"。自建 100 条语料 + 五层指标评测闭环，以 badcase 反向驱动提示词迭代，端到端准确率从 66.2% 提升到 75%。</p>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric"><div class="n">75%</div><div class="l">端到端完全正确率<br>(dev / test 双达标)</div></div>
+      <div class="metric"><div class="n">100%</div><div class="l">test 集 has_schedule 判定 F1</div></div>
+      <div class="metric"><div class="n">0%</div><div class="l">test 集误报率<br>(≤5% 达标)</div></div>
+      <div class="metric"><div class="n">100</div><div class="l">评测语料条数<br>(8:2 切分)</div></div>
+    </div>
+
+    <div class="chart-card">
+      <div style="font-weight:700;margin-bottom:6px">提示词迭代曲线（端到端准确率 %）</div>
+      <svg viewBox="0 0 720 280" role="img" aria-label="prompt 迭代曲线">
+        <!-- 坐标轴 -->
+        <line x1="50" y1="20" x2="50" y2="230" stroke="#cbd5e1" stroke-width="1.5"/>
+        <line x1="50" y1="230" x2="690" y2="230" stroke="#cbd5e1" stroke-width="1.5"/>
+        <!-- y 网格与刻度 60-80 -->
+        <g font-size="11" fill="#94a3b8" text-anchor="end">
+          <line x1="50" y1="230" x2="690" y2="230" stroke="#eef2f7"/>
+          <text x="44" y="234">60</text>
+          <line x1="50" y1="157" x2="690" y2="157" stroke="#eef2f7"/>
+          <text x="44" y="161">67</text>
+          <line x1="50" y1="104" x2="690" y2="104" stroke="#eef2f7"/>
+          <text x="44" y="108">72</text>
+          <line x1="50" y1="20" x2="690" y2="20" stroke="#eef2f7"/>
+          <text x="44" y="24">80</text>
+        </g>
+        <!-- 映射：x: v1=140, v1.1=380, v1.2=620 ; y: 66.2->225, 70->196, 75->157 -->
+        <!-- 计算：y = 230 - (val-60)/(80-60)*(230-20) = 230 - (val-60)/20*210
+             66.2 -> 230 - 6.2/20*210 = 230 - 65.1 = 164.9 ≈ 165
+             70   -> 230 - 10/20*210 = 230 - 105 = 125
+             75   -> 230 - 15/20*210 = 230 - 157.5 = 72.5 ≈ 72.5 -->
+        <polyline points="140,165 380,125 620,72.5"
+          fill="none" stroke="#4f46e5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="140" cy="165" r="6" fill="#4f46e5"/>
+        <circle cx="380" cy="125" r="6" fill="#4f46e5"/>
+        <circle cx="620" cy="72.5" r="6" fill="#4f46e5"/>
+        <g font-size="12" fill="#1f2937" text-anchor="middle" font-weight="700">
+          <text x="140" y="150">66.2%</text>
+          <text x="380" y="110">70.0%</text>
+          <text x="620" y="57">75.0%</text>
+        </g>
+        <g font-size="12" fill="#94a3b8" text-anchor="middle">
+          <text x="140" y="250">v1 基线</text>
+          <text x="380" y="250">v1.1</text>
+          <text x="620" y="250">v1.2 ✅</text>
+        </g>
+        <!-- 达标线 75% -->
+        <line x1="50" y1="72.5" x2="690" y2="72.5" stroke="#16a34a" stroke-width="1.2" stroke-dasharray="6 5"/>
+        <text x="686" y="66" text-anchor="end" font-size="11" fill="#16a34a">达标线 75%</text>
+      </svg>
+      <div class="legend">
+        <span><i style="background:#4f46e5"></i>端到端准确率</span>
+        <span><i style="background:#16a34a"></i>达标线 75%</span>
+      </div>
+    </div>
+
+    <p class="l" style="margin-top:16px;color:var(--muted);font-size:13px">
+      关键迭代：v1.1 新增"时段→钟点映射 / 相对星期未来向 / C 类无日期置空"；v1.2 新增"模糊但含行动意图必提取"规则，救回 C002/C003/C005/C009 漏报，dev/test 双双达到 75% 达标线。评测与线上 prompt 同步维护两份副本，确保度量有效。
+    </p>
+  </div>
+</section>
+
+<section id="demo" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Demo · 实机演示</div>
+      <h2>30 秒看懂它怎么用</h2>
+      <p>录屏展示"复制群消息 → 自动解析 → 确认保存 → 到点提醒"的完整链路。</p>
+    </div>
+    <div class="video-box">
+      <!-- TODO: 录好传 B站后，把下面的 .video-ph 替换为 <iframe src="//player.bilibili.com/player.html?bvid=你的BV号" ...></iframe> -->
+      <div class="video-ph">
+        <div class="ic">🎬</div>
+        <div class="t">Demo 视频即将上线</div>
+        <div class="s">录制前置：云函数已重传（parse 含 v1.2 prompt）+ 线上 key 已配 + 提醒链路已验证。<br>录好后会替换此占位并嵌入 B站播放器。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="links">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Links · 延伸阅读</div>
+      <h2>更多资料</h2>
+    </div>
+    <div class="links">
+      <a class="link" href="https://github.com/Hanwz5411" target="_blank" rel="noopener"><span class="em">💻</span> 源码 · GitHub</a>
+      <a class="link" href="#" target="_blank" rel="noopener"><span class="em">📊</span> 市场调研报告</a>
+      <a class="link" href="#" target="_blank" rel="noopener"><span class="em">🔒</span> 隐私说明</a>
+      <a class="link" href="#" target="_blank" rel="noopener"><span class="em">🧪</span> 评测报告 / badcase 明细</a>
+    </div>
+  </div>
+</section>
+
+<section id="devlog" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Dev Log · AI 协作开发</div>
+      <h2>给 AI 系统做工程化度量</h2>
+      <p>本项目以"评测闭环驱动"的方式迭代：先有确定性评测（固定切分 + 相对时间锚点 + 五层指标），再以 badcase 反向改 prompt，每一步都用数字验收。</p>
+    </div>
+    <ul class="log">
+      <li><b>建评测闭环</b>：100 条语料 + 8:2 固定切分（种子 20260717），五层指标覆盖 has_schedule 判定 / 误报率 / 事件级 P·R / 字段准确率 / 端到端正确率。<span class="meta">产出：run_eval.py + corpus/sample.jsonl + gen_corpus.py</span></li>
+      <li><b>prompt v1 → v1.2</b>：badcase 驱动，新增时段映射、相对星期未来向、行动意图必提取等规则。<span class="meta">结果：端到端 66.2% → 70.0% → 75.0%（dev/test 双达标）</span></li>
+      <li><b>前端体验优化</b>：剪贴板 30 字预览防撑爆布局；确认页日期/时间改用原生 picker。<span class="meta">并清理未引用的 event-card 组件与 format.js 死代码</span></li>
+      <li><b>工程化收尾</b>：密钥走本地 .env（不进对话/不进仓库）；一键评测启动器 run_dev.sh/.bat；git 初始化并修复沙箱回滚导致的工作树事故。<span class="meta">HEAD = bdc07c4</span></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>WeSchedule · 微信小程序 MVP — 把微信群消息一键变成日程</div>
+    <div style="margin-top:6px">个人作品集展示页 · 技术文档见项目 README · © 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
