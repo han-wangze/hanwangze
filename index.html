@@ -112,7 +112,7 @@
     <div class="brand"><span class="dot"></span>作品集</div>
     <div class="navlinks">
       <a href="#projects">项目</a>
-      <a href="#weschedule">WeSchedule</a>
+      <a href="weschedule.html">WeSchedule</a>
       <a href="report.html">调研报告</a>
       <a href="#links">链接</a>
     </div>
@@ -143,7 +143,7 @@
       <p>点开任意卡片查看项目详情。后续做的项目，直接在这里加一张卡片即可。</p>
     </div>
     <div class="projects">
-      <a class="pcard" href="#weschedule">
+      <a class="pcard" href="weschedule.html">
         <div class="ic">📱</div>
         <div class="t">WeSchedule</div>
         <div class="d">微信小程序 MVP：把微信群聊消息一键变成手机日程。复制群消息 → 自动解析 → 确认保存 → 订阅消息提醒。</div>
@@ -175,190 +175,21 @@
   </div>
 </section>
 
-<div id="weschedule">
+<section id="links">
   <div class="wrap">
-    <div class="backrow"><a href="#projects">← 返回项目列表</a></div>
     <div class="sec-head">
-      <div class="k">Project 01 · 微信小程序</div>
-      <h2>WeSchedule · 把微信群消息一键变成日程</h2>
-      <p>复制群消息 → 打开小程序自动读剪贴板 → AI 解析 → 确认卡片可编辑 → 微信订阅消息到点提醒。87 人调研、87.4% 接受度，端到端解析准确率 75%。</p>
+      <div class="k">Links · 延伸阅读</div>
+      <h2>更多资料</h2>
+    </div>
+    <div class="links">
+      <a class="link" href="https://github.com/Hanwz5411" target="_blank" rel="noopener"><span class="em">💻</span> 源码 · GitHub</a>
+      <a class="link" href="weschedule.html" target="_blank" rel="noopener"><span class="em">📱</span> WeSchedule 项目详情</a>
+      <a class="link" href="report.html" target="_blank" rel="noopener"><span class="em">📊</span> 市场调研报告（网页版）</a>
+      <a class="link" href="#" target="_blank" rel="noopener"><span class="em">🔒</span> 隐私说明</a>
+      <a class="link" href="#" target="_blank" rel="noopener"><span class="em">🧪</span> 评测报告 / badcase 明细</a>
     </div>
   </div>
-
-  <section id="why">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="k">Why · 痛点与市场</div>
-        <h2>群消息太多，日程总漏</h2>
-        <p>面向 87 名西交大学生的调研显示：信息过载导致遗漏是最高频痛点，手动录入繁琐且被动。一款"复制即转日程"的工具接受度高达 87.4%。<a href="report.html">查看完整调研报告 →</a></p>
-      </div>
-      <div class="grid3">
-        <div class="card stat">
-          <div class="n">80%</div>
-          <div class="l">因信息过载而遗漏重要事项</div>
-          <div class="d">调研第一痛点</div>
-        </div>
-        <div class="card stat">
-          <div class="n">45.6%</div>
-          <div class="l">认为手动录入日程繁琐</div>
-          <div class="d">第二大痛点</div>
-        </div>
-        <div class="card stat">
-          <div class="n">87.4%</div>
-          <div class="l">对"微信消息转日程"表示愿意使用</div>
-          <div class="d">市场验证</div>
-        </div>
-      </div>
-      <p class="l" style="margin-top:14px;color:var(--muted);font-size:13px">注：微信不支持"转发进小程序"，故采用"复制 → 打开 → 读剪贴板"链路；对外统一表述为"复制"。</p>
-    </div>
-  </section>
-
-  <section id="arch" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="k">How · 方案架构</div>
-        <h2>一条自动化的解析链路</h2>
-        <p>小程序端捕获剪贴板，云函数调用 DeepSeek 完成结构化解析，落库后通过微信订阅消息实现到点提醒。</p>
-      </div>
-      <div class="arch">
-        <svg viewBox="0 0 920 250" role="img" aria-label="WeSchedule 架构流程图">
-          <g>
-            <rect class="flow-step" x="10" y="95" width="150" height="60" rx="12"/>
-            <text class="flow-label" x="85" y="120" text-anchor="middle">复制群消息</text>
-            <text class="flow-sub" x="85" y="140" text-anchor="middle">用户操作</text>
-            <rect class="flow-step" x="200" y="95" width="150" height="60" rx="12"/>
-            <text class="flow-label" x="275" y="120" text-anchor="middle">读剪贴板</text>
-            <text class="flow-sub" x="275" y="140" text-anchor="middle">小程序 onShow</text>
-            <rect class="flow-step t" x="390" y="95" width="150" height="60" rx="12"/>
-            <text class="flow-label" x="465" y="120" text-anchor="middle">parse 云函数</text>
-            <text class="flow-sub" x="465" y="140" text-anchor="middle">调 DeepSeek</text>
-            <rect class="flow-step" x="580" y="95" width="150" height="60" rx="12"/>
-            <text class="flow-label" x="655" y="120" text-anchor="middle">确认卡片</text>
-            <text class="flow-sub" x="655" y="140" text-anchor="middle">可编辑保存</text>
-            <rect class="flow-step t" x="770" y="95" width="140" height="60" rx="12"/>
-            <text class="flow-label" x="840" y="120" text-anchor="middle">订阅消息</text>
-            <text class="flow-sub" x="840" y="140" text-anchor="middle">到点提醒</text>
-          </g>
-          <path class="flow-arrow" d="M160 125 H198"/>
-          <path class="flow-arrow" d="M350 125 H388"/>
-          <path class="flow-arrow" d="M540 125 H578"/>
-          <path class="flow-arrow" d="M730 125 H768"/>
-          <text class="flow-sub" x="655" y="185" text-anchor="middle">↓ 保存至 events 集合（云开发数据库）</text>
-          <rect x="580" y="195" width="150" height="34" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/>
-          <text class="flow-sub" x="655" y="216" text-anchor="middle" style="fill:#475569;font-weight:600">云开发 DB · events</text>
-        </svg>
-      </div>
-      <p class="l" style="margin-top:14px;color:var(--muted);font-size:13px">
-        技术栈：微信小程序（WXML/WXSS/JS）· 微信云开发（云函数 + 云数据库）· DeepSeek <code>deepseek-chat</code>（temperature=0，JSON 模式）· 微信订阅消息。
-        个人主体小程序，类目"工具-效率"；系统日历写入经真机验证不可用，故采用"小程序内日程 + 订阅消息提醒"方案。
-      </p>
-    </div>
-  </section>
-
-  <section id="tech">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="k">Tech · 技术亮点</div>
-        <h2>用评测闭环驱动 prompt 迭代</h2>
-        <p>没有"感觉准了"，只有"测出来准了"。自建 100 条语料 + 五层指标评测闭环，以 badcase 反向驱动提示词迭代，端到端准确率从 66.2% 提升到 75%。</p>
-      </div>
-      <div class="metric-row">
-        <div class="metric"><div class="n">75%</div><div class="l">端到端完全正确率<br>(dev / test 双达标)</div></div>
-        <div class="metric"><div class="n">100%</div><div class="l">test 集 has_schedule 判定 F1</div></div>
-        <div class="metric"><div class="n">0%</div><div class="l">test 集误报率<br>(≤5% 达标)</div></div>
-        <div class="metric"><div class="n">100</div><div class="l">评测语料条数<br>(8:2 切分)</div></div>
-      </div>
-      <div class="chart-card">
-        <div style="font-weight:700;margin-bottom:6px">提示词迭代曲线（端到端准确率 %）</div>
-        <svg viewBox="0 0 720 280" role="img" aria-label="prompt 迭代曲线">
-          <line x1="50" y1="20" x2="50" y2="230" stroke="#cbd5e1" stroke-width="1.5"/>
-          <line x1="50" y1="230" x2="690" y2="230" stroke="#cbd5e1" stroke-width="1.5"/>
-          <g font-size="11" fill="#94a3b8" text-anchor="end">
-            <line x1="50" y1="230" x2="690" y2="230" stroke="#eef2f7"/>
-            <text x="44" y="234">60</text>
-            <line x1="50" y1="157" x2="690" y2="157" stroke="#eef2f7"/>
-            <text x="44" y="161">67</text>
-            <line x1="50" y1="104" x2="690" y2="104" stroke="#eef2f7"/>
-            <text x="44" y="108">72</text>
-            <line x1="50" y1="20" x2="690" y2="20" stroke="#eef2f7"/>
-            <text x="44" y="24">80</text>
-          </g>
-          <polyline points="140,165 380,125 620,72.5" fill="none" stroke="#4f46e5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="140" cy="165" r="6" fill="#4f46e5"/>
-          <circle cx="380" cy="125" r="6" fill="#4f46e5"/>
-          <circle cx="620" cy="72.5" r="6" fill="#4f46e5"/>
-          <g font-size="12" fill="#1f2937" text-anchor="middle" font-weight="700">
-            <text x="140" y="150">66.2%</text>
-            <text x="380" y="110">70.0%</text>
-            <text x="620" y="57">75.0%</text>
-          </g>
-          <g font-size="12" fill="#94a3b8" text-anchor="middle">
-            <text x="140" y="250">v1 基线</text>
-            <text x="380" y="250">v1.1</text>
-            <text x="620" y="250">v1.2 ✅</text>
-          </g>
-          <line x1="50" y1="72.5" x2="690" y2="72.5" stroke="#16a34a" stroke-width="1.2" stroke-dasharray="6 5"/>
-          <text x="686" y="66" text-anchor="end" font-size="11" fill="#16a34a">达标线 75%</text>
-        </svg>
-        <div class="legend">
-          <span><i style="background:#4f46e5"></i>端到端准确率</span>
-          <span><i style="background:#16a34a"></i>达标线 75%</span>
-        </div>
-      </div>
-      <p class="l" style="margin-top:16px;color:var(--muted);font-size:13px">
-        关键迭代：v1.1 新增"时段→钟点映射 / 相对星期未来向 / C 类无日期置空"；v1.2 新增"模糊但含行动意图必提取"规则，救回 C002/C003/C005/C009 漏报，dev/test 双双达到 75% 达标线。评测与线上 prompt 同步维护两份副本，确保度量有效。
-      </p>
-    </div>
-  </section>
-
-  <section id="demo" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="k">Demo · 实机演示</div>
-        <h2>30 秒看懂它怎么用</h2>
-        <p>录屏展示"复制群消息 → 自动解析 → 确认保存 → 到点提醒"的完整链路。</p>
-      </div>
-      <div class="video-box">
-        <div class="video-ph">
-          <div class="ic">🎬</div>
-          <div class="t">Demo 视频即将上线</div>
-          <div class="s">录制前置：云函数已重传（parse 含 v1.2 prompt）+ 线上 key 已配 + 提醒链路已验证。<br>录好后会替换此占位并嵌入 B站播放器。</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="links">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="k">Links · 延伸阅读</div>
-        <h2>更多资料</h2>
-      </div>
-      <div class="links">
-        <a class="link" href="https://github.com/Hanwz5411" target="_blank" rel="noopener"><span class="em">💻</span> 源码 · GitHub</a>
-        <a class="link" href="report.html" target="_blank" rel="noopener"><span class="em">📊</span> 市场调研报告（网页版）</a>
-        <a class="link" href="#" target="_blank" rel="noopener"><span class="em">🔒</span> 隐私说明</a>
-        <a class="link" href="#" target="_blank" rel="noopener"><span class="em">🧪</span> 评测报告 / badcase 明细</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="devlog" style="background:#fff;border-top:1px solid var(--line)">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="k">Dev Log · AI 协作开发</div>
-        <h2>给 AI 系统做工程化度量</h2>
-        <p>本项目以"评测闭环驱动"的方式迭代：先有确定性评测（固定切分 + 相对时间锚点 + 五层指标），再以 badcase 反向改 prompt，每一步都用数字验收。</p>
-      </div>
-      <ul class="log">
-        <li><b>建评测闭环</b>：100 条语料 + 8:2 固定切分（种子 20260717），五层指标覆盖 has_schedule 判定 / 误报率 / 事件级 P·R / 字段准确率 / 端到端正确率。<span class="meta">产出：run_eval.py + corpus/sample.jsonl + gen_corpus.py</span></li>
-        <li><b>prompt v1 → v1.2</b>：badcase 驱动，新增时段映射、相对星期未来向、行动意图必提取等规则。<span class="meta">结果：端到端 66.2% → 70.0% → 75.0%（dev/test 双达标）</span></li>
-        <li><b>前端体验优化</b>：剪贴板 30 字预览防撑爆布局；确认页日期/时间改用原生 picker。<span class="meta">并清理未引用的 event-card 组件与 format.js 死代码</span></li>
-        <li><b>工程化收尾</b>：密钥走本地 .env（不进对话/不进仓库）；一键评测启动器 run_dev.sh/.bat；git 初始化并修复沙箱回滚导致的工作树事故。<span class="meta">HEAD = bdc07c4</span></li>
-      </ul>
-    </div>
-  </section>
-</div>
+</section>
 
 <footer>
   <div class="wrap">

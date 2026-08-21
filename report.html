@@ -171,8 +171,7 @@ vertical-align: middle;
   <style>
 :root{--primary:#4f46e5;--ink:#1f2937;--muted:#6b7280;--line:#e5e7eb;--bg:#f7f8fb;}
 *{box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.85;margin:0;padding:0}
-.report{max-width:800px;margin:0 auto;padding:40px 20px 90px}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.85;margin:0 auto;max-width:880px;padding:0 20px 90px}
 h1,h2,h3,h4{line-height:1.4;color:#111827;margin-top:1.7em}
 h1{font-size:30px;padding-bottom:.35em;border-bottom:2px solid var(--line);margin-top:.4em}
 h2{font-size:23px;padding-bottom:.25em;border-bottom:1px solid var(--line);margin-top:2em}
@@ -188,15 +187,22 @@ img{max-width:100%;height:auto;border-radius:10px;margin:1.1em 0;box-shadow:0 1p
 ul,ol{padding-left:1.5em;margin:.8em 0}
 li{margin:.3em 0}
 code{background:#f1f5f9;padding:2px 6px;border-radius:5px;font-size:.9em}
-.toc{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 24px;margin:1.6em 0;box-shadow:0 1px 3px rgba(16,24,40,.06)}
-.toc .toctitle{font-weight:700;margin-bottom:.5em;color:#111827}
-.toc ul{list-style:none;padding-left:0}
-.toc ul ul{padding-left:1.3em}
-.toc a{color:#374151}
 hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
-.nav-back{position:sticky;top:0;z-index:20;background:rgba(247,248,251,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:11px 20px;font-size:14px}
+#TOC{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 24px;margin:1.6em 0;box-shadow:0 1px 3px rgba(16,24,40,.06)}
+#TOC > ul{list-style:none;padding-left:0}
+#TOC ul ul{list-style:none;padding-left:1.3em}
+#TOC > ul > li{margin:.45em 0}
+#TOC a{color:#374151}
+#TOC a:hover{text-decoration:underline}
+.nav-back{position:sticky;top:0;z-index:20;background:rgba(247,248,251,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:11px 20px;font-size:14px;margin:0 -20px}
 .nav-back a{font-weight:600}
 .lead{font-size:16px;color:var(--muted)}
+.exec{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin:22px 0;box-shadow:0 1px 3px rgba(16,24,40,.06)}
+.exec h2{margin-top:0;border:none;font-size:22px;padding:0}
+.exec .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:16px}
+.exec .tile{background:#f7f8fb;border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
+.exec .tile .n{font-size:30px;font-weight:800;color:var(--primary);line-height:1}
+.exec .tile .l{font-size:13px;color:var(--muted);margin-top:8px}
 </style>
 </head>
 <body>
@@ -204,6 +210,17 @@ hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
 <header id="title-block-header">
 <h1 class="title">智能日程助手市场调查报告</h1>
 </header>
+<section class="exec">
+  <h2>核心结论速览</h2>
+  <p class="lead">面向 87 名大学生的需求调研，验证了"把微信群消息一键变成日程"这一需求的<strong>普遍性与高接受度</strong>，是 WeSchedule 立项的直接依据。</p>
+  <div class="tiles">
+    <div class="tile"><div class="n">87</div><div class="l">有效调研样本<br>（西交大学生）</div></div>
+    <div class="tile"><div class="n">80%</div><div class="l">因信息过载遗漏重要事项<br>（第一痛点）</div></div>
+    <div class="tile"><div class="n">45.6%</div><div class="l">认为手动录入日程繁琐<br>（第二痛点）</div></div>
+    <div class="tile"><div class="n">87.4%</div><div class="l">对"微信消息转日程"<br>愿意使用</div></div>
+  </div>
+  <p class="lead" style="margin-top:16px">完整报告含 42 张图表、描述性统计、交叉分析与竞品分析，点击右侧目录逐节阅读。</p>
+</section>
 <nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#目录" id="toc-目录">目录</a></li>
