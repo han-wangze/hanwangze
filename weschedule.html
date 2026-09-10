@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>WeSchedule · 作品集</title>
-<meta name="description" content="WeSchedule：微信小程序 MVP，把微信群聊消息一键变成手机日程。87 人调研、87.4% 接受度，端到端解析准确率 75%。" />
+<meta name="description" content="WeSchedule：微信小程序 MVP，把微信群聊消息一键变成手机日程，含非阻断式冲突检测与预备提醒。87 人调研、87.4% 接受度，端到端解析准确率 75%。" />
 <style>
   :root{
     --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
@@ -86,6 +86,19 @@
     border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
   .log li b{color:var(--primary)}
   .log li .meta{font-size:12px;color:#9ca3af;margin-top:4px}
+  .tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
+    border-radius:14px;overflow:hidden;box-shadow:var(--shadow);font-size:14px}
+  .tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  .tbl th{background:#f8fafc;font-size:13px;color:var(--muted);font-weight:700}
+  .tbl tr:last-child td{border-bottom:0}
+  @media(max-width:640px){.tbl{font-size:13px}.tbl th,.tbl td{padding:10px}}
+  .tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:12px;font-weight:700}
+  .tag.hard{background:#fee2e2;color:#b91c1c}
+  .tag.soft{background:#fef3c7;color:#b45309}
+  .feat h3{font-size:16px;font-weight:700;margin-bottom:8px}
+  .feat p{font-size:14px;color:var(--muted)}
+  .feat ul{margin:8px 0 0 18px;font-size:14px;color:var(--muted)}
+  .feat li{margin-bottom:4px}
   .backrow{padding:14px 0 0;font-size:14px;font-weight:600}
   .backrow a{color:var(--primary)}
   footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
@@ -101,6 +114,7 @@
       <a href="index.html">← 返回首页</a>
       <a href="#why">痛点</a>
       <a href="#arch">架构</a>
+      <a href="#smart">冲突检测</a>
       <a href="#tech">技术</a>
       <a href="#demo">Demo</a>
       <a href="#links">链接</a>
@@ -111,12 +125,14 @@
 <header class="hero">
   <div class="wrap">
     <h1>WeSchedule</h1>
-    <p class="sub">微信小程序 MVP：把微信群聊消息一键变成手机日程。复制群消息 → 自动解析 → 确认保存 → 订阅消息提醒。87 人调研、87.4% 接受度，端到端解析准确率 75%。</p>
+    <p class="sub">微信小程序 MVP：把微信群聊消息一键变成手机日程。复制群消息 → 自动解析 → 确认保存 → 订阅消息提醒，并带非阻断式<b>冲突检测</b>与<b>预备提醒</b>。87 人调研、87.4% 接受度，端到端解析准确率 75%。</p>
     <div class="badges">
       <span class="badge"><b>微信小程序</b></span>
       <span class="badge"><b>云开发</b></span>
       <span class="badge"><b>DeepSeek</b></span>
       <span class="badge"><b>75%</b> 端到端准确率</span>
+      <span class="badge"><b>冲突检测</b> 软硬分级</span>
+      <span class="badge"><b>预备提醒</b> 单授权复用</span>
     </div>
     <div class="cta">
       <a class="btn primary" href="#why">查看项目</a>
@@ -195,6 +211,68 @@
     </div>
   </section>
 
+  <section id="smart">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="k">Smart · 冲突检测与提醒策略</div>
+        <h2>把调研数据翻译成设计决策</h2>
+        <p>调研里三个数字直接约束了这个功能该长什么样：冲突检测是用户第一需求（70.1%），而"提醒打扰"是顾虑榜 5 分占比最高的一项（48.89%），"识别不准"又是顾虑均值第一（4.08）。所以功能不能只"检测出来"，得同时回应这三条约束。</p>
+      </div>
+
+      <table class="tbl">
+        <thead><tr><th style="width:40%">调研数据（约束）</th><th>由此推导的设计决策</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>冲突检测需求 <b>70.1%</b>，智能功能中排名第一</td>
+            <td>保存前自动检测时间重叠并提示，列表页同步标注 ⚠ 角标</td>
+          </tr>
+          <tr>
+            <td>"提醒打扰"顾虑均值 3.96，<b>48.89%</b> 打满分（最突出）</td>
+            <td><b>非阻断式内联警示</b>：不弹窗、不打断保存流程，用户可忽略并直接保存（成年人的日历本就允许重叠）</td>
+          </tr>
+          <tr>
+            <td>"识别不准"顾虑均值 <b>4.08</b>（第一）</td>
+            <td>凡是 AI 可能出错的环节改用<b>规则</b>：分级只依赖可靠字段 <code>is_deadline</code>，备选时段用规则法扫描而非 LLM</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="grid2" style="margin-top:18px">
+        <div class="card feat">
+          <h3>冲突分级：不是所有重叠都同等对待</h3>
+          <ul>
+            <li><span class="tag hard">硬冲突</span> 两个<b>定点事项</b>重叠（会议 vs 会议）→ 强提示 + 给备选时段</li>
+            <li><span class="tag soft">软冲突</span> 定点事项 vs <b>DDL</b> → 仅弱提示，不给改期建议</li>
+          </ul>
+          <p style="margin-top:10px">作业截止不是一个"占用时段"，它是一个 deadline——真正的问题是"截止前你有没有空干活"。这个区分让功能明显超出"时间重叠 if 判断"的水平。</p>
+          <p style="margin-top:8px"><b>关键点</b>：分级只用 <code>is_deadline</code> 这一个已很可靠的字段，<b>不引入新的 AI 输出类型</b>，从而避免了"类型判错 → 冲突等级被错误放大"的连锁风险。</p>
+        </div>
+
+        <div class="card feat">
+          <h3>建议时段：AI 提案，人裁决</h3>
+          <p>对硬冲突给出 1–2 个<b>一键采纳</b>的备选时段（chip 按钮："改为周三 16:00？"点一下即改），而不是直接改完让用户确认。</p>
+          <ul>
+            <li>默认<b>不动</b>用户的安排，用户主动采纳才生效</li>
+            <li>纯规则实现：按事件时长在当天/次日 8:00–22:00 扫描日历空隙</li>
+            <li>零成本、零延迟、<b>不会幻觉</b>——恰好回应"识别不准"顾虑</li>
+          </ul>
+          <p style="margin-top:10px">区别很微妙但重要：不是"AI 已改，你确认"（默认信任 AI），而是"AI 提案，你选"（默认不动）。</p>
+        </div>
+      </div>
+
+      <div class="card feat" style="margin-top:16px">
+        <h3>预备提醒 · 以及一个绕不开的平台约束</h3>
+        <p>含"材料 / PPT / 报告 / 准备 / 汇报"等关键词的日程，提醒会提前到<b>前一晚 20:00</b> 发出并改写文案（"请准备 · 明天 14:00 组会"），呼应调研中"忘记提前准备"这一高频痛点。</p>
+        <p style="margin-top:10px"><b>平台约束</b>：微信小程序的订阅消息是<b>"一次授权一次推送"</b>，提醒次数是受授权次数预算约束的稀缺资源。因此预备提醒<b>复用</b>该事件唯一的一次授权（把推送移到预备窗口），而不是新增一次推送——授权请求越少，用户越可能点"允许"。</p>
+        <p style="margin-top:10px">验收指标：单事件平均授权请求次数 ≤ 1.5；冲突检测因用规则实现，准确率接近 100%（已知边界：语义级冲突如"午饭撞午饭"不识别）。</p>
+      </div>
+
+      <p class="l" style="margin-top:14px;color:var(--muted);font-size:13px">
+        实现位置：<code>miniprogram/utils/conflict.js</code>（<code>detectConflicts</code> / <code>findFreeSlots</code>，纯前端零 AI 依赖）· <code>saveEvent</code> 计算 <code>is_prep</code> · <code>remind</code> 云函数按预备窗口调度。
+      </p>
+    </div>
+  </section>
+
   <section id="tech">
     <div class="wrap">
       <div class="sec-head">
@@ -256,13 +334,13 @@
       <div class="sec-head">
         <div class="k">Demo · 实机演示</div>
         <h2>30 秒看懂它怎么用</h2>
-        <p>录屏展示"复制群消息 → 自动解析 → 确认保存 → 到点提醒"的完整链路。</p>
+        <p>录屏展示"复制群消息 → 自动解析 → 冲突检测提示 → 确认保存 → 到点提醒"的完整链路。</p>
       </div>
       <div class="video-box">
         <div class="video-ph">
           <div class="ic">🎬</div>
           <div class="t">Demo 视频即将上线</div>
-          <div class="s">录制前置：云函数已重传（parse 含 v1.2 prompt）+ 线上 key 已配 + 提醒链路已验证。<br>录好后会替换此占位并嵌入 B站播放器。</div>
+          <div class="s">当前状态：云函数已重传（parse v1.2 / saveEvent / remind）。<br>真机验证通过后录屏，替换此占位并嵌入 B站播放器。</div>
         </div>
       </div>
     </div>
@@ -295,6 +373,9 @@
         <li><b>prompt v1 → v1.2</b>：badcase 驱动，新增时段映射、相对星期未来向、行动意图必提取等规则。<span class="meta">结果：端到端 66.2% → 70.0% → 75.0%（dev/test 双达标）</span></li>
         <li><b>前端体验优化</b>：剪贴板 30 字预览防撑爆布局；确认页日期/时间改用原生 picker。<span class="meta">并清理未引用的 event-card 组件与 format.js 死代码</span></li>
         <li><b>工程化收尾</b>：密钥走本地 .env（不进对话/不进仓库）；一键评测启动器 run_dev.sh/.bat；git 初始化并修复沙箱回滚导致的工作树事故。<span class="meta">HEAD = bdc07c4</span></li>
+        <li><b>P0 · 云函数时区 bug</b>：云函数运行在 UTC，导致北京时间 00:00–08:00 期间"今天"被算成前一天，日程锚点落在过去 → 提醒永不触发。改为显式 <code>Date.now()+8h</code> + <code>getUTC*</code> 换算。<span class="meta">这是"提醒不发"的真正根因，靠日志 scanned=12 / sent=0 反查定位</span></li>
+        <li><b>冲突检测</b>：基于 <code>is_deadline</code> 的软/硬分级 + 非阻断式内联警示 + 规则法空闲槽 chip。刻意<b>不引入</b>新的 AI 输出类型，避免"类型判错 → 冲突等级被放大"。<span class="meta">纯前端实现，零云函数改动、零 prompt 改动</span></li>
+        <li><b>预备提醒</b>：识别含准备关键词的日程，复用该事件唯一的一次订阅授权，把推送移到前一晚 20:00 的预备窗口。<span class="meta">回应微信"一次授权一次推送"的稀缺性约束，不增加授权请求</span></li>
       </ul>
     </div>
   </section>
