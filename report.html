@@ -45,6 +45,7 @@
   .brand .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--primary),var(--accent))}
   .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted);flex-wrap:wrap}
   .navlinks a:hover{color:var(--primary)}
+  .navlinks a.on{color:var(--primary);font-weight:600}
   @media(max-width:640px){.navlinks{display:none}}
   header.hero{padding:64px 0 48px;background:
     radial-gradient(1200px 400px at 80% -10%,rgba(79,70,229,.12),transparent),
@@ -89,8 +90,9 @@
     <div class="navlinks">
       <a href="index.html">首页</a>
       <a href="experience-cyou.html">实习经历</a>
-      <a href="weschedule.html">WeSchedule</a>
-      <a href="competition.html">竞争定位</a>
+      <a href="research.html">研究与写作</a>
+      <a class="on" href="index.html#projects">项目</a>
+      <a href="index.html#links">联系</a>
     </div>
   </div>
 </nav>
@@ -102,6 +104,9 @@
     <div class="cta">
       <a class="btn primary" href="report-full.html">阅读完整报告</a>
       <a class="btn ghost" href="weschedule.html">看调研如何变成产品 →</a>
+    </div>
+    <div style="margin-top:22px;max-width:790px;font-size:14px;color:var(--muted);background:#fff;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:14px 16px">
+      <b style="color:var(--ink)">本页与完整版的分工</b>：本页是速览——4 个核心数字与需求排序，一分钟看完；完整版补上调研方法、描述性统计、交叉分析、开放题文本分析、竞品分析、战略建议与问卷原文，共 60+ 小节、42 张图表，并附制图代码，供深挖核对。
     </div>
   </div>
 </header>

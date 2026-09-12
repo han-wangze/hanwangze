@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>软件测试实习 · 中服云 | 韩王泽</title>
+<meta name="description" content="中服软件（西安）有限公司（中服云）软件测试实习（2025.07）：工业物联网平台设备版 v5.0 的功能测试，覆盖 6 大模块、20 余个功能页面，提交缺陷 50 余项并走 Jira 闭环。" />
+<meta name="author" content="韩王泽" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<meta name="theme-color" content="#4f46e5" />
+<link rel="canonical" href="https://han-wangze.github.io/hanwangze/experience-zyf.html" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="韩王泽 · 个人主页" />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:title" content="软件测试实习 · 中服云 | 韩王泽" />
+<meta property="og:description" content="工业物联网平台设备版 v5.0 功能测试：覆盖 6 大模块、20 余个功能页面，提交缺陷 50 余项，全部走 Jira 闭环。" />
+<meta property="og:url" content="https://han-wangze.github.io/hanwangze/experience-zyf.html" />
+<meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="韩王泽个人主页：教育经历、实习经历与项目作品" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="软件测试实习 · 中服云 | 韩王泽" />
+<meta name="twitter:description" content="工业物联网平台设备版 v5.0 功能测试：覆盖 6 大模块、20 余个功能页面，提交缺陷 50 余项，全部走 Jira 闭环。" />
+<meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
+<style>
+  :root{
+    --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
+    --primary:#4f46e5; --primary-d:#4338ca; --accent:#0ea5e9;
+    --ok:#16a34a; --warn:#f59e0b; --line:#e5e7eb;
+    --shadow:0 1px 3px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(12px);
+    background:rgba(247,248,251,.82);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--primary),var(--accent))}
+  .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted)}
+  .navlinks a:hover{color:var(--primary)}
+  .navlinks a.on{color:var(--primary);font-weight:600}
+  @media(max-width:760px){.navlinks{display:none}}
+  header.hero{padding:64px 0 48px;background:
+    radial-gradient(1200px 400px at 80% -10%,rgba(79,70,229,.12),transparent),
+    radial-gradient(900px 360px at 0% 0%,rgba(14,165,233,.10),transparent);}
+  .hero h1{font-size:36px;line-height:1.22;font-weight:800;letter-spacing:-.5px}
+  .hero h1 .grad{background:linear-gradient(120deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .meta{margin-top:14px;font-size:15px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 18px}
+  .hero p.sub{margin-top:16px;font-size:17px;color:var(--muted);max-width:720px}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
+    padding:8px 14px;font-size:13px;box-shadow:var(--shadow);display:flex;gap:8px;align-items:center}
+  .badge b{color:var(--primary)}
+  .cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:12px;font-weight:600;font-size:14px;transition:.15s}
+  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(79,70,229,.35)}
+  .btn.primary:hover{background:var(--primary-d)}
+  .btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--primary);color:var(--primary)}
+  section{padding:48px 0}
+  section.alt{background:linear-gradient(180deg,rgba(79,70,229,.035),transparent)}
+  .sec-head{margin-bottom:26px}
+  .sec-head .k{font-size:13px;font-weight:700;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase}
+  .sec-head h2{font-size:26px;font-weight:800;margin-top:6px;letter-spacing:-.3px}
+  .sec-head p{color:var(--muted);margin-top:8px;max-width:740px;font-size:15px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+  .note{font-size:13.5px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+  .note b{color:var(--ink)}
+  /* 模块覆盖 */
+  .mods{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:760px){.mods{grid-template-columns:1fr}}
+  .mod{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow)}
+  .mod .mh{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .mod .mt{font-weight:800;font-size:16px}
+  .mod .mn{font-size:11.5px;font-weight:700;color:#fff;background:var(--primary);border-radius:999px;padding:2px 9px;white-space:nowrap}
+  .mod .md{font-size:13.5px;color:var(--muted);margin-top:8px}
+  .mod .mp{margin-top:9px;display:flex;flex-wrap:wrap;gap:6px}
+  .mod .mp span{font-size:11.5px;background:#f1f5f9;color:#475569;border-radius:7px;padding:3px 8px}
+  /* 方法条 */
+  .steps{display:flex;flex-direction:column;gap:12px}
+  .step{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--primary);border-radius:12px;padding:15px 18px;box-shadow:var(--shadow)}
+  .step .h{font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px}
+  .step .d{font-size:13.5px;color:var(--muted);margin-top:6px}
+  .step .d em{font-style:normal;color:var(--ink);background:#eef2ff;border-radius:4px;padding:0 4px}
+  /* 缺陷 */
+  .bugs{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media(max-width:760px){.bugs{grid-template-columns:1fr}}
+  .bug{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+  .bug .bt{font-weight:800;font-size:15.5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .bug .tag{font-size:11px;font-weight:700;border-radius:999px;padding:2px 9px}
+  .bug .tag.hi{background:#fef2f2;color:#b91c1c}
+  .bug .tag.mid{background:#fff7ed;color:#b45309}
+  .bug .tag.lo{background:#f1f5f9;color:#475569}
+  .bug ul{margin:0 0 0 17px;font-size:13.5px;color:var(--muted)}
+  .bug ul li{margin-bottom:5px}
+  .bug ul li b{color:var(--ink);font-weight:600}
+  .bug .loc{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;color:#64748b;background:#f8fafc;border:1px solid var(--line);border-radius:7px;padding:2px 7px;display:inline-block}
+  /* 案例 */
+  .cases{display:flex;flex-direction:column;gap:12px}
+  .case{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);
+    display:grid;grid-template-columns:26px 1fr;gap:12px}
+  .case .idx{width:26px;height:26px;border-radius:8px;background:#eef2ff;color:var(--primary);font-weight:800;font-size:13px;
+    display:flex;align-items:center;justify-content:center}
+  .case .ct{font-weight:700;font-size:14.5px}
+  .case .cd{font-size:13.5px;color:var(--muted);margin-top:4px}
+  .case .cd b{color:var(--ink)}
+  .case .risk{font-size:12.5px;color:#b91c1c;background:#fef2f2;border-radius:8px;padding:6px 10px;margin-top:8px;display:inline-block}
+  /* 收获 */
+  .gains{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:760px){.gains{grid-template-columns:1fr}}
+  .gain{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow)}
+  .gain .gt{font-weight:800;font-size:15px;color:var(--primary)}
+  .gain .gd{font-size:13.5px;color:var(--muted);margin-top:7px}
+  .stackrow{display:grid;grid-template-columns:88px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);align-items:start}
+  .stackrow:last-child{border-bottom:0}
+  .stackrow .sl{font-weight:700;font-size:14px;color:var(--primary);padding-top:3px}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{font-size:12.5px;background:#f1f5f9;color:#334155;border-radius:8px;padding:4px 10px}
+  footer{padding:36px 0 56px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>韩王泽</div>
+    <div class="navlinks">
+      <a href="index.html">首页</a>
+      <a class="on" href="experience-cyou.html">实习经历</a>
+      <a href="research.html">研究与写作</a>
+      <a href="index.html#projects">项目</a>
+      <a href="index.html#links">联系</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>中服软件（西安）有限公司 · <span class="grad">软件测试实习</span></h1>
+    <div class="meta">
+      <span>🏢 中服云（工业互联网平台厂商）</span>
+      <span>🧪 软件测试实习生</span>
+      <span>🗓 2025.07</span>
+      <span>🎓 学校组织的专业实习</span>
+    </div>
+    <p class="sub">在工业物联网平台「设备版 v5.0」上做功能测试：15 个工作日覆盖 6 大模块、20 余个功能页面，提交缺陷 50 余项，全部按「操作步骤 — 预期结果 — 实际差异」走 Jira 闭环。</p>
+    <div class="badges">
+      <span class="badge"><b>6</b> 大功能模块</span>
+      <span class="badge"><b>20+</b> 功能页面</span>
+      <span class="badge"><b>50+</b> 缺陷提交</span>
+      <span class="badge">Jira 缺陷闭环</span>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="index.html#about">← 返回主页</a>
+      <a class="btn ghost" href="experience-cyou.html">查看战略分析实习 →</a>
+    </div>
+    <div class="note" style="margin-top:24px">
+      <b>关于本页口径</b>：本次实习为西安交通大学经济与金融学院组织的专业实习。因涉及企业内部系统界面、菜单结构与客户信息，本页仅以文字形式说明工作内容、方法与我个人的判断，<b>不含任何系统截图、客户名单与内部数据</b>。
+    </div>
+  </div>
+</header>
+
+<section id="scope">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Scope · 测试范围</div>
+      <h2>我测了什么</h2>
+      <p>被测系统是面向工厂设备运维的工业物联网平台。我负责的 6 个模块串起来正好是一条完整的设备生命周期：<b>买进来 → 存得住 → 修得动 → 看得见 → 管得住</b>。</p>
+    </div>
+    <div class="mods">
+      <div class="mod">
+        <div class="mh"><div class="mt">设备资产</div><div class="mn">17 项缺陷</div></div>
+        <div class="md">设备从入库到报废的全流程台账，也是本次缺陷最集中的模块——采购、调拨、验收三条链路都有问题。</div>
+        <div class="mp"><span>设备台账</span><span>设备调拨</span><span>借用归还</span><span>安装验收</span><span>状态变更</span><span>采购需求</span><span>采购计划</span></div>
+      </div>
+      <div class="mod">
+        <div class="mh"><div class="mt">备品备件</div><div class="mn">8 项缺陷</div></div>
+        <div class="md">备件的分类、位置、模板与库存管理，重点是参数校验与库存上下限这类边界逻辑。</div>
+        <div class="mp"><span>备件分类</span><span>位置管理</span><span>模板管理</span><span>库存设置</span><span>备件采购</span></div>
+      </div>
+      <div class="mod">
+        <div class="mh"><div class="mt">两票管理</div><div class="mn">9 项缺陷</div></div>
+        <div class="md">工业现场作业的强制安全流程（工作票 / 操作票），缺陷一旦上线直接关联生产安全。</div>
+        <div class="mp"><span>工作票</span><span>安全措施</span><span>班组管理</span><span>排班管理</span><span>运行日志</span></div>
+      </div>
+      <div class="mod">
+        <div class="mh"><div class="mt">系统管理</div><div class="mn">7 项缺陷</div></div>
+        <div class="md">组织机构、权限与操作日志。权限配置的疏漏会直接影响数据边界，是内控相关度最高的模块。</div>
+        <div class="mp"><span>组织机构</span><span>角色权限</span><span>操作日志</span></div>
+      </div>
+      <div class="mod">
+        <div class="mh"><div class="mt">设备监控</div><div class="mn">3 项缺陷</div></div>
+        <div class="md">实时数据监测、视频监控与工单派发，考察数据展示的准确性与交互的确定性。</div>
+        <div class="mp"><span>数据监测</span><span>视频监控</span><span>快速派单</span></div>
+      </div>
+      <div class="mod">
+        <div class="mh"><div class="mt">设备健康</div><div class="mn">1 项缺陷</div></div>
+        <div class="md">设备健康概览与报警趋势展示，验证图表在筛选条件下的可读性。</div>
+        <div class="mp"><span>健康概览</span><span>报警趋势</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Method · 工作方法</div>
+      <h2>我是怎么测的</h2>
+      <p>没有测试用例库和自动化脚本，靠的是把「可交互的地方全点一遍」做到系统性，再用对比法找出不一致。</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="h">① 覆盖性测试：遍历每一个可交互元素</div>
+        <div class="d">对负责模块中的每个<em>按钮、链接、菜单项、输入框、下拉框、复选框</em>逐一操作，分别验证四件事：是否响应、结果是否符合预期、视觉反馈（加载态 / 悬停态）是否正常、以及按钮在特定条件下是否正确置灰。</div>
+      </div>
+      <div class="step">
+        <div class="h">② 边界值与异常操作：专门做「不该发生的事」</div>
+        <div class="d">字数上限超填、必填项留空、连续快速双击、超出范围的数值、超长文本提交。多个缺陷都是这样撞出来的——例如库存下限可以被设置为大于上限，安全措施连续点两次「确定」会产生两条重复记录。</div>
+      </div>
+      <div class="step">
+        <div class="h">③ 流程一致性对比：找同类模块之间的差异</div>
+        <div class="d">把「采购计划 / 采购需求 / 设备调拨」等模块的审批逻辑横向摆在一起比对。同一件事在不同模块的实现方式不一致，往往就是一个真缺陷——这也是我发现流程断裂问题的主要方式。</div>
+      </div>
+      <div class="step">
+        <div class="h">④ 操作路径复现：逐级验证菜单层级</div>
+        <div class="d">按「模块 &gt; 菜单 &gt; 页面」三级定位逐层进入，标记出反直觉的隐藏路径（例如审批入口被藏在「更多」菜单里），保证缺陷报告里给出的复现路径是唯一且准确的。</div>
+      </div>
+      <div class="step">
+        <div class="h">⑤ 数据操作验证：增删改查 + 分页排序</div>
+        <div class="d">用模拟数据跑通完整业务链路，逐项验证新增、修改、删除、查询的结果是否落库、列表是否刷新、必填校验是否拦截、分页与排序是否准确、组合筛选条件是否正确叠加。</div>
+      </div>
+      <div class="step">
+        <div class="h">⑥ 缺陷报告：统一格式走 Jira 闭环</div>
+        <div class="d">每条缺陷都写明<em>操作步骤、预期结果、实际结果与现象截图</em>，便于开发复现；提交后跟踪修复进度，并在晨会上同步阻塞项。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bugs">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Findings · 缺陷发现</div>
+      <h2>发现的问题（按性质归类）</h2>
+      <p>50 余项缺陷分布在六类问题上。真正值得说的不是数量，而是其中几项<b>会直接造成业务损失</b>——这类问题比界面错位重要得多。</p>
+    </div>
+
+    <div class="cases">
+      <div class="case">
+        <div class="idx">1</div>
+        <div>
+          <div class="ct">单条删除触发全量清除</div>
+          <div class="cd">采购计划中导入多份需求单后，<b>删除其中一条记录，系统会删掉全部记录</b>。</div>
+          <div class="risk">风险：整批采购数据瞬间丢失，且难以恢复 —— 典型的事务处理与前端传参缺陷</div>
+        </div>
+      </div>
+      <div class="case">
+        <div class="idx">2</div>
+        <div>
+          <div class="ct">已审核单据的关键字段仍可修改</div>
+          <div class="cd">已通过审核的需求单导入采购计划后，<b>单价与数量仍可随意编辑</b>，且没有留痕。</div>
+          <div class="risk">风险：审核环节形同虚设，采购金额可被事后修改 —— 直接的内控与合规隐患</div>
+        </div>
+      </div>
+      <div class="case">
+        <div class="idx">3</div>
+        <div>
+          <div class="ct">审批入口缺失导致流程断裂</div>
+          <div class="cd">采购需求模块<b>完全没有审批入口</b>，单据提交后直达下一环节；而采购计划模块的审批入口又隐藏在「更多」菜单里，两个同类模块实现方式不一致。</div>
+          <div class="risk">风险：审批链路不闭环，制度设计与系统实现脱节</div>
+        </div>
+      </div>
+      <div class="case">
+        <div class="idx">4</div>
+        <div>
+          <div class="ct">未填审批人即阻断单据创建</div>
+          <div class="cd">新建设备调拨单时若未指定审批人，系统<b>直接阻断创建</b>（历史版本允许先创建、只是不允许提交）。</div>
+          <div class="risk">风险：单据卡死在草稿阶段且无法自救，业务流程被硬性堵死</div>
+        </div>
+      </div>
+      <div class="case">
+        <div class="idx">5</div>
+        <div>
+          <div class="ct">状态反馈与真实结果相反</div>
+          <div class="cd">审核操作实际成功，界面却显示<b>红色叉号</b>；另有控件同时弹出「添加成功」与「请求失败」两条互斥提示。</div>
+          <div class="risk">风险：用户无法判断操作是否生效，容易重复提交或漏操作</div>
+        </div>
+      </div>
+      <div class="case">
+        <div class="idx">6</div>
+        <div>
+          <div class="ct">数据被静默污染</div>
+          <div class="cd">设备调拨完成后，<b>其他记录的已填时间被清空</b>；添加记录时「保存并新增」不刷新表单，仍保留上一条记录的信息。</div>
+          <div class="risk">风险：数据在用户无感知的情况下被改写，调度时序错乱</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-head" style="margin-top:34px">
+      <h2 style="font-size:20px">其余缺陷的六种性质</h2>
+    </div>
+    <div class="bugs">
+      <div class="bug">
+        <div class="bt">数据操作逻辑错误 <span class="tag hi">高</span></div>
+        <ul>
+          <li>批量删除按钮<b>点击无响应</b>，只能逐条处理</li>
+          <li>调拨完成一条后，其他记录的时间参数被清空</li>
+          <li>调拨执行时间可填写<b>不符合逻辑</b>的值</li>
+          <li><span class="loc">设备资产-设备调拨管理-我的设备调拨</span></li>
+        </ul>
+      </div>
+      <div class="bug">
+        <div class="bt">权限与内控漏洞 <span class="tag hi">高</span></div>
+        <ul>
+          <li>设备分类选择界面<b>未做权限隔离</b>，普通用户可见可选全部分类</li>
+          <li>设置部门主管 / 添加角色 / 分配用户时，<b>可能导致用户权限丢失</b></li>
+          <li>为普通用户分配权限时，部分选项异常置灰不可选</li>
+        </ul>
+      </div>
+      <div class="bug">
+        <div class="bt">流程与状态异常 <span class="tag mid">中</span></div>
+        <ul>
+          <li>第四阶段驳回后，<b>第二轮无法再进行该阶段审批</b></li>
+          <li>只选一条设备审核通过，流程即进入下一阶段</li>
+          <li>验收申请点击「关闭」会<b>直接入库成功</b></li>
+          <li>自动排班先报人员/时段重合，随后又自动排班成功</li>
+        </ul>
+      </div>
+      <div class="bug">
+        <div class="bt">校验与提示缺失 <span class="tag mid">中</span></div>
+        <ul>
+          <li>必填项未填写时<b>无提示、无跳转</b>，直接提交</li>
+          <li>库存下限可设置为<b>大于上限</b></li>
+          <li>参数名称重复时添加失败，但不提示原因</li>
+          <li>申请原因无字数限制，超长提交后报请求失败</li>
+          <li>手动排班未标必填项（缺 * 标识）</li>
+        </ul>
+      </div>
+      <div class="bug">
+        <div class="bt">功能未实现 / 未生效 <span class="tag mid">中</span></div>
+        <ul>
+          <li>操作日志<b>无法导出</b> Excel</li>
+          <li>「保存并新增」<b>未实现新增功能</b></li>
+          <li>工作票票号无法自动生成</li>
+          <li>关联业务可多选，实际只添加一个</li>
+          <li>调班后所调班次的人员未显示</li>
+        </ul>
+      </div>
+      <div class="bug">
+        <div class="bt">界面与渲染缺陷 <span class="tag lo">低</span></div>
+        <ul>
+          <li>字数限制提示<b>遮挡字段名与内容</b></li>
+          <li>工作组名称过长导致<b>文本重叠</b>、信息不可辨识</li>
+          <li>知识实体页面加载初期有 1–2 秒视觉闪动</li>
+          <li>下拉列表出现在页面左上角等定位异常</li>
+          <li>报警趋势文字被选择时间的图标遮挡</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gain" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Takeaway · 收获</div>
+      <h2>三周里我真正拿到的东西</h2>
+    </div>
+    <div class="gains">
+      <div class="gain">
+        <div class="gt">从「点功能」到「看风险」</div>
+        <div class="gd">一开始我只看按钮点得动点不动。发现「已审核单价仍可修改」之后才意识到，同一个现象在不同业务语境下的严重程度完全不同——判断缺陷优先级，需要先理解这条数据背后对应什么钱和什么责任。</div>
+      </div>
+      <div class="gain">
+        <div class="gt">方法要用在对的场景</div>
+        <div class="gd">边界值适合校验类问题，异常操作适合并发与状态类问题，流程对比适合设计不一致的问题。换方法之前先想清楚要找哪一类缺陷，比盲目乱点效率高得多。</div>
+      </div>
+      <div class="gain">
+        <div class="gt">缺陷报告是给别人看的</div>
+        <div class="gd">统一按「操作步骤 — 预期结果 — 实际差异」写，把复现路径精确到模块与菜单层级，开发才能一次复现。这直接决定了缺陷的修复速度。</div>
+      </div>
+      <div class="gain">
+        <div class="gt">企业级系统的业务逻辑感</div>
+        <div class="gd">设备从采购、入库、调拨到维修、报废是一条串起来的链条，任一环节的单据流转都会牵动后续数据。这种「流程即数据」的认知，后来在做产品需求分析时一直在用。</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:22px">
+      <div class="stackrow">
+        <div class="sl">测试方法</div>
+        <div class="chips"><span class="chip">覆盖性测试</span><span class="chip">边界值分析</span><span class="chip">异常操作测试</span><span class="chip">流程一致性对比</span><span class="chip">冒烟 / 系统 / 集成 / 性能测试（学习）</span></div>
+      </div>
+      <div class="stackrow">
+        <div class="sl">工具</div>
+        <div class="chips"><span class="chip">Jira 缺陷管理</span><span class="chip">多浏览器兼容验证</span><span class="chip">模拟数据构造</span></div>
+      </div>
+      <div class="stackrow">
+        <div class="sl">业务域</div>
+        <div class="chips"><span class="chip">工业物联网平台</span><span class="chip">设备全生命周期</span><span class="chip">采购与审批内控</span><span class="chip">两票安全流程</span></div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:18px">
+      这段经历对我的价值不在于「会用 Jira」，而在于它给了我一个具体的问题意识：<b>制度写得再完整，只要系统实现上少一个入口、多一个可编辑字段，控制就失效了</b>。这一点在我后来做产品与调研时，会持续发挥作用。
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>韩王泽 · 个人主页 — 把想法做成产品的实践记录</div>
+    <div style="margin-top:6px">226020376@link.cuhk.edu.cn · © 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>

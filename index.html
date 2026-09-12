@@ -45,6 +45,7 @@
   .brand .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--primary),var(--accent))}
   .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted)}
   .navlinks a:hover{color:var(--primary)}
+  .navlinks a.on{color:var(--primary);font-weight:600}
   @media(max-width:700px){.navlinks{display:none}}
   header.hero{padding:70px 0 52px;background:
     radial-gradient(1200px 400px at 80% -10%,rgba(79,70,229,.12),transparent),
@@ -111,6 +112,27 @@
   .link .em{font-size:20px}
   .skills{display:flex;flex-wrap:wrap;gap:8px}
   .chip{font-size:12.5px;background:#f1f5f9;color:#334155;border-radius:8px;padding:5px 11px}
+  /* 研究卡 */
+  .rcards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:760px){.rcards{grid-template-columns:1fr}}
+  .rcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;gap:9px;transition:.15s}
+  .rcard:hover{border-color:var(--primary);transform:translateY(-2px)}
+  .rcard .rk{font-size:11.5px;font-weight:700;color:var(--primary);letter-spacing:.8px;text-transform:uppercase}
+  .rcard .rt{font-weight:800;font-size:15.5px;line-height:1.45}
+  .rcard .rd{font-size:13.5px;color:var(--muted);flex:1}
+  .rcard .rf{font-size:13px;font-weight:700;color:var(--primary)}
+  /* 其他经历 */
+  .more-lead{font-size:14px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);margin-bottom:16px}
+  .more{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+  .mrow{display:grid;grid-template-columns:136px 1fr;gap:4px 16px;padding:15px 20px;border-bottom:1px solid var(--line)}
+  .mrow:last-child{border-bottom:0}
+  @media(max-width:640px){.mrow{grid-template-columns:1fr;gap:4px}}
+  .mrow .mw{font-size:12.5px;color:var(--muted);font-weight:700;letter-spacing:.2px;padding-top:3px}
+  .mrow .mt{font-weight:700;font-size:15px}
+  .mrow .md{font-size:13.5px;color:var(--muted);margin-top:4px}
+  .mrow .md b{color:var(--ink)}
   footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
 </style>
 </head>
@@ -120,10 +142,11 @@
   <div class="wrap">
     <div class="brand"><span class="dot"></span>韩王泽</div>
     <div class="navlinks">
-      <a href="#about">关于我</a>
+      <a class="on" href="index.html">首页</a>
       <a href="experience-cyou.html">实习经历</a>
-      <a href="#projects">项目</a>
-      <a href="#links">联系</a>
+      <a href="research.html">研究与写作</a>
+      <a href="index.html#projects">项目</a>
+      <a href="index.html#links">联系</a>
     </div>
   </div>
 </nav>
@@ -138,8 +161,9 @@
       <span><b>西安交通大学</b> · 经济与金融学院 · 贸易经济 · 全日制本科 · 2022.09 – 2026.06</span>
     </div>
     <div class="badges">
-      <span class="badge"><b>1</b> 段战略分析实习</span>
+      <span class="badge"><b>2</b> 段实习（战略分析 · 软件测试）</span>
       <span class="badge"><b>2</b> 个完整项目</span>
+      <span class="badge"><b>10</b> 份研究与写作</span>
       <span class="badge">从调研验证 → 方案设计 → 工程实现 → 数据验证</span>
     </div>
     <div class="cta">
@@ -155,7 +179,7 @@
     <div class="sec-head">
       <div class="k">Experience · 经历</div>
       <h2>时间线</h2>
-      <p>三段时间，一条主线：从经济学训练，到数据驱动的市场研究，再到把分析结论做成产品。</p>
+      <p>一条主线：从经济学训练，到工业现场的系统测试与数据驱动的市场研究，再到把分析结论做成产品。</p>
     </div>
     <div class="tl">
       <div class="tli">
@@ -171,6 +195,14 @@
           <div class="what">搜狐畅游 · 战略分析实习生</div>
           <div class="desc">负责中美日韩及微信小游戏市场的新品扫描与监测，主导概念测试与立项预评估，独立完成 6 份市场研究报告，并用 Python 沉淀出 10 个可复用的分析模块。</div>
           <div class="go">查看实习详情与材料 →</div>
+        </a>
+      </div>
+      <div class="tli hi">
+        <a class="box" href="experience-zyf.html">
+          <div class="when">2025.07</div>
+          <div class="what">中服软件（西安）有限公司 · 软件测试实习生</div>
+          <div class="desc">工业物联网平台「设备版 v5.0」功能测试，覆盖设备资产、备品备件、两票管理等 6 大模块、20 余个功能页面，提交缺陷 50 余项并全程走 Jira 闭环。</div>
+          <div class="go">查看实习详情 →</div>
         </a>
       </div>
       <div class="tli">
@@ -217,6 +249,86 @@
   </div>
 </section>
 
+<section id="research">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Research · 研究与写作</div>
+      <h2>研究与写作</h2>
+      <p>10 份学术与课程作品，分三类。每一份都写清了研究问题、方法与数据、主要发现——而不只是列一个标题。</p>
+    </div>
+    <div class="rcards">
+      <a class="rcard" href="research.html">
+        <div class="rk">计量与实证</div>
+        <div class="rt">人工智能采用对企业多元化经营的影响</div>
+        <div class="rd">2010–2024 年 A 股上市公司样本；把多元化结构分解为相关 / 不相关，用双向固定效应、多期双重差分与 PSM 识别因果效应。</div>
+        <div class="rf">看这一类 →</div>
+      </a>
+      <a class="rcard" href="research.html">
+        <div class="rk">社会调查</div>
+        <div class="rt">一刻钟便民生活圈下「小修小补」消费调查 · 腾飞杯二等奖</div>
+        <div class="rd">727 份居民问卷加上从业者量表，用 SPSS 做信效度检验与回归分析，定位影响消费满意度的因素。</div>
+        <div class="rf">看这一类 →</div>
+      </a>
+      <a class="rcard" href="research.html">
+        <div class="rk">案例与文献</div>
+        <div class="rt">空间计算起源与发展</div>
+        <div class="rd">以 Web of Science 文献计量切入，梳理概念边界、关键技术层与演化阶段，参考文献 40 余篇。</div>
+        <div class="rf">看这一类 →</div>
+      </a>
+    </div>
+    <div class="cta" style="margin-top:20px">
+      <a class="btn ghost" href="research.html">查看全部 10 份 →</a>
+    </div>
+  </div>
+</section>
+
+<section id="more" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">More · 其他经历</div>
+      <h2>其他经历</h2>
+    </div>
+    <div class="more-lead">与「数据分析 / 战略分析」主线相关性不高，但补上内容生产、组织协作与社会观察三块拼图。每一条只写实际做过的事。</div>
+    <div class="more">
+      <div class="mrow">
+        <div class="mw">2024.07 – 2025.05</div>
+        <div>
+          <div class="mt">西安交通大学团委 · 优思新媒体中心 · 轮值责编</div>
+          <div class="md">负责选题策划与图文制作，产出 3 篇原创推送，其中单篇阅读量 5 万+；轮值期间统筹排期与审稿。</div>
+        </div>
+      </div>
+      <div class="mrow">
+        <div class="mw">2023.07 – 2024.07</div>
+        <div>
+          <div class="mt">西安交通大学团委 · 青少年发展中心 · 部门负责人</div>
+          <div class="md">负责部门活动的策划与执行，协调志愿者分工与对外联络。</div>
+        </div>
+      </div>
+      <div class="mrow">
+        <div class="mw">社会实践</div>
+        <div>
+          <div class="mt">碑林区文艺路街道办 · 平安法治办公室</div>
+          <div class="md">参与基层信访与法治宣传工作：协助处理信访件 2 件，独立撰写 5000 余字调研报告；获「返家乡」社会实践<b>优秀个人</b>。</div>
+        </div>
+      </div>
+      <div class="mrow">
+        <div class="mw">勤工助学</div>
+        <div>
+          <div class="mt">西安交通大学勤工助学办公室 · 家教部</div>
+          <div class="md">负责学生兼职信息登记与派单对接，处理学生与家长之间的沟通协调。</div>
+        </div>
+      </div>
+      <div class="mrow">
+        <div class="mw">志愿服务</div>
+        <div>
+          <div class="mt">英仔爱心社 · 彭康书院团工委</div>
+          <div class="md">累计志愿服务 <b>200 小时以上</b>；参与书院基层团务工作。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="links">
   <div class="wrap">
     <div class="sec-head">
@@ -236,9 +348,12 @@
     <div class="links">
       <a class="link" href="mailto:226020376@link.cuhk.edu.cn"><span class="em">✉️</span> 226020376@link.cuhk.edu.cn</a>
       <a class="link" href="https://github.com/han-wangze" target="_blank" rel="noopener"><span class="em">💻</span> GitHub</a>
-      <a class="link" href="experience-cyou.html"><span class="em">📑</span> 战略分析实习详情</a>
+      <a class="link" href="experience-cyou.html"><span class="em">📑</span> 战略分析实习（搜狐畅游）</a>
+      <a class="link" href="experience-zyf.html"><span class="em">🧪</span> 软件测试实习（中服云）</a>
+      <a class="link" href="research.html"><span class="em">📄</span> 研究与写作（10 份）</a>
       <a class="link" href="weschedule.html"><span class="em">📱</span> WeSchedule 项目详情</a>
-      <a class="link" href="report.html"><span class="em">📊</span> 市场调研报告（网页版）</a>
+      <a class="link" href="report.html"><span class="em">📊</span> 市场调研报告（提要）</a>
+      <a class="link" href="report-full.html"><span class="em">📈</span> 市场调研报告（完整版）</a>
       <a class="link" href="competition.html"><span class="em">⚔️</span> 竞争格局与定位</a>
       <a class="link" href="https://github.com/han-wangze/hanwangze" target="_blank" rel="noopener"><span class="em">🧩</span> 本站源码</a>
     </div>

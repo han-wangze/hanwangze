@@ -45,6 +45,7 @@
   .brand .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--primary),var(--accent))}
   .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted);flex-wrap:wrap}
   .navlinks a:hover{color:var(--primary)}
+  .navlinks a.on{color:var(--primary);font-weight:600}
   @media(max-width:640px){.navlinks{display:none}}
   header.hero{padding:72px 0 56px;background:
     radial-gradient(1200px 400px at 80% -10%,rgba(79,70,229,.12),transparent),
@@ -129,15 +130,11 @@
   <div class="wrap">
     <div class="brand"><span class="dot"></span>韩王泽</div>
     <div class="navlinks">
-      <a href="index.html">← 返回首页</a>
+      <a href="index.html">首页</a>
       <a href="experience-cyou.html">实习经历</a>
-      <a href="#why">痛点</a>
-      <a href="#arch">架构</a>
-      <a href="#smart">冲突检测</a>
-      <a href="#position">定位</a>
-      <a href="#tech">技术</a>
-      <a href="#demo">Demo</a>
-      <a href="#links">链接</a>
+      <a href="research.html">研究与写作</a>
+      <a class="on" href="index.html#projects">项目</a>
+      <a href="index.html#links">联系</a>
     </div>
   </div>
 </nav>
