@@ -115,6 +115,7 @@
       <a href="#why">痛点</a>
       <a href="#arch">架构</a>
       <a href="#smart">冲突检测</a>
+      <a href="#position">定位</a>
       <a href="#tech">技术</a>
       <a href="#demo">Demo</a>
       <a href="#links">链接</a>
@@ -125,7 +126,7 @@
 <header class="hero">
   <div class="wrap">
     <h1>WeSchedule</h1>
-    <p class="sub">微信小程序 MVP：把微信群聊消息一键变成手机日程。复制群消息 → 自动解析 → 确认保存 → 订阅消息提醒，并带非阻断式<b>冲突检测</b>与<b>预备提醒</b>。87 人调研、87.4% 接受度，端到端解析准确率 75%。</p>
+    <p class="sub">微信小程序 MVP：把微信群聊消息变成可管理的日程。复制群消息 → 自动解析 → 确认保存 → 订阅消息提醒；不止于"解析成一条提醒"——带软/硬分级的<b>冲突检测</b>、DDL 区间识别与<b>预备提醒</b>，回答"日程装不装得下"。87 人调研、87.4% 接受度，端到端解析准确率 75%。</p>
     <div class="badges">
       <span class="badge"><b>微信小程序</b></span>
       <span class="badge"><b>云开发</b></span>
@@ -329,6 +330,21 @@
     </div>
   </section>
 
+  <section id="position" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="k">Position · 竞争定位</div>
+        <h2>不做"提醒生成"，做"日程治理"</h2>
+        <p>微信生态内已有小微（官方 AI 助手）、元宝、滴答清单等"消息 → 提醒"工具，但它们不维护可管理的日程库，也不回答"日程是否冲突、DDL 缓冲是否被透支"——后者恰是调研中的第一需求（70.1%）。本项目把价值落在治理层：解析只是入口。</p>
+      </div>
+      <div class="card feat">
+        <h3>两个维度看差异：本项目选择"有日程库 × 容量视角"</h3>
+        <p>小微 / 元宝 = 提醒生成（无日程库、只处理单次时刻）；滴答清单 = 任务清单（有库、无冲突治理）；WeSchedule = 日程治理（冲突检测 + DDL 区间 + 负载视角）。若官方能力日后覆盖"消息转日程"，入口层会被稀释，治理层依赖的日程库积累是留下的部分。</p>
+        <p style="margin-top:10px"><a href="competition.html" style="color:var(--primary);font-weight:700">查看完整竞争格局与防御性分析 →</a></p>
+      </div>
+    </div>
+  </section>
+
   <section id="demo" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
     <div class="wrap">
       <div class="sec-head">
@@ -355,6 +371,7 @@
       <div class="links">
         <a class="link" href="https://github.com/han-wangze/weschedule" target="_blank" rel="noopener"><span class="em">💻</span> WeSchedule 源码 · GitHub</a>
         <a class="link" href="report.html" target="_blank" rel="noopener"><span class="em">📊</span> 市场调研报告（网页版）</a>
+        <a class="link" href="competition.html"><span class="em">⚔️</span> 竞争格局与定位</a>
         <a class="link" href="#" target="_blank" rel="noopener"><span class="em">🔒</span> 隐私说明</a>
         <a class="link" href="#" target="_blank" rel="noopener"><span class="em">🧪</span> 评测报告 / badcase 明细</a>
       </div>

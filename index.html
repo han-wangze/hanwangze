@@ -103,6 +103,11 @@
   .pcard.ph .t{color:var(--muted);font-weight:700}
   footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
   code{background:#f1f5f9;padding:2px 6px;border-radius:5px;font-size:.9em}
+  .story{display:flex;align-items:stretch;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+  .story .step{flex:1;min-width:200px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:4px}
+  .story .step b{font-size:15px}
+  .story .step span{font-size:13px;color:var(--muted)}
+  .story .arr{display:flex;align-items:center;color:var(--primary);font-weight:800}
 </style>
 </head>
 <body>
@@ -122,11 +127,10 @@
 <header class="hero">
   <div class="wrap">
     <h1>个人<span class="grad">作品集</span></h1>
-    <p class="sub">我把做过的项目——从用户调研、方案设计，到工程实现与数据验证——整理在这里。每个项目都可点开看全过程。</p>
+    <p class="sub">从用户调研、方案设计到工程实现与数据验证——每个项目都可点开看完整过程。</p>
     <div class="badges">
       <span class="badge"><b>2</b> 个已展示项目</span>
-      <span class="badge"><b>87</b> 人校园调研</span>
-      <span class="badge"><b>75%</b> 端到端准确率</span>
+      <span class="badge">用户调研 → 方案设计 → 工程实现 → 数据验证</span>
     </div>
     <div class="cta">
       <a class="btn primary" href="#projects">查看项目</a>
@@ -140,7 +144,14 @@
     <div class="sec-head">
       <div class="k">Projects · 项目</div>
       <h2>我做的项目</h2>
-      <p>点开任意卡片查看项目详情。后续做的项目，直接在这里加一张卡片即可。</p>
+      <p>两个项目是同一条线的两端：先验证需求，再实现并定位。点开卡片看详情。</p>
+    </div>
+    <div class="story">
+      <div class="step"><b>① 调研验证</b><span>87 人问卷，确认痛点与需求优先级</span></div>
+      <div class="arr">→</div>
+      <div class="step"><b>② 产品实现</b><span>WeSchedule 小程序 MVP，真机验证</span></div>
+      <div class="arr">→</div>
+      <div class="step"><b>③ 竞争定位</b><span>对标生态内工具，明确"日程治理"方向</span></div>
     </div>
     <div class="projects">
       <a class="pcard" href="weschedule.html">
@@ -157,20 +168,6 @@
         <div class="tags"><span class="tag">用户调研</span><span class="tag">需求验证</span></div>
         <div class="go">阅读报告 →</div>
       </a>
-      <div class="pcard ph">
-        <div>
-          <div class="ic">➕</div>
-          <div class="t">你的下一个项目</div>
-          <div class="d" style="margin-top:8px">在这里添加你正在做 / 做过的项目，每个项目一张卡片，点开看详情。</div>
-        </div>
-      </div>
-      <div class="pcard ph">
-        <div>
-          <div class="ic">➕</div>
-          <div class="t">你的下一个项目</div>
-          <div class="d" style="margin-top:8px">复制一张卡片、改文案与链接即可，无需改其他结构。</div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -185,6 +182,7 @@
       <a class="link" href="https://github.com/han-wangze/hanwangze" target="_blank" rel="noopener"><span class="em">💻</span> 网站源码 · GitHub</a>
       <a class="link" href="weschedule.html"><span class="em">📱</span> WeSchedule 项目详情</a>
       <a class="link" href="report.html"><span class="em">📊</span> 市场调研报告（网页版）</a>
+      <a class="link" href="competition.html"><span class="em">⚔️</span> 竞争格局与定位</a>
     </div>
   </div>
 </section>

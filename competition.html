@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>竞争格局与产品定位 · WeSchedule</title>
+<meta name="description" content="WeSchedule 的竞争格局分析：对比微信生态内的提醒与日程工具（小微、元宝、滴答清单等），说明本项目选择"日程治理"方向的理由与防御性思考。" />
+<style>
+  :root{
+    --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
+    --primary:#4f46e5; --primary-d:#4338ca; --accent:#0ea5e9;
+    --ok:#16a34a; --warn:#f59e0b; --line:#e5e7eb;
+    --shadow:0 1px 3px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(12px);
+    background:rgba(247,248,251,.82);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--primary),var(--accent))}
+  .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+  .navlinks a:hover{color:var(--primary)}
+  @media(max-width:640px){.navlinks{display:none}}
+  header.hero{padding:64px 0 48px;background:
+    radial-gradient(1200px 400px at 80% -10%,rgba(79,70,229,.12),transparent),
+    radial-gradient(900px 360px at 0% 0%,rgba(14,165,233,.10),transparent);}
+  .hero h1{font-size:38px;line-height:1.18;font-weight:800;letter-spacing:-.5px}
+  .hero p.sub{margin-top:16px;font-size:17px;color:var(--muted);max-width:700px}
+  .hero p.sub b{color:var(--ink)}
+  section{padding:48px 0}
+  .sec-head{margin-bottom:24px}
+  .sec-head .k{font-size:13px;font-weight:700;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase}
+  .sec-head h2{font-size:26px;font-weight:800;margin-top:6px;letter-spacing:-.3px}
+  .sec-head p{color:var(--muted);margin-top:8px;max-width:700px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+  .tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
+    border-radius:14px;overflow:hidden;box-shadow:var(--shadow);font-size:14px}
+  .tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  .tbl th{background:#f8fafc;font-size:13px;color:var(--muted);font-weight:700}
+  .tbl tr:last-child td{border-bottom:0}
+  .tbl td.yes{color:var(--ok);font-weight:600}
+  .tbl td.no{color:var(--muted)}
+  @media(max-width:640px){.tbl{font-size:13px}.tbl th,.tbl td{padding:10px}}
+  .chart-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+  .chart-card svg{width:100%;height:auto}
+  .legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-top:10px;flex-wrap:wrap}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+  .note{margin-top:14px;color:var(--muted);font-size:13px}
+  .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  .feat h3{font-size:16px;font-weight:700;margin-bottom:8px}
+  .feat p{font-size:14px;color:var(--muted);margin-bottom:8px}
+  .feat ul{margin:8px 0 0 18px;font-size:14px;color:var(--muted)}
+  .feat li{margin-bottom:4px}
+  .road{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .road li{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--primary);
+    border-radius:10px;padding:14px 16px;box-shadow:var(--shadow);font-size:14px}
+  .road li b{color:var(--primary)}
+  .backrow{padding:14px 0 0;font-size:14px;font-weight:600}
+  .backrow a{color:var(--primary)}
+  footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
+  code{background:#f1f5f9;padding:2px 6px;border-radius:5px;font-size:.9em}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>作品集</div>
+    <div class="navlinks">
+      <a href="index.html">首页</a>
+      <a href="weschedule.html">WeSchedule</a>
+      <a href="report.html">调研报告</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>竞争格局与产品定位</h1>
+    <p class="sub">微信生态内已有多款"消息 → 提醒"类工具。这一节对比它们与 WeSchedule 的差异，说明这个项目选择做<b>冲突检测与日程治理</b>而非单纯解析的原因，以及如果平台原生能力下场，项目的应对思路。</p>
+    <p class="note">竞品信息核实于 2026 年 9 月（功能以各产品当前版本为准）。</p>
+  </div>
+</header>
+
+<section id="landscape">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Landscape · 竞品全景</div>
+      <h2>微信生态内的同类工具</h2>
+      <p>生态内与"消息转日程"直接相关的有四类：微信官方 AI 助手、腾讯元宝、滴答清单的微信入口、工作 IM 的原生日程。</p>
+    </div>
+    <table class="tbl">
+      <thead>
+        <tr><th style="width:16%">产品</th><th style="width:30%">创建方式</th><th style="width:20%">提醒通道</th><th style="width:12%">冲突检测</th><th>主要局限</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>WeSchedule</b>（本项目）</td>
+          <td>复制群消息 → 小程序读剪贴板 → DeepSeek 结构化解析（10 字段 + 置信度）→ 确认后保存</td>
+          <td>微信订阅消息（一次授权一次推送）</td>
+          <td class="yes">有：软/硬分级 + 备选时段</td>
+          <td>入口需"复制 → 打开"两步；日程库从零积累</td>
+        </tr>
+        <tr>
+          <td>腾讯元宝</td>
+          <td>微信好友聊天，一句话设提醒（2025.12 上线，支持语音与模糊时间）</td>
+          <td>微信服务通知（不受订阅授权次数限制）</td>
+          <td class="no">无</td>
+          <td>单次提醒即终点；微信内暂不支持周期提醒；无日程库与视图管理</td>
+        </tr>
+        <tr>
+          <td>微信「小微」</td>
+          <td>微信原生 AI 助手（2026.6 起灰度内测）：聊天框内"问小微"可总结当前对话、设系统级提醒</td>
+          <td>系统级待办 / 微信弹窗</td>
+          <td class="no">未见</td>
+          <td>仍处内测，2026 年内计划扩大开放；功能边界在持续变化</td>
+        </tr>
+        <tr>
+          <td>滴答清单</td>
+          <td>服务号发消息建任务（自动识别时间）；或把聊天记录转发给"滴答小助手"采集保存</td>
+          <td>App 推送 + 微信提醒</td>
+          <td class="no">无（有日历视图，无冲突概念）</td>
+          <td>转发仅"采集存原文"，不解析时间；无确认编辑环节</td>
+        </tr>
+        <tr>
+          <td>企业微信 / 钉钉 / 飞书</td>
+          <td>工作 IM 原生日程、群消息转日程</td>
+          <td>系统推送</td>
+          <td class="no">部分有闲忙</td>
+          <td>限工作场景与组织内，不覆盖个人微信群</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note">两点值得注意：① 元宝的提醒走微信服务通知，不受小程序"一次授权一次推送"的预算约束，这是平台身份带来的差异；② 「小微」是微信官方能力，入口距离最短，若其覆盖"消息转日程"，入口层的价值会被稀释——这是本项目需要正视的变量。</p>
+  </div>
+</section>
+
+<section id="position" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Position · 差异化定位</div>
+      <h2>不做"提醒生成"，做"日程治理"</h2>
+      <p>把上面的产品放进两个维度里看：横轴是有没有<b>日程库</b>（能否积累并管理），纵轴是处理<b>时刻问题</b>（这件事几点发生、撞没撞）还是<b>容量问题</b>（这一周还排不排得下）。</p>
+    </div>
+    <div class="chart-card">
+      <svg viewBox="0 0 720 460" role="img" aria-label="二维竞争坐标图">
+        <!-- 象限底色 -->
+        <rect x="360" y="40" width="320" height="190" fill="#eef2ff" />
+        <rect x="40" y="230" width="320" height="190" fill="#f8fafc" />
+        <rect x="360" y="230" width="320" height="190" fill="#f8fafc" />
+        <!-- 轴线 -->
+        <line x1="360" y1="30" x2="360" y2="440" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="30" y1="230" x2="690" y2="230" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
+        <defs>
+          <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+            <path d="M0,0 L8,3 L0,6 Z" fill="#94a3b8"/>
+          </marker>
+        </defs>
+        <!-- 轴标签 -->
+        <text x="686" y="24" text-anchor="end" font-size="13" fill="#6b7280">有日程库 →</text>
+        <text x="42" y="24" text-anchor="start" font-size="13" fill="#6b7280">→ 无日程库</text>
+        <text x="664" y="58" text-anchor="end" font-size="13" fill="#6b7280">容量视角（排不排得下）↑</text>
+        <text x="664" y="452" text-anchor="end" font-size="13" fill="#6b7280">↓ 时刻视角（几点、撞没撞）</text>
+        <!-- 象限标注 -->
+        <text x="520" y="66" text-anchor="middle" font-size="13" font-weight="700" fill="#4f46e5">日程治理（本项目所在）</text>
+        <text x="180" y="66" text-anchor="middle" font-size="12" fill="#9ca3af">暂无产品占据</text>
+        <text x="180" y="416" text-anchor="middle" font-size="13" font-weight="700" fill="#0ea5e9">提醒生成</text>
+        <text x="520" y="416" text-anchor="middle" font-size="13" font-weight="700" fill="#f59e0b">任务清单</text>
+        <!-- 点 -->
+        <circle cx="150" cy="300" r="9" fill="#0ea5e9"/>
+        <text x="150" y="322" text-anchor="middle" font-size="12" fill="#1f2937">腾讯元宝</text>
+        <circle cx="240" cy="340" r="9" fill="#0ea5e9"/>
+        <text x="240" y="362" text-anchor="middle" font-size="12" fill="#1f2937">小微</text>
+        <circle cx="520" cy="300" r="9" fill="#f59e0b"/>
+        <text x="520" y="322" text-anchor="middle" font-size="12" fill="#1f2937">滴答清单</text>
+        <circle cx="500" cy="150" r="13" fill="#4f46e5" stroke="#fff" stroke-width="3"/>
+        <text x="500" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#4f46e5">WeSchedule</text>
+        <text x="500" y="176" text-anchor="middle" font-size="11" fill="#6b7280">冲突检测 · DDL 区间 · 负载</text>
+      </svg>
+      <div class="legend">
+        <span><i style="background:#0ea5e9"></i>提醒生成（单次、无积累）</span>
+        <span><i style="background:#f59e0b"></i>任务清单（有库、无治理）</span>
+        <span><i style="background:#4f46e5"></i>日程治理（本项目方向）</span>
+      </div>
+    </div>
+    <p class="note">观察：提醒类工具解决"别忘事"，但都不维护一份可管理的日程库，也不回答"日程之间是否冲突、DDL 的缓冲是否被透支"。这正好对应调研中的第一需求——冲突检测（70.1%）。</p>
+  </div>
+</section>
+
+<section id="framework">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Framework · 问题框架</div>
+      <h2>"别撞车" 与 "别过载" 是两件事</h2>
+    </div>
+    <div class="grid2">
+      <div class="card feat">
+        <h3>撞车：时刻维度的冲突</h3>
+        <ul>
+          <li><b>硬冲突</b>：两个定点事项时间重叠（会议撞会议）——多数日历能做基础检测</li>
+          <li><b>软冲突</b>：定点事项落在 DDL 的缓冲区间内——DDL 不是"那一天"，而是"截止前的那段可支配时间"。周四答应聚餐，表面不撞车，实际透支了周日 DDL 的缓冲</li>
+        </ul>
+        <p style="margin-top:8px">WeSchedule 用 <code>is_deadline</code> 这一个可靠字段区分两者，刻意不引入新的 AI 类型判断，避免"类型判错 → 冲突等级被放大"。</p>
+      </div>
+      <div class="card feat">
+        <h3>过载：容量维度的冲突</h3>
+        <ul>
+          <li><b>DDL 堆积</b>：三个作业同周末截止，每个录入时都"不冲突"，到期才发现排不开</li>
+          <li><b>会议沼泽</b>：日程表不重叠，但一整天没有整块可支配时间</li>
+        </ul>
+        <p style="margin-top:8px">现有工具问的是"这个时间空不空"，少有人问"这周还剩多少可支配时间"。过载是慢性的，发现时往往已晚——这是比撞车更难被现有工具覆盖的问题。</p>
+      </div>
+    </div>
+    <p class="note">工程上，过载检测不需要 AI：现有数据结构（date / 起止时间 / is_deadline / fuzzy_time）已足够，规则在本地跑即可，几乎不增加后端成本。</p>
+  </div>
+</section>
+
+<section id="defense" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Defense · 防御性思考</div>
+      <h2>如果平台原生能力下场，还剩什么</h2>
+      <p>「小微」正在内测，官方 Agent 天然拥有最短的入口和系统级通道。如果"消息转日程"被原生能力覆盖，这个项目的价值还剩什么——这是设计之初就想清楚的问题。</p>
+    </div>
+    <ul class="road">
+      <li><b>正视变量</b>：入口层（复制 → 解析）确实可能被原生能力替代，所以本项目不把"解析"当作壁垒，只把它当作入口。</li>
+      <li><b>价值落在治理层</b>：冲突检测、DDL 区间管理、负载提示依赖一份持续积累的日程库——用得越久，检测越准。提醒类工具是无状态的，用过即走；治理的价值随使用加深。</li>
+      <li><b>把平台约束转成设计决策</b>：个人主体小程序无法写系统日历，于是用"小程序内日程 + 订阅消息"；订阅消息"一次授权一次推送"，于是预备提醒复用同一授权改到前一晚；隐私合规要求下，解析日志只存 <code>input_hash</code> 不留原文。这些约束反而定义了产品的形态。</li>
+    </ul>
+  </div>
+</section>
+
+<section id="next">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Next · 下一步规划</div>
+      <h2>如果继续做，按这个顺序</h2>
+    </div>
+    <ul class="road">
+      <li><b>badcase 一键上报</b>：解析结果页加"识别有误？"上报入口，用真实 badcase 驱动 prompt 迭代（当前 75% 准确率的第一改进杠杆）。</li>
+      <li><b>置信度驱动 UI</b>：低置信度字段标黄并要求确认，让"75% 准确率"对用户透明。</li>
+      <li><b>确认页前置当日全景</b>：保存前展示当天已有日程，让首次使用者立刻感知冲突检测的价值。</li>
+      <li><b>过载层（V1.1）</b>：周负载条 → DDL 堆积预警 → 准备块自动排程，复用现有 <code>is_prep</code> 与冲突引擎。</li>
+    </ul>
+    <div class="backrow"><a href="weschedule.html">← 返回 WeSchedule 项目详情</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>个人作品集 · 把想法做成产品的实践记录</div>
+    <div style="margin-top:6px">技术文档见各项目 README · © 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
