@@ -72,10 +72,8 @@
   .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
   .video-box{background:#0f172a;border-radius:16px;overflow:hidden;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#cbd5e1;position:relative}
   .video-box iframe{width:100%;height:100%;border:0}
-  .video-ph{text-align:center;padding:30px}
-  .video-ph .ic{font-size:40px}
-  .video-ph .t{margin-top:10px;font-weight:700;color:#fff}
-  .video-ph .s{font-size:13px;color:#94a3b8;margin-top:6px}
+  .video-tip{margin-top:12px;font-size:13px;color:var(--muted);text-align:center}
+  .video-tip a{color:var(--primary);font-weight:700}
   .links{display:flex;flex-wrap:wrap;gap:12px}
   .link{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);
     border-radius:12px;padding:14px 18px;font-weight:600;box-shadow:var(--shadow);transition:.15s}
@@ -349,16 +347,15 @@
     <div class="wrap">
       <div class="sec-head">
         <div class="k">Demo · 实机演示</div>
-        <h2>30 秒看懂它怎么用</h2>
+        <h2>一段录屏看懂它怎么用</h2>
         <p>录屏展示"复制群消息 → 自动解析 → 冲突检测提示 → 确认保存 → 到点提醒"的完整链路。</p>
       </div>
       <div class="video-box">
-        <div class="video-ph">
-          <div class="ic">🎬</div>
-          <div class="t">Demo 视频即将上线</div>
-          <div class="s">当前状态：核心链路已通过真机验证（隐私弹窗 / 剪贴板解析 / 冲突检测 / 订阅提醒）。<br>正在录制演示视频，完成后替换此占位并嵌入 B站播放器。</div>
-        </div>
+        <iframe src="//player.bilibili.com/player.html?bvid=BV1VDYR6YE6m&amp;page=1&amp;high_quality=1&amp;danmaku=0&amp;autoplay=0"
+          scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"
+          title="WeSchedule Demo · 实机演示"></iframe>
       </div>
+      <p class="video-tip">手机端或浏览器限制第三方嵌入时，可<a href="https://www.bilibili.com/video/BV1VDYR6YE6m/" target="_blank" rel="noopener">前往 B站观看 →</a></p>
     </div>
   </section>
 
@@ -370,6 +367,7 @@
       </div>
       <div class="links">
         <a class="link" href="https://github.com/han-wangze/weschedule" target="_blank" rel="noopener"><span class="em">💻</span> WeSchedule 源码 · GitHub</a>
+        <a class="link" href="https://www.bilibili.com/video/BV1VDYR6YE6m/" target="_blank" rel="noopener"><span class="em">🎬</span> Demo 视频 · B站</a>
         <a class="link" href="report.html" target="_blank" rel="noopener"><span class="em">📊</span> 市场调研报告（网页版）</a>
         <a class="link" href="competition.html"><span class="em">⚔️</span> 竞争格局与定位</a>
         <a class="link" href="#" target="_blank" rel="noopener"><span class="em">🔒</span> 隐私说明</a>
