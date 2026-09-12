@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>战略分析实习 · 搜狐畅游 | 韩王泽</title>
+<meta name="description" content="搜狐畅游战略分析实习（2025.11–2026.02）：新品监测体系、概念测试闭环、竞争格局与品类建模、预测与增长归因四线工作的代码与工具沉淀。" />
+<style>
+  :root{
+    --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
+    --primary:#4f46e5; --primary-d:#4338ca; --accent:#0ea5e9;
+    --ok:#16a34a; --warn:#f59e0b; --line:#e5e7eb;
+    --shadow:0 1px 3px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(12px);
+    background:rgba(247,248,251,.82);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--primary),var(--accent))}
+  .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted)}
+  .navlinks a:hover{color:var(--primary)}
+  .navlinks a.on{color:var(--primary);font-weight:600}
+  @media(max-width:700px){.navlinks{display:none}}
+  header.hero{padding:64px 0 48px;background:
+    radial-gradient(1200px 400px at 80% -10%,rgba(79,70,229,.12),transparent),
+    radial-gradient(900px 360px at 0% 0%,rgba(14,165,233,.10),transparent);}
+  .hero h1{font-size:38px;line-height:1.2;font-weight:800;letter-spacing:-.5px}
+  .hero h1 .grad{background:linear-gradient(120deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .meta{margin-top:14px;font-size:15px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 18px}
+  .hero p.sub{margin-top:16px;font-size:17px;color:var(--muted);max-width:700px}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
+    padding:8px 14px;font-size:13px;box-shadow:var(--shadow);display:flex;gap:8px;align-items:center}
+  .badge b{color:var(--primary)}
+  .cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:12px;font-weight:600;font-size:14px;transition:.15s}
+  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(79,70,229,.35)}
+  .btn.primary:hover{background:var(--primary-d)}
+  .btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--primary);color:var(--primary)}
+  section{padding:48px 0}
+  section.alt{background:linear-gradient(180deg,rgba(79,70,229,.035),transparent)}
+  .sec-head{margin-bottom:26px}
+  .sec-head .k{font-size:13px;font-weight:700;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase}
+  .sec-head h2{font-size:26px;font-weight:800;margin-top:6px;letter-spacing:-.3px}
+  .sec-head p{color:var(--muted);margin-top:8px;max-width:700px;font-size:15px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+  .roles{display:flex;flex-direction:column;gap:12px}
+  .role{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--primary);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow)}
+  .role .h{font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px}
+  .role .d{font-size:14px;color:var(--muted);margin-top:6px}
+  .arch{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);overflow-x:auto;margin-bottom:24px}
+  .arch svg{width:100%;height:auto;min-width:640px}
+  .flow-step{fill:#eef2ff;stroke:var(--primary);stroke-width:1.5}
+  .flow-step.t{fill:#ecfeff;stroke:var(--accent)}
+  .flow-arrow{stroke:#94a3b8;stroke-width:2;fill:none}
+  .flow-label{font-size:14px;fill:var(--ink);font-weight:700}
+  .flow-sub{font-size:11.5px;fill:var(--muted)}
+  /* 能力线 */
+  .lines{display:flex;flex-direction:column;gap:14px}
+  .line{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow)}
+  .line .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .line .no{font-size:12px;font-weight:800;color:#fff;background:var(--primary);border-radius:6px;padding:2px 8px}
+  .line .t{font-weight:800;font-size:17px}
+  .line .chain{font-size:13.5px;color:var(--muted);margin-top:8px}
+  .line .foot{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px}
+  .pill{background:#eef2ff;color:var(--primary);border-radius:999px;padding:3px 10px;font-weight:600}
+  .pill.g{background:#ecfdf5;color:#047857}
+  .pill.o{background:#fff7ed;color:#b45309}
+  /* 代码卡 */
+  .codecard{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px}
+  .codecard .ch{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px 0;flex-wrap:wrap}
+  .codecard .ch .nm{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;font-weight:700}
+  .codecard .ch .ln{font-size:11.5px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 9px}
+  .codecard .cc{padding:14px 18px 18px}
+  .codecard .cc .lead{font-size:14px;margin-bottom:10px}
+  .codecard .cc ul{margin:0 0 12px 18px;font-size:13.5px;color:var(--muted)}
+  .codecard .cc ul li{margin-bottom:3px}
+  .codecard .iter{font-size:12.5px;color:#b45309;background:#fff7ed;border-radius:8px;padding:8px 11px;margin-bottom:12px}
+  pre{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.75;color:#334155}
+  pre .c{color:#94a3b8}
+  .codefoot{font-size:12px;color:#9ca3af;margin-top:8px}
+  /* 配套方法条 */
+  .methods{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+  @media(max-width:720px){.methods{grid-template-columns:1fr}}
+  .method{background:var(--bg);border:1px dashed #cbd5e1;border-radius:14px;padding:15px 16px}
+  .method .t{font-weight:700;font-size:14px;display:flex;align-items:center;gap:7px}
+  .method .d{font-size:12.5px;color:var(--muted);margin-top:6px}
+  .method .tag{font-size:11px;color:#0e7490;background:#ecfeff;border-radius:999px;padding:2px 8px;display:inline-block;margin-top:9px}
+  /* 报告提要 */
+  .reports{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media(max-width:760px){.reports{grid-template-columns:1fr}}
+  .rcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+  .rcard .rt{font-weight:800;font-size:16px;line-height:1.4}
+  .rcard .rm{font-size:12px;color:var(--muted)}
+  .kv{display:grid;grid-template-columns:76px 1fr;gap:6px 10px;font-size:13.5px}
+  .kv dt{color:#9ca3af;font-weight:600}
+  .kv dd{color:var(--ink)}
+  .kv dd .hl{background:#eef2ff;border-radius:4px;padding:0 4px}
+  .note{font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:12px;padding:14px 16px;margin-top:16px;box-shadow:var(--shadow)}
+  /* 技能栈 */
+  .stackrow{display:grid;grid-template-columns:88px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);align-items:start}
+  .stackrow:last-child{border-bottom:0}
+  .stackrow .sl{font-weight:700;font-size:14px;color:var(--primary);padding-top:3px}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{font-size:12.5px;background:#f1f5f9;color:#334155;border-radius:8px;padding:4px 10px}
+  .backrow{padding:14px 0 0;font-size:14px;font-weight:600}
+  .backrow a{color:var(--primary)}
+  footer{padding:36px 0 56px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>韩王泽</div>
+    <div class="navlinks">
+      <a href="index.html">首页</a>
+      <a class="on" href="experience-cyou.html">实习经历</a>
+      <a href="weschedule.html">WeSchedule</a>
+      <a href="report.html">调研报告</a>
+      <a href="competition.html">竞争定位</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>战略分析实习 · <span class="grad">搜狐畅游</span></h1>
+    <div class="meta">
+      <span>2025.11 – 2026.02</span>
+      <span>·</span>
+      <span>北京畅游天下网络技术集团有限公司</span>
+    </div>
+    <p class="sub">负责中、美、日、韩及微信小游戏市场的新品扫描与监测，主导潜力产品的概念测试与立项预评估，独立完成 6 份市场研究报告，并用 Python 把反复出现的统计与建模工作沉淀成可复用的分析工具。</p>
+    <div class="badges">
+      <span class="badge"><b>6</b> 份独立研究报告</span>
+      <span class="badge"><b>10</b> 个功能模块</span>
+      <span class="badge"><b>49</b> 个分析脚本</span>
+      <span class="badge"><b>4</b> 条能力线</span>
+      <span class="badge">多渠道新品扫描 · 概念测试闭环 · 品类建模</span>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="#code">看代码与工具</a>
+      <a class="btn ghost" href="#reports">看报告提要</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 职责 ============ -->
+<section id="role">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Role · 职责</div>
+      <h2>我负责什么</h2>
+      <p>四条主线，每条都落到具体产出，而不只是"参与"。</p>
+    </div>
+    <div class="roles">
+      <div class="role">
+        <div class="h">🔍 新品机会洞察与监测体系</div>
+        <div class="d">负责中、美、日、韩及微信小游戏市场的新品扫描，覆盖 Sensor Tower 榜单、Steam、YouTube / B站游戏自媒体等多渠道；从玩法差异化、吸量能力、买量依赖度、同质化程度四个维度初判，<b>每周输出新品机会清单</b>，直接支撑部门立项储备。多渠道采集与去重筛查已脚本化，把周度工作从人工比对压缩成一条命令。</div>
+      </div>
+      <div class="role">
+        <div class="h">🧪 概念测试与立项预评估</div>
+        <div class="d">主导潜力产品的早期市场验证全流程：玩法展示视频剪辑、世界观包装、问卷配置与投放回收；基于「下载意愿 ≥ 70% 且尖叫度 ≥ 1.5」的筛选标准，用 Python 批量处理多轮概念测试回收数据并输出统计结论，为高潜立项方向提供数据依据。</div>
+      </div>
+      <div class="role">
+        <div class="h">📑 市场研究与报告产出</div>
+        <div class="d">独立完成 6 份研究报告：中国 MMO 头部产品趋势、美国手游品类趋势（五年）、美国手游题材研究（五年）、中美日韩 RPG 细分赛道研究（MMORPG / 放置 RPG / 卡牌 / 开放世界）、小游戏畅销榜月度监测。基于 Sensor Tower、ADX、广大大等工具，从市场规模、竞争格局、买量素材策略、用户画像、内购结构等维度输出洞察。</div>
+      </div>
+      <div class="role">
+        <div class="h">🐍 基于 Python 的数据分析体系</div>
+        <div class="d">把报告里反复出现的统计工作沉淀成工具：产品生命周期「始终在榜 / 曾经在榜 / 从未在榜」分类模型；K-Means 文本聚类识别细分赛道格局；头部 / 中腰部 / 尾部分层贡献率、吸量效率、变现效率（RPD / ARPU）等指标体系，输出结构化 Excel 分析报告。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 四条能力线 ============ -->
+<section id="lines" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Capability Lines · 能力线</div>
+      <h2>49 个脚本 → 10 个模块 → 4 条能力线</h2>
+      <p>下面每个功能模块都与上面的一条职责对应，避免"写了代码但说不清为什么写"。</p>
+    </div>
+
+    <div class="arch">
+      <svg viewBox="0 0 880 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="脚本到能力线的收敛关系">
+        <rect class="flow-step" x="8" y="26" width="188" height="76" rx="12" />
+        <text class="flow-label" x="102" y="56" text-anchor="middle">49 个分析脚本</text>
+        <text class="flow-sub" x="102" y="76" text-anchor="middle">版本迭代 1.0 → 8.0</text>
+        <text class="flow-sub" x="102" y="92" text-anchor="middle">200 – 1200 行 / 个</text>
+
+        <path class="flow-arrow" d="M200 64 L232 64" marker-end="url(#a)" />
+        <rect class="flow-step t" x="236" y="26" width="188" height="76" rx="12" />
+        <text class="flow-label" x="330" y="56" text-anchor="middle">10 个功能模块</text>
+        <text class="flow-sub" x="330" y="76" text-anchor="middle">取数 · 清洗 · 建模</text>
+        <text class="flow-sub" x="330" y="92" text-anchor="middle">指标 · 预测 · 归因</text>
+
+        <path class="flow-arrow" d="M428 64 L460 64" marker-end="url(#a)" />
+        <rect class="flow-step" x="464" y="26" width="188" height="76" rx="12" />
+        <text class="flow-label" x="558" y="56" text-anchor="middle">4 条能力线</text>
+        <text class="flow-sub" x="558" y="76" text-anchor="middle">与岗位职责一一对应</text>
+        <text class="flow-sub" x="558" y="92" text-anchor="middle">监测 · 闭环 · 建模 · 归因</text>
+
+        <path class="flow-arrow" d="M656 64 L688 64" marker-end="url(#a)" />
+        <rect class="flow-step t" x="692" y="26" width="180" height="76" rx="12" />
+        <text class="flow-label" x="782" y="56" text-anchor="middle">5 份报告 + 1 套机制</text>
+        <text class="flow-sub" x="782" y="76" text-anchor="middle">含 59 页品类趋势研究</text>
+        <text class="flow-sub" x="782" y="92" text-anchor="middle">月度畅销榜监测</text>
+
+        <defs>
+          <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0 0 L6 3 L0 6 z" fill="#94a3b8" />
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="lines">
+      <div class="line">
+        <div class="top"><span class="no">01</span><span class="t">新品监测体系</span></div>
+        <div class="chain">多渠道扫描（ST 榜单 / Steam / YouTube·B站自媒体）→ 格式兼容与去重 → 四维研判（玩法差异化 · 吸量 · 买量依赖 · 同质化）→ 周度机会清单</div>
+        <div class="foot"><span class="pill">模块 1 新品扫描</span><span class="pill">模块 2 多源合并</span><span class="pill">模块 9 自媒体爬虫</span><span class="pill g">对应职责 1</span></div>
+      </div>
+      <div class="line">
+        <div class="top"><span class="no">02</span><span class="t">概念测试闭环</span></div>
+        <div class="chain">素材剪辑 + 世界观包装 + 问卷配置 → 投放回收 → Python 批量出统计表（样本量 / 下载意愿 / 尖叫度 / 分群意愿 / 原因占比 / 游玩时长）→ 按量化门槛筛高潜方向</div>
+        <div class="foot"><span class="pill">模块 6 问卷批处理</span><span class="pill o">交付给非技术同事使用</span><span class="pill g">对应职责 2</span></div>
+      </div>
+      <div class="line">
+        <div class="top"><span class="no">03</span><span class="t">竞争格局与品类建模</span></div>
+        <div class="chain">集中度 CR 与分层贡献率 → 产品生命周期三分类 → TF-IDF + KMeans 题材聚类（含最佳 K 自动选择）→ 吸量 / 留存 / 变现效率指标体系</div>
+        <div class="foot"><span class="pill">模块 3 集中度 CR</span><span class="pill">模块 4 生命周期</span><span class="pill">模块 5 品类与题材</span><span class="pill g">对应职责 4</span></div>
+      </div>
+      <div class="line">
+        <div class="top"><span class="no">04</span><span class="t">预测与增长归因</span></div>
+        <div class="chain">月度发行分布卡方检验 → 下载 / 收入回归预测（含异常值清洗与置信区间）→ 数据缺口预测补位 → 增量贡献与增长贡献分解</div>
+        <div class="foot"><span class="pill">模块 7 数量预测</span><span class="pill">模块 8 收入预测</span><span class="pill">模块 10 贡献率分解</span><span class="pill g">支撑职责 3、4</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 代码 ============ -->
+<section id="code">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Code · 代码与工具</div>
+      <h2>把重复劳动变成工具</h2>
+      <p>下面 7 个模块是四条能力线里最能说明问题的部分，节选代表函数。涉及的本地路径与内部标识均已移除。</p>
+    </div>
+
+    <!-- 1 -->
+    <div class="codecard">
+      <div class="ch"><span class="nm">new_release_scanner.py</span><span class="ln">288 行 · 模块 1</span></div>
+      <div class="cc">
+        <div class="lead"><b>做什么</b>：读取逐周的 Sensor Tower 榜单导出文件，统一格式、按条件筛选、与累积的已扫描名单去重，输出本周真正的新品清单并回写名单。</div>
+        <ul>
+          <li><b>为什么需要</b>：每周要在几百行榜单里人工比对历史名单，重复且易错。</li>
+          <li><b>工程点</b>：榜单导出存在两种列名口径，自动识别并映射；类封装 11 个方法，去重、筛选、回写各司其职。</li>
+        </ul>
+        <div class="iter">迭代轨迹：精简版（仅筛选）→ 加入滚动去重表 → 修复输出路径写成目录导致覆盖的问题。</div>
+<pre><span class="c">    def detect_format_and_extract(self, df):</span>
+        <span class="c">"""检测表格格式并提取所需字段"""</span>
+        columns = df.columns.tolist()
+
+        <span class="c"># 榜单导出存在两种列名口径，先统一</span>
+        if 'Downloads' in columns and 'Revenue ($)' in columns:
+            required_columns = [
+                'Country', 'Chart', 'Date', 'Ranking', 'App ID', 'App name',
+                'App URL', 'Release date', 'App ranking change',
+                'Downloads', 'Revenue ($)'
+            ]
+        elif 'iPhone downloads' in columns and 'iPhone revenue ($)' in columns:
+            df = df.rename(columns={
+                'iPhone downloads': 'Downloads',
+                'iPhone revenue ($)': 'Revenue ($)'
+            })
+            required_columns = [ ... ]
+        else:
+            print("未知表格格式，跳过处理")
+            return pd.DataFrame()
+
+        available_columns = [c for c in required_columns if c in df.columns]
+        return df[available_columns].copy()
+
+
+    <span class="c">def remove_duplicate_games(self, df):</span>
+        <span class="c">"""剔除与滚动去重表重复的记录（仅按游戏名）"""</span>
+        <span class="c"># 与新游戏名称空格做格式统一</span>
+        df['App name_clean'] = df['App name'].astype(str).str.strip()
+
+        <span class="c"># 筛选：新游戏名称不在去重表中</span>
+        keep = ~df['App name_clean'].isin(self.excluded_game_names)
+        dedup = df[keep].drop(columns=['App name_clean'])
+
+        print(f"去重结果: 原始 {len(df)} 条 -> 去重后 {len(dedup)} 条")
+        return dedup</pre>
+        <div class="codefoot">节选代表函数，完整脚本 288 行。</div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="codecard">
+      <div class="ch"><span class="nm">merge_datasets.py</span><span class="ln">166 行 · 模块 2</span></div>
+      <div class="cc">
+        <div class="lead"><b>做什么</b>：把几十个各国各年的榜单导出文件合并成一张统一底表，为后续所有分析提供输入。</div>
+        <ul>
+          <li><b>为什么需要</b>：同一份数据源在不同市场导出编码不同（UTF-8 / UTF-16），且下载未完成的临时文件混在目录里。</li>
+          <li><b>工程点</b>：编码自动检测 + 失败兜底；从文件名正则解析年份与国家；兼容 <code>.crdownload</code> 分片文件。</li>
+        </ul>
+        <div class="iter">迭代轨迹：基础合并 → 2.0 增加未完成下载文件的兼容与空内容兜底。</div>
+<pre><span class="c">def detect_encoding(file_path):</span>
+    <span class="c">"""自动检测文件的编码格式（兼容 crdownload 临时文件）"""</span>
+    try:
+        with open(file_path, 'rb') as f:
+            <span class="c"># 读取更多数据提高检测准确性（分片文件可能不完整）</span>
+            raw_data = f.read(50000)
+            if len(raw_data) == 0:
+                print(f"警告：文件 {file_path} 为空")
+                return 'utf-8'
+            result = chardet.detect(raw_data)
+            encoding = result['encoding']
+            <span class="c"># 处理检测结果为空的情况</span>
+            if encoding is None:
+                encoding = 'utf-16'          <span class="c"># 兜底默认编码</span>
+            print(f"检测到文件编码: {encoding}, 置信度: {result['confidence']:.2f}")
+            return encoding
+    except Exception as e:
+        print(f"检测编码失败: {str(e)}，使用默认编码 utf-16")
+        return 'utf-16'
+
+
+<span class="c">def extract_info_from_filename(filename):</span>
+    <span class="c"># 文件名形如：双平台 应用排行榜 下载量 (Jan 1, 2021 - Dec 31, 2021, US), 详细.csv</span>
+    pattern = r'\([^()]*(\d{4})[^()]*(\d{4}),\s*([A-Z]{2})?\)'
+    match = re.search(pattern, filename)
+    <span class="c"># 提取起始年份与国家代码，作为新列并入底表</span>
+    ...</pre>
+        <div class="codefoot">节选代表函数，完整脚本 166 行。</div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="codecard">
+      <div class="ch"><span class="nm">concentration_cr.py</span><span class="ln">576 行 · 模块 3</span></div>
+      <div class="cc">
+        <div class="lead"><b>做什么</b>：按「年份 × 国家 × 品类」切片，分别按下载量与收入排序计算 CR（头部集中度），并输出带样式公式的多工作表 Excel 报告。</div>
+        <ul>
+          <li><b>为什么需要</b>：判断一个赛道是"头部垄断"还是"仍有新位置"，需要一个可横比的口径。</li>
+          <li><b>工程点</b>：下载与收入两个维度独立排序（避免用同一套名次算两个口径的份额）；不同品类使用不同集中度基数；输出直接可用的成品表而非中间数据。</li>
+        </ul>
+<pre><span class="c">    # ========== 分别按收入 / 下载量排序 ==========</span>
+    <span class="c"># 收入维度：按收入降序（用于收入集中度 + 前 10 产品展示）</span>
+    sorted_by_revenue  = filtered_df.sort_values('收入', ascending=False).reset_index(drop=True)
+    <span class="c"># 下载量维度：按下载量降序（仅用于下载集中度）</span>
+    sorted_by_download = filtered_df.sort_values('下载', ascending=False).reset_index(drop=True)
+
+    <span class="c"># 精准判断"当年首发"，排除日期解析误差</span>
+    target_year = int(year)
+    sorted_by_revenue['是否当年首发'] = (sorted_by_revenue['首发年份_精准'] == target_year)
+
+    top10_revenue  = sorted_by_revenue.head(10).copy()
+    top10_download = sorted_by_download.head(10).copy()
+    <span class="c"># ...（省略产品明细打印）</span>
+
+    <span class="c"># ========== 按品类确定集中度基数 ==========</span>
+    cr_base = 4 if genre == 'Open World' else 5     <span class="c"># CR4 / CR5 切换</span>
+    total_download = filtered_df['下载'].sum()
+    total_revenue  = filtered_df['收入'].sum()
+
+    <span class="c"># 下载集中度：按下载排名取前 N 名</span>
+    cr_download = round(
+        (sorted_by_download.head(cr_base)['下载'].sum() / total_download * 100)
+    ) if total_download &gt; 0 else 0
+    <span class="c"># 收入集中度：按收入排名取前 N 名</span>
+    cr_revenue = round(
+        (sorted_by_revenue.head(cr_base)['收入'].sum() / total_revenue * 100)
+    ) if total_revenue &gt; 0 else 0</pre>
+        <div class="codefoot">节选代表函数，完整脚本 576 行。</div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="codecard">
+      <div class="ch"><span class="nm">lifecycle_classify.py</span><span class="ln">509 行 · 模块 4</span></div>
+      <div class="cc">
+        <div class="lead"><b>做什么</b>：把每个产品在「年份 × 国家 × 品类」内的榜内表现逐年对齐，打上「始终在榜 / 曾经在榜 / 从未在榜」标签，量化长线运营能力。</div>
+        <ul>
+          <li><b>为什么需要</b>："这游戏活得久不久"原本是定性判断，需要一个可计算、可横比的定义。</li>
+          <li><b>工程点</b>：跨年对齐时先做产品名归一化（大小写、命名差异）；以"有数据的年份"为分母，避免因缺数据被误判为掉榜。</li>
+        </ul>
+<pre><span class="c">def classify_products(df, top20_dict):</span>
+    <span class="c">"""</span>
+    <span class="c">    始终在榜：有数据的年份里，每年都在本品类榜内</span>
+    <span class="c">    曾经在榜：至少一年在榜，但不是所有年份都在榜</span>
+    <span class="c">    从未在榜：从未进入本品类榜内</span>
+    <span class="c">"""</span>
+    <span class="c"># 按 产品-国家-品类 维度去重</span>
+    all_units = df[['Unified Name', '国家', '合并后品类']].drop_duplicates()
+    years = ['2021', '2022', '2023', '2024', '2025']
+
+    for _, row in all_units.iterrows():
+        product_name, country, genre = row['Unified Name'], row['国家'], row['合并后品类']
+        yearly_status, total_years_in_top20 = {}, 0
+
+        for year in years:
+            <span class="c"># 本品类内下载或收入任一进入前 20 即算在榜</span>
+            in_dl  = product_name in top20_dict['download'].get((year, country, genre), [])
+            in_rev = product_name in top20_dict['revenue'].get((year, country, genre), [])
+            if in_dl or in_rev:
+                yearly_status[year] = '在榜'
+                total_years_in_top20 += 1
+            else:
+                yearly_status[year] = '不在榜'
+
+        <span class="c"># 以"有数据的年份"为分母，避免缺数据被误判为掉榜</span>
+        years_with_data = sum(1 for v in yearly_status.values() if v != '无数据')
+        if years_with_data &gt; 0 and total_years_in_top20 == years_with_data:
+            classification = '始终在榜'
+        elif total_years_in_top20 &gt; 0:
+            classification = '曾经在榜'
+        else:
+            classification = '从未在榜'</pre>
+        <div class="codefoot">节选代表函数，完整脚本 509 行。</div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="codecard">
+      <div class="ch"><span class="nm">genre_analysis.py</span><span class="ln">1202 行 · 模块 5</span></div>
+      <div class="cc">
+        <div class="lead"><b>做什么</b>：对产品的名称 / 题材文本做 TF-IDF 向量化后用 K-Means 聚类，自动挑选最优聚类数并给每一簇打标签，识别细分赛道格局；同一套引擎换输入即可做题材维度分析。</div>
+        <ul>
+          <li><b>为什么需要</b>：赛道划分原本依赖人工经验，主观且不可复现。</li>
+          <li><b>工程点</b>：遍历候选 K 用轮廓系数自动选优（只接受系数为正的聚类）；特征数随语料规模动态调整；TF-IDF 失败时降级返回而不中断整个分析。</li>
+        </ul>
+        <div class="iter">迭代轨迹：1.0 → 8.0，共 8 轮。分析窗口 2 年 → 5 年；单指标 → 12 项指标体系（五年复合增速、波动系数、头尾差距比、中间层与尾部效率差等）；手工看聚类 → 自动选最优 K；并补齐了 NLTK 资源的自动下载与修复逻辑。</div>
+<pre><span class="c">    # 优化 TF-IDF 参数，降低稀疏度</span>
+    tfidf = TfidfVectorizer(
+        max_features=min(50, len(set(' '.join(valid_names).split()))),  <span class="c"># 动态特征数</span>
+        min_df=2,                    <span class="c"># 至少出现在 2 个文档中</span>
+        stop_words='english'
+    )
+    tfidf_matrix = tfidf.fit_transform(valid_names)
+
+    <span class="c"># 遍历候选 K，用轮廓系数自动选最优</span>
+    start_k, end_k = cluster_range
+    best_k, best_score, all_scores = start_k, -1, []
+
+    for k in range(start_k, end_k + 1):
+        if k &gt;= len(valid_names):
+            break
+        kmeans = KMeans(n_clusters=k, random_state=42, n_init=Config.KMEANS_N_INIT)
+        labels = kmeans.fit_predict(tfidf_matrix)
+
+        <span class="c"># 聚类数少于 2 无法计算轮廓系数，跳过</span>
+        if len(set(labels)) &lt; 2:
+            continue
+        score = silhouette_score(tfidf_matrix, labels)
+        all_scores.append((k, score))
+
+        <span class="c"># 轮廓系数范围 [-1, 1]，&gt; 0 表示聚类有效</span>
+        if score &gt; 0 and score &gt; best_score:
+            best_score, best_k = score, k
+
+    <span class="c"># 兜底：所有 K 都无效时，退化为最接近 2 的有效值</span>
+    if best_score &lt;= 0 and all_scores:
+        ...</pre>
+        <div class="codefoot">节选代表函数，完整脚本 1202 行。</div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="codecard">
+      <div class="ch"><span class="nm">concept_test_stats.py</span><span class="ln">454 行 · 模块 6</span></div>
+      <div class="cc">
+        <div class="lead"><b>做什么</b>：批量遍历概念测试回收的问卷导出表，自动识别每轮的品类题列，按固定列序输出标准统计表（样本量 / 整体下载意愿 / 尖叫度 / 男女分群 / 原因占比 / 游玩时长占比）。</div>
+        <ul>
+          <li><b>为什么需要</b>：多轮投放的问卷题号与列名会变，手工统计既慢又容易口径不一。</li>
+          <li><b>工程点</b>：<b>把业务口径写成了代码</b>——下载意愿的分母是"有效爱好用户 + 已查看未填写用户"，尖叫度只在"愿意试玩"子集里取均值，游玩时长的分母取"已填写"字段为正向值的样本。</li>
+          <li><b>工程点</b>：加了文件夹选择窗口，让非技术同事可以直接双击运行，不必改代码。</li>
+        </ul>
+        <div class="iter">迭代轨迹：基础统计 → 增加游玩时长题 → 增加"已填写"字段识别修正分母 → 加入图形界面；期间按业务方反馈修正过样本量口径。</div>
+<pre><span class="c">def calculate_statistics(df_clean, category_name, category_col):</span>
+    <span class="c">"""核心统计函数：基于"已填写"字段判断分母"""</span>
+    metrics = {'样本用户属性': category_name}
+
+    df_clean['是否愿意']  = df_clean['是否愿意'].apply(safe_string_convert)
+    df_clean['1试玩意愿'] = df_clean['1试玩意愿'].apply(safe_string_convert)
+
+    <span class="c"># 分母口径：有效爱好用户 + 已查看未填写用户</span>
+    hobby_users    = df_clean[df_clean[category_col] == '有出于爱好体验过']
+    willing_no_choice = df_clean[(df_clean['是否愿意'] == '愿意') &amp;
+                                (df_clean['1试玩意愿'].isin(['', '-']))]
+    sample_users = pd.concat([hobby_users, willing_no_choice]).drop_duplicates(subset=['序号'])
+    metrics['样本量'] = len(sample_users)
+
+    <span class="c"># 整体下载意愿</span>
+    hobby_willing = hobby_users[hobby_users['1试玩意愿'] == '愿意试玩']
+    metrics['整体下载意愿'] = (f'{len(hobby_willing) / metrics["样本量"]:.0%}'
+                              if metrics['样本量'] else '0%')
+
+    <span class="c"># 尖叫度：仅在"愿意试玩"子集内取均值</span>
+    df_clean['1尖叫度'] = df_clean['1尖叫度'].apply(safe_string_convert)
+    valid_scream = hobby_willing[hobby_willing['1尖叫度'] != '-']['1尖叫度']
+    scream_values = []
+    for val in valid_scream:
+        try:
+            scream_values.append(float(val))
+        except (ValueError, TypeError):
+            continue
+    metrics['尖叫度-愿意下载'] = f'{np.mean(scream_values):.2f}' if scream_values else '0.00'
+
+    <span class="c"># 游玩时长：分母 = "已填写"字段为正向值的样本</span>
+    duration_col = auto_detect_play_duration_column(df_clean.columns)
+    filled_col   = auto_detect_filled_column(df_clean.columns)</pre>
+        <div class="codefoot">节选代表函数，完整脚本 454 行。</div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="codecard">
+      <div class="ch"><span class="nm">bilibili_crawler.py</span><span class="ln">198 行 · 模块 9</span></div>
+      <div class="cc">
+        <div class="lead"><b>做什么</b>：抓取指定 UP 主在时间范围内的投稿（标题 / 链接 / 发布时间），支持多 UID 批量，导出 CSV，用于监测自媒体侧的新品热度。</div>
+        <ul>
+          <li><b>工程点</b>：带重试策略的会话（指数退避 + 指定可重试状态码）；请求间随机延迟，降低触发频控的概率；按发布时间倒序，早于起始时间即提前退出，避免无谓翻页。</li>
+        </ul>
+        <div class="iter">迭代轨迹：1.0 用浏览器自动化驱动（易被识别、速度慢）→ 2.0/3.0 改用官方库异步分页 → 4.0 改为直连接口 + 重试 + 退避，稳定性和速度都明显提升。</div>
+<pre><span class="c">def create_session():</span>
+    <span class="c">"""创建带重试机制的 requests 会话"""</span>
+    session = requests.Session()
+    retry_strategy = Retry(
+        total=3,                                     <span class="c"># 总重试次数</span>
+        backoff_factor=1,                            <span class="c"># 重试间隔系数</span>
+        status_forcelist=[412, 500, 502, 503, 504],  <span class="c"># 需要重试的状态码</span>
+        allowed_methods=["GET"]
+    )
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    session.mount("https://", adapter)
+    session.headers.update(HEADERS)                  <span class="c"># 模拟真实浏览器</span>
+    return session
+
+
+<span class="c"># ------------------------ 抓取主循环 ------------------------</span>
+while True:
+    time.sleep(random.uniform(0.5, 2))               <span class="c"># 随机延迟，避免请求频率过高</span>
+    url = (f"https://api.bilibili.com/x/space/wbi/arc/search"
+           f"?mid={uid}&amp;ps=30&amp;pn={page}&amp;order=pubdate")
+    response = session.get(url, proxies=PROXIES, timeout=15)
+
+    data = response.json()
+    if data.get('code') != 0:
+        error_msg = f"API返回错误：{data.get('message', '未知错误')}"
+        break
+
+    video_list = data.get('data', {}).get('list', {}).get('vlist', [])
+    if not video_list:
+        break                                        <span class="c"># 没有更多视频</span>
+
+    for video in video_list:
+        pubdate = video.get('created', 0)
+        if start_ts &lt;= pubdate &lt;= end_ts:
+            video_count += 1
+        elif pubdate &lt; start_ts:
+            <span class="c"># 发布时间已早于起始时间，后续也都更早，提前退出</span>
+            return video_count, error_msg</pre>
+        <div class="codefoot">节选代表函数，完整脚本 198 行。</div>
+      </div>
+    </div>
+
+    <!-- 配套方法条 -->
+    <div class="sec-head" style="margin-top:34px;margin-bottom:0">
+      <div class="k">Supporting Methods · 配套方法</div>
+      <h2 style="font-size:20px">另有 3 个方法模块</h2>
+      <p style="font-size:14px">这三个模块以方法论为主、复用度低于上面 7 个，所以不单独展开代码，一并列出以保证能力覆盖的完整性。</p>
+    </div>
+    <div class="methods">
+      <div class="method">
+        <div class="t">📐 卡方拟合优度检验</div>
+        <div class="d">检验新品发行在月份间是否均匀分布；若显著偏离均匀分布，再叠加修正而非直接外推。</div>
+        <div class="tag">模块 7 · 产品数量预测</div>
+      </div>
+      <div class="method">
+        <div class="t">📈 回归 + 适用性判定</div>
+        <div class="d">对下载量与收入做趋势拟合，并按 R² 分档判断线性是否可用；对不可用的情况改走加权均值 + 趋势与季节修正，并给出置信区间。</div>
+        <div class="tag">模块 8 · 收入预测</div>
+      </div>
+      <div class="method">
+        <div class="t">🧩 贡献率分解</div>
+        <div class="d">区分"增量贡献"与"增长贡献"两种口径分别计算，并用预测值补位当年缺失数据，解决年度归因做不完整的问题。</div>
+        <div class="tag">模块 10 · 增长归因</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 报告提要 ============ -->
+<section id="reports" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Reports · 报告提要</div>
+      <h2>6 份研究报告</h2>
+      <p>每份写明：要回答什么问题、我做了什么、用什么数据与框架、得出哪一类结论。涉及委托方业务数据的具体数值与产品名单不在此公开。</p>
+    </div>
+    <div class="reports">
+
+      <div class="rcard">
+        <div class="rt">2021–2025 美国手游品类趋势研究</div>
+        <div class="rm">59 页 · 独立完成</div>
+        <dl class="kv">
+          <dt>研究问题</dt><dd>美国手游近五年各玩法品类的规模演化，以及哪些品类仍存在进入机会</dd>
+          <dt>我的角色</dt><dd>独立完成选题、数据整理、分析与成稿</dd>
+          <dt>数据工具</dt><dd>Sensor Tower 双平台数据 + RPD 指标；集中度与分层贡献用 Python 计算</dd>
+          <dt>分析框架</dt><dd>下载与收入双维度 × 品类前 20 × 增长率分层（近两年变化 / 五年趋势）× RPD × 新品贡献结构</dd>
+          <dt>发现</dt><dd>下载端整体处于收缩通道，收入端由少数高 RPD 品类支撑；增长品类的驱动力主要来自爆款新品而非存量产品。据此对每个重点品类给出<span class="hl">可关注 / 需差异化切入 / 不建议进入</span>三类判断</dd>
+          <dt>产出形态</dt><dd>59 页研究报告，进入部门选题储备</dd>
+        </dl>
+      </div>
+
+      <div class="rcard">
+        <div class="rt">2021–2025 美国手游题材研究</div>
+        <div class="rm">13 页 · 独立完成</div>
+        <dl class="kv">
+          <dt>研究问题</dt><dd>从题材视角看，哪些题材在吸量、哪些在变现，差异化空间落在哪里</dd>
+          <dt>我的角色</dt><dd>独立完成；与品类研究共用同一套分析引擎，更换输入维度</dd>
+          <dt>数据工具</dt><dd>Sensor Tower 双平台数据；题材聚类与 RPD 趋势用 Python 计算</dd>
+          <dt>分析框架</dt><dd>题材下载榜 × 五年趋势 × RPD 分层 × 代表题材的玩法组合拆解</dd>
+          <dt>发现</dt><dd>题材下载榜高度集中，多数题材已进入下行通道；增长题材普遍叠加了<span class="hl">解压向体验与强即时反馈</span>的设计元素；差异化空间主要来自题材与玩法的融合方式，而非题材本身</dd>
+          <dt>产出形态</dt><dd>13 页专题研究</dd>
+        </dl>
+      </div>
+
+      <div class="rcard">
+        <div class="rt">中美日韩 RPG 类市场研究</div>
+        <div class="rm">29 页 · 独立完成</div>
+        <dl class="kv">
+          <dt>研究问题</dt><dd>四个市场的 RPG 赛道规模与结构如何演变，不同细分品类的进入条件差在哪</dd>
+          <dt>我的角色</dt><dd>独立完成四国数据整理与全部分析</dd>
+          <dt>数据工具</dt><dd>Sensor Tower 日粒度数据（下载 / 收入 / 产品数量），Python 做规模测算与效率指标</dd>
+          <dt>分析框架</dt><dd>四国市场对比 × 规模与 RPD × 产品数量供给 × 四个细分品类（MMORPG / 放置 RPG / 卡牌 / 开放世界）× 研发门槛与回收周期</dd>
+          <dt>发现</dt><dd>四国 RPG 市场同步进入收缩期，但收缩的成因与结构不同；<span class="hl">细分品类之间的进入门槛差距，远大于市场规模之间的差距</span>——高投入品类需要匹配完整的研发团队与长线内容能力，不适合以机会型方式进入</dd>
+          <dt>产出形态</dt><dd>29 页研究，含各细分品类的进入条件评估</dd>
+        </dl>
+      </div>
+
+      <div class="rcard">
+        <div class="rt">中国 MMO 头部产品趋势研究</div>
+        <div class="rm">7 页 · 独立完成</div>
+        <dl class="kv">
+          <dt>研究问题</dt><dd>头部 MMO 的竞争壁垒由什么构成，近两年在往哪个方向迁移</dd>
+          <dt>我的角色</dt><dd>独立完成；买量素材与内购结构双主线拆解</dd>
+          <dt>数据工具</dt><dd>Sensor Tower 榜单与规模数据 + ADX 买量素材数据；份额与分层贡献用 Python 计算</dd>
+          <dt>分析框架</dt><dd>即时制 / 回合制分层 × 收入结构 × 买量素材卖点演化 × 内购结构变化</dd>
+          <dt>发现</dt><dd>头部格局基本固化，新品进入难度持续上升；买量素材的诉求重心正从<span class="hl">玩法与职业展示</span>转向<span class="hl">福利、场景展示与情怀 / IP</span>，变现结构的重心亦同步移动</dd>
+          <dt>产出形态</dt><dd>7 页专题研究</dd>
+        </dl>
+      </div>
+
+      <div class="rcard">
+        <div class="rt">小游戏畅销榜每月监测（2025 年 10 月）</div>
+        <div class="rm">月度文档 · 我搭建机制并逐月执行</div>
+        <dl class="kv">
+          <dt>研究问题</dt><dd>微信小游戏供给端正在发生什么结构性变化</dd>
+          <dt>我的角色</dt><dd>监测机制由我设计并执行：扫描节点、品类标签口径、新游拆解模板均自行定义</dd>
+          <dt>数据工具</dt><dd>微信小游戏畅销榜 Top100（每月固定节点扫描）</dd>
+          <dt>分析框架</dt><dd>品类数量变化 × 新进 / 回榜 / 掉出产品 × 新游四段拆解（玩法 → 核心循环 → 养成系统 → 商业化）</dd>
+          <dt>发现</dt><dd>品类结构存在明显轮动：一类因<span class="hl">IP 化新品集中入榜</span>而数量上升，另一类因子类产品批量掉榜而下降；IP 化是当期新品快速起量的主要路径之一</dd>
+          <dt>产出形态</dt><dd>月度监测文档，形成连续跟踪</dd>
+        </dl>
+      </div>
+
+      <div class="rcard" style="justify-content:center">
+        <div class="rt">另：参与部门年度报告 MMO 章节</div>
+        <div class="rm">《2020–2024 全球手游品类趋势研究》</div>
+        <dl class="kv">
+          <dt>我的参与</dt><dd>独立完成其中 MMO 章节的分析与撰写；该章节与上面的中国 MMO 独立报告同源，在此不重复展开</dd>
+        </dl>
+      </div>
+
+    </div>
+
+    <div class="note">
+      <b>关于材料边界</b>：本页展示的是我的方法、流程与工具实现（代码已移除本地路径与内部标识）。报告涉及的具体数值、产品名单与立项结论属委托方业务信息，不在公开渠道发布；需要了解研究全貌时可在面试中当面沟通。
+    </div>
+  </div>
+</section>
+
+<!-- ============ 技能栈 ============ -->
+<section id="stack">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Stack · 工具与技能</div>
+      <h2>用到的工具</h2>
+    </div>
+    <div class="card">
+      <div class="stackrow">
+        <div class="sl">数据获取</div>
+        <div class="chips">
+          <span class="chip">Sensor Tower</span><span class="chip">ADX</span><span class="chip">广大大</span><span class="chip">Steam</span>
+          <span class="chip">B站 / YouTube 自媒体</span><span class="chip">requests + bs4</span><span class="chip">bilibili API</span>
+          <span class="chip">编码检测 chardet</span><span class="chip">正则解析</span>
+        </div>
+      </div>
+      <div class="stackrow">
+        <div class="sl">分析建模</div>
+        <div class="chips">
+          <span class="chip">pandas</span><span class="chip">numpy</span><span class="chip">scipy</span>
+          <span class="chip">scikit-learn</span><span class="chip">TF-IDF</span><span class="chip">K-Means</span>
+          <span class="chip">轮廓系数选优</span><span class="chip">NLTK</span><span class="chip">卡方检验</span>
+          <span class="chip">线性回归 + R² 判定</span><span class="chip">集中度 CR</span><span class="chip">分层贡献率</span>
+        </div>
+      </div>
+      <div class="stackrow">
+        <div class="sl">输出交付</div>
+        <div class="chips">
+          <span class="chip">openpyxl 多工作表报告</span><span class="chip">matplotlib</span><span class="chip">seaborn</span>
+          <span class="chip">tkinter 图形界面</span><span class="chip">PPT 研究成稿</span>
+        </div>
+      </div>
+      <div class="stackrow">
+        <div class="sl">研究方法</div>
+        <div class="chips">
+          <span class="chip">市场规模测算</span><span class="chip">RPD / ARPU 效率指标</span><span class="chip">买量素材拆解</span>
+          <span class="chip">内购结构拆解</span><span class="chip">用户画像</span><span class="chip">概念测试设计</span>
+          <span class="chip">问卷投放与回收</span><span class="chip">玩法与题材分层</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="backrow"><a href="index.html">← 返回首页</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>韩王泽 · 个人主页</div>
+    <div style="margin-top:6px">搜狐畅游 战略分析实习（2025.11 – 2026.02）· © 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>个人作品集 · 项目合集</title>
-<meta name="description" content="个人作品集：收录做过的项目，从用户调研、方案设计到工程实现与数据验证的全过程。" />
+<title>韩王泽 · 个人主页</title>
+<meta name="description" content="韩王泽的个人主页：教育经历、搜狐畅游战略分析实习、WeSchedule 小程序与校园市场调研等项目的完整过程记录。" />
 <style>
   :root{
     --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
@@ -25,126 +25,151 @@
   .brand .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--primary),var(--accent))}
   .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted)}
   .navlinks a:hover{color:var(--primary)}
-  @media(max-width:640px){.navlinks{display:none}}
-  header.hero{padding:72px 0 56px;background:
+  @media(max-width:700px){.navlinks{display:none}}
+  header.hero{padding:70px 0 52px;background:
     radial-gradient(1200px 400px at 80% -10%,rgba(79,70,229,.12),transparent),
     radial-gradient(900px 360px at 0% 0%,rgba(14,165,233,.10),transparent);}
-  .hero h1{font-size:42px;line-height:1.18;font-weight:800;letter-spacing:-.5px}
+  .hero .eyebrow{font-size:13px;font-weight:700;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase}
+  .hero h1{font-size:44px;line-height:1.15;font-weight:800;letter-spacing:-.5px;margin-top:8px}
   .hero h1 .grad{background:linear-gradient(120deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p.sub{margin-top:16px;font-size:18px;color:var(--muted);max-width:660px}
-  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .hero p.sub{margin-top:16px;font-size:17px;color:var(--muted);max-width:700px}
+  .hero .edu{margin-top:18px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--muted)}
+  .hero .edu span b{color:var(--ink)}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
   .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
     padding:8px 14px;font-size:13px;box-shadow:var(--shadow);display:flex;gap:8px;align-items:center}
   .badge b{color:var(--primary)}
-  .cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+  .cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
   .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:600;font-size:15px;transition:.15s}
   .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(79,70,229,.35)}
   .btn.primary:hover{background:var(--primary-d)}
   .btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
   .btn.ghost:hover{border-color:var(--primary);color:var(--primary)}
-  section{padding:56px 0}
-  .sec-head{margin-bottom:28px}
+  section{padding:52px 0}
+  section.alt{background:linear-gradient(180deg,rgba(79,70,229,.035),transparent)}
+  .sec-head{margin-bottom:26px}
   .sec-head .k{font-size:13px;font-weight:700;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase}
   .sec-head h2{font-size:28px;font-weight:800;margin-top:6px;letter-spacing:-.3px}
-  .sec-head p{color:var(--muted);margin-top:8px;max-width:680px}
+  .sec-head p{color:var(--muted);margin-top:8px;max-width:700px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
-  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-  @media(max-width:720px){.grid3,.grid2{grid-template-columns:1fr}}
-  .stat .n{font-size:34px;font-weight:800;color:var(--primary);line-height:1}
-  .stat .l{margin-top:8px;font-size:14px;color:var(--muted)}
-  .stat .d{margin-top:6px;font-size:12px;color:#9ca3af}
-  .arch{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);overflow-x:auto}
-  .arch svg{width:100%;height:auto;min-width:640px}
-  .flow-step{fill:#eef2ff;stroke:var(--primary);stroke-width:1.5}
-  .flow-step.t{fill:#ecfeff;stroke:var(--accent)}
-  .flow-arrow{stroke:#94a3b8;stroke-width:2;fill:none}
-  .flow-label{font-size:13px;fill:var(--ink);font-weight:600}
-  .flow-sub{font-size:11px;fill:var(--muted)}
-  .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
-  @media(max-width:720px){.metric-row{grid-template-columns:repeat(2,1fr)}}
-  .metric{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;box-shadow:var(--shadow)}
-  .metric .n{font-size:26px;font-weight:800;color:var(--primary)}
-  .metric .l{font-size:12px;color:var(--muted);margin-top:4px}
-  .chart-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
-  .chart-card svg{width:100%;height:auto}
-  .legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-top:10px;flex-wrap:wrap}
-  .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
-  .video-box{background:#0f172a;border-radius:16px;overflow:hidden;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#cbd5e1;position:relative}
-  .video-box iframe{width:100%;height:100%;border:0}
-  .video-ph{text-align:center;padding:30px}
-  .video-ph .ic{font-size:40px}
-  .video-ph .t{margin-top:10px;font-weight:700;color:#fff}
-  .video-ph .s{font-size:13px;color:#94a3b8;margin-top:6px}
-  .links{display:flex;flex-wrap:wrap;gap:12px}
-  .link{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);
-    border-radius:12px;padding:14px 18px;font-weight:600;box-shadow:var(--shadow);transition:.15s}
-  .link:hover{border-color:var(--primary);transform:translateY(-1px)}
-  .link .em{font-size:20px}
-  .log{list-style:none;display:flex;flex-direction:column;gap:12px}
-  .log li{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--primary);
-    border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
-  .log li b{color:var(--primary)}
-  .log li .meta{font-size:12px;color:#9ca3af;margin-top:4px}
-  .backrow{padding:14px 0 0;font-size:14px;font-weight:600}
-  .backrow a{color:var(--primary)}
-  /* projects grid */
-  .projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  /* 时间线 */
+  .tl{position:relative;padding-left:26px}
+  .tl:before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--primary),var(--accent),transparent)}
+  .tli{position:relative;margin-bottom:16px}
+  .tli:before{content:"";position:absolute;left:-26px;top:9px;width:12px;height:12px;border-radius:50%;
+    background:var(--card);border:2.5px solid var(--primary)}
+  .tli.hi:before{background:var(--primary)}
+  .tli .box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 18px;box-shadow:var(--shadow);display:block}
+  .tli.hi .box{border-color:rgba(79,70,229,.45)}
+  .tli .when{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.3px}
+  .tli .what{font-weight:800;font-size:16px;margin-top:3px}
+  .tli .desc{font-size:13.5px;color:var(--muted);margin-top:5px}
+  .tli a.box:hover{border-color:var(--primary);transform:translateY(-1px);transition:.15s}
+  .tli .go{font-size:13px;font-weight:700;color:var(--primary);margin-top:7px;display:inline-block}
+  /* 项目卡 */
+  .projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
   .pcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow);
-    display:flex;flex-direction:column;gap:10px;transition:.15s;position:relative;overflow:hidden}
+    display:flex;flex-direction:column;gap:10px;transition:.15s}
   .pcard:hover{border-color:var(--primary);transform:translateY(-2px)}
   .pcard .ic{font-size:28px}
   .pcard .t{font-weight:800;font-size:18px}
   .pcard .d{font-size:14px;color:var(--muted);flex:1}
   .pcard .tags{display:flex;flex-wrap:wrap;gap:6px}
   .pcard .tag{font-size:11px;background:#eef2ff;color:var(--primary);border-radius:999px;padding:3px 9px}
-  .pcard .go{font-size:13px;font-weight:700;color:var(--primary);margin-top:4px;display:inline-flex;align-items:center;gap:4px}
-  .pcard.ph{border-style:dashed;background:transparent;color:var(--muted);align-items:center;justify-content:center;text-align:center;min-height:190px}
-  .pcard.ph .t{color:var(--muted);font-weight:700}
-  footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
-  code{background:#f1f5f9;padding:2px 6px;border-radius:5px;font-size:.9em}
+  .pcard .go{font-size:13px;font-weight:700;color:var(--primary);margin-top:4px}
   .story{display:flex;align-items:stretch;gap:12px;margin-bottom:22px;flex-wrap:wrap}
-  .story .step{flex:1;min-width:200px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:4px}
+  .story .step{flex:1;min-width:190px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:4px}
   .story .step b{font-size:15px}
   .story .step span{font-size:13px;color:var(--muted)}
   .story .arr{display:flex;align-items:center;color:var(--primary);font-weight:800}
+  .links{display:flex;flex-wrap:wrap;gap:12px}
+  .link{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:14px 18px;font-weight:600;box-shadow:var(--shadow);transition:.15s}
+  .link:hover{border-color:var(--primary);transform:translateY(-1px)}
+  .link .em{font-size:20px}
+  .skills{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-size:12.5px;background:#f1f5f9;color:#334155;border-radius:8px;padding:5px 11px}
+  footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
 </style>
 </head>
 <body>
 
 <nav>
   <div class="wrap">
-    <div class="brand"><span class="dot"></span>作品集</div>
+    <div class="brand"><span class="dot"></span>韩王泽</div>
     <div class="navlinks">
+      <a href="#about">关于我</a>
+      <a href="experience-cyou.html">实习经历</a>
       <a href="#projects">项目</a>
-      <a href="weschedule.html">WeSchedule</a>
-      <a href="report.html">调研报告</a>
-      <a href="#links">链接</a>
+      <a href="#links">联系</a>
     </div>
   </div>
 </nav>
 
 <header class="hero">
   <div class="wrap">
-    <h1>个人<span class="grad">作品集</span></h1>
-    <p class="sub">从用户调研、方案设计到工程实现与数据验证——每个项目都可点开看完整过程。</p>
+    <div class="eyebrow">Personal Homepage</div>
+    <h1>韩王泽 · <span class="grad">个人主页</span></h1>
+    <p class="sub">经济与金融的本科训练，加上信息管理与商业分析的硕士方向——关注游戏与内容行业的数据分析、市场研究与产品判断，习惯把反复出现的分析工作沉淀成可复用的工具。</p>
+    <div class="edu">
+      <span><b>香港中文大学（深圳）</b> · 信息管理与商业分析 · 全日制硕士 · 2026.09 – 至今</span>
+      <span><b>西安交通大学</b> · 经济与金融学院 · 贸易经济 · 全日制本科 · 2022.09 – 2026.06</span>
+    </div>
     <div class="badges">
-      <span class="badge"><b>2</b> 个已展示项目</span>
-      <span class="badge">用户调研 → 方案设计 → 工程实现 → 数据验证</span>
+      <span class="badge"><b>1</b> 段战略分析实习</span>
+      <span class="badge"><b>2</b> 个完整项目</span>
+      <span class="badge">从调研验证 → 方案设计 → 工程实现 → 数据验证</span>
     </div>
     <div class="cta">
-      <a class="btn primary" href="#projects">查看项目</a>
+      <a class="btn primary" href="experience-cyou.html">实习经历</a>
+      <a class="btn ghost" href="#projects">查看项目</a>
       <a class="btn ghost" href="https://github.com/han-wangze" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
 </header>
 
-<section id="projects">
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Experience · 经历</div>
+      <h2>时间线</h2>
+      <p>三段时间，一条主线：从经济学训练，到数据驱动的市场研究，再到把分析结论做成产品。</p>
+    </div>
+    <div class="tl">
+      <div class="tli">
+        <div class="box">
+          <div class="when">2026.09 – 至今</div>
+          <div class="what">香港中文大学（深圳） · 信息管理与商业分析</div>
+          <div class="desc">全日制硕士在读。方向聚焦数据分析与商业决策，继续把统计与工程能力往实际业务问题上落。</div>
+        </div>
+      </div>
+      <div class="tli hi">
+        <a class="box" href="experience-cyou.html">
+          <div class="when">2025.11 – 2026.02</div>
+          <div class="what">搜狐畅游 · 战略分析实习生</div>
+          <div class="desc">负责中美日韩及微信小游戏市场的新品扫描与监测，主导概念测试与立项预评估，独立完成 6 份市场研究报告，并用 Python 沉淀出 10 个可复用的分析模块。</div>
+          <div class="go">查看实习详情与材料 →</div>
+        </a>
+      </div>
+      <div class="tli">
+        <div class="box">
+          <div class="when">2022.09 – 2026.06</div>
+          <div class="what">西安交通大学 · 经济与金融学院 · 贸易经济</div>
+          <div class="desc">全日制本科。经济学与统计基础训练，期间完成了下面两个项目。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="alt">
   <div class="wrap">
     <div class="sec-head">
       <div class="k">Projects · 项目</div>
       <h2>我做的项目</h2>
-      <p>两个项目是同一条线的两端：先验证需求，再实现并定位。点开卡片看详情。</p>
+      <p>两个项目是同一条线的两端：先验证需求，再实现并定位。</p>
     </div>
     <div class="story">
       <div class="step"><b>① 调研验证</b><span>87 人问卷，确认痛点与需求优先级</span></div>
@@ -175,22 +200,35 @@
 <section id="links">
   <div class="wrap">
     <div class="sec-head">
-      <div class="k">Links · 延伸阅读</div>
+      <div class="k">Contact · 联系</div>
       <h2>更多资料</h2>
     </div>
+    <div class="card" style="margin-bottom:18px">
+      <div class="skills">
+        <span class="chip">Python / pandas / scikit-learn</span>
+        <span class="chip">SQL</span>
+        <span class="chip">Excel / PPT 研究成稿</span>
+        <span class="chip">微信小程序 · 云开发</span>
+        <span class="chip">市场研究 · 用户调研</span>
+        <span class="chip">量化建模与指标体系</span>
+      </div>
+    </div>
     <div class="links">
-      <a class="link" href="https://github.com/han-wangze/hanwangze" target="_blank" rel="noopener"><span class="em">💻</span> 网站源码 · GitHub</a>
+      <a class="link" href="mailto:226020376@link.cuhk.edu.cn"><span class="em">✉️</span> 226020376@link.cuhk.edu.cn</a>
+      <a class="link" href="https://github.com/han-wangze" target="_blank" rel="noopener"><span class="em">💻</span> GitHub</a>
+      <a class="link" href="experience-cyou.html"><span class="em">📑</span> 战略分析实习详情</a>
       <a class="link" href="weschedule.html"><span class="em">📱</span> WeSchedule 项目详情</a>
       <a class="link" href="report.html"><span class="em">📊</span> 市场调研报告（网页版）</a>
       <a class="link" href="competition.html"><span class="em">⚔️</span> 竞争格局与定位</a>
+      <a class="link" href="https://github.com/han-wangze/hanwangze" target="_blank" rel="noopener"><span class="em">🧩</span> 本站源码</a>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <div>个人作品集 · 把想法做成产品的实践记录</div>
-    <div style="margin-top:6px">技术文档见各项目 README · © 2026</div>
+    <div>韩王泽 · 个人主页 — 把想法做成产品的实践记录</div>
+    <div style="margin-top:6px">226020376@link.cuhk.edu.cn · © 2026</div>
   </div>
 </footer>
 
