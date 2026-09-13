@@ -9,7 +9,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-<meta name="theme-color" content="#4f46e5" />
+<meta name="theme-color" content="#3730a3" />
 <link rel="canonical" href="https://han-wangze.github.io/hanwangze/weschedule.html" />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
@@ -28,7 +28,7 @@
 <style>
   :root{
     --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
-    --primary:#4f46e5; --primary-d:#4338ca; --accent:#0ea5e9;
+    --primary:#3730a3; --primary-d:#312e81; --accent:#0f766e; --signal:#b45309;
     --ok:#16a34a; --warn:#f59e0b; --line:#e5e7eb;
     --shadow:0 1px 3px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
   }
@@ -42,24 +42,24 @@
     background:rgba(247,248,251,.82);border-bottom:1px solid var(--line)}
   nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
   .brand{font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
-  .brand .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--primary),var(--accent))}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:var(--primary)}
   .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted);flex-wrap:wrap}
   .navlinks a:hover{color:var(--primary)}
   .navlinks a.on{color:var(--primary);font-weight:600}
-  @media(max-width:640px){.navlinks{display:none}}
+  @media(max-width:760px){nav .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 20px;gap:2px 0}.navlinks{display:flex;flex-wrap:wrap;font-size:13px;gap:14px;padding-bottom:4px}}
   header.hero{padding:72px 0 56px;background:
-    radial-gradient(1200px 400px at 80% -10%,rgba(79,70,229,.12),transparent),
-    radial-gradient(900px 360px at 0% 0%,rgba(14,165,233,.10),transparent);}
+    radial-gradient(1200px 400px at 80% -10%,rgba(55,48,163,.12),transparent),
+    radial-gradient(900px 360px at 0% 0%,rgba(15,118,110,.10),transparent);}
   .hero h1{font-size:42px;line-height:1.18;font-weight:800;letter-spacing:-.5px}
-  .hero h1 .grad{background:linear-gradient(120deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero h1 .grad{color:var(--primary)}
   .hero p.sub{margin-top:16px;font-size:18px;color:var(--muted);max-width:660px}
   .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
   .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
     padding:8px 14px;font-size:13px;box-shadow:var(--shadow);display:flex;gap:8px;align-items:center}
-  .badge b{color:var(--primary)}
+  .badge b{color:var(--signal)}
   .cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
   .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:600;font-size:15px;transition:.15s}
-  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(79,70,229,.35)}
+  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(55,48,163,.35)}
   .btn.primary:hover{background:var(--primary-d)}
   .btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
   .btn.ghost:hover{border-color:var(--primary);color:var(--primary)}
@@ -72,7 +72,7 @@
   .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
   @media(max-width:720px){.grid3,.grid2{grid-template-columns:1fr}}
-  .stat .n{font-size:34px;font-weight:800;color:var(--primary);line-height:1}
+  .stat .n{font-size:34px;font-weight:800;color:var(--signal);line-height:1}
   .stat .l{margin-top:8px;font-size:14px;color:var(--muted)}
   .stat .d{margin-top:6px;font-size:12px;color:#9ca3af}
   .arch{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);overflow-x:auto}
@@ -85,7 +85,7 @@
   .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
   @media(max-width:720px){.metric-row{grid-template-columns:repeat(2,1fr)}}
   .metric{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;box-shadow:var(--shadow)}
-  .metric .n{font-size:26px;font-weight:800;color:var(--primary)}
+  .metric .n{font-size:26px;font-weight:800;color:var(--signal)}
   .metric .l{font-size:12px;color:var(--muted);margin-top:4px}
   .chart-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
   .chart-card svg{width:100%;height:auto}
@@ -122,6 +122,7 @@
   .backrow a{color:var(--primary)}
   footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
   code{background:#f1f5f9;padding:2px 6px;border-radius:5px;font-size:.9em}
+  h1,h2,.paper .pt,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif;font-weight:700;letter-spacing:0}
 </style>
 </head>
 <body>
@@ -142,7 +143,7 @@
 <header class="hero">
   <div class="wrap">
     <h1>WeSchedule</h1>
-    <p class="sub">微信小程序 MVP：把微信群聊消息变成可管理的日程。复制群消息 → 自动解析 → 确认保存 → 订阅消息提醒；不止于"解析成一条提醒"——带软/硬分级的<b>冲突检测</b>、DDL 区间识别与<b>预备提醒</b>，回答"日程装不装得下"。87 人调研、87.4% 接受度，端到端解析准确率 75%。</p>
+    <p class="sub">微信小程序 MVP：把微信群聊消息变成可管理的日程。复制群消息 → 自动解析 → 确认保存 → 订阅消息提醒。在此之上做了软/硬分级的<b>冲突检测</b>、DDL 区间识别与<b>预备提醒</b>，回答"日程装不装得下"。87 人调研、87.4% 接受度，端到端解析准确率 75%。</p>
     <div class="badges">
       <span class="badge"><b>微信小程序</b></span>
       <span class="badge"><b>云开发</b></span>
@@ -182,7 +183,7 @@
           <div class="d">市场验证</div>
         </div>
       </div>
-      <p class="l" style="margin-top:14px;color:var(--muted);font-size:13px">注：微信不支持"转发进小程序"，故采用"复制 → 打开 → 读剪贴板"链路；对外统一表述为"复制"。</p>
+      <p class="l" style="margin-top:14px;color:var(--muted);font-size:13px">注：微信不支持"转发进小程序"，所以链路是"复制 → 打开小程序 → 读取剪贴板"。</p>
     </div>
   </section>
 
@@ -261,26 +262,25 @@
             <li><span class="tag hard">硬冲突</span> 两个<b>定点事项</b>重叠（会议 vs 会议）→ 强提示 + 给备选时段</li>
             <li><span class="tag soft">软冲突</span> 定点事项 vs <b>DDL</b> → 仅弱提示，不给改期建议</li>
           </ul>
-          <p style="margin-top:10px">作业截止不是一个"占用时段"，它是一个 deadline——真正的问题是"截止前你有没有空干活"。这个区分让功能明显超出"时间重叠 if 判断"的水平。</p>
+          <p style="margin-top:10px">作业截止本身不占用时段，它的性质是 deadline：要回答的问题是"截止前你有没有空干活"。</p>
           <p style="margin-top:8px"><b>关键点</b>：分级只用 <code>is_deadline</code> 这一个已很可靠的字段，<b>不引入新的 AI 输出类型</b>，从而避免了"类型判错 → 冲突等级被错误放大"的连锁风险。</p>
         </div>
 
         <div class="card feat">
           <h3>建议时段：AI 提案，人裁决</h3>
-          <p>对硬冲突给出 1–2 个<b>一键采纳</b>的备选时段（chip 按钮："改为周三 16:00？"点一下即改），而不是直接改完让用户确认。</p>
+          <p>对硬冲突给出 1–2 个<b>一键采纳</b>的备选时段（chip 按钮："改为周三 16:00？"点一下即改）。</p>
           <ul>
             <li>默认<b>不动</b>用户的安排，用户主动采纳才生效</li>
-            <li>纯规则实现：按事件时长在当天/次日 8:00–22:00 扫描日历空隙</li>
-            <li>零成本、零延迟、<b>不会幻觉</b>——恰好回应"识别不准"顾虑</li>
+            <li>按事件时长在当天/次日 8:00–22:00 扫描日历空隙：零成本、零延迟，也不会出现模型幻觉</li>
           </ul>
-          <p style="margin-top:10px">区别很微妙但重要：不是"AI 已改，你确认"（默认信任 AI），而是"AI 提案，你选"（默认不动）。</p>
+          
         </div>
       </div>
 
       <div class="card feat" style="margin-top:16px">
         <h3>预备提醒 · 以及一个绕不开的平台约束</h3>
         <p>含"材料 / PPT / 报告 / 准备 / 汇报"等关键词的日程，提醒会提前到<b>前一晚 20:00</b> 发出并改写文案（"请准备 · 明天 14:00 组会"），呼应调研中"忘记提前准备"这一高频痛点。</p>
-        <p style="margin-top:10px"><b>平台约束</b>：微信小程序的订阅消息是<b>"一次授权一次推送"</b>，提醒次数是受授权次数预算约束的稀缺资源。因此预备提醒<b>复用</b>该事件唯一的一次授权（把推送移到预备窗口），而不是新增一次推送——授权请求越少，用户越可能点"允许"。</p>
+        <p style="margin-top:10px"><b>平台约束</b>：微信小程序的订阅消息是<b>"一次授权一次推送"</b>，推送次数受授权次数约束。预备提醒因此<b>复用</b>该事件唯一的一次授权，把它移到预备窗口发出，授权请求数不增加。</p>
         <p style="margin-top:10px">验收指标：单事件平均授权请求次数 ≤ 1.5；冲突检测因用规则实现，准确率接近 100%（已知边界：语义级冲突如"午饭撞午饭"不识别）。</p>
       </div>
 
@@ -294,8 +294,8 @@
     <div class="wrap">
       <div class="sec-head">
         <div class="k">Tech · 技术亮点</div>
-        <h2>用评测闭环驱动 prompt 迭代</h2>
-        <p>没有"感觉准了"，只有"测出来准了"。自建 100 条语料 + 五层指标评测闭环，以 badcase 反向驱动提示词迭代，端到端准确率从 66.2% 提升到 75%。</p>
+        <h2>给解析质量建一套可复现的评测</h2>
+        <p>要判断一次提示词改动是变好还是变坏，前提是有一套能重复的评测。这里先写 100 条群聊语料（覆盖日常通知、相对时间、模糊时间、多日程、DDL 等七类），按 8:2 固定切成开发集与测试集、切分种子写死；再把"解析对不对"拆成五层可计算的指标：是否识别出日程、误报率、事件级查准查全、字段准确率、端到端完全正确率。之后每改一次提示词就重跑全量，逐条看哪些从错变对、哪些从对变错。</p>
       </div>
       <div class="metric-row">
         <div class="metric"><div class="n">75%</div><div class="l">端到端完全正确率<br>(dev / test 双达标)</div></div>
@@ -311,17 +311,19 @@
           <g font-size="11" fill="#94a3b8" text-anchor="end">
             <line x1="50" y1="230" x2="690" y2="230" stroke="#eef2f7"/>
             <text x="44" y="234">60</text>
-            <line x1="50" y1="157" x2="690" y2="157" stroke="#eef2f7"/>
-            <text x="44" y="161">67</text>
-            <line x1="50" y1="104" x2="690" y2="104" stroke="#eef2f7"/>
-            <text x="44" y="108">72</text>
+            <line x1="50" y1="177.5" x2="690" y2="177.5" stroke="#eef2f7"/>
+            <text x="44" y="181.5">65</text>
+            <line x1="50" y1="125" x2="690" y2="125" stroke="#eef2f7"/>
+            <text x="44" y="129">70</text>
+            <line x1="50" y1="72.5" x2="690" y2="72.5" stroke="#eef2f7"/>
+            <text x="44" y="76.5">75</text>
             <line x1="50" y1="20" x2="690" y2="20" stroke="#eef2f7"/>
             <text x="44" y="24">80</text>
           </g>
-          <polyline points="140,165 380,125 620,72.5" fill="none" stroke="#4f46e5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="140" cy="165" r="6" fill="#4f46e5"/>
-          <circle cx="380" cy="125" r="6" fill="#4f46e5"/>
-          <circle cx="620" cy="72.5" r="6" fill="#4f46e5"/>
+          <polyline points="140,165 380,125 620,72.5" fill="none" stroke="#3730a3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="140" cy="165" r="6" fill="#3730a3"/>
+          <circle cx="380" cy="125" r="6" fill="#3730a3"/>
+          <circle cx="620" cy="72.5" r="6" fill="#3730a3"/>
           <g font-size="12" fill="#1f2937" text-anchor="middle" font-weight="700">
             <text x="140" y="150">66.2%</text>
             <text x="380" y="110">70.0%</text>
@@ -336,12 +338,15 @@
           <text x="686" y="66" text-anchor="end" font-size="11" fill="#16a34a">达标线 75%</text>
         </svg>
         <div class="legend">
-          <span><i style="background:#4f46e5"></i>端到端准确率</span>
+          <span><i style="background:#3730a3"></i>端到端准确率</span>
           <span><i style="background:#16a34a"></i>达标线 75%</span>
         </div>
       </div>
       <p class="l" style="margin-top:16px;color:var(--muted);font-size:13px">
-        关键迭代：v1.1 新增"时段→钟点映射 / 相对星期未来向 / C 类无日期置空"；v1.2 新增"模糊但含行动意图必提取"规则，救回 C002/C003/C005/C009 漏报，dev/test 双双达到 75% 达标线。评测与线上 prompt 同步维护两份副本，确保度量有效。
+        三轮迭代的改动：v1.1 补了"时段词 → 钟点"的映射表，并规定"下周X"一律按未来向推算；v1.2 加了"只要表达了未来的行动意图就必须提取"：此前"晚上有空的话一起自习吧"这类消息会被当成闲聊丢掉，这一条救回 4 条漏报，开发集与测试集同步到 75%。线上云函数与评测脚本里的提示词保持逐字一致，否则测出来的分数不代表线上表现。
+      </p>
+      <p class="l" style="margin-top:8px;color:var(--muted);font-size:13px">
+        可复现资产：<code>eval/run_eval.py</code> · <code>eval/corpus/sample.jsonl</code> · <code>eval/gen_corpus.py</code>。逐版完整指标、badcase 明细与这套评测的边界，见 <a href="weschedule-eval.html" style="color:var(--primary);font-weight:700">解析质量评测报告 →</a>
       </p>
     </div>
   </section>
@@ -351,7 +356,7 @@
       <div class="sec-head">
         <div class="k">Position · 竞争定位</div>
         <h2>不做"提醒生成"，做"日程治理"</h2>
-        <p>微信生态内已有小微（官方 AI 助手）、元宝、滴答清单等"消息 → 提醒"工具，但它们不维护可管理的日程库，也不回答"日程是否冲突、DDL 缓冲是否被透支"——后者恰是调研中的第一需求（70.1%）。本项目把价值落在治理层：解析只是入口。</p>
+        <p>微信生态内已有小微（官方 AI 助手）、元宝、滴答清单等"消息 → 提醒"工具，但它们不维护可管理的日程库，也不回答"日程是否冲突、DDL 缓冲是否被透支"，而这恰是调研中的第一需求（70.1%）。本项目把价值落在治理层：解析只是入口。</p>
       </div>
       <div class="card feat">
         <h3>两个维度看差异：本项目选择"有日程库 × 容量视角"</h3>
@@ -388,8 +393,8 @@
         <a class="link" href="https://www.bilibili.com/video/BV1VDYR6YE6m/" target="_blank" rel="noopener"><span class="em">🎬</span> Demo 视频 · B站</a>
         <a class="link" href="report.html" target="_blank" rel="noopener"><span class="em">📊</span> 市场调研报告（网页版）</a>
         <a class="link" href="competition.html"><span class="em">⚔️</span> 竞争格局与定位</a>
-        <a class="link" href="#" target="_blank" rel="noopener"><span class="em">🔒</span> 隐私说明</a>
-        <a class="link" href="#" target="_blank" rel="noopener"><span class="em">🧪</span> 评测报告 / badcase 明细</a>
+        <a class="link" href="weschedule-eval.html"><span class="em">🧪</span> 解析质量评测报告（含 badcase 明细）</a>
+        <a class="link" href="weschedule-eval.html#privacy"><span class="em">🔒</span> 数据与隐私说明</a>
       </div>
     </div>
   </section>
@@ -398,17 +403,14 @@
     <div class="wrap">
       <div class="sec-head">
         <div class="k">Dev Log · AI 协作开发</div>
-        <h2>给 AI 系统做工程化度量</h2>
-        <p>本项目以"评测闭环驱动"的方式迭代：先有确定性评测（固定切分 + 相对时间锚点 + 五层指标），再以 badcase 反向改 prompt，每一步都用数字验收。</p>
+        <h2>卡住过的地方，和怎么定位的</h2>
+        <p>功能是和 AI 一起做的，但"哪里错了、该改哪一层"得自己判断。下面几条是真正卡住过的地方。</p>
       </div>
       <ul class="log">
-        <li><b>建评测闭环</b>：100 条语料 + 8:2 固定切分（种子 20260717），五层指标覆盖 has_schedule 判定 / 误报率 / 事件级 P·R / 字段准确率 / 端到端正确率。<span class="meta">产出：run_eval.py + corpus/sample.jsonl + gen_corpus.py</span></li>
-        <li><b>prompt v1 → v1.2</b>：badcase 驱动，新增时段映射、相对星期未来向、行动意图必提取等规则。<span class="meta">结果：端到端 66.2% → 70.0% → 75.0%（dev/test 双达标）</span></li>
-        <li><b>前端体验优化</b>：剪贴板 30 字预览防撑爆布局；确认页日期/时间改用原生 picker。<span class="meta">并清理未引用的 event-card 组件与 format.js 死代码</span></li>
-        <li><b>工程化收尾</b>：密钥走本地 .env（不进对话/不进仓库）；一键评测启动器 run_dev.sh/.bat；git 初始化并修复沙箱回滚导致的工作树事故。<span class="meta">HEAD = bdc07c4</span></li>
-        <li><b>P0 · 云函数时区 bug</b>：云函数运行在 UTC，导致北京时间 00:00–08:00 期间"今天"被算成前一天，日程锚点落在过去 → 提醒永不触发。改为显式 <code>Date.now()+8h</code> + <code>getUTC*</code> 换算。<span class="meta">这是"提醒不发"的真正根因，靠日志 scanned=12 / sent=0 反查定位</span></li>
-        <li><b>冲突检测</b>：基于 <code>is_deadline</code> 的软/硬分级 + 非阻断式内联警示 + 规则法空闲槽 chip。刻意<b>不引入</b>新的 AI 输出类型，避免"类型判错 → 冲突等级被放大"。<span class="meta">纯前端实现，零云函数改动、零 prompt 改动</span></li>
-        <li><b>预备提醒</b>：识别含准备关键词的日程，复用该事件唯一的一次订阅授权，把推送移到前一晚 20:00 的预备窗口。<span class="meta">回应微信"一次授权一次推送"的稀缺性约束，不增加授权请求</span></li>
+        <li><b>两处静默失败</b>：新建日程写入时少了 <code>reminded</code> 字段，提醒扫描把它当成"已提醒"跳过，日程建好了却永远不进队列；<code>location</code> 为空的日程仍在列表里渲染 null。<span class="meta">改法：写入时显式 <code>reminded: false</code>；空值不渲染</span></li>
+        <li><b>提醒锚点算错一天</b>：云函数运行在 UTC，北京时间 00:00–08:00 之间"今天"会被算成前一天，日程锚点落到过去，提醒不会触发。<span class="meta">改法：显式 +8 小时后再取日期；靠日志 scanned=12 / sent=0 反查到这一步</span></li>
+        <li><b>剪贴板读取"点了同意也不生效"</b>：两个问题叠在一起：隐私授权 API 名写错，自定义弹窗其实从未注册；回调里回传的 buttonId 在页面上又不存在，微信判定无效，授权态于是存不下来。<span class="meta">改法：修正 API 名，弹窗里改成真实的同意按钮并回传它的 id</span></li>
+        <li><b>密钥不进仓库</b>：DeepSeek key 只写在本地 <code>.env</code>，仓库里只有 <code>.env.example</code>，评测脚本从环境变量读。<span class="meta">从第一天就这么定，避免提交历史里留下 key</span></li>
       </ul>
     </div>
   </section>

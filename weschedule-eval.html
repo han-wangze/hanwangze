@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>解析质量评测报告 · WeSchedule | 韩王泽</title>
+<meta name="description" content="WeSchedule 解析链路的确定性回归测试：100 条语料、8:2 固定切分（种子 20260717）、五层指标，提示词三版迭代后端到端完全正确率 66.2% → 70.0% → 75.0%，dev / test 双达标。" />
+<meta name="author" content="韩王泽" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<meta name="theme-color" content="#3730a3" />
+<link rel="canonical" href="https://han-wangze.github.io/hanwangze/weschedule-eval.html" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="韩王泽 · 个人主页" />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:title" content="解析质量评测报告 · WeSchedule" />
+<meta property="og:description" content="100 条语料、8:2 固定切分、五层指标的确定性回归测试：提示词三版迭代后端到端 66.2% → 75.0%，dev / test 双达标，含 badcase 明细与已知边界。" />
+<meta property="og:url" content="https://han-wangze.github.io/hanwangze/weschedule-eval.html" />
+<meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="WeSchedule 解析质量评测报告 · 韩王泽" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="解析质量评测报告 · WeSchedule" />
+<meta name="twitter:description" content="100 条语料、五层指标的确定性回归测试：端到端 66.2% → 75.0%，dev / test 双达标。" />
+<meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
+<style>
+  :root{
+    --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
+    --primary:#3730a3; --primary-d:#312e81; --accent:#0f766e; --signal:#b45309;
+    --ok:#16a34a; --warn:#f59e0b; --line:#e5e7eb;
+    --shadow:0 1px 3px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(12px);
+    background:rgba(247,248,251,.82);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:var(--primary)}
+  .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+  .navlinks a:hover{color:var(--primary)}
+  .navlinks a.on{color:var(--primary);font-weight:600}
+  @media(max-width:760px){nav .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 20px;gap:2px 0}.navlinks{display:flex;flex-wrap:wrap;font-size:13px;gap:14px;padding-bottom:4px}}
+  header.hero{padding:64px 0 48px;background:
+    radial-gradient(1200px 400px at 80% -10%,rgba(55,48,163,.10),transparent),
+    radial-gradient(900px 360px at 0% 0%,rgba(15,118,110,.08),transparent);}
+  .hero h1{font-size:40px;line-height:1.18;font-weight:800;letter-spacing:-.5px}
+  .hero p.sub{margin-top:16px;font-size:17px;color:var(--muted);max-width:700px}
+  .hero p.sub b{color:var(--ink)}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
+    padding:8px 14px;font-size:13px;box-shadow:var(--shadow);display:flex;gap:8px;align-items:center}
+  .badge b{color:var(--signal)}
+  .cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:12px;font-weight:600;font-size:14px;transition:.15s}
+  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(55,48,163,.30)}
+  .btn.primary:hover{background:var(--primary-d)}
+  .btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--primary);color:var(--primary)}
+  section{padding:48px 0}
+  section.alt{background:linear-gradient(180deg,rgba(55,48,163,.035),transparent)}
+  .sec-head{margin-bottom:26px}
+  .sec-head .k{font-size:13px;font-weight:700;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase}
+  .sec-head h2{font-size:26px;font-weight:800;margin-top:6px;letter-spacing:-.3px}
+  .sec-head p{color:var(--muted);margin-top:8px;max-width:740px;font-size:15px}
+  h1,h2,.paper .pt,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif;font-weight:700;letter-spacing:0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+  .note{font-size:13.5px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+  .note b{color:var(--ink)}
+  .tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
+    border-radius:14px;overflow:hidden;box-shadow:var(--shadow);font-size:14px}
+  .tbl th,.tbl td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  .tbl th{background:#f8fafc;font-size:13px;color:var(--muted);font-weight:700}
+  .tbl tr:last-child td{border-bottom:0}
+  .tbl td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .tbl td.ok{color:var(--ok);font-weight:700}
+  .tbl td.bad{color:#b91c1c;font-weight:700}
+  .tbl .hl{background:#fef3c7;border-radius:4px;padding:0 4px}
+  @media(max-width:640px){.tbl{font-size:13px}.tbl th,.tbl td{padding:9px 10px}}
+  .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+  @media(max-width:720px){.metric-row{grid-template-columns:repeat(2,1fr)}}
+  .metric{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;box-shadow:var(--shadow)}
+  .metric .n{font-size:26px;font-weight:800;color:var(--signal)}
+  .metric .l{font-size:12px;color:var(--muted);margin-top:4px}
+  .backrow{padding:14px 0 0;font-size:14px;font-weight:600}
+  .backrow a{color:var(--primary)}
+  footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
+  code{background:#f1f5f9;padding:2px 6px;border-radius:5px;font-size:.9em}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>韩王泽</div>
+    <div class="navlinks">
+      <a href="index.html">首页</a>
+      <a href="experience-cyou.html">实习经历</a>
+      <a href="research.html">研究与写作</a>
+      <a class="on" href="index.html#projects">项目</a>
+      <a href="index.html#links">联系</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>解析质量评测报告</h1>
+    <p class="sub">这是 WeSchedule 解析链路的<b>确定性回归测试</b>：100 条群聊语料、固定切分、五层指标。它只回答一个问题：改完提示词之后，这次是变好还是变坏。<b>它不是公开 benchmark</b>，语料、金标准与达标线都由我自己定义，数字只在本项目的历次迭代之间可比。</p>
+    <div class="badges">
+      <span class="badge"><b>100</b> 条语料 · 7 类</span>
+      <span class="badge"><b>8:2</b> 固定切分</span>
+      <span class="badge"><b>5</b> 层指标</span>
+      <span class="badge"><b>75.0%</b> 端到端（dev/test 双达标）</span>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="#result">看迭代结果</a>
+      <a class="btn ghost" href="weschedule.html">← 返回项目详情</a>
+    </div>
+  </div>
+</header>
+
+<section id="corpus">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Corpus · 评测集</div>
+      <h2>语料是怎么来的</h2>
+      <p>100 条语料按"消息形态"分七类，每类对应解析链路的一种失败模式。相对时间的锚点统一写死为 <code>2026-07-17</code>（周五），保证同一条语料每次跑出同一个标准答案。</p>
+    </div>
+    <table class="tbl">
+      <thead><tr><th style="width:14%">类别</th><th style="width:10%">条数</th><th>考察什么</th><th style="width:30%">样例</th></tr></thead>
+      <tbody>
+        <tr><td><b>A 标准</b></td><td class="num">25</td><td>明确的日期 + 钟点（+ 可选地点），基本盘</td><td class="num" style="font-size:13px">7月24日周五下午3点在主楼A203开班会</td></tr>
+        <tr><td><b>B 相对时间</b></td><td class="num">20</td><td>"明天 / 下周三"这类相对表述能否正确换算成绝对日期</td><td class="num" style="font-size:13px">明天晚上7点老地方打球</td></tr>
+        <tr><td><b>C 模糊</b></td><td class="num">10</td><td>只给"傍晚 / 改天"这类时段词，没有确切钟点</td><td class="num" style="font-size:13px">下周一傍晚咱们宿舍聚餐</td></tr>
+        <tr><td><b>D 多日程</b></td><td class="num">10</td><td>一条消息里含两个及以上事件，考验是否漏掉后一个</td><td class="num" style="font-size:13px">周六上午10点交实验报告，下午4点班级开会</td></tr>
+        <tr><td><b>E 无日程</b></td><td class="num">15</td><td>闲聊与疑问句，考验<b>不误报</b></td><td class="num" style="font-size:13px">哈哈哈这个表情包绝了，谁做的</td></tr>
+        <tr><td><b>F 截止日</b></td><td class="num">10</td><td>DDL 型消息，需要正确打上 <code>is_deadline</code></td><td class="num" style="font-size:13px">数据结构第4次作业7月20日晚12点前提交</td></tr>
+        <tr><td><b>G 口语碎片</b></td><td class="num">10</td><td>带表情、错字、改写通知的口语表达</td><td class="num" style="font-size:13px">志愿活动改到下午两点半了哈，集合还是在西门[捂脸]</td></tr>
+      </tbody>
+    </table>
+    <p class="note" style="margin-top:16px">
+      <b>来源构成</b>：100 条里 <b>93 条是手写构造</b>（按上表七类逐类补齐），<b>7 条来自真实群聊脱敏</b>，原始种子就取自实际群聊，脱敏后保留原样。这一点如实说明：它意味着这套语料能覆盖我预想到的失败模式，但<b>不能代表真实流量的分布</b>。
+    </p>
+    <p class="note" style="margin-top:12px">
+      <b>切分方式</b>：按 <code>seed=20260717</code> 做一次固定随机切分，dev 80 条 / test 20 条，切分结果落盘在 <code>eval/.split.json</code>。同一份切分贯穿全部三个版本，因此版本之间的差值只来自提示词本身。
+    </p>
+  </div>
+</section>
+
+<section id="metrics" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Metrics · 指标口径</div>
+      <h2>五层指标与达标线</h2>
+      <p>单看一个分数很容易被误导，所以把"解析对不对"拆成五层分别统计。同一层里也会互相拉扯，最终以端到端为准。</p>
+    </div>
+    <table class="tbl">
+      <thead><tr><th style="width:22%">层级</th><th>怎么算</th><th style="width:18%">达标线</th></tr></thead>
+      <tbody>
+        <tr><td><b>has_schedule 判定</b></td><td>这条消息该不该生成日程（P / R / F1）</td><td>F1 = 100</td></tr>
+        <tr><td><b>误报率</b></td><td>E 类（无日程）被判成有日程的比例</td><td>≤ 5%</td></tr>
+        <tr><td><b>事件级 P / R</b></td><td>抽出来的事件与标注事件逐个配对后的查准 / 查全</td><td>—</td></tr>
+        <tr><td><b>字段准确率</b></td><td>在命中事件里，<code>date</code> / <code>time</code> / <code>location</code> 与标准答案完全一致的比例</td><td>90% / 80% / 70%</td></tr>
+        <tr><td><b>端到端完全正确率</b></td><td>该条消息<b>所有</b>标注事件都命中、且每条命中的 date / time / location 全对、且没有多报，才算这条通过</td><td>≥ 75%</td></tr>
+      </tbody>
+    </table>
+    <p class="note" style="margin-top:16px">
+      <b>关于 75% 这个口径</b>：端到端是"整条消息完全正确"的严格口径，任何一处字段不一致就判该条失败。它不等于"准确率只有四分之三"：同一次运行的字段准确率是 <code>date</code> 100%、<code>time</code> 89.4%、<code>location</code> 100%。
+    </p>
+  </div>
+</section>
+
+<section id="result">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Result · 迭代结果</div>
+      <h2>三版提示词，dev 集逐版对比</h2>
+      <p>原始日志在 <code>eval/reports/</code>，下面的数字全部来自日志原文，未做二次整理。</p>
+    </div>
+    <div class="metric-row">
+      <div class="metric"><div class="n">66.2%</div><div class="l">v1 端到端</div></div>
+      <div class="metric"><div class="n">70.0%</div><div class="l">v1.1 端到端</div></div>
+      <div class="metric"><div class="n">75.0%</div><div class="l">v1.2 端到端</div></div>
+      <div class="metric"><div class="n">75.0%</div><div class="l">v1.2 · test 集</div></div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th style="width:34%">指标</th><th>v1 (dev 80)</th><th>v1.1 (dev 80)</th><th>v1.2 (dev 80)</th><th>v1.2 (test 20)</th></tr></thead>
+      <tbody>
+        <tr><td>has_schedule 判定 F1</td><td class="num">99.2 *</td><td class="num">97.0</td><td class="num ok">100.0</td><td class="num ok">100.0</td></tr>
+        <tr><td>误报率（E 类判有）</td><td class="num ok">0.0%</td><td class="num ok">0.0%</td><td class="num ok">0.0%</td><td class="num ok">0.0%</td></tr>
+        <tr><td>事件级 P / R</td><td class="num">89.5 / 88.3</td><td class="num">94.5 / 89.6</td><td class="num">94.8 / 94.8</td><td class="num">95.0 / 95.0</td></tr>
+        <tr><td>date 准确率</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td></tr>
+        <tr><td>time 准确率</td><td class="num">83.3%</td><td class="num">89.4%</td><td class="num">89.4%</td><td class="num">87.5%</td></tr>
+        <tr><td>location 准确率</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td></tr>
+        <tr><td><b>端到端完全正确率</b></td><td class="num bad">66.2%</td><td class="num bad">70.0%</td><td class="num ok"><span class="hl">75.0%</span></td><td class="num ok"><span class="hl">75.0%</span></td></tr>
+        <tr><td>badcase 条数</td><td class="num">15</td><td class="num">12</td><td class="num">8</td><td class="num">2</td></tr>
+      </tbody>
+    </table>
+    <p class="note" style="margin-top:16px">
+      <b>* 一处历史显示 bug（未改动历史日志）</b>：v1 那次运行里 has_schedule F1 打印成了 <code>9924.4</code>，原因是当时脚本在百分比换算上重复乘了一次 100，正确值应为 <code>99.2</code>。后续版本已修正，v1.1 之后的日志数值正常。
+    </p>
+    <p class="note" style="margin-top:12px">
+      <b>为什么只看端到端</b>：v1.1 那一次，has_schedule 判定准确率反而从 98.8% 掉到 95.0%，而事件级与端到端同期上升。单层指标会互相拉扯，所以判断一次改动的好坏只认端到端完全正确率：五层指标都留着，但只有这一层参与决策。
+    </p>
+  </div>
+</section>
+
+<section id="badcase" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Badcase · 失败面</div>
+      <h2>改完提示词，错的地方换了位置</h2>
+      <p>逐版把 badcase 落盘对比，失败面发生了方向性迁移，数量也在下降。</p>
+    </div>
+    <table class="tbl">
+      <thead><tr><th style="width:26%">版本</th><th>badcase 条数</th><th>按类别分布（B 相对时间 / C 模糊 / D 多日程）</th></tr></thead>
+      <tbody>
+        <tr><td>v1 · dev</td><td class="num">15</td><td class="num">B 4 · C 5 · D 6</td></tr>
+        <tr><td>v1.1 · dev</td><td class="num">12</td><td class="num">B 2 · C 4 · D 6</td></tr>
+        <tr><td>v1.2 · dev</td><td class="num">8</td><td class="num">B 2 · C 0 · D 6</td></tr>
+        <tr><td>v1.2 · test</td><td class="num">2</td><td class="num">B 1 · D 1</td></tr>
+      </tbody>
+    </table>
+    <div class="grid2" style="margin-top:18px">
+      <div class="card">
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:8px">v1.1 修掉了什么</h3>
+        <p style="font-size:14px;color:var(--muted)">补上"时段词 → 钟点"的映射表，并规定"下周X"一律按未来向推算。C 类（模糊时间）的 badcase 从 5 条降到 4 条，<code>time</code> 字段准确率从 83.3% 升到 89.4%。</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:8px">v1.2 修掉了什么</h3>
+        <p style="font-size:14px;color:var(--muted)">加了"只要表达了未来的行动意图就必须提取"这条规则，把此前被当成闲聊丢掉的"晚上有空的话一起自习吧"这类消息救回来了。这一版把 C 类 badcase 清零，端到端首次到 75%。</p>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">
+      <b>剩下的错集中在哪</b>：v1.2 的 8 条 badcase 里 6 条属于 D 类多日程——一条消息里有多个事件时，排在后面的那个容易漏。这类问题靠加规则不容易解决（规则越多，误报风险越大），更合理的路径是把"识别有误"的上报入口做进产品，用真实 badcase 继续喂养评测集。
+    </p>
+  </div>
+</section>
+
+<section id="limits">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Limits · 边界</div>
+      <h2>这套评测不能证明什么</h2>
+    </div>
+    <table class="tbl">
+      <thead><tr><th style="width:30%">边界</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>语料以手写构造为主</td><td>93 / 100 条是我按失败模式写的，真实群聊脱敏只有 7 条。它能验证"我预想到的问题有没有被修掉"，不能代表真实流量分布。</td></tr>
+        <tr><td>金标准与达标线都是自定的</td><td>标注、指标口径、75% 这条线都由我定义，属于确定性回归测试，<b>数字不能与公开 benchmark 类比</b>。</td></tr>
+        <tr><td>端到端口径极严</td><td>整条消息全对才算通过。这也是 75% 看起来不高、但字段准确率接近满分的原因。</td></tr>
+        <tr><td>未做多模型对比</td><td>只测了线上实际使用的 <code>deepseek-chat</code>（temperature=0，JSON 模式），没有横向对比其他模型。</td></tr>
+        <tr><td>没有线上真实流量回流</td><td>评测集是离线固定的，尚未把线上解析日志接进评测闭环；这是下一步的第一优先项。</td></tr>
+        <tr><td>完成时点</td><td>这套闭环在 2026-08-21 的一次会话中集中完成，之后随提示词迭代继续复用。</td></tr>
+      </tbody>
+    </table>
+    <p class="note" style="margin-top:16px">
+      <b>评测集与线上提示词是两份副本</b>：<code>cloudfunctions/parse/index.js</code> 与 <code>eval/run_eval.py</code> 里各存一份提示词，两边保持逐字一致（各 1804 字符）。一旦线上一份被单独改动，评测分数就不再代表线上表现，改提示词时必须同时改两处。
+    </p>
+  </div>
+</section>
+
+<section id="privacy" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Privacy · 数据与隐私</div>
+      <h2>解析过程留了什么、不留什么</h2>
+      <p>小程序个人主体，类目"工具-效率"。解析日志表的字段是我自己定的，原则是最小化留存。</p>
+    </div>
+    <table class="tbl">
+      <thead><tr><th style="width:30%">项目</th><th>处理方式</th></tr></thead>
+      <tbody>
+        <tr><td>用户的原始消息文本</td><td><b>不保存</b>。日志里只留长度 <code>input_len</code> 与哈希 <code>input_hash</code>，可用于排查与去重，但不能还原原文。</td></tr>
+        <tr><td>解析结果 JSON</td><td>会落库（<code>output_json</code>），用于回查解析质量。其中包含从消息里抽取的标题、时间、地点等字段。</td></tr>
+        <tr><td>其他日志字段</td><td><code>request_id</code> / <code>prompt_version</code> / <code>model</code> / <code>latency_ms</code> / <code>success</code> / <code>error_code</code> / <code>created_at</code>。</td></tr>
+        <tr><td>模型 API 密钥</td><td>只存在于本地 <code>.env</code> 与云函数环境变量，<b>不入仓库、不进对话</b>。仓库里只有 <code>.env.example</code>。</td></tr>
+        <tr><td>剪贴板</td><td>读取由微信隐私授权控制，用户可拒绝；拒绝时仅该功能不可用，其余功能不受影响。</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="assets">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Assets · 可复现资产</div>
+      <h2>想自己跑一遍</h2>
+      <p>评测脚本与语料都在仓库里。设置 <code>DEEPSEEK_API_KEY</code> 后执行 <code>python eval/run_eval.py --prompt v1.2 --dataset dev</code> 即可复现上表最后两列。</p>
+    </div>
+    <table class="tbl">
+      <thead><tr><th style="width:42%">文件</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td><code>eval/run_eval.py</code></td><td>评测主脚本：固定切分、五层指标计算、badcase 落盘、提示词内嵌</td></tr>
+        <tr><td><code>eval/corpus/sample.jsonl</code></td><td>100 条语料与金标准标注</td></tr>
+        <tr><td><code>eval/gen_corpus.py</code></td><td>语料生成器（相对时间锚点 <code>2026-07-17</code> 写死其中）</td></tr>
+        <tr><td><code>eval/.split.json</code></td><td>dev / test 固定切分结果</td></tr>
+        <tr><td><code>eval/reports/*_run.log</code></td><td>四次运行的原始日志（v1 / v1.1 / v1.2 / test）</td></tr>
+        <tr><td><code>eval/reports/badcase_*.jsonl</code></td><td>四个版本的 badcase 明细，含原文、金标准与模型输出</td></tr>
+      </tbody>
+    </table>
+    <div class="backrow"><a href="weschedule.html">← 返回 WeSchedule 项目详情</a> &nbsp;·&nbsp; <a href="competition.html">竞争格局与产品定位 →</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>韩王泽 · 个人主页 — 把想法做成产品的实践记录</div>
+    <div style="margin-top:6px">226020376@link.cuhk.edu.cn · 评测产物见 weschedule 仓库 eval/ · © 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>

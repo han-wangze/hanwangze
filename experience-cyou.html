@@ -9,7 +9,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-<meta name="theme-color" content="#4f46e5" />
+<meta name="theme-color" content="#3730a3" />
 <link rel="canonical" href="https://han-wangze.github.io/hanwangze/experience-cyou.html" />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
@@ -28,7 +28,7 @@
 <style>
   :root{
     --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
-    --primary:#4f46e5; --primary-d:#4338ca; --accent:#0ea5e9;
+    --primary:#3730a3; --primary-d:#312e81; --accent:#0f766e; --signal:#b45309;
     --ok:#16a34a; --warn:#f59e0b; --line:#e5e7eb;
     --shadow:0 1px 3px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
   }
@@ -42,30 +42,30 @@
     background:rgba(247,248,251,.82);border-bottom:1px solid var(--line)}
   nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
   .brand{font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
-  .brand .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--primary),var(--accent))}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:var(--primary)}
   .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted)}
   .navlinks a:hover{color:var(--primary)}
   .navlinks a.on{color:var(--primary);font-weight:600}
-  @media(max-width:700px){.navlinks{display:none}}
+  @media(max-width:760px){nav .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 20px;gap:2px 0}.navlinks{display:flex;flex-wrap:wrap;font-size:13px;gap:14px;padding-bottom:4px}}
   header.hero{padding:64px 0 48px;background:
-    radial-gradient(1200px 400px at 80% -10%,rgba(79,70,229,.12),transparent),
-    radial-gradient(900px 360px at 0% 0%,rgba(14,165,233,.10),transparent);}
+    radial-gradient(1200px 400px at 80% -10%,rgba(55,48,163,.12),transparent),
+    radial-gradient(900px 360px at 0% 0%,rgba(15,118,110,.10),transparent);}
   .hero h1{font-size:38px;line-height:1.2;font-weight:800;letter-spacing:-.5px}
-  .hero h1 .grad{background:linear-gradient(120deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero h1 .grad{color:var(--primary)}
   .hero .meta{margin-top:14px;font-size:15px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 18px}
   .hero p.sub{margin-top:16px;font-size:17px;color:var(--muted);max-width:700px}
   .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
   .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
     padding:8px 14px;font-size:13px;box-shadow:var(--shadow);display:flex;gap:8px;align-items:center}
-  .badge b{color:var(--primary)}
+  .badge b{color:var(--signal)}
   .cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
   .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:12px;font-weight:600;font-size:14px;transition:.15s}
-  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(79,70,229,.35)}
+  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(55,48,163,.35)}
   .btn.primary:hover{background:var(--primary-d)}
   .btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
   .btn.ghost:hover{border-color:var(--primary);color:var(--primary)}
   section{padding:48px 0}
-  section.alt{background:linear-gradient(180deg,rgba(79,70,229,.035),transparent)}
+  section.alt{background:linear-gradient(180deg,rgba(55,48,163,.035),transparent)}
   .sec-head{margin-bottom:26px}
   .sec-head .k{font-size:13px;font-weight:700;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase}
   .sec-head h2{font-size:26px;font-weight:800;margin-top:6px;letter-spacing:-.3px}
@@ -91,7 +91,7 @@
   .line .chain{font-size:13.5px;color:var(--muted);margin-top:8px}
   .line .foot{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px}
   .pill{background:#eef2ff;color:var(--primary);border-radius:999px;padding:3px 10px;font-weight:600}
-  .pill.g{background:#ecfdf5;color:#047857}
+  .pill.g{background:#f1f5f9;color:#475569}
   .pill.o{background:#fff7ed;color:#b45309}
   /* 代码卡 */
   .codecard{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px}
@@ -123,7 +123,7 @@
   .kv{display:grid;grid-template-columns:76px 1fr;gap:6px 10px;font-size:13.5px}
   .kv dt{color:#9ca3af;font-weight:600}
   .kv dd{color:var(--ink)}
-  .kv dd .hl{background:#eef2ff;border-radius:4px;padding:0 4px}
+  .kv dd .hl{background:#fef3c7;border-radius:4px;padding:0 4px}
   .note{font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
     border-radius:12px;padding:14px 16px;margin-top:16px;box-shadow:var(--shadow)}
   /* 技能栈 */
@@ -135,6 +135,7 @@
   .backrow{padding:14px 0 0;font-size:14px;font-weight:600}
   .backrow a{color:var(--primary)}
   footer{padding:36px 0 56px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
+  h1,h2,.paper .pt,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif;font-weight:700;letter-spacing:0}
 </style>
 </head>
 <body>
@@ -160,9 +161,10 @@
       <span>·</span>
       <span>搜狐畅游</span>
     </div>
-    <p class="sub">负责中、美、日、韩及微信小游戏市场的新品扫描与监测，主导潜力产品的概念测试与立项预评估，独立完成 6 份市场研究报告，并用 Python 把反复出现的统计与建模工作沉淀成可复用的分析工具。</p>
+    <p class="sub">负责中、美、日、韩及微信小游戏市场的新品扫描与监测，主导潜力产品的概念测试与立项预评估；独立完成 4 份专题研究报告，建立并逐月执行 1 套小游戏畅销榜监测机制，并用 Python 把反复出现的统计与建模工作沉淀成可复用的分析工具。</p>
     <div class="badges">
-      <span class="badge"><b>6</b> 份独立研究报告</span>
+      <span class="badge"><b>4</b> 份独立专题报告</span>
+      <span class="badge"><b>1</b> 套月度监测机制</span>
       <span class="badge"><b>10</b> 个功能模块</span>
       <span class="badge"><b>49</b> 个分析脚本</span>
       <span class="badge"><b>4</b> 条能力线</span>
@@ -181,7 +183,7 @@
     <div class="sec-head">
       <div class="k">Role · 职责</div>
       <h2>我负责什么</h2>
-      <p>四条主线，每条都落到具体产出，而不只是"参与"。</p>
+      <p>四条主线，每条都落到具体产出。</p>
     </div>
     <div class="roles">
       <div class="role">
@@ -194,7 +196,7 @@
       </div>
       <div class="role">
         <div class="h">📑 市场研究与报告产出</div>
-        <div class="d">独立完成 6 份研究报告：中国 MMO 头部产品趋势、美国手游品类趋势（五年）、美国手游题材研究（五年）、中美日韩 RPG 细分赛道研究（MMORPG / 放置 RPG / 卡牌 / 开放世界）、小游戏畅销榜月度监测。基于 Sensor Tower、ADX、广大大等工具，从市场规模、竞争格局、买量素材策略、用户画像、内购结构等维度输出洞察。</div>
+        <div class="d">独立完成 4 份专题研究报告：中国 MMO 头部产品趋势、美国手游品类趋势（五年）、美国手游题材研究（五年）、中美日韩 RPG 细分赛道研究（MMORPG / 放置 RPG / 卡牌 / 开放世界）；另建立小游戏畅销榜月度监测机制并逐月执行。基于 Sensor Tower、ADX、广大大等工具，从市场规模、竞争格局、买量素材策略、用户画像、内购结构等维度输出洞察。</div>
       </div>
       <div class="role">
         <div class="h">🐍 基于 Python 的数据分析体系</div>
@@ -210,7 +212,7 @@
     <div class="sec-head">
       <div class="k">Capability Lines · 能力线</div>
       <h2>49 个脚本 → 10 个模块 → 4 条能力线</h2>
-      <p>下面每个功能模块都与上面的一条职责对应，避免"写了代码但说不清为什么写"。</p>
+      <p>下面每个功能模块都与上面的一条职责对应，每条代码都能说清为什么写。</p>
     </div>
 
     <div class="arch">
@@ -234,9 +236,9 @@
 
         <path class="flow-arrow" d="M656 64 L688 64" marker-end="url(#a)" />
         <rect class="flow-step t" x="692" y="26" width="180" height="76" rx="12" />
-        <text class="flow-label" x="782" y="56" text-anchor="middle">5 份报告 + 1 套机制</text>
-        <text class="flow-sub" x="782" y="76" text-anchor="middle">含 59 页品类趋势研究</text>
-        <text class="flow-sub" x="782" y="92" text-anchor="middle">月度畅销榜监测</text>
+        <text class="flow-label" x="782" y="56" text-anchor="middle">4 份专题报告</text>
+        <text class="flow-sub" x="782" y="76" text-anchor="middle">+ 1 套月度监测机制</text>
+        <text class="flow-sub" x="782" y="92" text-anchor="middle">最长 59 页</text>
 
         <defs>
           <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
@@ -289,7 +291,7 @@
           <li><b>为什么需要</b>：每周要在几百行榜单里人工比对历史名单，重复且易错。</li>
           <li><b>工程点</b>：榜单导出存在两种列名口径，自动识别并映射；类封装 11 个方法，去重、筛选、回写各司其职。</li>
         </ul>
-        <div class="iter">迭代轨迹：精简版（仅筛选）→ 加入滚动去重表 → 修复输出路径写成目录导致覆盖的问题。</div>
+        <div class="iter">迭代轨迹：精简版（仅筛选）→ 加入滚动去重表，避免同一款产品被反复计入。</div>
 <pre><span class="c">    def detect_format_and_extract(self, df):</span>
         <span class="c">"""检测表格格式并提取所需字段"""</span>
         columns = df.columns.tolist()
@@ -465,7 +467,7 @@
           <li><b>为什么需要</b>：赛道划分原本依赖人工经验，主观且不可复现。</li>
           <li><b>工程点</b>：遍历候选 K 用轮廓系数自动选优（只接受系数为正的聚类）；特征数随语料规模动态调整；TF-IDF 失败时降级返回而不中断整个分析。</li>
         </ul>
-        <div class="iter">迭代轨迹：1.0 → 8.0，共 8 轮。分析窗口 2 年 → 5 年；单指标 → 12 项指标体系（五年复合增速、波动系数、头尾差距比、中间层与尾部效率差等）；手工看聚类 → 自动选最优 K；并补齐了 NLTK 资源的自动下载与修复逻辑。</div>
+        <div class="iter">迭代轨迹：1.0 → 8.0，共 8 轮。分析窗口 2 年 → 5 年；单指标 → 12 项指标体系（五年复合增速、波动系数、头尾差距比、中间层与尾部效率差等）；手工看聚类 → 自动选最优 K。</div>
 <pre><span class="c">    # 优化 TF-IDF 参数，降低稀疏度</span>
     tfidf = TfidfVectorizer(
         max_features=min(50, len(set(' '.join(valid_names).split()))),  <span class="c"># 动态特征数</span>
@@ -508,7 +510,7 @@
         <div class="lead"><b>做什么</b>：批量遍历概念测试回收的问卷导出表，自动识别每轮的品类题列，按固定列序输出标准统计表（样本量 / 整体下载意愿 / 尖叫度 / 男女分群 / 原因占比 / 游玩时长占比）。</div>
         <ul>
           <li><b>为什么需要</b>：多轮投放的问卷题号与列名会变，手工统计既慢又容易口径不一。</li>
-          <li><b>工程点</b>：<b>把业务口径写成了代码</b>——下载意愿的分母是"有效爱好用户 + 已查看未填写用户"，尖叫度只在"愿意试玩"子集里取均值，游玩时长的分母取"已填写"字段为正向值的样本。</li>
+          <li><b>工程点</b>：<b>把业务口径写成了代码</b>：下载意愿的分母是"有效爱好用户 + 已查看未填写用户"，尖叫度只在"愿意试玩"子集里取均值，游玩时长的分母取"已填写"字段为正向值的样本。</li>
           <li><b>工程点</b>：加了文件夹选择窗口，让非技术同事可以直接双击运行，不必改代码。</li>
         </ul>
         <div class="iter">迭代轨迹：基础统计 → 增加游玩时长题 → 增加"已填写"字段识别修正分母 → 加入图形界面；期间按业务方反馈修正过样本量口径。</div>
@@ -631,7 +633,7 @@ while True:
   <div class="wrap">
     <div class="sec-head">
       <div class="k">Reports · 报告提要</div>
-      <h2>6 份研究报告</h2>
+      <h2>4 份专题报告 + 1 套监测机制</h2>
       <p>每份写明：要回答什么问题、我做了什么、用什么数据与框架、得出哪一类结论。涉及委托方业务数据的具体数值与产品名单不在此公开。</p>
     </div>
     <div class="reports">
@@ -670,7 +672,7 @@ while True:
           <dt>我的角色</dt><dd>独立完成四国数据整理与全部分析</dd>
           <dt>数据工具</dt><dd>Sensor Tower 日粒度数据（下载 / 收入 / 产品数量），Python 做规模测算与效率指标</dd>
           <dt>分析框架</dt><dd>四国市场对比 × 规模与 RPD × 产品数量供给 × 四个细分品类（MMORPG / 放置 RPG / 卡牌 / 开放世界）× 研发门槛与回收周期</dd>
-          <dt>发现</dt><dd>四国 RPG 市场同步进入收缩期，但收缩的成因与结构不同；<span class="hl">细分品类之间的进入门槛差距，远大于市场规模之间的差距</span>——高投入品类需要匹配完整的研发团队与长线内容能力，不适合以机会型方式进入</dd>
+          <dt>发现</dt><dd>四国 RPG 市场同步进入收缩期，但收缩的成因与结构不同；<span class="hl">细分品类之间的进入门槛差距，远大于市场规模之间的差距</span>：高投入品类需要匹配完整的研发团队与长线内容能力，不适合以机会型方式进入</dd>
           <dt>产出形态</dt><dd>29 页研究，含各细分品类的进入条件评估</dd>
         </dl>
       </div>
@@ -688,8 +690,8 @@ while True:
         </dl>
       </div>
 
-      <div class="rcard">
-        <div class="rt">小游戏畅销榜每月监测（2025 年 10 月）</div>
+      <div class="rcard" style="grid-column:1/-1">
+        <div class="rt">小游戏畅销榜每月监测</div>
         <div class="rm">月度文档 · 我搭建机制并逐月执行</div>
         <dl class="kv">
           <dt>研究问题</dt><dd>微信小游戏供给端正在发生什么结构性变化</dd>
@@ -701,14 +703,10 @@ while True:
         </dl>
       </div>
 
-      <div class="rcard" style="justify-content:center">
-        <div class="rt">另：参与部门年度报告 MMO 章节</div>
-        <div class="rm">《2020–2024 全球手游品类趋势研究》</div>
-        <dl class="kv">
-          <dt>我的参与</dt><dd>独立完成其中 MMO 章节的分析与撰写；该章节与上面的中国 MMO 独立报告同源，在此不重复展开</dd>
-        </dl>
-      </div>
+    </div>
 
+    <div class="note">
+      另：参与过部门年度报告《2020–2024 全球手游品类趋势研究》的 MMO 章节撰写，该章节与上面的中国 MMO 独立报告同源。年度报告整体为部门产出，不计入上面的个人报告数。
     </div>
 
     <div class="note">

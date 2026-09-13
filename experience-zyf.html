@@ -9,7 +9,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-<meta name="theme-color" content="#4f46e5" />
+<meta name="theme-color" content="#3730a3" />
 <link rel="canonical" href="https://han-wangze.github.io/hanwangze/experience-zyf.html" />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
@@ -28,7 +28,7 @@
 <style>
   :root{
     --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
-    --primary:#4f46e5; --primary-d:#4338ca; --accent:#0ea5e9;
+    --primary:#3730a3; --primary-d:#312e81; --accent:#0f766e; --signal:#b45309;
     --ok:#16a34a; --warn:#f59e0b; --line:#e5e7eb;
     --shadow:0 1px 3px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
   }
@@ -42,30 +42,30 @@
     background:rgba(247,248,251,.82);border-bottom:1px solid var(--line)}
   nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
   .brand{font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
-  .brand .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--primary),var(--accent))}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:var(--primary)}
   .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted)}
   .navlinks a:hover{color:var(--primary)}
   .navlinks a.on{color:var(--primary);font-weight:600}
-  @media(max-width:760px){.navlinks{display:none}}
+  @media(max-width:760px){nav .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 20px;gap:2px 0}.navlinks{display:flex;flex-wrap:wrap;font-size:13px;gap:14px;padding-bottom:4px}}
   header.hero{padding:64px 0 48px;background:
-    radial-gradient(1200px 400px at 80% -10%,rgba(79,70,229,.12),transparent),
-    radial-gradient(900px 360px at 0% 0%,rgba(14,165,233,.10),transparent);}
+    radial-gradient(1200px 400px at 80% -10%,rgba(55,48,163,.12),transparent),
+    radial-gradient(900px 360px at 0% 0%,rgba(15,118,110,.10),transparent);}
   .hero h1{font-size:36px;line-height:1.22;font-weight:800;letter-spacing:-.5px}
-  .hero h1 .grad{background:linear-gradient(120deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero h1 .grad{color:var(--primary)}
   .hero .meta{margin-top:14px;font-size:15px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 18px}
   .hero p.sub{margin-top:16px;font-size:17px;color:var(--muted);max-width:720px}
   .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
   .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
     padding:8px 14px;font-size:13px;box-shadow:var(--shadow);display:flex;gap:8px;align-items:center}
-  .badge b{color:var(--primary)}
+  .badge b{color:var(--signal)}
   .cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
   .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:12px;font-weight:600;font-size:14px;transition:.15s}
-  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(79,70,229,.35)}
+  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(55,48,163,.35)}
   .btn.primary:hover{background:var(--primary-d)}
   .btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
   .btn.ghost:hover{border-color:var(--primary);color:var(--primary)}
   section{padding:48px 0}
-  section.alt{background:linear-gradient(180deg,rgba(79,70,229,.035),transparent)}
+  section.alt{background:linear-gradient(180deg,rgba(55,48,163,.035),transparent)}
   .sec-head{margin-bottom:26px}
   .sec-head .k{font-size:13px;font-weight:700;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase}
   .sec-head h2{font-size:26px;font-weight:800;margin-top:6px;letter-spacing:-.3px}
@@ -125,6 +125,7 @@
   .chips{display:flex;flex-wrap:wrap;gap:7px}
   .chip{font-size:12.5px;background:#f1f5f9;color:#334155;border-radius:8px;padding:4px 10px}
   footer{padding:36px 0 56px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
+  h1,h2,.paper .pt,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif;font-weight:700;letter-spacing:0}
 </style>
 </head>
 <body>
@@ -163,7 +164,7 @@
       <a class="btn ghost" href="experience-cyou.html">查看战略分析实习 →</a>
     </div>
     <div class="note" style="margin-top:24px">
-      <b>关于本页口径</b>：本次实习为西安交通大学经济与金融学院组织的专业实习。因涉及企业内部系统界面、菜单结构与客户信息，本页仅以文字形式说明工作内容、方法与我个人的判断，<b>不含任何系统截图、客户名单与内部数据</b>。
+      <b>关于本页口径</b>：本次实习为学校组织的专业实习。因涉及企业内部系统界面与客户信息，本页仅以文字说明，<b>不含系统截图、客户名单与内部数据</b>。
     </div>
   </div>
 </header>
@@ -173,12 +174,12 @@
     <div class="sec-head">
       <div class="k">Scope · 测试范围</div>
       <h2>我测了什么</h2>
-      <p>被测系统是面向工厂设备运维的工业物联网平台。我负责的 6 个模块串起来正好是一条完整的设备生命周期：<b>买进来 → 存得住 → 修得动 → 看得见 → 管得住</b>。</p>
+      <p>被测系统是面向工厂设备运维的工业物联网平台。我负责的 6 个模块串起来正好是设备的完整生命周期：从采购入库、调拨维修，到报废与健康监测。</p>
     </div>
     <div class="mods">
       <div class="mod">
         <div class="mh"><div class="mt">设备资产</div><div class="mn">17 项缺陷</div></div>
-        <div class="md">设备从入库到报废的全流程台账，也是本次缺陷最集中的模块——采购、调拨、验收三条链路都有问题。</div>
+        <div class="md">设备从入库到报废的全流程台账，也是本次缺陷最集中的模块，采购、调拨、验收三条链路都有问题。</div>
         <div class="mp"><span>设备台账</span><span>设备调拨</span><span>借用归还</span><span>安装验收</span><span>状态变更</span><span>采购需求</span><span>采购计划</span></div>
       </div>
       <div class="mod">
@@ -224,11 +225,11 @@
       </div>
       <div class="step">
         <div class="h">② 边界值与异常操作：专门做「不该发生的事」</div>
-        <div class="d">字数上限超填、必填项留空、连续快速双击、超出范围的数值、超长文本提交。多个缺陷都是这样撞出来的——例如库存下限可以被设置为大于上限，安全措施连续点两次「确定」会产生两条重复记录。</div>
+        <div class="d">字数上限超填、必填项留空、连续快速双击、超出范围的数值、超长文本提交。多个缺陷都是这样撞出来的。例如库存下限可以被设置为大于上限，安全措施连续点两次「确定」会产生两条重复记录。</div>
       </div>
       <div class="step">
         <div class="h">③ 流程一致性对比：找同类模块之间的差异</div>
-        <div class="d">把「采购计划 / 采购需求 / 设备调拨」等模块的审批逻辑横向摆在一起比对。同一件事在不同模块的实现方式不一致，往往就是一个真缺陷——这也是我发现流程断裂问题的主要方式。</div>
+        <div class="d">把「采购计划 / 采购需求 / 设备调拨」等模块的审批逻辑横向摆在一起比对。同一件事在不同模块的实现方式不一致，往往就是一个真缺陷，这也是我发现流程断裂问题的主要方式。</div>
       </div>
       <div class="step">
         <div class="h">④ 操作路径复现：逐级验证菜单层级</div>
@@ -251,7 +252,7 @@
     <div class="sec-head">
       <div class="k">Findings · 缺陷发现</div>
       <h2>发现的问题（按性质归类）</h2>
-      <p>50 余项缺陷分布在六类问题上。真正值得说的不是数量，而是其中几项<b>会直接造成业务损失</b>——这类问题比界面错位重要得多。</p>
+      <p>50 余项缺陷分布在六类问题上。下面 6 项<b>会直接造成业务损失</b>，比界面错位重要得多。</p>
     </div>
 
     <div class="cases">
@@ -260,7 +261,7 @@
         <div>
           <div class="ct">单条删除触发全量清除</div>
           <div class="cd">采购计划中导入多份需求单后，<b>删除其中一条记录，系统会删掉全部记录</b>。</div>
-          <div class="risk">风险：整批采购数据瞬间丢失，且难以恢复 —— 典型的事务处理与前端传参缺陷</div>
+          <div class="risk">风险：整批采购数据瞬间丢失，且难以恢复（典型的事务处理与前端传参缺陷）</div>
         </div>
       </div>
       <div class="case">
@@ -268,7 +269,7 @@
         <div>
           <div class="ct">已审核单据的关键字段仍可修改</div>
           <div class="cd">已通过审核的需求单导入采购计划后，<b>单价与数量仍可随意编辑</b>，且没有留痕。</div>
-          <div class="risk">风险：审核环节形同虚设，采购金额可被事后修改 —— 直接的内控与合规隐患</div>
+          <div class="risk">风险：审核环节形同虚设，采购金额可被事后修改，属直接的内控与合规隐患</div>
         </div>
       </div>
       <div class="case">
@@ -410,7 +411,7 @@
     </div>
 
     <div class="note" style="margin-top:18px">
-      这段经历对我的价值不在于「会用 Jira」，而在于它给了我一个具体的问题意识：<b>制度写得再完整，只要系统实现上少一个入口、多一个可编辑字段，控制就失效了</b>。这一点在我后来做产品与调研时，会持续发挥作用。
+      这段经历让我记住一件事：<b>制度写得再完整，只要系统实现上少一个入口、多一个可编辑字段，控制就失效了</b>。这个视角在我后来做产品与调研时一直在用。
     </div>
   </div>
 </section>

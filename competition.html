@@ -9,7 +9,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-<meta name="theme-color" content="#4f46e5" />
+<meta name="theme-color" content="#3730a3" />
 <link rel="canonical" href="https://han-wangze.github.io/hanwangze/competition.html" />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
@@ -28,7 +28,7 @@
 <style>
   :root{
     --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
-    --primary:#4f46e5; --primary-d:#4338ca; --accent:#0ea5e9;
+    --primary:#3730a3; --primary-d:#312e81; --accent:#0f766e; --signal:#b45309;
     --ok:#16a34a; --warn:#f59e0b; --line:#e5e7eb;
     --shadow:0 1px 3px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
   }
@@ -42,14 +42,14 @@
     background:rgba(247,248,251,.82);border-bottom:1px solid var(--line)}
   nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
   .brand{font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
-  .brand .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--primary),var(--accent))}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:var(--primary)}
   .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted);flex-wrap:wrap}
   .navlinks a:hover{color:var(--primary)}
   .navlinks a.on{color:var(--primary);font-weight:600}
-  @media(max-width:640px){.navlinks{display:none}}
+  @media(max-width:760px){nav .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 20px;gap:2px 0}.navlinks{display:flex;flex-wrap:wrap;font-size:13px;gap:14px;padding-bottom:4px}}
   header.hero{padding:64px 0 48px;background:
-    radial-gradient(1200px 400px at 80% -10%,rgba(79,70,229,.12),transparent),
-    radial-gradient(900px 360px at 0% 0%,rgba(14,165,233,.10),transparent);}
+    radial-gradient(1200px 400px at 80% -10%,rgba(55,48,163,.12),transparent),
+    radial-gradient(900px 360px at 0% 0%,rgba(15,118,110,.10),transparent);}
   .hero h1{font-size:38px;line-height:1.18;font-weight:800;letter-spacing:-.5px}
   .hero p.sub{margin-top:16px;font-size:17px;color:var(--muted);max-width:700px}
   .hero p.sub b{color:var(--ink)}
@@ -86,6 +86,7 @@
   .backrow a{color:var(--primary)}
   footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
   code{background:#f1f5f9;padding:2px 6px;border-radius:5px;font-size:.9em}
+  h1,h2,.paper .pt,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif;font-weight:700;letter-spacing:0}
 </style>
 </head>
 <body>
@@ -187,32 +188,33 @@
         </defs>
         <!-- 轴标签 -->
         <text x="686" y="24" text-anchor="end" font-size="13" fill="#6b7280">有日程库 →</text>
-        <text x="42" y="24" text-anchor="start" font-size="13" fill="#6b7280">→ 无日程库</text>
+        <text x="42" y="24" text-anchor="start" font-size="13" fill="#6b7280">← 无日程库</text>
+        <text x="366" y="452" text-anchor="middle" font-size="12" fill="#9ca3af">原点：无日程库 × 时刻视角</text>
         <text x="664" y="58" text-anchor="end" font-size="13" fill="#6b7280">容量视角（排不排得下）↑</text>
         <text x="664" y="452" text-anchor="end" font-size="13" fill="#6b7280">↓ 时刻视角（几点、撞没撞）</text>
         <!-- 象限标注 -->
-        <text x="520" y="66" text-anchor="middle" font-size="13" font-weight="700" fill="#4f46e5">日程治理（本项目所在）</text>
+        <text x="520" y="66" text-anchor="middle" font-size="13" font-weight="700" fill="#3730a3">日程治理（本项目所在）</text>
         <text x="180" y="66" text-anchor="middle" font-size="12" fill="#9ca3af">暂无产品占据</text>
-        <text x="180" y="416" text-anchor="middle" font-size="13" font-weight="700" fill="#0ea5e9">提醒生成</text>
+        <text x="180" y="416" text-anchor="middle" font-size="13" font-weight="700" fill="#0f766e">提醒生成</text>
         <text x="520" y="416" text-anchor="middle" font-size="13" font-weight="700" fill="#f59e0b">任务清单</text>
         <!-- 点 -->
-        <circle cx="150" cy="300" r="9" fill="#0ea5e9"/>
+        <circle cx="150" cy="300" r="9" fill="#0f766e"/>
         <text x="150" y="322" text-anchor="middle" font-size="12" fill="#1f2937">腾讯元宝</text>
-        <circle cx="240" cy="340" r="9" fill="#0ea5e9"/>
+        <circle cx="240" cy="340" r="9" fill="#0f766e"/>
         <text x="240" y="362" text-anchor="middle" font-size="12" fill="#1f2937">小微</text>
         <circle cx="520" cy="300" r="9" fill="#f59e0b"/>
         <text x="520" y="322" text-anchor="middle" font-size="12" fill="#1f2937">滴答清单</text>
-        <circle cx="500" cy="150" r="13" fill="#4f46e5" stroke="#fff" stroke-width="3"/>
-        <text x="500" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#4f46e5">WeSchedule</text>
+        <circle cx="500" cy="150" r="13" fill="#3730a3" stroke="#fff" stroke-width="3"/>
+        <text x="500" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#3730a3">WeSchedule</text>
         <text x="500" y="176" text-anchor="middle" font-size="11" fill="#6b7280">冲突检测 · DDL 区间 · 负载</text>
       </svg>
       <div class="legend">
-        <span><i style="background:#0ea5e9"></i>提醒生成（单次、无积累）</span>
+        <span><i style="background:#0f766e"></i>提醒生成（单次、无积累）</span>
         <span><i style="background:#f59e0b"></i>任务清单（有库、无治理）</span>
-        <span><i style="background:#4f46e5"></i>日程治理（本项目方向）</span>
+        <span><i style="background:#3730a3"></i>日程治理（本项目方向）</span>
       </div>
     </div>
-    <p class="note">观察：提醒类工具解决"别忘事"，但都不维护一份可管理的日程库，也不回答"日程之间是否冲突、DDL 的缓冲是否被透支"。这正好对应调研中的第一需求——冲突检测（70.1%）。</p>
+    <p class="note">观察：提醒类工具解决"别忘事"，但都不维护一份可管理的日程库，也不回答"日程之间是否冲突、DDL 的缓冲是否被透支"。这正好对应调研中的第一需求：冲突检测（70.1%）。</p>
   </div>
 </section>
 
@@ -237,7 +239,7 @@
           <li><b>DDL 堆积</b>：三个作业同周末截止，每个录入时都"不冲突"，到期才发现排不开</li>
           <li><b>会议沼泽</b>：日程表不重叠，但一整天没有整块可支配时间</li>
         </ul>
-        <p style="margin-top:8px">现有工具问的是"这个时间空不空"，少有人问"这周还剩多少可支配时间"。过载是慢性的，发现时往往已晚——这是比撞车更难被现有工具覆盖的问题。</p>
+        <p style="margin-top:8px">现有工具问的是"这个时间空不空"，少有人问"这周还剩多少可支配时间"。过载是慢性的，发现时往往已晚。这是比撞车更难被现有工具覆盖的问题。</p>
       </div>
     </div>
     <p class="note">工程上，过载检测不需要 AI：现有数据结构（date / 起止时间 / is_deadline / fuzzy_time）已足够，规则在本地跑即可，几乎不增加后端成本。</p>
@@ -249,11 +251,11 @@
     <div class="sec-head">
       <div class="k">Defense · 防御性思考</div>
       <h2>如果平台原生能力下场，还剩什么</h2>
-      <p>「小微」正在内测，官方 Agent 天然拥有最短的入口和系统级通道。如果"消息转日程"被原生能力覆盖，这个项目的价值还剩什么——这是设计之初就想清楚的问题。</p>
+      <p>「小微」正在内测，官方 Agent 天然拥有最短的入口和系统级通道。如果"消息转日程"被原生能力覆盖，这个项目的价值还剩什么。这是设计之初就想清楚的问题。</p>
     </div>
     <ul class="road">
       <li><b>正视变量</b>：入口层（复制 → 解析）确实可能被原生能力替代，所以本项目不把"解析"当作壁垒，只把它当作入口。</li>
-      <li><b>价值落在治理层</b>：冲突检测、DDL 区间管理、负载提示依赖一份持续积累的日程库——用得越久，检测越准。提醒类工具是无状态的，用过即走；治理的价值随使用加深。</li>
+      <li><b>价值落在治理层</b>：冲突检测、DDL 区间管理、负载提示依赖一份持续积累的日程库：用得越久，检测越准。提醒类工具是无状态的，用过即走；治理的价值随使用加深。</li>
       <li><b>把平台约束转成设计决策</b>：个人主体小程序无法写系统日历，于是用"小程序内日程 + 订阅消息"；订阅消息"一次授权一次推送"，于是预备提醒复用同一授权改到前一晚；隐私合规要求下，解析日志只存 <code>input_hash</code> 不留原文。这些约束反而定义了产品的形态。</li>
     </ul>
   </div>

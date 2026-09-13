@@ -9,7 +9,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-<meta name="theme-color" content="#4f46e5" />
+<meta name="theme-color" content="#3730a3" />
 <link rel="canonical" href="https://han-wangze.github.io/hanwangze/research.html" />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
@@ -28,7 +28,7 @@
 <style>
   :root{
     --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
-    --primary:#4f46e5; --primary-d:#4338ca; --accent:#0ea5e9;
+    --primary:#3730a3; --primary-d:#312e81; --accent:#0f766e; --signal:#b45309;
     --ok:#16a34a; --warn:#f59e0b; --line:#e5e7eb;
     --shadow:0 1px 3px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
   }
@@ -42,29 +42,29 @@
     background:rgba(247,248,251,.82);border-bottom:1px solid var(--line)}
   nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
   .brand{font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
-  .brand .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--primary),var(--accent))}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:var(--primary)}
   .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted)}
   .navlinks a:hover{color:var(--primary)}
   .navlinks a.on{color:var(--primary);font-weight:600}
-  @media(max-width:760px){.navlinks{display:none}}
+  @media(max-width:760px){nav .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 20px;gap:2px 0}.navlinks{display:flex;flex-wrap:wrap;font-size:13px;gap:14px;padding-bottom:4px}}
   header.hero{padding:64px 0 48px;background:
-    radial-gradient(1200px 400px at 80% -10%,rgba(79,70,229,.12),transparent),
-    radial-gradient(900px 360px at 0% 0%,rgba(14,165,233,.10),transparent);}
+    radial-gradient(1200px 400px at 80% -10%,rgba(55,48,163,.12),transparent),
+    radial-gradient(900px 360px at 0% 0%,rgba(15,118,110,.10),transparent);}
   .hero h1{font-size:38px;line-height:1.2;font-weight:800;letter-spacing:-.5px}
-  .hero h1 .grad{background:linear-gradient(120deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero h1 .grad{color:var(--primary)}
   .hero p.sub{margin-top:16px;font-size:17px;color:var(--muted);max-width:740px}
   .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
   .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
     padding:8px 14px;font-size:13px;box-shadow:var(--shadow);display:flex;gap:8px;align-items:center}
-  .badge b{color:var(--primary)}
+  .badge b{color:var(--signal)}
   .cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
   .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:12px;font-weight:600;font-size:14px;transition:.15s}
-  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(79,70,229,.35)}
+  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(55,48,163,.35)}
   .btn.primary:hover{background:var(--primary-d)}
   .btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
   .btn.ghost:hover{border-color:var(--primary);color:var(--primary)}
   section{padding:48px 0}
-  section.alt{background:linear-gradient(180deg,rgba(79,70,229,.035),transparent)}
+  section.alt{background:linear-gradient(180deg,rgba(55,48,163,.035),transparent)}
   .sec-head{margin-bottom:26px}
   .sec-head .k{font-size:13px;font-weight:700;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase}
   .sec-head h2{font-size:26px;font-weight:800;margin-top:6px;letter-spacing:-.3px}
@@ -80,13 +80,13 @@
   .pill{font-size:11.5px;border-radius:999px;padding:3px 10px;font-weight:600;white-space:nowrap}
   .pill.b{background:#eef2ff;color:var(--primary)}
   .pill.o{background:#fff7ed;color:#b45309}
-  .pill.g{background:#ecfdf5;color:#047857}
+  .pill.g{background:#f1f5f9;color:#475569}
   .pill.n{background:#f1f5f9;color:#475569}
   .kv{display:grid;grid-template-columns:78px 1fr;gap:8px 12px;font-size:13.5px;margin-top:14px}
   .kv dt{color:#9ca3af;font-weight:600;padding-top:1px}
   .kv dd{color:var(--ink)}
   .kv dd em{font-style:normal;color:#0e7490;background:#ecfeff;border-radius:4px;padding:0 4px}
-  .kv dd b{background:#eef2ff;border-radius:4px;padding:0 4px}
+  .kv dd b{background:#fef3c7;border-radius:4px;padding:0 4px}
   /* 紧凑卡 */
   .list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
   @media(max-width:760px){.list{grid-template-columns:1fr}}
@@ -97,6 +97,7 @@
   .mini .md b{color:var(--ink);font-weight:600}
   .mini .mf{font-size:12.5px;color:var(--primary);font-weight:600}
   footer{padding:36px 0 56px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
+  h1,h2,.paper .pt,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif;font-weight:700;letter-spacing:0}
 </style>
 </head>
 <body>
@@ -117,7 +118,7 @@
 <header class="hero">
   <div class="wrap">
     <h1>研究与写作</h1>
-    <p class="sub">10 份学术与课程作品，分三类：<b>计量与实证分析</b>（用数据回答一个可检验的问题）、<b>社会调查</b>（自己收数据并处理它的局限）、<b>案例与文献研究</b>（把一个陌生领域摸清并讲明白）。每一份都按「研究问题 — 方法与数据 — 主要发现 — 产出形态」写清楚，而不是只列标题。</p>
+    <p class="sub">10 份学术与课程作品，分三类：<b>计量与实证分析</b>（用数据回答一个可检验的问题）、<b>社会调查</b>（自己收数据并处理它的局限）、<b>案例与文献研究</b>（把一个陌生领域摸清并讲明白）。每一份都按「研究问题 — 方法与数据 — 主要发现 — 产出形态」写清楚，不只列标题。</p>
     <div class="badges">
       <span class="badge"><b>10</b> 份作品</span>
       <span class="badge"><b>3</b> 类研究方法</span>
@@ -136,7 +137,7 @@
     <div class="sec-head">
       <div class="k">Quantitative · 计量与实证</div>
       <h2>用数据回答一个可检验的问题</h2>
-      <p>三篇实证研究，共同点是：先提出可被证伪的假设，再用数据与模型去检验——而不是先有结论再找证据。</p>
+      <p>三篇实证研究都是先提出可被证伪的假设，再用数据与模型去检验。</p>
     </div>
 
     <div class="paper">
@@ -235,7 +236,7 @@
         <dt>主要发现</dt>
         <dd>社区对从业者的支持力度与<b>居民消费满意度显著正相关</b>，也与居民对「社区工坊」模式的可行性评价正相关；价格透明度、找到从业者的时间成本均显著影响满意度。政策层面据此提出以社区为枢纽统筹供给的建议</dd>
         <dt>特别说明</dt>
-        <dd>报告中<b>主动写出了调研自身的缺陷</b>：第一因子方差解释率过高说明问卷维度划分不够清晰、第二三维度题目设计不充分；供给端样本量过少无法形成有代表性的结论——并给出了明确的改进方向。这一部分是我认为整份报告最值得保留的内容</dd>
+        <dd>报告中<b>主动写出了调研自身的缺陷</b>：第一因子方差解释率过高说明问卷维度划分不够清晰、第二三维度题目设计不充分；供给端样本量过少无法形成有代表性的结论，并给出了明确的改进方向</dd>
       </dl>
     </div>
   </div>
@@ -246,63 +247,47 @@
     <div class="sec-head">
       <div class="k">Case &amp; Review · 案例与文献</div>
       <h2>把一个陌生领域摸清并讲明白</h2>
-      <p>六份作品，主题从空间计算到广告传播再到财政理论——共同要求是把大量外部材料压缩成一条自己能讲清楚的逻辑。</p>
+      <p>六份作品，主题从空间计算到广告传播再到财政理论，共同要求是把大量外部材料压缩成一条自己能讲清楚的逻辑。</p>
     </div>
     <div class="list">
       <div class="mini">
         <div class="mt">空间计算起源与发展</div>
         <div class="mm"><span class="pill b">文献综述</span><span class="pill n">13 页</span></div>
         <div class="md">以 <b>Web of Science 文献计量</b>切入（检索式 TS="Spatial Computing"，做引文趋势分析），再按演化阶段梳理概念边界与关键技术：数据采集、数据处理、显示与交互四层。<br><b>发现</b>：领域已从早期工程计算扩展到消费端应用，但仍受成熟度、自然交互与实时渲染三类瓶颈约束。<br>参考文献 40 余篇，以英文文献为主。</div>
-        <div class="mf">一篇能看出「会做 literature review」的综述</div>
       </div>
       <div class="mini">
         <div class="mt">空间计算在物流管理中的运用</div>
         <div class="mm"><span class="pill b">课程论文</span><span class="pill n">13 页</span><span class="pill o">小组合作</span></div>
         <div class="md">把空间计算技术映射到物流具体场景：实时货物跟踪、路径规划、仓库自动化，并逐项分析落地障碍。<br><b>发现</b>：应用空间明确，但受技术成熟度、经济成本与数据安全三重约束；数据安全部分讨论了 3D 仓库模型泄露可能暴露安防盲区这类具体风险。</div>
-        <div class="mf">技术综述＋场景落地判断</div>
       </div>
       <div class="mini">
         <div class="mt">旺旺魔性广告为何洗脑</div>
         <div class="mm"><span class="pill b">案例分析</span><span class="pill n">6 页</span></div>
         <div class="md">拆解「魔性」的构成要素：<b>重复</b>强化记忆、<b>生活化叙事与儿童视角</b>建立情感连接、<b>IP 形象运营</b>延续品牌资产，并用顾客心理所有权等文献框架解释其作用路径。<br><b>发现</b>：形式看似过时，实质是对细分客群与消费者心理的精准把握，因此在注意力稀缺的短视频时代依然有效。</div>
-        <div class="mf">把一个「感觉」拆成可分析的结构</div>
       </div>
       <div class="mini">
         <div class="mt">「五个女博士」广告争议案例</div>
         <div class="mm"><span class="pill b">案例分析</span><span class="pill n">7 页</span></div>
         <div class="md">套用扎根理论提炼的争议广告分析框架：冒犯度（产品效用 / 心理效用 / 体验效用 / 情感四类损失）与消费者容忍度之间的比较，决定购买意愿走向。<br><b>发现</b>：该广告以「贩卖焦虑」制造记忆点，与品牌自建的「高学术背景」形象发生冲突，长期必然导致购买意愿下降。</div>
-        <div class="mf">用现成框架分析真实商业事件</div>
       </div>
       <div class="mini">
         <div class="mt">国家、财政、经济之间的关系</div>
         <div class="mm"><span class="pill b">文献综述</span><span class="pill n">6 页</span></div>
         <div class="md">先界定国家与财政的概念范畴，再从多个角度梳理三者相互作用：经济发展水平决定财政状况，财政通过支出结构反向影响经济。<br><b>发现</b>：财政支出的产出弹性存在明显地区差异，教育支出与科技支出对增长的促进作用最为显著；并梳理了政绩考核体系变化对地方投资行为的影响。</div>
-        <div class="mf">把宏观关系讲成一条因果链</div>
       </div>
       <div class="mini">
         <div class="mt">制造业领域人机协同中的知识流动</div>
         <div class="mm"><span class="pill b">思维导图</span><span class="pill n">1 页</span></div>
-        <div class="md">以手绘思维导图梳理制造业人机协同场景下知识在人与系统之间的流动路径——从隐性经验到可执行指令，再到反馈回流的闭环。</div>
-        <div class="mf">视觉化梳理复杂结构</div>
+        <div class="md">以手绘思维导图梳理制造业人机协同场景下知识在人与系统之间的流动路径：从隐性经验到可执行指令，再到反馈回流的闭环。</div>
       </div>
     </div>
   </div>
 </section>
 
 <section id="about" class="alt">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="k">Note · 说明</div>
-      <h2>关于本页收录口径</h2>
-    </div>
-    <div class="note">
-      本页所有作品均以<b>提要</b>形式呈现，重点说明研究问题、方法与数据、以及我得出的是哪一类结论。<br>
-      不直接挂载全文 PDF，原因有两点：一是课程论文与竞赛作品属于校内场景产物，我倾向于保持它本来的分发范围；二是<b>提要比全文更能体现判断力</b>——知道一份研究里什么值得讲、什么可以省，本身就是能力的一部分。<br>
-      如果你对某一项的具体结论、数据或方法细节感兴趣，<b>欢迎直接联系我索取全文</b>。
-    </div>
-    <div class="note" style="margin-top:14px;border-left-color:var(--primary)">
-      另有一份完整公开的原创调研报告：<a href="report-full.html" style="color:var(--primary);font-weight:600">智能日程助手市场调查报告</a>
-      —— 从问卷设计、87 份样本回收、交叉分析到战略建议的完整过程，含 42 张图表与制图代码，可作为上述研究方法的完整成品示例。
+  <div class="wrap">    <div class="note">
+      本页所有作品均以<b>提要</b>形式呈现：研究问题、方法与数据、得出的结论类型。全文不挂载 PDF，因为课程论文与竞赛作品属校内场景产物；提要比全文更能说明一份研究里什么值得讲、什么可以省。需要全文<b>可直接联系我</b>。<br>
+      另有一份完整公开的原创调研报告：<a href="report-full.html" style="color:var(--primary);font-weight:600">智能日程助手市场调查报告</a>（87 份样本，含 58 张图表与制图代码），可作为研究方法的完整成品示例。
     </div>
   </div>
 </section>
