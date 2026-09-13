@@ -212,15 +212,13 @@
     <div class="sec-head">
       <div class="k">Capability Lines · 能力线</div>
       <h2>49 个脚本 → 10 个模块 → 4 条能力线</h2>
-      <p>下面每个功能模块都与上面的一条职责对应，每条代码都能说清为什么写。</p>
+      <p>把 49 个脚本按用途收拢成 10 个模块，归到四条能力线，下面是模块节选。</p>
     </div>
 
     <div class="arch">
       <svg viewBox="0 0 880 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="脚本到能力线的收敛关系">
         <rect class="flow-step" x="8" y="26" width="188" height="76" rx="12" />
-        <text class="flow-label" x="102" y="56" text-anchor="middle">49 个分析脚本</text>
-        <text class="flow-sub" x="102" y="76" text-anchor="middle">版本迭代 1.0 → 8.0</text>
-        <text class="flow-sub" x="102" y="92" text-anchor="middle">200 – 1200 行 / 个</text>
+        <text class="flow-label" x="102" y="64" text-anchor="middle">49 个分析脚本</text>
 
         <path class="flow-arrow" d="M200 64 L232 64" marker-end="url(#a)" />
         <rect class="flow-step t" x="236" y="26" width="188" height="76" rx="12" />
@@ -231,8 +229,7 @@
         <path class="flow-arrow" d="M428 64 L460 64" marker-end="url(#a)" />
         <rect class="flow-step" x="464" y="26" width="188" height="76" rx="12" />
         <text class="flow-label" x="558" y="56" text-anchor="middle">4 条能力线</text>
-        <text class="flow-sub" x="558" y="76" text-anchor="middle">与岗位职责一一对应</text>
-        <text class="flow-sub" x="558" y="92" text-anchor="middle">监测 · 闭环 · 建模 · 归因</text>
+        <text class="flow-sub" x="558" y="76" text-anchor="middle">监测 · 闭环 · 建模 · 归因</text>
 
         <path class="flow-arrow" d="M656 64 L688 64" marker-end="url(#a)" />
         <rect class="flow-step t" x="692" y="26" width="180" height="76" rx="12" />
@@ -279,7 +276,7 @@
     <div class="sec-head">
       <div class="k">Code · 代码与工具</div>
       <h2>把重复劳动变成工具</h2>
-      <p>下面 7 个模块是四条能力线里最能说明问题的部分，节选代表函数。涉及的本地路径与内部标识均已移除。</p>
+      <p>下面节选 7 个模块的代表函数。涉及的本地路径与内部标识均已移除。</p>
     </div>
 
     <!-- 1 -->
@@ -467,7 +464,7 @@
           <li><b>为什么需要</b>：赛道划分原本依赖人工经验，主观且不可复现。</li>
           <li><b>工程点</b>：遍历候选 K 用轮廓系数自动选优（只接受系数为正的聚类）；特征数随语料规模动态调整；TF-IDF 失败时降级返回而不中断整个分析。</li>
         </ul>
-        <div class="iter">迭代轨迹：1.0 → 8.0，共 8 轮。分析窗口 2 年 → 5 年；单指标 → 12 项指标体系（五年复合增速、波动系数、头尾差距比、中间层与尾部效率差等）；手工看聚类 → 自动选最优 K。</div>
+        <div class="iter">迭代轨迹：分析窗口从 2 年扩到 5 年；单指标扩到 12 项指标体系（五年复合增速、波动系数、头尾差距比、中间层与尾部效率差等）；手工看聚类 → 自动选最优 K。</div>
 <pre><span class="c">    # 优化 TF-IDF 参数，降低稀疏度</span>
     tfidf = TfidfVectorizer(
         max_features=min(50, len(set(' '.join(valid_names).split()))),  <span class="c"># 动态特征数</span>
