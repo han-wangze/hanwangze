@@ -46,7 +46,7 @@
   .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted);flex-wrap:wrap}
   .navlinks a:hover{color:var(--primary)}
   .navlinks a.on{color:var(--primary);font-weight:600}
-  @media(max-width:760px){nav .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 20px;gap:2px 0}.navlinks{display:flex;flex-wrap:wrap;font-size:13px;gap:14px;padding-bottom:4px}}
+  @media(max-width:760px){nav .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 20px;gap:2px 0}.navlinks{display:flex;flex-wrap:wrap;font-size:13px;gap:14px;padding-bottom:4px}.navlinks a{padding:8px 2px;min-height:44px;display:inline-flex;align-items:center}}
   header.hero{padding:64px 0 48px;background:
     radial-gradient(1200px 400px at 80% -10%,rgba(55,48,163,.12),transparent),
     radial-gradient(900px 360px at 0% 0%,rgba(15,118,110,.10),transparent);}
@@ -86,7 +86,7 @@
   .backrow a{color:var(--primary)}
   footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
   code{background:#f1f5f9;padding:2px 6px;border-radius:5px;font-size:.9em}
-  h1,h2,.paper .pt,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif;font-weight:700;letter-spacing:0}
+  h1,h2,.paper .pt,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif}
 </style>
 </head>
 <body>
@@ -179,22 +179,22 @@
         <rect x="40" y="230" width="320" height="190" fill="#f8fafc" />
         <rect x="360" y="230" width="320" height="190" fill="#f8fafc" />
         <!-- 轴线 -->
-        <line x1="360" y1="30" x2="360" y2="440" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
-        <line x1="30" y1="230" x2="690" y2="230" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="360" y1="30" x2="360" y2="440" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="30" y1="230" x2="690" y2="230" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
         <defs>
           <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-            <path d="M0,0 L8,3 L0,6 Z" fill="#94a3b8"/>
+            <path d="M0,0 L8,3 L0,6 Z" fill="var(--muted)"/>
           </marker>
         </defs>
         <!-- 轴标签 -->
         <text x="686" y="24" text-anchor="end" font-size="13" fill="#6b7280">有日程库 →</text>
         <text x="42" y="24" text-anchor="start" font-size="13" fill="#6b7280">← 无日程库</text>
-        <text x="366" y="452" text-anchor="middle" font-size="12" fill="#9ca3af">原点：无日程库 × 时刻视角</text>
+        <text x="366" y="452" text-anchor="middle" font-size="12" fill="var(--muted)">原点：无日程库 × 时刻视角</text>
         <text x="664" y="58" text-anchor="end" font-size="13" fill="#6b7280">容量视角（排不排得下）↑</text>
         <text x="664" y="452" text-anchor="end" font-size="13" fill="#6b7280">↓ 时刻视角（几点、撞没撞）</text>
         <!-- 象限标注 -->
         <text x="520" y="66" text-anchor="middle" font-size="13" font-weight="700" fill="#3730a3">日程治理（本项目所在）</text>
-        <text x="180" y="66" text-anchor="middle" font-size="12" fill="#9ca3af">暂无产品占据</text>
+        <text x="180" y="66" text-anchor="middle" font-size="12" fill="var(--muted)">暂无产品占据</text>
         <text x="180" y="416" text-anchor="middle" font-size="13" font-weight="700" fill="#0f766e">提醒生成</text>
         <text x="520" y="416" text-anchor="middle" font-size="13" font-weight="700" fill="#f59e0b">任务清单</text>
         <!-- 点 -->

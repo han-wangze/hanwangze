@@ -46,7 +46,7 @@
   .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted);flex-wrap:wrap}
   .navlinks a:hover{color:var(--primary)}
   .navlinks a.on{color:var(--primary);font-weight:600}
-  @media(max-width:760px){nav .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 20px;gap:2px 0}.navlinks{display:flex;flex-wrap:wrap;font-size:13px;gap:14px;padding-bottom:4px}}
+  @media(max-width:760px){nav .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 20px;gap:2px 0}.navlinks{display:flex;flex-wrap:wrap;font-size:13px;gap:14px;padding-bottom:4px}.navlinks a{padding:8px 2px;min-height:44px;display:inline-flex;align-items:center}}
   header.hero{padding:72px 0 56px;background:
     radial-gradient(1200px 400px at 80% -10%,rgba(55,48,163,.12),transparent),
     radial-gradient(900px 360px at 0% 0%,rgba(15,118,110,.10),transparent);}
@@ -55,7 +55,7 @@
   .hero p.sub{margin-top:16px;font-size:18px;color:var(--muted);max-width:660px}
   .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
   .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
-    padding:8px 14px;font-size:13px;box-shadow:var(--shadow);display:flex;gap:8px;align-items:center}
+    padding:8px 14px;font-size:13px;display:flex;gap:8px;align-items:center}
   .badge b{color:var(--signal)}
   .cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
   .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:600;font-size:15px;transition:.15s}
@@ -74,12 +74,12 @@
   @media(max-width:720px){.grid3,.grid2{grid-template-columns:1fr}}
   .stat .n{font-size:34px;font-weight:800;color:var(--signal);line-height:1}
   .stat .l{margin-top:8px;font-size:14px;color:var(--muted)}
-  .stat .d{margin-top:6px;font-size:12px;color:#9ca3af}
+  .stat .d{margin-top:6px;font-size:12px;color:var(--muted)}
   .arch{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);overflow-x:auto}
   .arch svg{width:100%;height:auto;min-width:640px}
   .flow-step{fill:#eef2ff;stroke:var(--primary);stroke-width:1.5}
   .flow-step.t{fill:#ecfeff;stroke:var(--accent)}
-  .flow-arrow{stroke:#94a3b8;stroke-width:2;fill:none}
+  .flow-arrow{stroke:var(--muted);stroke-width:2;fill:none}
   .flow-label{font-size:13px;fill:var(--ink);font-weight:600}
   .flow-sub{font-size:11px;fill:var(--muted)}
   .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
@@ -104,7 +104,7 @@
   .log li{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--primary);
     border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
   .log li b{color:var(--primary)}
-  .log li .meta{font-size:12px;color:#9ca3af;margin-top:4px}
+  .log li .meta{font-size:12px;color:var(--muted);margin-top:4px}
   .tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
     border-radius:14px;overflow:hidden;box-shadow:var(--shadow);font-size:14px}
   .tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
@@ -122,7 +122,7 @@
   .backrow a{color:var(--primary)}
   footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
   code{background:#f1f5f9;padding:2px 6px;border-radius:5px;font-size:.9em}
-  h1,h2,.paper .pt,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif;font-weight:700;letter-spacing:0}
+  h1,h2,.paper .pt,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif}
 </style>
 </head>
 <body>
@@ -308,7 +308,7 @@
         <svg viewBox="0 0 720 280" role="img" aria-label="prompt 迭代曲线">
           <line x1="50" y1="20" x2="50" y2="230" stroke="#cbd5e1" stroke-width="1.5"/>
           <line x1="50" y1="230" x2="690" y2="230" stroke="#cbd5e1" stroke-width="1.5"/>
-          <g font-size="11" fill="#94a3b8" text-anchor="end">
+          <g font-size="11" fill="var(--muted)" text-anchor="end">
             <line x1="50" y1="230" x2="690" y2="230" stroke="#eef2f7"/>
             <text x="44" y="234">60</text>
             <line x1="50" y1="177.5" x2="690" y2="177.5" stroke="#eef2f7"/>
@@ -329,7 +329,7 @@
             <text x="380" y="110">70.0%</text>
             <text x="620" y="57">75.0%</text>
           </g>
-          <g font-size="12" fill="#94a3b8" text-anchor="middle">
+          <g font-size="12" fill="var(--muted)" text-anchor="middle">
             <text x="140" y="250">v1 基线</text>
             <text x="380" y="250">v1.1</text>
             <text x="620" y="250">v1.2 ✅</text>
