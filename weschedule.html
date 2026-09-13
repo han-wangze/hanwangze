@@ -95,6 +95,11 @@
   .video-box iframe{width:100%;height:100%;border:0}
   .video-tip{margin-top:12px;font-size:13px;color:var(--muted);text-align:center}
   .video-tip a{color:var(--primary);font-weight:700}
+  .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+  .shot{margin:0;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+  .shot img{width:100%;height:auto;display:block}
+  .shot figcaption{padding:10px 12px;font-size:13px;color:var(--muted);text-align:center}
+  @media(max-width:720px){.shots{gap:8px}.shot figcaption{font-size:12px;padding:8px 6px}}
   .links{display:flex;flex-wrap:wrap;gap:12px}
   .link{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);
     border-radius:12px;padding:14px 18px;font-weight:600;box-shadow:var(--shadow);transition:.15s}
@@ -379,6 +384,21 @@
           title="WeSchedule Demo · 实机演示"></iframe>
       </div>
       <p class="video-tip">手机端或浏览器限制第三方嵌入时，可<a href="https://www.bilibili.com/video/BV1VDYR6YE6m/" target="_blank" rel="noopener">前往 B站观看 →</a></p>
+
+      <div class="shots">
+        <figure class="shot">
+          <img src="img/shot-1.png" alt="首页：打开小程序读取剪贴板并触发解析" loading="lazy" decoding="async" width="645" height="1438">
+          <figcaption>首页 · 读剪贴板触发解析</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="img/shot-2.png" alt="解析结果确认页：确认并编辑日程的日期与时间" loading="lazy" decoding="async" width="643" height="1435">
+          <figcaption>解析确认 · 可编辑日期时间</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="img/shot-3.png" alt="日程列表页：已保存的日程" loading="lazy" decoding="async" width="640" height="1435">
+          <figcaption>日程列表 · 已保存日程</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
