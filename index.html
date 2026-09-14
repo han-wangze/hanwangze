@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>韩王泽 · 个人主页</title>
-<meta name="description" content="韩王泽的个人主页：游戏与互联网 · 商业分析 / 数据分析方向，有战略分析实习与独立产品实践。" />
+<meta name="description" content="韩王泽的个人主页：游戏行业战略分析实习 · AI 产品实践 · 商业分析 / 数据分析方向。" />
 <meta name="author" content="韩王泽" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
 <meta property="og:locale" content="zh_CN" />
 <meta property="og:title" content="韩王泽 · 个人主页" />
-<meta property="og:description" content="游戏与互联网 · 商业分析 / 数据分析方向，有战略分析实习与独立产品实践。" />
+<meta property="og:description" content="游戏行业战略分析实习 · AI 产品实践 · 商业分析 / 数据分析方向。" />
 <meta property="og:url" content="https://han-wangze.github.io/hanwangze/" />
 <meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <meta property="og:image:width" content="1200" />
@@ -23,7 +23,7 @@
 <meta property="og:image:alt" content="韩王泽个人主页：教育经历、实习经历与项目作品" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="韩王泽 · 个人主页" />
-<meta name="twitter:description" content="游戏与互联网 · 商业分析 / 数据分析方向，有战略分析实习与独立产品实践。" />
+<meta name="twitter:description" content="游戏行业战略分析实习 · AI 产品实践 · 商业分析 / 数据分析方向。" />
 <meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <style>
   :root{
@@ -56,6 +56,10 @@
   .hero p.sub b{color:var(--primary)}
   .hero .edu{margin-top:16px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--muted)}
   .hero .edu span b{color:var(--ink)}
+  .hero .edu .courses{font-size:12.5px;color:var(--muted)}
+  .tagline{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .tagline .t{display:inline-flex;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;color:var(--ink)}
+  .tagline .t b{color:var(--primary);font-weight:700}
   .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
   .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
     padding:8px 14px;font-size:13px;display:flex;gap:8px;align-items:center}
@@ -153,6 +157,14 @@
   .mrow .mt{font-weight:700;font-size:15px}
   .mrow .md{font-size:13.5px;color:var(--muted);margin-top:4px}
   .mrow .md b{color:var(--ink)}
+  .mgroup{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+  .mgroup:last-child{margin-bottom:0}
+  .mgroup summary{list-style:none;cursor:pointer;padding:16px 20px;display:flex;align-items:center;gap:12px;font-weight:800;font-size:15.5px;user-select:none}
+  .mgroup summary::-webkit-details-marker{display:none}
+  .mgroup summary .cnt{font-size:12px;font-weight:500;color:var(--muted);flex:1;text-align:right}
+  .mgroup summary .plus{margin-left:auto;width:9px;height:9px;border-right:2px solid var(--primary);border-bottom:2px solid var(--primary);transform:rotate(45deg);transition:.18s;flex-shrink:0}
+  .mgroup[open] summary .plus{transform:rotate(225deg)}
+  .mgroup .mrow{border-top:1px solid var(--line)}
   footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
   h1,h2,.paper .pt,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif}
 </style>
@@ -175,10 +187,17 @@
   <div class="wrap">
     <div class="eyebrow">Han Wangze · Personal Homepage</div>
     <h1>韩王泽</h1>
-    <p class="sub">游戏与互联网 · 商业分析 / 数据分析方向，有战略分析实习与独立产品实践。</p>
+    <div class="tagline">
+      <span class="t"><b>游戏行业战略分析实习</b></span>
+      <span class="t"><b>AI 产品实践</b></span>
+      <span class="t">商业分析</span>
+      <span class="t">数据分析</span>
+      <span class="t">Python</span>
+    </div>
     <div class="edu">
       <span><b>香港中文大学（深圳）</b> · 信息管理与商业分析 · 全日制硕士在读 · 2026.09 入学</span>
       <span><b>西安交通大学</b> · 经济与金融学院 · 贸易经济 · 全日制本科 · 2022.09 – 2026.06</span>
+      <span class="courses">核心课程：统计学 · 计量经济学 · Python 数据处理 ／ 经济博弈论 · 数字经济与拍卖 · 价格学 ／ 市场调查与预测 · 数字化营销</span>
     </div>
     <div class="cta">
       <a class="btn primary" href="experience-cyou.html">实习经历</a>
@@ -198,7 +217,7 @@
         <a class="box" href="experience-cyou.html">
           <div class="when">2025.11 – 2026.02</div>
           <div class="what">搜狐畅游 · 战略分析实习生</div>
-          <div class="desc">负责中美日韩及微信小游戏市场的新品扫描与监测，主导概念测试与立项预评估；独立完成 4 份专题研究报告，建立并逐月执行 1 套小游戏畅销榜监测机制，用 Python 把重复的分析工作沉淀成 10 个可复用模块。</div>
+          <div class="desc">负责中美日韩及微信小游戏市场的<b>新品扫描与监测</b>，主导<b>概念测试与立项预评估</b>；独立完成 <b>4 份专题研究报告</b>与 <b>1 份小游戏畅销榜产品分析</b>，用 Python 把重复的分析工作沉淀成 <b>10 个可复用模块</b>。</div>
           <div class="go">查看实习详情与材料 →</div>
         </a>
       </div>
@@ -266,9 +285,9 @@
         </a>
         <a class="rcard" href="research.html#case">
           <div class="rk">案例与文献</div>
-          <div class="rt">空间计算起源与发展</div>
-          <div class="tags"><span class="tag">文献计量</span><span class="tag">Web of Science</span><span class="tag">40+ 文献</span></div>
-          <div class="rd">梳理概念边界、关键技术层与演化阶段。</div>
+          <div class="rt">广告分析：旺旺魔性广告 &amp; 「五个女博士」争议</div>
+          <div class="tags"><span class="tag">消费者心理</span><span class="tag">品牌传播</span><span class="tag">争议广告框架</span></div>
+          <div class="rd">拆解「魔性」与「贩卖焦虑」背后的消费者心理与品牌影响。</div>
           <div class="rf">看这一类 →</div>
         </a>
       </div>
@@ -288,41 +307,54 @@
       <h2>其他经历</h2>
     </div>
     <div class="more">
-      <div class="mrow">
-        <div class="mw">2024.07 – 2025.05</div>
-        <div>
-          <div class="mt">西安交通大学团委 · 优思新媒体中心 · 轮值责编</div>
-          <div class="md">负责选题策划与图文制作，产出 3 篇原创推送，其中单篇阅读量 5 万+；轮值期间统筹排期与审稿。</div>
+      <details class="mgroup">
+        <summary>学生工作<span class="cnt">优思新媒体 · 青少年发展中心 · 团工委 · 勤工助学</span><span class="plus"></span></summary>
+        <div class="mrow">
+          <div class="mw">2023.07 – 2024.07</div>
+          <div>
+            <div class="mt">团委 · 优思新媒体中心 · 平台运营部 / 内容生产部 干事</div>
+            <div class="md">担任「西安交通大学团委」公众号值班编辑，负责推送制作、转载、排期与审核；策划 3 篇原创推文，参与文案与排版，累计阅读量 5 万+。</div>
+          </div>
         </div>
-      </div>
-      <div class="mrow">
-        <div class="mw">2023.07 – 2024.07</div>
-        <div>
-          <div class="mt">西安交通大学团委 · 青少年发展中心 · 部门负责人</div>
-          <div class="md">负责部门活动的策划与执行，协调志愿者分工与对外联络。</div>
+        <div class="mrow">
+          <div class="mw">2023.07 – 2025.05</div>
+          <div>
+            <div class="mt">团委 · 青少年发展中心 · 教研部 干事 → 部门负责人</div>
+            <div class="md">负责「每日新闻」栏目运营（排班、审核、修改）；策划社会治理训练营「情景模拟」板块；参与「交大吉尼斯」宣传与海峡两岸交流活动会务保障。</div>
+          </div>
         </div>
-      </div>
-      <div class="mrow">
-        <div class="mw">社会实践</div>
-        <div>
-          <div class="mt">碑林区文艺路街道办 · 平安法治办公室</div>
-          <div class="md">参与基层信访与法治宣传工作：协助处理信访件 2 件，独立撰写 5000 余字调研报告；获「返家乡」社会实践<b>优秀个人</b>。</div>
+        <div class="mrow">
+          <div class="mw">2022.09 – 2023.07</div>
+          <div>
+            <div class="mt">彭康书院团工委 · 团组织建设指导中心 干事</div>
+            <div class="md">承担基础团务：团组织星级评定、团费收缴、团组织关系相关工作。</div>
+          </div>
         </div>
-      </div>
-      <div class="mrow">
-        <div class="mw">勤工助学</div>
-        <div>
-          <div class="mt">西安交通大学勤工助学办公室 · 家教部</div>
-          <div class="md">负责学生兼职信息登记与派单对接，处理学生与家长之间的沟通协调。</div>
+        <div class="mrow">
+          <div class="mw">2022.09 – 2023.10</div>
+          <div>
+            <div class="mt">勤工助学办公室 · 家教部 干事</div>
+            <div class="md">参与岗位审核、工资发布与二级单位工资上报对接；处理家教事务，接待同学、老师、家长并处理纠纷；保障「温暖校工」义务家教活动。</div>
+          </div>
         </div>
-      </div>
-      <div class="mrow">
-        <div class="mw">志愿服务</div>
-        <div>
-          <div class="mt">英仔爱心社 · 彭康书院团工委</div>
-          <div class="md">累计志愿服务 <b>200 小时以上</b>；参与书院基层团务工作。</div>
+      </details>
+      <details class="mgroup">
+        <summary>社会实践与志愿服务<span class="cnt">街道办 · 英仔爱心社</span><span class="plus"></span></summary>
+        <div class="mrow">
+          <div class="mw">2024.07 – 2024.08</div>
+          <div>
+            <div class="mt">碑林区文艺路街道办 · 平安法治办公室</div>
+            <div class="md">协助处理信访件 2 件，撰写 5000 余字总结报告；整理归档文件 50 余份、台账 2 份，获评碑林区「返家乡」社会实践优秀个人。</div>
+          </div>
         </div>
-      </div>
+        <div class="mrow">
+          <div class="mw">2022.09 – 2023.07</div>
+          <div>
+            <div class="mt">英仔爱心社 · 常务部 / 「向日葵」项目部 干事</div>
+            <div class="md">承办社团大会（流程策划、邀请函设计、会务保障）；参与敬老志愿服务与寒暑假社会实践，累计工时 200h+。</div>
+          </div>
+        </div>
+      </details>
     </div>
   </div>
 </section>
