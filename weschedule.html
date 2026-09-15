@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>WeSchedule · 韩王泽</title>
-<meta name="description" content="WeSchedule：微信小程序 MVP，把微信群聊消息一键变成手机日程，含非阻断式冲突检测与预备提醒。87 人调研、87.4% 接受度，端到端解析准确率 75%。" />
+<meta name="description" content="WeSchedule：微信小程序 MVP，把微信群聊消息一键变成手机日程，含冲突检测与预备提醒。87 人调研、87.4% 接受度，端到端解析准确率 75%。" />
 <meta name="author" content="韩王泽" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
 <meta property="og:locale" content="zh_CN" />
 <meta property="og:title" content="WeSchedule · 把群聊消息变成日程的微信小程序" />
-<meta property="og:description" content="复制群消息即可解析为日程，含非阻断式冲突检测与预备提醒。87 人调研、87.4% 接受度，端到端解析准确率 75%，附实操 Demo 视频。" />
+<meta property="og:description" content="复制群消息即可解析为日程，含冲突检测与预备提醒。87 人调研、87.4% 接受度，端到端解析准确率 75%，附实操 Demo 视频。" />
 <meta property="og:url" content="https://han-wangze.github.io/hanwangze/weschedule.html" />
 <meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <meta property="og:image:width" content="1200" />
@@ -23,7 +23,7 @@
 <meta property="og:image:alt" content="WeSchedule 项目详情 · 韩王泽" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="WeSchedule · 把群聊消息变成日程的微信小程序" />
-<meta name="twitter:description" content="复制群消息即可解析为日程，含非阻断式冲突检测与预备提醒。87 人调研、87.4% 接受度，端到端解析准确率 75%。" />
+<meta name="twitter:description" content="复制群消息即可解析为日程，含冲突检测与预备提醒。87 人调研、87.4% 接受度，端到端解析准确率 75%。" />
 <meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <style>
   :root{
@@ -80,8 +80,7 @@
   .sec-head p{color:var(--muted);margin-top:8px;max-width:680px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
   .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-  @media(max-width:720px){.grid3,.grid2{grid-template-columns:1fr}}
+  @media(max-width:720px){.grid3{grid-template-columns:1fr}}
   .stat .n{font-size:34px;font-weight:800;color:var(--signal);line-height:1}
   .stat .l{margin-top:8px;font-size:14px;color:var(--muted)}
   .stat .d{margin-top:6px;font-size:12px;color:var(--muted)}
@@ -120,12 +119,6 @@
     border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
   .log li b{color:var(--primary)}
   .log li .meta{font-size:12px;color:var(--muted);margin-top:4px}
-  .tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
-    border-radius:14px;overflow:hidden;box-shadow:var(--shadow);font-size:14px}
-  .tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-  .tbl th{background:#f8fafc;font-size:13px;color:var(--muted);font-weight:700}
-  .tbl tr:last-child td{border-bottom:0}
-  @media(max-width:640px){.tbl{font-size:13px}.tbl th,.tbl td{padding:10px}}
   .tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:12px;font-weight:700}
   .tag.hard{background:#fee2e2;color:#b91c1c}
   .tag.soft{background:#fef3c7;color:#b45309}
@@ -133,6 +126,24 @@
   .feat p{font-size:14px;color:var(--muted)}
   .feat ul{margin:8px 0 0 18px;font-size:14px;color:var(--muted)}
   .feat li{margin-bottom:4px}
+  .dec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);margin-bottom:16px}
+  .dec:last-child{margin-bottom:0}
+  .dec-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .dec-n{font-size:12px;font-weight:800;color:var(--primary);background:#eef2ff;border-radius:6px;padding:3px 8px;letter-spacing:.5px}
+  .dec-top h3{font-size:17px;font-weight:800}
+  .dec-src{margin-top:8px;font-size:13px;color:var(--muted)}
+  .dec-src b{color:var(--signal)}
+  .dec .lead{margin-top:10px;font-size:14.5px}
+  .dec-body{margin-top:14px;background:#f8fafc;border-left:3px solid var(--primary);border-radius:0 10px 10px 0;padding:14px 16px}
+  .dec-body .m{font-size:12px;font-weight:800;color:var(--primary);letter-spacing:.5px;margin:12px 0 6px}
+  .dec-body .m:first-child{margin-top:0}
+  .dec-body ul{margin:0 0 0 18px;font-size:14px;color:var(--muted)}
+  .dec-body li{margin-bottom:5px}
+  .dec-body p{font-size:14px;color:var(--muted)}
+  .dec-body p+p{margin-top:8px}
+  .why-foot{margin-top:20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .why-foot .btn.ghost{color:var(--primary);border-color:#c7d2fe}
+  .why-foot .btn.ghost:hover{background:#eef2ff;border-color:var(--primary)}
   .backrow{padding:14px 0 0;font-size:14px;font-weight:600}
   .backrow a{color:var(--primary)}
   footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
@@ -199,7 +210,7 @@
       <div class="sec-head">
         <div class="k">Why · 痛点与市场</div>
         <h2>群消息太多，日程总漏</h2>
-        <p>面向 87 名西交大学生的调研显示：信息过载导致遗漏是最高频痛点，手动录入繁琐、易遗漏。一款"复制即转日程"的工具接受度高达 87.4%。<a href="report.html">查看完整调研报告 →</a></p>
+        <p>调研对象为 87 名西交大学生，问卷覆盖痛点、现有工具的使用情况与概念接受度。</p>
       </div>
       <div class="grid3">
         <div class="card stat">
@@ -218,7 +229,9 @@
           <div class="d">市场验证</div>
         </div>
       </div>
-      <p class="l" style="margin-top:14px;color:var(--muted);font-size:13px">注：微信不支持"转发进小程序"，所以链路是"复制 → 打开小程序 → 读取剪贴板"。</p>
+      <div class="why-foot">
+        <a class="btn ghost" href="report.html">查看调研报告提要 →</a>
+      </div>
     </div>
   </section>
 
@@ -227,7 +240,7 @@
       <div class="sec-head">
         <div class="k">How · 方案架构</div>
         <h2>一条自动化的解析链路</h2>
-        <p>小程序端捕获剪贴板，云函数调用 DeepSeek 完成结构化解析，落库后通过微信订阅消息实现到点提醒。</p>
+        <p>微信不支持把消息直接转发进小程序，入口只能是"复制 → 打开小程序 → 读取剪贴板"；云函数调用 DeepSeek 完成结构化解析，落库后通过微信订阅消息实现到点提醒。</p>
       </div>
       <div class="arch">
         <svg viewBox="0 0 920 250" role="img" aria-label="WeSchedule 架构流程图">
@@ -259,7 +272,6 @@
       </div>
       <p class="l" style="margin-top:14px;color:var(--muted);font-size:13px">
         技术栈：微信小程序（WXML/WXSS/JS）· 微信云开发（云函数 + 云数据库）· DeepSeek <code>deepseek-chat</code>（temperature=0，JSON 模式）· 微信订阅消息。
-        个人主体小程序，类目"工具-效率"；系统日历写入受平台限制，采用"小程序内日程 + 订阅消息提醒"方案。
       </p>
     </div>
   </section>
@@ -269,59 +281,45 @@
       <div class="sec-head">
         <div class="k">Smart · 冲突检测与提醒策略</div>
         <h2>把调研数据翻译成设计决策</h2>
-        <p>调研里三个数字直接约束了这个功能该长什么样：冲突检测是用户第一需求（70.1%），而"提醒打扰"是顾虑榜 5 分占比最高的一项（48.89%），"识别不准"又是顾虑均值第一（4.08）。所以功能不能只"检测出来"，得同时回应这三条约束。</p>
       </div>
 
-      <table class="tbl">
-        <thead><tr><th style="width:40%">调研数据（约束）</th><th>由此推导的设计决策</th></tr></thead>
-        <tbody>
-          <tr>
-            <td>冲突检测需求 <b>70.1%</b>，智能功能中排名第一</td>
-            <td>保存前自动检测时间重叠并提示，列表页同步标注 ⚠ 角标</td>
-          </tr>
-          <tr>
-            <td>"提醒打扰"顾虑均值 3.96，<b>48.89%</b> 打满分（最突出）</td>
-            <td><b>非阻断式内联警示</b>：不弹窗、不打断保存流程，用户可忽略并直接保存（成年人的日历本就允许重叠）</td>
-          </tr>
-          <tr>
-            <td>"识别不准"顾虑均值 <b>4.08</b>（第一）</td>
-            <td>凡是 AI 可能出错的环节改用<b>规则</b>：分级只依赖可靠字段 <code>is_deadline</code>，备选时段用规则法扫描而非 LLM</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="grid2" style="margin-top:18px">
-        <div class="card feat">
-          <h3>冲突分级：不是所有重叠都同等对待</h3>
+      <article class="dec">
+        <div class="dec-top"><span class="dec-n">01</span><h3>保存前检测冲突，并区分"占用时段"和"只有截止时间"</h3></div>
+        <div class="dec-src">调研依据 · 冲突检测以 <b>70.1%</b> 排在智能功能偏好第一</div>
+        <p class="lead">保存前自动检测时间重叠，在保存页标出，列表页同步给 ⚠ 角标。</p>
+        <div class="dec-body">
+          <div class="m">怎么分级</div>
           <ul>
-            <li><span class="tag hard">硬冲突</span> 两个<b>定点事项</b>重叠（会议 vs 会议）→ 强提示 + 给备选时段</li>
-            <li><span class="tag soft">软冲突</span> 定点事项 vs <b>DDL</b> → 仅弱提示，不给改期建议</li>
+            <li><span class="tag hard">硬冲突</span> 两个定点事项重叠（会议撞会议）→ 强提示，并给出备选时段</li>
+            <li><span class="tag soft">软冲突</span> 定点事项撞 DDL → 只弱提示，不给改期建议。作业截止本身不占时段，要回答的是"截止前你有没有空干活"</li>
           </ul>
-          <p style="margin-top:10px">作业截止本身不占用时段，它的性质是 deadline：要回答的问题是"截止前你有没有空干活"。</p>
-          <p style="margin-top:8px"><b>关键点</b>：分级只用 <code>is_deadline</code> 这一个已很可靠的字段，<b>不引入新的 AI 输出类型</b>，从而避免了"类型判错 → 冲突等级被错误放大"的连锁风险。</p>
+          <p>分级只看 <code>is_deadline</code> 这一个已经稳定的字段，不新增 AI 判断，避免"类型判错 → 冲突等级被放大"。</p>
+          <div class="m">验收口径</div>
+          <p>分级走规则实现，准确率接近 100%（已知边界：语义级冲突如"午饭撞午饭"不识别）。</p>
         </div>
+      </article>
 
-        <div class="card feat">
-          <h3>建议时段：AI 提案，人裁决</h3>
-          <p>对硬冲突给出 1–2 个<b>一键采纳</b>的备选时段（chip 按钮："改为周三 16:00？"点一下即改）。</p>
-          <ul>
-            <li>默认<b>不动</b>用户的安排，用户主动采纳才生效</li>
-            <li>按事件时长在当天/次日 8:00–22:00 扫描日历空隙：零成本、零延迟，也不会出现模型幻觉</li>
-          </ul>
-          
+      <article class="dec">
+        <div class="dec-top"><span class="dec-n">02</span><h3>只给建议，不替用户改日程</h3></div>
+        <div class="dec-src">调研依据 · "识别不准"顾虑均值 <b>4.08</b> 排第一 → 该由人拍板的事不交给模型</div>
+        <p class="lead">硬冲突给 1–2 个可一键采纳的备选时段（"改为周三 16:00？"点一下即改），默认不动用户原来的安排。</p>
+        <div class="dec-body">
+          <div class="m">备选时段怎么来</div>
+          <p>按事件时长在当天/次日 8:00–22:00 扫描日历空隙，用规则算而不是让模型提案：零延迟，也不会出现幻觉。</p>
         </div>
-      </div>
+      </article>
 
-      <div class="card feat" style="margin-top:16px">
-        <h3>预备提醒 · 以及一个绕不开的平台约束</h3>
-        <p>含"材料 / PPT / 报告 / 准备 / 汇报"等关键词的日程，提醒会提前到<b>前一晚 20:00</b> 发出并改写文案（"请准备 · 明天 14:00 组会"），呼应调研中"忘记提前准备"这一高频痛点。</p>
-        <p style="margin-top:10px"><b>平台约束</b>：微信小程序的订阅消息是<b>"一次授权一次推送"</b>，推送次数受授权次数约束。预备提醒因此<b>复用</b>该事件唯一的一次授权，把它移到预备窗口发出，授权请求数不增加。</p>
-        <p style="margin-top:10px">验收指标：单事件平均授权请求次数 ≤ 1.5；冲突检测因用规则实现，准确率接近 100%（已知边界：语义级冲突如"午饭撞午饭"不识别）。</p>
-      </div>
-
-      <p class="l" style="margin-top:14px;color:var(--muted);font-size:13px">
-        实现位置：<code>miniprogram/utils/conflict.js</code>（<code>detectConflicts</code> / <code>findFreeSlots</code>，纯前端零 AI 依赖）· <code>saveEvent</code> 计算 <code>is_prep</code> · <code>remind</code> 云函数按预备窗口调度。
-      </p>
+      <article class="dec">
+        <div class="dec-top"><span class="dec-n">03</span><h3>不打断用户，但需要提前准备的日程提前一晚提醒</h3></div>
+        <div class="dec-src">调研依据 · "提醒打扰"顾虑均值 3.96、<b>48.89%</b> 打满分，是顾虑榜里最突出的一项</div>
+        <p class="lead">冲突提示只出现在保存页里，不弹窗、不拦着保存，用户看一眼可以照存。</p>
+        <div class="dec-body">
+          <div class="m">提前一晚</div>
+          <p>含"材料 / PPT / 报告 / 准备 / 汇报"等关键词的日程，提醒提前到前一晚 20:00 并改写文案（"请准备 · 明天 14:00 组会"）。"忘记提前准备"是调研里的高频痛点。</p>
+          <div class="m">平台约束</div>
+          <p>微信订阅消息是"一次授权一次推送"。预备提醒不再申请额外授权，而是复用该事件唯一的那一次，把它挪到预备窗口发出；验收口径：单事件平均授权请求次数 ≤ 1.5。</p>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -441,7 +439,7 @@
       <div class="links">
         <a class="link" href="https://github.com/han-wangze/weschedule" target="_blank" rel="noopener"><span class="em">💻</span> WeSchedule 源码 · GitHub</a>
         <a class="link" href="https://www.bilibili.com/video/BV1VDYR6YE6m/" target="_blank" rel="noopener"><span class="em">🎬</span> Demo 视频 · B站</a>
-        <a class="link" href="report.html" target="_blank" rel="noopener"><span class="em">📊</span> 市场调研报告（网页版）</a>
+        <a class="link" href="report.html" target="_blank" rel="noopener"><span class="em">📊</span> 调研报告提要（网页版）</a>
         <a class="link" href="competition.html"><span class="em">⚔️</span> 竞争格局与定位</a>
         <a class="link" href="weschedule-eval.html"><span class="em">🧪</span> 解析质量评测报告（含 badcase 明细）</a>
         <a class="link" href="weschedule-eval.html#privacy"><span class="em">🔒</span> 数据与隐私说明</a>
@@ -454,7 +452,7 @@
       <div class="sec-head">
         <div class="k">Dev Log · AI 协作开发</div>
         <h2>卡住过的地方，和怎么定位的</h2>
-        <p>功能是和 AI 一起做的，但"哪里错了、该改哪一层"得自己判断。下面几条是卡住过的地方。</p>
+        <p>功能与 AI 协作完成，"哪里错了、该改哪一层"是自己判断的。</p>
       </div>
       <ul class="log">
         <li><b>两处静默失败</b>：新建日程写入时少了 <code>reminded</code> 字段，提醒扫描把它当成"已提醒"跳过，日程建好了却永远不进队列；<code>location</code> 为空的日程仍在列表里渲染 null。<span class="meta">改法：写入时显式 <code>reminded: false</code>；空值不渲染</span></li>
