@@ -46,6 +46,16 @@
   .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted)}
   .navlinks a:hover{color:var(--primary)}
   .navlinks a.on{color:var(--primary);font-weight:600}
+  .navdrop{position:relative;display:flex}
+  .navdrop>a{display:inline-flex;align-items:center;gap:6px}
+  .navdrop .caret{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid currentColor;opacity:.55;margin-top:2px}
+  .navdrop .menu{position:absolute;top:100%;left:0;min-width:180px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:6px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .15s,transform .15s,visibility .15s;z-index:70}
+  .navdrop:hover .menu{opacity:1;visibility:visible;transform:translateY(0)}
+  .navdrop .menu a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border-radius:8px;font-size:13.5px;color:var(--ink);white-space:nowrap}
+  .navdrop .menu a:hover{background:#eef2ff;color:var(--primary)}
+  .navdrop .menu a.on{background:#eef2ff;color:var(--primary);font-weight:600}
+  .navdrop .menu .tag{font-size:12px;color:var(--muted)}
+  @media(max-width:760px){.navdrop .menu{display:none}}
   @media(max-width:760px){nav .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 20px;gap:2px 0}.navlinks{display:flex;flex-wrap:wrap;font-size:13px;gap:14px;padding-bottom:4px}.navlinks a{padding:8px 2px;min-height:44px;display:inline-flex;align-items:center}}
   header.hero{padding:64px 0 48px;background:
     radial-gradient(1200px 400px at 80% -10%,rgba(55,48,163,.10),transparent),
@@ -54,9 +64,18 @@
   .hero h1{font-size:40px;line-height:1.15;font-weight:800;letter-spacing:-.5px;margin-top:8px}
   .hero p.sub{margin-top:16px;font-size:16px;color:var(--ink);max-width:720px}
   .hero p.sub b{color:var(--primary)}
-  .hero .edu{margin-top:16px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--muted)}
-  .hero .edu span b{color:var(--ink)}
-  .hero .edu .courses{font-size:12.5px;color:var(--muted)}
+  .hero .edu{margin-top:18px;display:flex;flex-direction:column;gap:12px;font-size:14px;color:var(--muted)}
+  .hero .edu .edu-item{display:flex;flex-direction:column;gap:4px}
+  .hero .edu .school{font-weight:700;color:var(--ink);margin-right:8px}
+  .hero .edu .major{color:var(--ink);margin-right:8px}
+  .hero .edu .meta{color:var(--muted);font-size:13px}
+  .hero .edu .courses{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-left:16px;font-size:12.5px}
+  .hero .edu .courses .lbl{font-weight:700;color:var(--ink);margin-right:2px}
+  .hero .edu .courses .chip{font-size:12px;background:#eef2ff;color:var(--primary);border:1px solid #e0e7ff;border-radius:8px;padding:4px 10px;font-weight:500}
+  .hero .edu .courses .sep{width:1px;height:14px;background:var(--line);margin:0 8px;flex-shrink:0}
+  .hero .contact{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:12px;font-size:13.5px}
+  .hero .contact a{display:inline-flex;align-items:center;gap:7px;color:var(--muted);transition:.15s}
+  .hero .contact a:hover{color:var(--primary)}
   .tagline{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
   .tagline .t{display:inline-flex;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;color:var(--ink)}
   .tagline .t b{color:var(--primary);font-weight:700}
@@ -77,20 +96,16 @@
   .sec-head h2{font-size:24px;font-weight:800;margin-top:6px;letter-spacing:-.3px}
   .sec-head p{color:var(--muted);margin-top:8px;max-width:720px;font-size:14.5px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
-  /* 时间线 */
-  .tl{position:relative;padding-left:26px}
-  .tl:before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--primary),var(--accent),transparent)}
-  .tli{position:relative;margin-bottom:22px}
-  .tli:before{content:"";position:absolute;left:-26px;top:9px;width:12px;height:12px;border-radius:50%;
-    background:var(--card);border:2.5px solid var(--primary)}
-  .tli.hi:before{background:var(--primary)}
-  .tli.hi .what{color:var(--primary)}
-  .tli .box{display:block}
-    .tli .when{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.3px}
-  .tli .what{font-weight:800;font-size:15.5px;margin-top:3px}
-  .tli .desc{font-size:14px;color:var(--muted);margin-top:5px}
-  .tli a.box:hover .what{color:var(--primary)}
-  .tli .go{font-size:13px;font-weight:700;color:var(--primary);margin-top:7px;display:inline-block}
+  /* 实习经历卡 */
+  .exp{display:flex;flex-direction:column;gap:16px}
+  .ecard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;gap:6px;transition:.15s}
+  .ecard:hover{border-color:var(--primary);transform:translateY(-2px)}
+  .ecard .ewhen{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.3px}
+  .ecard .ewhat{font-weight:800;font-size:17px}
+  .ecard .edesc{font-size:14px;color:var(--muted);margin-top:2px}
+  .ecard .edesc b{color:var(--ink)}
+  .ecard .ego{font-size:13px;font-weight:700;color:var(--primary);margin-top:6px}
   /* 项目卡 */
   .projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
   .pcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow);
@@ -105,8 +120,11 @@
   .proj-block{margin-bottom:30px}
   .proj-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
   .proj-head h3{font-size:19px;font-weight:800}
+  .proj-item h4{font-size:16px;font-weight:800;margin:0 0 6px}
+  .rcards.single{grid-template-columns:1fr}
   .proj-tag{font-size:12px;font-weight:700;color:var(--primary);background:#eef2ff;padding:3px 10px;border-radius:6px}
-  .proj-desc{font-size:14px;color:var(--muted);max-width:720px;margin-bottom:14px}
+  .proj-desc{font-size:14px;color:var(--muted);max-width:720px;margin-bottom:14px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+  .kc{display:inline-flex;align-items:center;font-size:12px;background:#eef2ff;color:var(--primary);border:1px solid #e0e7ff;border-radius:8px;padding:4px 10px;font-weight:500}
   .proj-stages{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
   @media(max-width:720px){.proj-stages{grid-template-columns:1fr}}
   .stage{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px;transition:.15s}
@@ -135,7 +153,7 @@
   .sitemap a:hover{color:var(--primary);border-bottom-color:var(--primary)}
   .sitemap .sg{margin-bottom:8px}
   .sitemap .sg:last-child{margin-bottom:0}
-  .sitemap .sg b{display:inline-block;min-width:52px;color:var(--ink);font-weight:700}
+  .sitemap .sg b{display:inline-block;min-width:88px;color:var(--ink);font-weight:700}
   .sitemap .sg a{margin-right:16px}
   /* 研究卡 */
   .rcards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -176,9 +194,22 @@
     <div class="brand"><span class="dot"></span>韩王泽</div>
     <div class="navlinks">
       <a class="on" href="index.html">首页</a>
-      <a href="#about">实习经历</a>
-      <a href="#projects">项目</a>
-      <a href="#links">联系</a>
+      <div class="navdrop">
+        <a href="#about">实习经历<span class="caret"></span></a>
+        <div class="menu">
+          <a href="experience-cyou.html">搜狐畅游<span class="tag">战略分析</span></a>
+          <a href="experience-zyf.html">中服云<span class="tag">功能测试</span></a>
+        </div>
+      </div>
+      <div class="navdrop">
+        <a href="#projects">项目<span class="caret"></span></a>
+        <div class="menu">
+          <a href="weschedule.html">产品项目<span class="tag">WeSchedule</span></a>
+          <a href="research.html#quant">实证研究<span class="tag">3 份</span></a>
+          <a href="research.html#survey">社会调查<span class="tag">1 份</span></a>
+          <a href="research.html#case">案例研究<span class="tag">5 份</span></a>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
@@ -187,6 +218,10 @@
   <div class="wrap">
     <div class="eyebrow">Han Wangze · Personal Homepage</div>
     <h1>韩王泽</h1>
+    <div class="contact">
+      <a href="mailto:wangzehan@link.cuhk.edu.cn"><span class="em">✉️</span> wangzehan@link.cuhk.edu.cn</a>
+      <a href="https://github.com/han-wangze" target="_blank" rel="noopener"><span class="em">💻</span> github.com/han-wangze</a>
+    </div>
     <div class="tagline">
       <span class="t"><b>游戏行业战略分析实习</b></span>
       <span class="t"><b>AI 产品实践</b></span>
@@ -195,13 +230,25 @@
       <span class="t">Python</span>
     </div>
     <div class="edu">
-      <span><b>香港中文大学（深圳）</b> · 信息管理与商业分析 · 全日制硕士在读 · 2026.09 入学</span>
-      <span><b>西安交通大学</b> · 经济与金融学院 · 贸易经济 · 全日制本科 · 2022.09 – 2026.06</span>
-      <span class="courses">核心课程：统计学 · 计量经济学 · Python 数据处理 ／ 经济博弈论 · 数字经济与拍卖 · 价格学 ／ 市场调查与预测 · 数字化营销</span>
-    </div>
-    <div class="cta">
-      <a class="btn primary" href="experience-cyou.html">实习经历</a>
-      <a class="btn ghost" href="#projects">查看项目</a>
+      <div class="edu-item">
+        <div class="edu-row"><span class="school">香港中文大学（深圳）</span><span class="major">信息管理与商业分析</span><span class="meta">硕士在读 · 2026.09 入学</span></div>
+        <div class="courses">
+          <span class="lbl">核心课程</span>
+          <span class="chip">决策科学与量化模型</span><span class="chip">经济模型分析</span><span class="chip">运营分析</span>
+          <span class="chip">商业智能编程</span><span class="chip">商业机器学习</span><span class="chip">统计学基础与商务分析</span>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-row"><span class="school">西安交通大学</span><span class="major">经济与金融学院 · 贸易经济</span><span class="meta">本科 · 2022.09 – 2026.06</span></div>
+        <div class="courses">
+          <span class="lbl">核心课程</span>
+          <span class="chip">统计学</span><span class="chip">计量经济学</span><span class="chip">Python 数据处理</span>
+          <span class="sep"></span>
+          <span class="chip">经济博弈论</span><span class="chip">数字经济与拍卖</span><span class="chip">价格学</span>
+          <span class="sep"></span>
+          <span class="chip">市场调查与预测</span><span class="chip">数字化营销</span>
+        </div>
+      </div>
     </div>
   </div>
 </header>
@@ -212,23 +259,19 @@
       <div class="k">Experience · 实习经历</div>
       <h2>实习经历</h2>
     </div>
-    <div class="tl">
-      <div class="tli hi">
-        <a class="box" href="experience-cyou.html">
-          <div class="when">2025.11 – 2026.02</div>
-          <div class="what">搜狐畅游 · 战略分析实习生</div>
-          <div class="desc">负责中美日韩及微信小游戏市场的<b>新品扫描与监测</b>，主导<b>概念测试与立项预评估</b>；独立完成 <b>4 份专题研究报告</b>与 <b>1 份小游戏畅销榜产品分析</b>，用 Python 把重复的分析工作沉淀成 <b>10 个可复用模块</b>。</div>
-          <div class="go">查看实习详情与材料 →</div>
-        </a>
-      </div>
-      <div class="tli">
-        <a class="box" href="experience-zyf.html">
-          <div class="when">2025.07 · 学校安排的专业实习</div>
-          <div class="what">中服软件（西安）有限公司 · 软件测试实习生</div>
-          <div class="desc">工业物联网平台功能测试，覆盖 6 大模块、20 余个页面，提交缺陷 50 余项并全程走 Jira 闭环。</div>
-          <div class="go">查看实习详情 →</div>
-        </a>
-      </div>
+    <div class="exp">
+      <a class="ecard" href="experience-cyou.html">
+        <div class="ewhen">2025.11 – 2026.02</div>
+        <div class="ewhat">搜狐畅游 · 战略分析实习生</div>
+        <div class="edesc">负责中美日韩及微信小游戏市场的<b>新品扫描与监测</b>，主导<b>概念测试与立项预评估</b>；用 Python 把重复的分析流程<b>自动化</b>，并基于<b>统计分析</b>，参与<b>年度报告子模块</b>撰写，另完成中美日韩 <b>RPG 专项研究</b>与 <b>1 份微信小游戏产品分析报告</b>。</div>
+        <div class="ego">查看实习详情与材料 →</div>
+      </a>
+      <a class="ecard" href="experience-zyf.html">
+        <div class="ewhen">2025.07 · 本科专业实习</div>
+        <div class="ewhat">中服软件（西安）有限公司 · 功能测试实习生</div>
+        <div class="edesc">工业物联网平台功能测试，覆盖 6 大模块、20 余个页面，在 Jira 提交并跟进缺陷 50 余项至闭环。</div>
+        <div class="ego">查看实习详情 →</div>
+      </a>
     </div>
   </div>
 </section>
@@ -242,61 +285,73 @@
 
     <div class="proj-block">
       <div class="proj-head">
-        <h3>WeSchedule 日程助手</h3>
-        <span class="proj-tag">产品项目</span>
+        <h3>产品项目</h3>
       </div>
-      <p class="proj-desc">把微信群聊消息变成可管理的日程：复制 → 自动解析 → 确认保存 → 订阅消息提醒，带软/硬分级冲突检测与预备提醒；自建 100 条语料评测，端到端准确率 75%。</p>
-      <div class="proj-stages">
-        <a class="stage" href="report.html">
-          <b>① 需求验证</b>
-          <span>87 人校园调研：信息过载遗漏 80%、接受度 87.4%，是立项依据。</span>
-        </a>
-        <a class="stage" href="weschedule.html">
-          <b>② 产品实现</b>
-          <span>小程序 MVP 真机上线，冲突检测 + 预备提醒 + 评测闭环。</span>
-        </a>
-        <a class="stage" href="competition.html">
-          <b>③ 竞争定位</b>
-          <span>对标小微 / 元宝 / 滴答清单，明确「日程治理」差异化。</span>
+      <div class="proj-item">
+        <h4>WeSchedule 日程助手</h4>
+        <p class="proj-desc">把微信群聊消息变成可管理的日程：复制 → 自动解析 → 确认保存 → 订阅消息提醒，带软/硬分级冲突检测与预备提醒。</p>
+        <div class="proj-stages">
+          <a class="stage" href="report.html">
+            <b>① 需求验证</b>
+            <span>87 人校园调研：信息过载遗漏 80%、接受度 87.4%，是立项依据。</span>
+          </a>
+          <a class="stage" href="weschedule.html">
+            <b>② 产品实现</b>
+            <span>小程序 MVP 真机上线，冲突检测 + 预备提醒 + 评测闭环。</span>
+          </a>
+          <a class="stage" href="competition.html">
+            <b>③ 竞争定位</b>
+            <span>对比小微 / 元宝 / 滴答清单，明确「日程治理」差异化。</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-block">
+      <div class="proj-head">
+        <h3>实证研究</h3>
+      </div>
+      <div class="rcards single">
+        <a class="rcard" href="research.html#quant">
+          <div class="rt">人工智能采用对企业多元化经营的影响</div>
+          <div class="tags"><span class="tag">双向固定效应</span><span class="tag">多期 DID</span><span class="tag">PSM</span></div>
+          <div class="rd">2010–2024 年 A 股上市公司样本；把多元化结构分解为相关 / 不相关，识别因果效应。</div>
+          <div class="rf">看这一类 →</div>
         </a>
       </div>
     </div>
 
     <div class="proj-block">
       <div class="proj-head">
-        <h3>研究与写作</h3>
-        <span class="proj-tag">学术作品 · 10 份</span>
+        <h3>社会调查</h3>
       </div>
-      <p class="proj-desc">计量实证 / 社会调查 / 案例文献三类，每份按「研究问题 — 方法与数据 — 主要发现」呈现。</p>
-      <div class="rcards">
-        <a class="rcard" href="research.html#quant">
-          <div class="rk">计量与实证</div>
-          <div class="rt">人工智能采用对企业多元化经营的影响</div>
-          <div class="tags"><span class="tag">双向固定效应</span><span class="tag">多期 DID</span><span class="tag">PSM</span></div>
-          <div class="rd">2010–2024 年 A 股上市公司样本；把多元化结构分解为相关 / 不相关，识别因果效应。</div>
-          <div class="rf">看这一类 →</div>
-        </a>
+      <div class="rcards single">
         <a class="rcard" href="research.html#survey">
-          <div class="rk">社会调查</div>
           <div class="rt">一刻钟便民生活圈下「小修小补」消费调查 · 腾飞杯二等奖</div>
           <div class="tags"><span class="tag">727 份问卷</span><span class="tag">SPSS 信效度</span><span class="tag">回归分析</span></div>
           <div class="rd">居民问卷加从业者量表双渠道，定位影响消费满意度的因素。</div>
           <div class="rf">看这一类 →</div>
         </a>
+      </div>
+    </div>
+
+    <div class="proj-block">
+      <div class="proj-head">
+        <h3>案例研究</h3>
+      </div>
+      <div class="rcards single">
         <a class="rcard" href="research.html#case">
-          <div class="rk">案例与文献</div>
           <div class="rt">广告分析：旺旺魔性广告 &amp; 「五个女博士」争议</div>
           <div class="tags"><span class="tag">消费者心理</span><span class="tag">品牌传播</span><span class="tag">争议广告框架</span></div>
           <div class="rd">拆解「魔性」与「贩卖焦虑」背后的消费者心理与品牌影响。</div>
           <div class="rf">看这一类 →</div>
         </a>
       </div>
-      <div class="cta" style="margin-top:18px">
-        <a class="btn ghost" href="research.html">查看全部 10 份 →</a>
-      </div>
     </div>
 
-    <p class="pnote">关于证据强度：调研为预调研性质——87 份、方便抽样、单一学校，结论是「值得做 MVP」而非「需求已被证明」；这也是随后选择真机验证、而非直接推广的原因。</p>
+    <div class="cta" style="margin-top:18px">
+      <a class="btn ghost" href="research.html">查看全部研究 →</a>
+    </div>
   </div>
 </section>
 
@@ -308,7 +363,7 @@
     </div>
     <div class="more">
       <details class="mgroup">
-        <summary>学生工作<span class="cnt">优思新媒体 · 青少年发展中心 · 团工委 · 勤工助学</span><span class="plus"></span></summary>
+        <summary>学生工作<span class="cnt">优思新媒体 · 青少年发展中心 · 团工委 · 勤工助学办公室</span><span class="plus"></span></summary>
         <div class="mrow">
           <div class="mw">2023.07 – 2024.07</div>
           <div>
@@ -397,37 +452,22 @@
       <div class="skill-group">
         <div class="sg-label">语言与办公</div>
         <div class="skills">
-          <span class="chip">Excel / PPT 研究成稿</span>
           <span class="chip">英语：雅思 6.5 / 六级 595</span>
+          <span class="chip">Excel / PPT</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="links" class="alt">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="k">Contact · 联系</div>
-      <h2>联系我</h2>
-    </div>
-    <div class="links">
-      <a class="link" href="mailto:226020376@link.cuhk.edu.cn"><span class="em">✉️</span> 226020376@link.cuhk.edu.cn</a>
-      <a class="link" href="https://github.com/han-wangze" target="_blank" rel="noopener"><span class="em">💻</span> GitHub · han-wangze</a>
-    </div>
-    <div class="sitemap">
-      <div class="sg"><b>实习</b><a href="experience-cyou.html">搜狐畅游</a><a href="experience-zyf.html">中服云</a></div>
-      <div class="sg"><b>项目</b><a href="weschedule.html">WeSchedule</a><a href="report.html">调研报告（提要）</a><a href="report-full.html">调研报告（全文）</a><a href="weschedule-eval.html">评测报告</a><a href="competition.html">竞争定位</a></div>
-      <div class="sg"><b>研究</b><a href="research.html">研究与写作（10 份）</a></div>
-      <div class="sg"><b>源码</b><a href="https://github.com/han-wangze/hanwangze" target="_blank" rel="noopener">本站源码</a></div>
-    </div>
-  </div>
-</section>
-
 <footer>
   <div class="wrap">
-    <div>韩王泽 · 个人主页 — 把想法做成产品的实践记录</div>
-    <div style="margin-top:6px">226020376@link.cuhk.edu.cn · © 2026</div>
+    <div class="sitemap" style="margin-top:0">
+      <div class="sg"><b>实习</b><a href="experience-cyou.html">搜狐畅游</a><a href="experience-zyf.html">中服云</a></div>
+      <div class="sg"><b>项目</b><a href="weschedule.html">产品项目</a><a href="research.html#quant">实证研究</a><a href="research.html#survey">社会调查</a><a href="research.html#case">案例研究</a></div>
+      <div class="sg"><b>源码</b><a href="https://github.com/han-wangze/hanwangze" target="_blank" rel="noopener">本站源码</a></div>
+    </div>
+    <div style="margin-top:16px">韩王泽 · 个人主页 · © 2026</div>
   </div>
 </footer>
 

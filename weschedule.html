@@ -46,6 +46,16 @@
   .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted);flex-wrap:wrap}
   .navlinks a:hover{color:var(--primary)}
   .navlinks a.on{color:var(--primary);font-weight:600}
+  .navdrop{position:relative;display:flex}
+  .navdrop>a{display:inline-flex;align-items:center;gap:6px}
+  .navdrop .caret{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid currentColor;opacity:.55;margin-top:2px}
+  .navdrop .menu{position:absolute;top:100%;left:0;min-width:180px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:6px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .15s,transform .15s,visibility .15s;z-index:70}
+  .navdrop:hover .menu{opacity:1;visibility:visible;transform:translateY(0)}
+  .navdrop .menu a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border-radius:8px;font-size:13.5px;color:var(--ink);white-space:nowrap}
+  .navdrop .menu a:hover{background:#eef2ff;color:var(--primary)}
+  .navdrop .menu a.on{background:#eef2ff;color:var(--primary);font-weight:600}
+  .navdrop .menu .tag{font-size:12px;color:var(--muted)}
+  @media(max-width:760px){.navdrop .menu{display:none}}
   @media(max-width:760px){nav .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 20px;gap:2px 0}.navlinks{display:flex;flex-wrap:wrap;font-size:13px;gap:14px;padding-bottom:4px}.navlinks a{padding:8px 2px;min-height:44px;display:inline-flex;align-items:center}}
   header.hero{padding:72px 0 56px;background:
     radial-gradient(1200px 400px at 80% -10%,rgba(55,48,163,.12),transparent),
@@ -137,9 +147,22 @@
     <div class="brand"><span class="dot"></span>韩王泽</div>
     <div class="navlinks">
       <a href="index.html">首页</a>
-      <a href="experience-cyou.html">实习经历</a>
-      <a class="on" href="index.html#projects">项目</a>
-      <a href="index.html#links">联系</a>
+      <div class="navdrop">
+        <a href="experience-cyou.html">实习经历<span class="caret"></span></a>
+        <div class="menu">
+          <a href="experience-cyou.html">搜狐畅游<span class="tag">战略分析</span></a>
+          <a href="experience-zyf.html">中服云<span class="tag">功能测试</span></a>
+        </div>
+      </div>
+      <div class="navdrop">
+        <a class="on" href="index.html#projects">项目<span class="caret"></span></a>
+        <div class="menu">
+          <a href="weschedule.html">产品项目<span class="tag">WeSchedule</span></a>
+          <a href="research.html#quant">实证研究<span class="tag">3 份</span></a>
+          <a href="research.html#survey">社会调查<span class="tag">1 份</span></a>
+          <a href="research.html#case">案例研究<span class="tag">5 份</span></a>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
@@ -154,7 +177,7 @@
       <span class="badge"><b>DeepSeek</b></span>
       <span class="badge"><b>75%</b> 端到端准确率</span>
       <span class="badge"><b>冲突检测</b> 软硬分级</span>
-      <span class="badge"><b>预备提醒</b> 单授权复用</span>
+      <span class="badge"><b>预备提醒</b> 提前一晚</span>
     </div>
     <div class="cta">
       <a class="btn primary" href="#why">查看项目</a>
@@ -168,7 +191,7 @@
       <div class="sec-head">
         <div class="k">Why · 痛点与市场</div>
         <h2>群消息太多，日程总漏</h2>
-        <p>面向 87 名西交大学生的调研显示：信息过载导致遗漏是最高频痛点，手动录入繁琐且被动。一款"复制即转日程"的工具接受度高达 87.4%。<a href="report.html">查看完整调研报告 →</a></p>
+        <p>面向 87 名西交大学生的调研显示：信息过载导致遗漏是最高频痛点，手动录入繁琐、易遗漏。一款"复制即转日程"的工具接受度高达 87.4%。<a href="report.html">查看完整调研报告 →</a></p>
       </div>
       <div class="grid3">
         <div class="card stat">
@@ -228,7 +251,7 @@
       </div>
       <p class="l" style="margin-top:14px;color:var(--muted);font-size:13px">
         技术栈：微信小程序（WXML/WXSS/JS）· 微信云开发（云函数 + 云数据库）· DeepSeek <code>deepseek-chat</code>（temperature=0，JSON 模式）· 微信订阅消息。
-        个人主体小程序，类目"工具-效率"；系统日历写入经真机验证不可用，故采用"小程序内日程 + 订阅消息提醒"方案。
+        个人主体小程序，类目"工具-效率"；系统日历写入受平台限制，采用"小程序内日程 + 订阅消息提醒"方案。
       </p>
     </div>
   </section>
@@ -364,7 +387,7 @@
       </div>
       <div class="card feat">
         <h3>两个维度看差异：本项目选择"有日程库 × 容量视角"</h3>
-        <p>小微 / 元宝 = 提醒生成（无日程库、只处理单次时刻）；滴答清单 = 任务清单（有库、无冲突治理）；WeSchedule = 日程治理（冲突检测 + DDL 区间 + 负载视角）。若官方能力日后覆盖"消息转日程"，入口层会被稀释，治理层依赖的日程库积累是留下的部分。</p>
+        <p>小微 / 元宝 = 提醒生成（无日程库、只处理单次时刻）；滴答清单 = 任务清单（有库、无冲突治理）；WeSchedule = 日程治理（冲突检测 + DDL 区间 + 容量视角）。若官方能力日后覆盖"消息转日程"，入口层会被稀释，治理层依赖的日程库积累是留下的部分。</p>
         <p style="margin-top:10px"><a href="competition.html" style="color:var(--primary);font-weight:700">查看完整竞争格局与防御性分析 →</a></p>
       </div>
     </div>
@@ -423,7 +446,7 @@
       <div class="sec-head">
         <div class="k">Dev Log · AI 协作开发</div>
         <h2>卡住过的地方，和怎么定位的</h2>
-        <p>功能是和 AI 一起做的，但"哪里错了、该改哪一层"得自己判断。下面几条是真正卡住过的地方。</p>
+        <p>功能是和 AI 一起做的，但"哪里错了、该改哪一层"得自己判断。下面几条是卡住过的地方。</p>
       </div>
       <ul class="log">
         <li><b>两处静默失败</b>：新建日程写入时少了 <code>reminded</code> 字段，提醒扫描把它当成"已提醒"跳过，日程建好了却永远不进队列；<code>location</code> 为空的日程仍在列表里渲染 null。<span class="meta">改法：写入时显式 <code>reminded: false</code>；空值不渲染</span></li>
@@ -436,8 +459,8 @@
 
 <footer>
   <div class="wrap">
-    <div>韩王泽 · 个人主页 — 把想法做成产品的实践记录</div>
-    <div style="margin-top:6px">226020376@link.cuhk.edu.cn · 技术文档见各项目 README · © 2026</div>
+    <div>韩王泽 · 个人主页</div>
+    <div style="margin-top:6px">wangzehan@link.cuhk.edu.cn · 技术文档见各项目 README · © 2026</div>
   </div>
 </footer>
 
