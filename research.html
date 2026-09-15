@@ -109,6 +109,14 @@
   .mini .md b{color:var(--ink);font-weight:600}
   .mini .mf{font-size:12.5px;color:var(--primary);font-weight:600}
   footer{padding:36px 0 56px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
+  .sitemap{margin-top:0;font-size:14px;color:var(--muted);line-height:2}
+  .sitemap b{color:var(--ink);font-weight:600}
+  .sitemap a{color:var(--muted);border-bottom:1px solid transparent;transition:.15s}
+  .sitemap a:hover{color:var(--primary);border-bottom-color:var(--primary)}
+  .sitemap .sg{margin-bottom:8px}
+  .sitemap .sg:last-child{margin-bottom:0}
+  .sitemap .sg b{display:inline-block;min-width:88px;color:var(--ink);font-weight:700}
+  .sitemap .sg a{margin-right:16px}
   h1,h2,.paper .pt,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif}
 </style>
 </head>
@@ -316,7 +324,12 @@
 
 <footer>
   <div class="wrap">
-    <div>韩王泽 · 个人主页</div>
+    <div class="sitemap">
+      <div class="sg"><b>实习</b><a href="experience-cyou.html">搜狐畅游</a><a href="experience-zyf.html">中服云</a></div>
+      <div class="sg"><b>项目</b><a href="weschedule.html">产品项目</a><a href="research.html#quant">实证研究</a><a href="research.html#survey">社会调查</a><a href="research.html#case">案例研究</a></div>
+      <div class="sg"><b>更多</b><a href="index.html">首页</a><a href="https://github.com/han-wangze/hanwangze" target="_blank" rel="noopener">本站源码</a></div>
+    </div>
+    <div style="margin-top:16px">韩王泽 · 个人主页</div>
     <div style="margin-top:6px">wangzehan@link.cuhk.edu.cn · © 2026</div>
   </div>
 </footer>
