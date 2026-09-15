@@ -155,6 +155,16 @@
   .sitemap .sg:last-child{margin-bottom:0}
   .sitemap .sg b{display:inline-block;min-width:88px;color:var(--ink);font-weight:700}
   .sitemap .sg a{margin-right:16px}
+  .toc{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;font-size:13.5px;color:var(--muted)}
+  .toc b{color:var(--ink);font-weight:600}
+  .toc a{color:var(--muted);border-bottom:1px solid transparent;transition:.15s}
+  .toc a:hover{color:var(--primary);border-bottom-color:var(--primary)}
+  .tnotes{margin-top:22px;display:flex;flex-direction:column;gap:18px}
+  .tnote{display:grid;grid-template-columns:32px 1fr;gap:12px}
+  .tnote .i{font-size:12.5px;font-weight:800;color:var(--primary);letter-spacing:.5px;padding-top:4px}
+  .tnote h3{font-size:15.5px;font-weight:700;margin-bottom:5px}
+  .tnote p{font-size:14px;color:var(--muted)}
+  @media(max-width:560px){.tnote{grid-template-columns:24px 1fr;gap:8px}.tnote h3{font-size:15px}}
   code{background:#f1f5f9;padding:2px 6px;border-radius:5px;font-size:.9em}
   h1,h2,.paper .pt,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif}
 </style>
@@ -199,8 +209,17 @@
       <span class="badge"><b>预备提醒</b> 提前一晚</span>
     </div>
     <div class="cta">
-      <a class="btn primary" href="#why">查看项目</a>
-      <a class="btn ghost" href="https://github.com/han-wangze" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn primary" href="#demo">观看 Demo 演示</a>
+      <a class="btn ghost" href="https://github.com/han-wangze/weschedule" target="_blank" rel="noopener">GitHub 源码</a>
+    </div>
+    <div class="toc">
+      <b>本页内容</b>
+      <a href="#why">痛点与市场</a>
+      <a href="#arch">方案架构</a>
+      <a href="#smart">冲突检测与提醒策略</a>
+      <a href="#tech">技术亮点</a>
+      <a href="#position">竞争定位</a>
+      <a href="#demo">Demo 实机演示</a>
     </div>
   </div>
 </header>
@@ -327,8 +346,8 @@
     <div class="wrap">
       <div class="sec-head">
         <div class="k">Tech · 技术亮点</div>
-        <h2>给解析质量建一套可复现的评测</h2>
-        <p>要判断一次提示词改动是变好还是变坏，前提是有一套能重复的评测。这里先写 100 条群聊语料（覆盖日常通知、相对时间、模糊时间、多日程、DDL 等七类），按 8:2 固定切成开发集与测试集、切分种子写死；再把"解析对不对"拆成五层可计算的指标：是否识别出日程、误报率、事件级查准查全、字段准确率、端到端完全正确率。之后每改一次提示词就重跑全量，逐条看哪些从错变对、哪些从对变错。</p>
+        <h2>改了三版提示词，才定下该看哪个数</h2>
+        <p>第一版提示词跑完，端到端完全正确率是 66.2%，15 条 badcase 里 9 条出在"明天""下周""傍晚"这类时间表述上。改一版提示词到底是变好还是变坏，光翻几条语料判断不了：有的从错变对，有的从对变错。于是先造 100 条语料覆盖七类消息形态，按 8:2 固定切分、种子写死，把"解析对不对"拆成五层分别统计，每改一版就重跑全量。到第三版，端到端走到 75.0%，dev 与 test 两侧都过线。</p>
       </div>
       <div class="metric-row">
         <div class="metric"><div class="n">75%</div><div class="l">端到端完全正确率<br>(dev / test 双达标)</div></div>
@@ -375,11 +394,31 @@
           <span><i style="background:#16a34a"></i>达标线 75%</span>
         </div>
       </div>
-      <p class="l" style="margin-top:16px;color:var(--muted);font-size:13px">
-        三轮迭代的改动：v1.1 补了"时段词 → 钟点"的映射表，并规定"下周X"一律按未来向推算；v1.2 加了"只要表达了未来的行动意图就必须提取"：此前"晚上有空的话一起自习吧"这类消息会被当成闲聊丢掉，这一条救回 4 条漏报，开发集与测试集同步到 75%。线上云函数与评测脚本里的提示词保持逐字一致，否则测出来的分数不代表线上表现。
-      </p>
-      <p class="l" style="margin-top:8px;color:var(--muted);font-size:13px">
-        可复现资产：<code>eval/run_eval.py</code> · <code>eval/corpus/sample.jsonl</code> · <code>eval/gen_corpus.py</code>。逐版完整指标、badcase 明细与这套评测的边界，见 <a href="weschedule-eval.html" style="color:var(--primary);font-weight:700">解析质量评测报告 →</a>
+      <div class="tnotes">
+        <div class="tnote">
+          <div class="i">01</div>
+          <div>
+            <h3>单层指标会互相打架，所以只认端到端</h3>
+            <p>v1.1 那版，has_schedule 判定 F1 从 99.2 掉到 97.0，同期事件级查准和端到端却在涨。五层指标都留着看，但决定一版提示词留不留的只有端到端完全正确率。</p>
+          </div>
+        </div>
+        <div class="tnote">
+          <div class="i">02</div>
+          <div>
+            <h3>失败点在往多日程集中</h3>
+            <p>三版 badcase 是 15 → 12 → 8 条，结构却在迁移：模糊时间（C 类）从 5 条清零，多日程（D 类）一直卡在 6 条。v1.2 加的"只要表达了未来的行动意图就必须提取"，把"晚上有空的话一起自习吧"这类被当成闲聊丢掉的消息救了回来，C 类一次全清。</p>
+          </div>
+        </div>
+        <div class="tnote">
+          <div class="i">03</div>
+          <div>
+            <h3>剩下的错集中在多日程</h3>
+            <p>8 条 badcase 里 6 条是多日程：一条消息里两个事件，排在后面的容易被漏掉。这类问题靠加规则收益递减，规则越多误报风险越大。下一步因此转到了产品侧，把"识别有误"的上报入口做进小程序，用真实 badcase 继续喂评测集。</p>
+          </div>
+        </div>
+      </div>
+      <p class="l" style="margin-top:22px;color:var(--muted);font-size:13px">
+        可复现资产：<code>eval/run_eval.py</code> · <code>eval/corpus/sample.jsonl</code> · <code>eval/gen_corpus.py</code>。线上云函数与评测脚本里各存一份提示词，两边保持逐字一致（各 1804 字符），线上一旦单独改动，跑出来的分数就不再代表线上表现。逐版完整指标、badcase 明细与这套评测的边界，见 <a href="weschedule-eval.html" style="color:var(--primary);font-weight:700">解析质量评测报告 →</a>
       </p>
     </div>
   </section>
