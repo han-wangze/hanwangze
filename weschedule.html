@@ -109,11 +109,6 @@
   .shot img{width:100%;height:auto;display:block}
   .shot figcaption{padding:10px 12px;font-size:13px;color:var(--muted);text-align:center}
   @media(max-width:720px){.shots{gap:8px}.shot figcaption{font-size:12px;padding:8px 6px}}
-  .links{display:flex;flex-wrap:wrap;gap:12px}
-  .link{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);
-    border-radius:12px;padding:14px 18px;font-weight:600;box-shadow:var(--shadow);transition:.15s}
-  .link:hover{border-color:var(--primary);transform:translateY(-1px)}
-  .link .em{font-size:20px}
   .log{list-style:none;display:flex;flex-direction:column;gap:12px}
   .log li{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--primary);
     border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
@@ -220,6 +215,7 @@
       <a href="#tech">技术亮点</a>
       <a href="#position">竞争定位</a>
       <a href="#demo">Demo 实机演示</a>
+      <a href="#devlog">排障记录</a>
     </div>
   </div>
 </header>
@@ -418,7 +414,7 @@
         </div>
       </div>
       <p class="l" style="margin-top:22px;color:var(--muted);font-size:13px">
-        可复现资产：<code>eval/run_eval.py</code> · <code>eval/corpus/sample.jsonl</code> · <code>eval/gen_corpus.py</code>。线上云函数与评测脚本里各存一份提示词，两边保持逐字一致（各 1804 字符），线上一旦单独改动，跑出来的分数就不再代表线上表现。逐版完整指标、badcase 明细与这套评测的边界，见 <a href="weschedule-eval.html" style="color:var(--primary);font-weight:700">解析质量评测报告 →</a>
+        可复现资产：<code>eval/run_eval.py</code> · <code>eval/corpus/sample.jsonl</code> · <code>eval/gen_corpus.py</code>。线上云函数与评测脚本里各存一份提示词，两边保持逐字一致（各 1804 字符），线上一旦单独改动，跑出来的分数就不再代表线上表现。逐版完整指标、badcase 明细与这套评测的边界，见 <a href="weschedule-eval.html" style="color:var(--primary);font-weight:700">解析质量评测报告 →</a> · <a href="weschedule-eval.html#privacy" style="color:var(--primary);font-weight:700">数据与隐私说明 →</a>
       </p>
     </div>
   </section>
@@ -438,7 +434,7 @@
     </div>
   </section>
 
-  <section id="demo" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <section id="demo" style="background:#fff;border-top:1px solid var(--line)">
     <div class="wrap">
       <div class="sec-head">
         <div class="k">Demo · 实机演示</div>
@@ -469,35 +465,17 @@
     </div>
   </section>
 
-  <section id="links">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="k">Links · 延伸阅读</div>
-        <h2>更多资料</h2>
-      </div>
-      <div class="links">
-        <a class="link" href="https://github.com/han-wangze/weschedule" target="_blank" rel="noopener"><span class="em">💻</span> WeSchedule 源码 · GitHub</a>
-        <a class="link" href="https://www.bilibili.com/video/BV1VDYR6YE6m/" target="_blank" rel="noopener"><span class="em">🎬</span> Demo 视频 · B站</a>
-        <a class="link" href="report.html" target="_blank" rel="noopener"><span class="em">📊</span> 调研报告提要（网页版）</a>
-        <a class="link" href="competition.html"><span class="em">⚔️</span> 竞争格局与定位</a>
-        <a class="link" href="weschedule-eval.html"><span class="em">🧪</span> 解析质量评测报告（含 badcase 明细）</a>
-        <a class="link" href="weschedule-eval.html#privacy"><span class="em">🔒</span> 数据与隐私说明</a>
-      </div>
-    </div>
-  </section>
-
   <section id="devlog" style="background:#fff;border-top:1px solid var(--line)">
     <div class="wrap">
       <div class="sec-head">
-        <div class="k">Dev Log · AI 协作开发</div>
-        <h2>卡住过的地方，和怎么定位的</h2>
-        <p>功能与 AI 协作完成，"哪里错了、该改哪一层"是自己判断的。</p>
+        <div class="k">Dev Log · 排障记录</div>
+        <h2>三个故障，和怎么定位的</h2>
+        <p>功能与 AI 协作完成；这三处问题的定位与修改由我完成。</p>
       </div>
       <ul class="log">
-        <li><b>两处静默失败</b>：新建日程写入时少了 <code>reminded</code> 字段，提醒扫描把它当成"已提醒"跳过，日程建好了却永远不进队列；<code>location</code> 为空的日程仍在列表里渲染 null。<span class="meta">改法：写入时显式 <code>reminded: false</code>；空值不渲染</span></li>
         <li><b>提醒锚点算错一天</b>：云函数运行在 UTC，北京时间 00:00–08:00 之间"今天"会被算成前一天，日程锚点落到过去，提醒不会触发。<span class="meta">改法：显式 +8 小时后再取日期；靠日志 scanned=12 / sent=0 反查到这一步</span></li>
+        <li><b>两处静默失败</b>：新建日程写入时少了 <code>reminded</code> 字段，提醒扫描把它当成"已提醒"跳过，日程建好了却永远不进队列；<code>location</code> 为空的日程仍在列表里渲染 null。<span class="meta">改法：写入时显式 <code>reminded: false</code>；空值不渲染</span></li>
         <li><b>剪贴板读取"点了同意也不生效"</b>：两个问题叠在一起：隐私授权 API 名写错，自定义弹窗其实从未注册；回调里回传的 buttonId 在页面上又不存在，微信判定无效，授权态于是存不下来。<span class="meta">改法：修正 API 名，弹窗里改成真实的同意按钮并回传它的 id</span></li>
-        <li><b>密钥不进仓库</b>：DeepSeek key 只写在本地 <code>.env</code>，仓库里只有 <code>.env.example</code>，评测脚本从环境变量读。<span class="meta">从第一天就这么定，避免提交历史里留下 key</span></li>
       </ul>
     </div>
   </section>
