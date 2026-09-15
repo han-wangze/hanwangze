@@ -120,16 +120,8 @@
   .proj-block{margin-bottom:30px}
   .proj-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
   .proj-head h3{font-size:19px;font-weight:800}
-  .proj-item h4{font-size:16px;font-weight:800;margin:0 0 6px}
   .rcards.single{grid-template-columns:1fr}
   .proj-tag{font-size:12px;font-weight:700;color:var(--primary);background:#eef2ff;padding:3px 10px;border-radius:6px}
-  .proj-desc{font-size:14px;color:var(--muted);max-width:720px;margin-bottom:14px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-  .proj-stages{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  @media(max-width:720px){.proj-stages{grid-template-columns:1fr}}
-  .stage{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px;transition:.15s}
-  .stage:hover{border-color:var(--primary);transform:translateY(-2px)}
-  .stage b{font-size:14.5px}
-  .stage span{font-size:13px;color:var(--muted)}
   .tags{display:flex;flex-wrap:wrap;gap:6px}
   .tag,.chip{font-size:12px;background:#f1f5f9;color:#475569;border-radius:8px;padding:4px 10px}
   .story{display:flex;align-items:stretch;gap:12px;margin-bottom:20px;flex-wrap:wrap}
@@ -286,23 +278,13 @@
       <div class="proj-head">
         <h3>产品项目</h3>
       </div>
-      <div class="proj-item">
-        <h4>WeSchedule 日程助手</h4>
-        <p class="proj-desc">把微信群聊消息变成可管理的日程：复制 → 自动解析 → 确认保存 → 订阅消息提醒，带软/硬分级冲突检测与预备提醒。</p>
-        <div class="proj-stages">
-          <a class="stage" href="report.html">
-            <b>① 需求验证</b>
-            <span>87 人校园调研：信息过载遗漏 80%、接受度 87.4%，是立项依据。</span>
-          </a>
-          <a class="stage" href="weschedule.html">
-            <b>② 产品实现</b>
-            <span>小程序 MVP 真机上线，冲突检测 + 预备提醒 + 评测闭环。</span>
-          </a>
-          <a class="stage" href="competition.html">
-            <b>③ 竞争定位</b>
-            <span>对比小微 / 元宝 / 滴答清单，明确「日程治理」差异化。</span>
-          </a>
-        </div>
+      <div class="rcards single">
+        <a class="rcard" href="weschedule.html">
+          <div class="rt">WeSchedule 日程助手</div>
+          <div class="tags"><span class="tag">微信小程序</span><span class="tag">DeepSeek 解析</span><span class="tag">冲突检测</span><span class="tag">订阅消息提醒</span></div>
+          <div class="rd">把微信群聊消息变成可管理的日程：复制 → 自动解析 → 确认保存 → 订阅消息提醒。立项依据是 87 人校园调研（信息过载遗漏 80%、接受度 87.4%），已完成 MVP 真机上线与竞争格局定位。</div>
+          <div class="rf">进入项目详情 →</div>
+        </a>
       </div>
     </div>
 
