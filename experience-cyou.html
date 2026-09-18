@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>战略分析实习 · 搜狐畅游 | 韩王泽</title>
-<meta name="description" content="搜狐畅游战略分析实习（2025.11–2026.02）：新品扫描、概念测试、市场研究与数据分析的代码与工具沉淀。" />
+<meta name="description" content="搜狐畅游战略分析实习（2025.11–2026.02）：新品扫描、产品概念测试、市场研究、产品分析与数据分析的代码与工具沉淀。" />
 <meta name="author" content="韩王泽" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
 <meta property="og:locale" content="zh_CN" />
 <meta property="og:title" content="战略分析实习 · 搜狐畅游 | 韩王泽" />
-<meta property="og:description" content="新品扫描、概念测试、市场研究与数据分析，以及可复用分析脚本的代码沉淀。" />
+<meta property="og:description" content="新品扫描、产品概念测试、市场研究、产品分析与数据分析，以及可复用分析脚本的代码沉淀。" />
 <meta property="og:url" content="https://han-wangze.github.io/hanwangze/experience-cyou.html" />
 <meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <meta property="og:image:width" content="1200" />
@@ -23,7 +23,7 @@
 <meta property="og:image:alt" content="韩王泽个人主页：教育经历、实习经历与项目作品" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="战略分析实习 · 搜狐畅游 | 韩王泽" />
-<meta name="twitter:description" content="新品扫描、概念测试、市场研究与数据分析，以及可复用分析脚本的代码沉淀。" />
+<meta name="twitter:description" content="新品扫描、产品概念测试、市场研究、产品分析与数据分析，以及可复用分析脚本的代码沉淀。" />
 <meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <style>
   :root{
@@ -64,6 +64,14 @@
   .hero h1 .grad{color:var(--primary)}
   .hero .meta{margin-top:14px;font-size:15px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 18px}
   .hero p.sub{margin-top:16px;font-size:17px;color:var(--muted);max-width:700px}
+  /* hero 圆框标签 */
+  .hero-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;list-style:none}
+  .hero-tags li{display:inline-flex;align-items:center;height:34px;padding:0 16px;
+    border:1px solid rgba(55,48,163,.22);border-radius:999px;background:rgba(255,255,255,.72);
+    color:var(--primary);font-size:14px;font-weight:600;letter-spacing:.2px;white-space:nowrap;
+    transition:border-color .15s,background .15s}
+  .hero-tags li:hover{border-color:var(--primary);background:#fff}
+  @media(max-width:640px){.hero-tags{gap:8px;margin-top:18px}.hero-tags li{height:30px;padding:0 13px;font-size:13px}}
   .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
   .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
     padding:8px 14px;font-size:13px;display:flex;gap:8px;align-items:center}
@@ -224,7 +232,12 @@
       <span>·</span>
       <span>搜狐畅游</span>
     </div>
-    <p class="sub">面向中、美、日、韩及微信小游戏市场，做新品机会扫描、概念测试与市场研究。</p>
+    <ul class="hero-tags">
+      <li>新品扫描</li>
+      <li>产品概念测试</li>
+      <li>市场研究</li>
+      <li>产品分析</li>
+    </ul>
   </div>
 </header>
 
@@ -238,7 +251,7 @@
     <div class="roles">
       <div class="role" id="r-scan">
         <div class="h">🔍 新品机会扫描</div>
-        <div class="d"><b>每周输出一份可立项的新品清单。</b>从 Sensor Tower 榜单、Steam、YouTube / B站自媒体等渠道扫描中、美、日、韩及微信小游戏市场，按玩法差异化、吸量、买量依赖、同质化程度几个维度筛选。</div>
+        <div class="d"><b>输出值得关注的新品清单。</b>从 Sensor Tower 榜单、Steam、YouTube / B站自媒体等渠道扫描新游，按玩法差异化、吸量、买量依赖、同质化程度几个维度筛选。</div>
       </div>
       <div class="role" id="r-concept">
         <div class="h">🧪 概念测试与立项评估</div>
