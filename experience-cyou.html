@@ -239,7 +239,7 @@
       </div>
       <div class="role" id="r-data">
         <div class="h">🐍 数据分析与流程自动化</div>
-        <div class="d"><b>数据分析</b>：品类 / 题材文本聚类与指标体系（集中度、吸量效率、新品 / 存量表现、Top10 贡献）、产品生命周期分类、RPG 四国集中度。<b>自动化</b>：把新品扫描、多源数据合并、问卷批处理、内容抓取等重复工作脚本化。<a href="#code">→ 代码与工具</a></div>
+        <div class="d"><b>数据分析</b>：品类 / 题材文本聚类与指标体系（集中度、吸量效率、新品 / 存量表现、Top10 贡献）、产品生命周期分类、RPG 四国集中度。<b>自动化</b>：把新品扫描、问卷批处理、内容抓取等重复工作脚本化。<a href="#code">→ 代码与工具</a></div>
       </div>
     </div>
   </div>
@@ -459,8 +459,9 @@
     </details>
     </div>
 
-      <div class="codegroup" id="code-auto"> <span>把重复工作脚本化</span></h3>
-      <p class="gsub">问卷批处理、内容抓取、新品扫描、多源数据合并——把每周重复的人工操作压成可复用命令。</p>
+      <div class="codegroup" id="code-auto">
+      <h3>自动化 <span>把重复工作脚本化</span></h3>
+      <p class="gsub">问卷批处理、内容抓取、新品扫描——把每周重复的人工操作压成可复用命令。</p>
 <!-- 6 -->
     <details class="codecard">
       <summary><span class="nm">concept_test_stats.py</span><span class="ln">问卷批处理</span><span class="one">多轮问卷的批量清洗与统计：样本量 / 下载意愿 / 尖叫度 / 游玩时长 / 原因占比</span></summary>
@@ -581,44 +582,7 @@
         print(f"去重结果: 原始 {len(df)} 条 -> 去重后 {len(dedup)} 条")
         return dedup</pre></details>
       </div>
-    </details><!-- 2 -->
-    <details class="codecard">
-      <summary><span class="nm">merge_datasets.py</span><span class="ln">多源数据合并</span><span class="one">把各国各年的榜单文件合并成统一底表</span></summary>
-      <div class="cc">
-        <ul>
-          <li><b>为什么需要</b>：同一份数据源在不同市场导出编码不同（UTF-8 / UTF-16），且下载未完成的临时文件混在目录里。</li>
-          <li><b>亮点</b>：编码自动检测 + 失败兜底；从文件名正则解析年份与国家；兼容 <code>.crdownload</code> 分片文件。</li>
-        </ul>
-<details class="code"><summary>查看代码片段</summary><pre><span class="c">def detect_encoding(file_path):</span>
-    <span class="c">"""自动检测文件的编码格式（兼容 crdownload 临时文件）"""</span>
-    try:
-        with open(file_path, 'rb') as f:
-            <span class="c"># 读取更多数据提高检测准确性（分片文件可能不完整）</span>
-            raw_data = f.read(50000)
-            if len(raw_data) == 0:
-                print(f"警告：文件 {file_path} 为空")
-                return 'utf-8'
-            result = chardet.detect(raw_data)
-            encoding = result['encoding']
-            <span class="c"># 处理检测结果为空的情况</span>
-            if encoding is None:
-                encoding = 'utf-16'          <span class="c"># 兜底默认编码</span>
-            print(f"检测到文件编码: {encoding}, 置信度: {result['confidence']:.2f}")
-            return encoding
-    except Exception as e:
-        print(f"检测编码失败: {str(e)}，使用默认编码 utf-16")
-        return 'utf-16'
-
-
-<span class="c">def extract_info_from_filename(filename):</span>
-    <span class="c"># 文件名形如：双平台 应用排行榜 下载量 (Jan 1, 2021 - Dec 31, 2021, US), 详细.csv</span>
-    pattern = r'\([^()]*(\d{4})[^()]*(\d{4}),\s*([A-Z]{2})?\)'
-    match = re.search(pattern, filename)
-    <span class="c"># 提取起始年份与国家代码，作为新列并入底表</span>
-    ...</pre></details>
-      </div>
     </details>
-
     </div>
   </div>
 </section>
