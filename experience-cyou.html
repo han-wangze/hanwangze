@@ -82,6 +82,19 @@
   .sec-head p{color:var(--muted);margin-top:8px;max-width:700px;font-size:15px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
   .roles{display:flex;flex-direction:column;gap:12px}
+  /* 职责卡内的可展开内容 */
+  details.expand{margin-top:12px;border-top:1px dashed var(--line);padding-top:2px}
+  details.expand>summary{list-style:none;cursor:pointer;user-select:none;
+    font-size:13px;font-weight:700;color:var(--primary);
+    padding:8px 0 2px;display:flex;align-items:center;gap:7px;transition:.15s}
+  details.expand>summary::-webkit-details-marker{display:none}
+  details.expand>summary::before{content:"\25B8";font-size:10px;line-height:1;transition:transform .18s}
+  details.expand[open]>summary::before{transform:rotate(90deg)}
+  details.expand>summary:hover{opacity:.78}
+  details.expand>summary b{font-weight:800}
+  details.expand .ebody{margin-top:14px}
+  details.expand .ebody .reports{margin-top:0}
+  details.expand .ebody .codegroup:first-child{margin-top:0}
   .role{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--primary);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow)}
   .role .h{font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px}
   .role .d{font-size:14px;color:var(--muted);margin-top:6px}
@@ -105,14 +118,17 @@
   .pill.o{background:#fff7ed;color:#b45309}
   /* 代码卡 */
   details.codecard{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px}
-  details.codecard summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;user-select:none;position:relative;padding-right:82px}
-  details.codecard summary::-webkit-details-marker{display:none}
-  details.codecard summary::after{content:none}
+  details.codecard > summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;user-select:none;position:relative;padding-right:104px;transition:background .15s}
+  details.codecard > summary::-webkit-details-marker{display:none}
+  details.codecard > summary::after{content:"展开详情 \25B8";position:absolute;right:18px;top:16px;height:22px;line-height:22px;font-size:12px;font-weight:600;color:var(--primary);letter-spacing:.2px;white-space:nowrap;pointer-events:none}
+  details.codecard[open] > summary::after{content:"收起 \25BE"}
 
-  details.codecard summary .nm{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;font-weight:700}
-  details.codecard summary .ln{font-size:11.5px;color:var(--primary);border:1px solid var(--line);border-radius:999px;padding:2px 9px}
-  details.codecard summary .one{font-size:13px;color:var(--muted);flex-basis:100%}
-  details.codecard .cc{padding:0 18px 18px;border-top:1px solid var(--line)}
+  details.codecard > summary .nm{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;font-weight:700}
+  details.codecard > summary .ln{font-size:11.5px;color:var(--primary);border:1px solid var(--line);border-radius:999px;padding:2px 9px}
+  details.codecard > summary .one{font-size:13px;color:var(--muted);flex-basis:100%}
+  details.codecard > summary:hover{background:#f8fafc}
+  details.codecard[open] > summary{border-bottom:1px solid var(--line)}
+  details.codecard .cc{padding:0 18px 18px}
   .codecard .cc .lead{font-size:14px;margin-bottom:10px}
   .codecard .cc ul{margin:0 0 12px 18px;font-size:13.5px;color:var(--muted)}
   .codecard .cc ul li{margin-bottom:3px}
@@ -235,25 +251,11 @@
       </div>
       <div class="role" id="r-report">
         <div class="h">📑 市场研究与报告撰写</div>
-        <div class="d">参与《2025 年玩法类型 / 题材类型年度报告》撰写，负责<a href="#r-us-genre">美国品类趋势</a>、<a href="#r-us-theme">美国题材研究</a>、<a href="#r-mmo">中国 MMO 头部产品趋势</a>三个子模块；基于 Sensor Tower、ADX、广大大等数据，分析市场规模、竞争格局、买量素材、用户画像、内购结构；另完成<a href="#r-rpg">中美日韩 RPG 类市场研究</a>与<a href="#r-minigame">1 份微信小游戏产品分析报告</a>。</div>
-      </div>
-      <div class="role" id="r-data">
-        <div class="h">🐍 数据分析与流程自动化</div>
-        <div class="d"><b>数据分析</b>：品类 / 题材文本聚类与指标体系（集中度、吸量效率、新品 / 存量表现、Top10 贡献）、产品生命周期分类、RPG 四国集中度。<b>自动化</b>：把新品扫描、问卷批处理、内容抓取等重复工作脚本化。<a href="#code">→ 代码与工具</a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 报告提要 ============ -->
-<section id="reports" class="alt">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="k">Reports · 报告提要</div>
-      <h2>年度报告子模块 + 专项研究 + 产品分析</h2>
-    </div>
-    <div class="reports">
-
+        <div class="d">参与《2025 年玩法类型 / 题材类型年度报告》撰写，负责美国品类趋势、美国题材研究、中国 MMO 头部产品趋势三个子模块；基于 Sensor Tower、ADX、广大大等数据，分析市场规模、竞争格局、买量素材、用户画像、内购结构；另完成中美日韩 RPG 类市场研究与 1 份微信小游戏产品分析报告。</div>
+        <details class="expand" id="reports">
+          <summary>查看 <b>5</b> 份报告的研究问题、分析框架与发现</summary>
+          <div class="ebody">
+            <div class="reports">
       <div class="rcard" id="r-us-genre">
         <div class="rt">2021–2025 美国手游品类趋势研究</div>
         <div class="rm">年度报告子模块</div>
@@ -318,21 +320,18 @@
         </dl>
       </div>
 
-    </div>
-
-  </div>
-</section>
-
-<!-- ============ 代码 ============ -->
-<section id="code">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="k">Code · 代码与工具</div>
-      <h2>把重复劳动变成工具</h2>
-      <p>下面是实际在用的脚本，分两组：一组做指标与统计计算，一组把重复劳动自动化。点开每张卡可看到它解决什么问题、代码怎么写。</p>
-    </div>
-
-        <div class="codegroup" id="code-ds">
+    
+            </div>
+          </div>
+        </details>
+      </div>
+      <div class="role" id="r-data">
+        <div class="h">🐍 数据分析与流程自动化</div>
+        <div class="d"><b>数据分析</b>：品类 / 题材文本聚类与指标体系（集中度、吸量效率、新品 / 存量表现、Top10 贡献）、产品生命周期分类、RPG 四国集中度。<b>自动化</b>：把新品扫描、问卷批处理、内容抓取等重复工作脚本化。</div>
+        <details class="expand" id="code">
+          <summary>查看 <b>6</b> 个脚本的用途与代码</summary>
+          <div class="ebody">
+<div class="codegroup" id="code-ds">
       <h3>数据分析 <span>统计与指标计算</span></h3>
       <p class="gsub">支撑市场集中度测算与品类 / 题材指标体系的脚本：聚类、集中度、生命周期分类。下方每张卡分别对应一项指标能力。</p>
 <!-- 5 -->
@@ -459,7 +458,7 @@
     </details>
     </div>
 
-      <div class="codegroup" id="code-auto">
+<div class="codegroup" id="code-auto">
       <h3>自动化 <span>把重复工作脚本化</span></h3>
       <p class="gsub">问卷批处理、内容抓取、新品扫描——把每周重复的人工操作压成可复用命令。</p>
 <!-- 6 -->
@@ -569,7 +568,6 @@
         available_columns = [c for c in required_columns if c in df.columns]
         return df[available_columns].copy()
 
-
     <span class="c">def remove_duplicate_games(self, df):</span>
         <span class="c">"""剔除与滚动去重表重复的记录（仅按游戏名）"""</span>
         <span class="c"># 与新游戏名称空格做格式统一</span>
@@ -583,6 +581,10 @@
         return dedup</pre></details>
       </div>
     </details>
+    </div>
+          </div>
+        </details>
+      </div>
     </div>
   </div>
 </section>
