@@ -111,12 +111,12 @@
   .proj-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
   .proj-head h3{font-size:19px;font-weight:800}
   .rcards.single{grid-template-columns:1fr}
+  .proj-mini{font-size:13.5px;color:var(--muted)}
+  .proj-mini b{color:var(--ink)}
+  .proj-mini a{color:var(--primary);font-weight:700}
   .tags{display:flex;flex-wrap:wrap;gap:6px}
   .tag,.chip{font-size:12px;background:#f1f5f9;color:#475569;border-radius:8px;padding:4px 10px}
   .skills{display:flex;flex-wrap:wrap;gap:8px}
-  .skill-group{margin-bottom:16px}
-  .skill-group:last-child{margin-bottom:0}
-  .sg-label{font-size:13px;font-weight:700;color:var(--primary);margin-bottom:8px;letter-spacing:.3px}
   .sitemap{margin-top:18px;font-size:14px;color:var(--muted);line-height:2}
   .sitemap b{color:var(--ink);font-weight:600}
   .sitemap a{color:var(--muted);border-bottom:1px solid transparent;transition:.15s}
@@ -125,6 +125,17 @@
   .sitemap .sg:last-child{margin-bottom:0}
   .sitemap .sg b{display:inline-block;min-width:88px;color:var(--ink);font-weight:700}
   .sitemap .sg a{margin-right:16px}
+  /* 能力块 */
+  .cap{display:flex;flex-direction:column;gap:14px}
+  .cap-item{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+  .cap-item h3{font-size:17px;font-weight:800;letter-spacing:-.2px}
+  .cap-kw{margin-top:8px;font-size:12.5px;color:var(--primary);font-weight:600;letter-spacing:.2px}
+  .cap-ev{margin-top:10px;font-size:14px;color:var(--muted)}
+  .cap-ev b{color:var(--ink)}
+  .cap-out{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px}
+  .cap-out a{color:var(--primary);font-weight:700;border-bottom:1px solid transparent;transition:.15s}
+  .cap-out a:hover{border-bottom-color:var(--primary)}
+  .cap-note{margin-top:16px;font-size:12.5px;color:var(--muted)}
   /* 研究卡 */
   .rcards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
   @media(max-width:760px){.rcards{grid-template-columns:1fr}}
@@ -223,6 +234,50 @@
   </div>
 </header>
 
+<section id="capability">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Capability · 能力</div>
+      <h2>能做什么</h2>
+    </div>
+    <div class="cap">
+
+      <div class="cap-item">
+        <h3>数据分析与建模</h3>
+        <div class="cap-kw">Python · SQL · Stata · pandas · 指标体系 · 回归与聚类</div>
+        <div class="cap-ev">用集中度（CR3/CR5/CR10）测算中美日韩市场结构，把周度扫榜与问卷批处理从手工改成脚本，并完成产品生命周期分类；独立完成 1 篇企业多元化实证研究（熵指数 + 双向固定效应 + 多期 DID + PSM），另主导 1 份 <b>727 份样本</b>的问卷统计（SPSS 信效度检验 + 多元回归）。</div>
+        <div class="cap-out">
+          <a href="experience-cyou.html">看这段经历 →</a>
+          <a href="research.html#quant">看实证研究 →</a>
+          <a href="research.html#survey">看社会调查 →</a>
+        </div>
+      </div>
+
+      <div class="cap-item">
+        <h3>市场与用户研究</h3>
+        <div class="cap-kw">市场研究 · 概念测试 · 问卷设计 · 用户调研 · 竞争格局</div>
+        <div class="cap-ev">主导潜力产品的概念测试闭环：玩法展示与世界观包装、问卷配置与投放回收，按「下载意愿 ≥ 70% 且尖叫度 ≥ 1.5」筛选高潜方向；设计并回收 <b>87 人校园调研</b>问卷，据此完成一个日程工具的需求验证与立项。</div>
+        <div class="cap-out">
+          <a href="experience-cyou.html#role">看这段经历 →</a>
+          <a href="weschedule.html#why">看 87 人调研 →</a>
+          <a href="research.html#survey">看社会调查 →</a>
+        </div>
+      </div>
+
+      <div class="cap-item">
+        <h3>产品设计与验证</h3>
+        <div class="cap-kw">微信小程序 · 云开发 · MVP 迭代 · 评测体系 · 上线交付</div>
+        <div class="cap-ev">把微信群聊消息变成可管理的日程：从需求验证 → 定义 MVP → 小程序上线 → 建可复现评测体系迭代（端到端 <b>66.2% → 75.0%</b>），并完成竞争格局定位。</div>
+        <div class="cap-out">
+          <a href="weschedule.html">看这个项目 →</a>
+        </div>
+      </div>
+
+    </div>
+    <div class="cap-note">英语：雅思 6.5 / 六级 595 / 四级 655.4 · Excel / PPT</div>
+  </div>
+</section>
+
 <section id="about">
   <div class="wrap">
     <div class="sec-head">
@@ -298,14 +353,7 @@
     <div class="proj-block">
       <div class="proj-head">
         <h3>案例研究</h3>
-      </div>
-      <div class="rcards single">
-        <a class="rcard" href="research.html#case">
-          <div class="rt">广告分析：旺旺魔性广告 &amp; 「五个女博士」争议</div>
-          <div class="tags"><span class="tag">消费者心理</span><span class="tag">品牌传播</span><span class="tag">争议广告框架</span></div>
-          <div class="rd">拆解「魔性」与「贩卖焦虑」背后的消费者心理与品牌影响。</div>
-          <div class="rf">看这一类 →</div>
-        </a>
+        <div class="proj-mini">空间计算·文献计量、广告与消费者心理、财政与经济关系共 <b>5</b> 份 · <a href="research.html#case">看全部 →</a></div>
       </div>
     </div>
 
@@ -370,52 +418,6 @@
           </div>
         </div>
       </details>
-    </div>
-  </div>
-</section>
-
-<section id="stack">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="k">Stack · 技能栈</div>
-      <h2>技能栈</h2>
-    </div>
-    <div class="card">
-      <div class="skill-group">
-        <div class="sg-label">数据分析</div>
-        <div class="skills">
-          <span class="chip">Python / pandas / scikit-learn</span>
-          <span class="chip">SQL</span>
-          <span class="chip">量化建模与指标体系</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="sg-label">市场研究</div>
-        <div class="skills">
-          <span class="chip">市场研究 · 用户调研</span>
-          <span class="chip">概念测试与问卷设计</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="sg-label">数据工具</div>
-        <div class="skills">
-          <span class="chip">Sensor Tower / ADX 等第三方数据平台</span>
-          <span class="chip">网络爬虫（requests / bilibili-api）</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="sg-label">产品工程</div>
-        <div class="skills">
-          <span class="chip">微信小程序 · 云开发</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="sg-label">语言与办公</div>
-        <div class="skills">
-          <span class="chip">英语：雅思 6.5 / 六级 595 / 四级 655.4</span>
-          <span class="chip">Excel / PPT</span>
-        </div>
-      </div>
     </div>
   </div>
 </section>
