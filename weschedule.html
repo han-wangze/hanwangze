@@ -105,15 +105,6 @@
     background:radial-gradient(125% 130% at 18% 0%,#1e293b 0%,#0f172a 58%,#0a1020 100%);
     border:1px solid #1e293b;transition:.2s}
   .video-box:hover{border-color:#334155}
-.video-box.is-playing{display:none}
-.video-embed{position:relative;width:100%;aspect-ratio:16/9;background:#0f172a;border-radius:16px;overflow:hidden;border:1px solid #1e293b}
-.video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.video-fallback{position:absolute;inset:0;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;gap:9px;text-align:center;padding:24px}
-.video-fallback b{display:block;color:#e2e8f0;font-size:15.5px;font-weight:700}
-.video-fallback span{display:block;color:#94a3b8;font-size:13px}
-.video-fallback a{display:inline-block;margin-top:6px;padding:9px 18px;border-radius:999px;background:#fff;
-    color:var(--primary);font-weight:700;font-size:13.5px;text-decoration:none}
   .video-box:hover .vplay{background:#fff;transform:scale(1.05)}
   .vplay{width:62px;height:62px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;transition:.2s}
   .vplay i{width:0;height:0;border-left:17px solid var(--primary);border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:5px}
@@ -457,13 +448,11 @@
         <h2>一段录屏看懂它怎么用</h2>
         <p>录屏展示"复制群消息 → 自动解析 → 冲突检测提示 → 确认保存 → 到点提醒"的完整链路。</p>
       </div>
-      <a class="video-box" id="videoBox" href="https://www.bilibili.com/video/BV1VDYR6YE6m/" target="_blank" rel="noopener">
+      <a class="video-box" href="https://www.bilibili.com/video/BV1VDYR6YE6m/" target="_blank" rel="noopener">
         <span class="vplay" aria-hidden="true"><i></i></span>
         <span class="vt">WeSchedule 实机录屏 · 32 秒</span>
-        <span class="vs">视频托管在 B 站，点击后在本页播放</span>
+        <span class="vs">视频托管在 B 站，点击后新标签页打开</span>
       </a>
-      <div class="video-embed" id="videoEmbed" hidden></div>
-      <noscript><p style="margin-top:12px;font-size:13.5px"><a href="https://www.bilibili.com/video/BV1VDYR6YE6m/" target="_blank" rel="noopener">在 B 站观看这段 32 秒录屏 →</a></p></noscript>
 
       <div class="shots">
         <figure class="shot">
@@ -509,58 +498,5 @@
   </div>
 </footer>
 
-
-<script>
-(function () {
-  var box = document.getElementById('videoBox');
-  var slot = document.getElementById('videoEmbed');
-  if (!box || !slot) return;
-
-  var PAGE = 'https://www.bilibili.com/video/BV1VDYR6YE6m/';
-  var EMBED = 'https://player.bilibili.com/player.html?aid=117258462497363'
-            + '\u0026cid=41831500458\u0026page=1\u0026autoplay=1\u0026danmaku=1';
-
-  /* 内联播放依赖第三方 iframe 与 B站网络。iframe 的 load 事件不代表播放器真的可用
-     （受限网络下会静默返回空白），所以这里改用「播放器就绪信号」判定：
-     B站播放器加载完成后会 postMessage 出来，收到即认为可用；6 秒内没收到就换成
-     明确的播放入口，不留黑底。 */
-  var settled = false;
-  var timer;
-
-  window.addEventListener('message', function (ev) {
-    if (ev.origin !== 'https://player.bilibili.com') return;
-    settled = true;
-    clearTimeout(timer);
-  });
-
-  var f = document.createElement('iframe');
-  f.src = EMBED;
-  f.setAttribute('allowfullscreen', 'true');
-  f.setAttribute('scrolling', 'no');
-  f.setAttribute('frameborder', '0');
-  slot.appendChild(f);
-
-  function fallback() {
-    if (settled) return;
-    settled = true;
-    clearTimeout(timer);
-    slot.innerHTML = '<div class="video-fallback">' +
-      '<b>播放器没能加载</b>' +
-      '<span>当前网络或浏览器环境不支持内联播放。</span>' +
-      '<a class="vbtn" target="_blank" rel="noopener">在 B 站打开视频 →</a>' +
-      '</div>';
-    slot.querySelector('.vbtn').setAttribute('href', PAGE);
-  }
-
-  timer = setTimeout(fallback, 6000);
-
-  box.addEventListener('click', function (e) {
-    e.preventDefault();
-    box.classList.add('is-playing');
-    box.removeAttribute('href');
-    slot.hidden = false;
-  });
-})();
-</script>
 </body>
 </html>
