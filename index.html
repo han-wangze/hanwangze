@@ -134,17 +134,17 @@
   .cap-item h3{font-size:17px;font-weight:800;letter-spacing:-.2px}
   .cap-kw{margin-top:8px;font-size:12.5px;color:var(--primary);font-weight:600;letter-spacing:.2px}
   .cap-f{margin-top:14px;display:flex;flex-direction:column;gap:11px}
-  .cap-fi{display:grid;grid-template-columns:126px 1fr;gap:4px 14px;align-items:baseline}
-  @media(max-width:640px){.cap-fi{grid-template-columns:1fr;gap:2px}}
+  .cap-fi{display:grid;grid-template-columns:152px minmax(0,1fr);gap:4px 14px;align-items:baseline}
+  @media(max-width:640px){.cap-fi{grid-template-columns:1fr;gap:2px}.cap-fi .n{justify-content:flex-start}}
   .cap-fi{position:relative}
-  .cap-fi .n{font-size:13.5px;font-weight:700;color:var(--ink)}
+  .cap-fi .n{font-size:13.5px;font-weight:700;color:var(--ink);display:flex;justify-content:space-between;align-items:baseline;gap:8px}
   .cap-fi .v{font-size:13.5px;color:var(--muted)}
   .cap-fi .v b{color:var(--ink)}
   a.cap-fi{text-decoration:none;border-radius:8px;padding:3px 6px;margin:-3px -6px;transition:.15s}
   a.cap-fi:hover{background:#eef2ff}
-  a.cap-fi .n,a.cap-fi .v{color:var(--primary)}
-  a.cap-fi .v b{color:var(--primary)}
-  a.cap-fi .ar{font-size:12px;color:var(--primary);opacity:.75;margin-left:4px}
+  a.cap-fi:hover .n,a.cap-fi:hover .v,
+  a.cap-fi:hover .v b{color:var(--primary)}
+  a.cap-fi .ar{font-size:12px;color:var(--primary);opacity:.75;margin:0}
   .cap-note{margin-top:16px;font-size:12.5px;color:var(--muted)}
   /* 研究卡 */
   .rcards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
