@@ -144,7 +144,7 @@
 <header class="hero">
   <div class="wrap">
     <h1>解析质量评测报告</h1>
-    <p class="sub">这是 WeSchedule 解析链路的<b>确定性回归测试</b>：100 条群聊语料、固定切分、五层指标。它只回答一个问题：改完提示词之后，这次是变好还是变坏。<b>它不是公开 benchmark</b>，语料、金标准与达标线都由我自己定义，数字只在本项目的历次迭代之间可比。</p>
+    <p class="sub">这是 WeSchedule 解析链路的<b>确定性回归测试</b>：100 条群聊语料、固定切分、五层指标，用来判断一次提示词改动之后，这次是变好还是变坏。</p>
     <div class="badges">
       <span class="badge"><b>100</b> 条语料 · 7 类</span>
       <span class="badge"><b>8:2</b> 固定切分</span>
@@ -178,7 +178,7 @@
       </tbody>
     </table>
     <p class="note" style="margin-top:16px">
-      <b>来源构成</b>：100 条里 <b>93 条是手写构造</b>（按上表七类逐类补齐），<b>7 条来自真实群聊脱敏</b>，原始种子就取自实际群聊，脱敏后保留原样。这意味着这套语料能覆盖我预想到的失败模式，但<b>不能代表真实流量的分布</b>。
+      <b>来源构成</b>：100 条里 <b>93 条是手写构造</b>（按上表七类逐类补齐），<b>7 条来自真实群聊脱敏</b>，原始种子就取自实际群聊，脱敏后保留原样。
     </p>
     <p class="note" style="margin-top:12px">
       <b>切分方式</b>：按 <code>seed=20260717</code> 做一次固定随机切分，dev 80 条 / test 20 条，切分结果落盘在 <code>eval/.split.json</code>。同一份切分贯穿全部三个版本，因此版本之间的差值只来自提示词本身。
@@ -191,7 +191,6 @@
     <div class="sec-head">
       <div class="k">Metrics · 指标口径</div>
       <h2>五层指标与达标线</h2>
-      <p>单看一个分数很容易被误导，所以把"解析对不对"拆成五层分别统计。同一层里也会互相拉扯，最终以端到端为准。</p>
     </div>
     <table class="tbl">
       <thead><tr><th style="width:22%">层级</th><th>怎么算</th><th style="width:18%">达标线</th></tr></thead>
@@ -290,7 +289,6 @@
         <tr><td>端到端口径极严</td><td>整条消息全对才算通过。这也是 75% 看起来不高、但字段准确率接近满分的原因。</td></tr>
         <tr><td>未做多模型对比</td><td>只测了线上实际使用的 <code>deepseek-chat</code>（temperature=0，JSON 模式），没有横向对比其他模型。</td></tr>
         <tr><td>没有线上真实流量回流</td><td>评测集是离线固定的，尚未把线上解析日志接进评测闭环；这是下一步的第一优先项。</td></tr>
-        <tr><td>持续使用</td><td>这套闭环随提示词迭代持续复用至今，不是一次性度量。</td></tr>
       </tbody>
     </table>
     <p class="note" style="margin-top:16px">
