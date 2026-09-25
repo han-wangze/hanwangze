@@ -161,34 +161,43 @@
   .rcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
   .rcard .rt{font-weight:800;font-size:16px;line-height:1.4}
   .rcard .rm{font-size:12px;color:var(--muted)}
-  .kv{display:grid;grid-template-columns:76px 1fr;gap:6px 10px;font-size:13.5px}
-  .kv dt{color:var(--muted);font-weight:600}
-  .kv dd{color:var(--ink)}
-  .kv dd .hl{background:#fef3c7;border-radius:4px;padding:0 4px}
   .note{font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
     border-radius:12px;padding:14px 16px;margin-top:16px;box-shadow:var(--shadow)}
-  /* 09-25：下拉内容统一 13px 正文 + bullet 化（像素君修订） */
+  /* 09-25：下拉内容排版体系（13px 正文 + bullet + 左描边分块） */
   .mech{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
   .mech>li{font-size:13px;line-height:1.6;color:var(--muted);padding-left:14px;position:relative}
   .mech>li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:2px;background:var(--primary);opacity:.45}
   .mech>li>b{color:var(--ink);font-weight:700;margin-right:5px}
-  .bul{list-style:none;margin:4px 0 0;padding:0}
+  .bul{list-style:none;margin:0;padding:0}
   .bul>li{font-size:13px;line-height:1.6;color:var(--ink);padding-left:14px;position:relative;margin-bottom:5px}
   .bul>li:last-child{margin-bottom:0}
   .bul>li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:2px;background:var(--primary);opacity:.38}
   .bul>li>b{font-weight:700}
+  /* 字段分块：左描边 + 小标题（沿用站内 #smart 决策卡的语言） */
+  .blk{margin-top:13px;padding-left:13px;border-left:2px solid var(--line)}
+  .blk>.bt{font-size:12.5px;font-weight:800;color:var(--primary);letter-spacing:.3px;margin-bottom:5px}
+  /* 结论块：底色 + 主色左条，让判断落点跳出来 */
+  .blk.key{margin-top:15px;padding:11px 14px 11px 12px;border-left:3px solid var(--primary);
+    background:#f7f8ff;border-radius:0 10px 10px 0}
+  .blk.key>.bul>li::before{opacity:.55}
+  /* 元信息行 / 脚注行：低对比度，不抢主体 */
+  .meta-row{font-size:12.5px;line-height:1.62;color:var(--muted);margin-top:8px}
+  .meta-row b{color:var(--ink);font-weight:600;margin-right:5px}
+  .foot-line{font-size:12.5px;line-height:1.6;color:var(--muted);margin-top:13px;padding-top:10px;border-top:1px dashed var(--line)}
+  .foot-line b{color:var(--ink);font-weight:600;margin-right:4px}
+  .hl{background:#fef3c7;border-radius:4px;padding:0 4px}
   .role code,.codecard code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
     font-size:12px;background:#f1f5f9;border-radius:5px;padding:1px 5px;color:#334155}
-  .subh{font-size:12.5px;font-weight:800;color:var(--primary);letter-spacing:.3px;margin:13px 0 4px}
+  .subh{font-size:12.5px;font-weight:800;color:var(--primary);letter-spacing:.3px;margin:13px 0 5px}
   .subh:first-child{margin-top:0}
-  /* 字号倒挂修正：工具卡里的 <p> 原来继承 body 的 16px，比邻接列表(13.5px)还大 */
   .codecard .cc p{font-size:13px;line-height:1.6;color:var(--muted)}
-  .kv{font-size:13px}
   .codecard .cc ul{font-size:13px}
   .codecard .cc ul li{margin-bottom:4px}
   .codegroup>h3{font-size:15px}
   .codegroup .gsub{font-size:12.5px}
+  .rcard{gap:0}
   .rcard .rt{font-size:15px}
+  .rcard .rm{font-size:12px;margin-top:3px}
   .reports.wide{grid-template-columns:1fr}
   /* 技能栈 */
   .stackrow{display:grid;grid-template-columns:88px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);align-items:start}
@@ -280,19 +289,13 @@
     <details class="codecard">
       <summary><span class="nm">new_release_scanner.py</span><span class="ln">新品扫描</span><span class="one">扫描 Sensor Tower 免费榜，筛 2025 年新上线产品，去重后输出每周新品清单</span></summary>
       <div class="cc">
-        <ul>
-          <li><b>为什么需要</b>：每周要从 Sensor Tower 的 App Store 免费榜（top free）里筛出 2025 年新上线的新品，人工比对历史名单重复且易错。</li>
-          <li><b>亮点</b>：榜单有两种导出格式（列名不同），自动识别并映射成统一字段；筛选、去重、回写拆成独立方法，改一处不碰其他。</li>
-        </ul>
+        <p class="subh">为什么需要</p><ul class="bul"><li>每周要从 Sensor Tower 的 App Store 免费榜（top free）里筛出 2025 年新上线的新品，人工比对历史名单重复且易错。</li></ul><p class="subh">怎么做</p><ul class="bul"><li>榜单有两种导出格式（列名不同），自动识别并映射成统一字段；筛选、去重、回写拆成独立方法，改一处不碰其他。</li></ul>
       </div>
     </details>
     <details class="codecard">
       <summary><span class="nm">bilibili_crawler.py</span><span class="ln">B站内容抓取</span><span class="one">抓取游戏 UP 主投稿的标题和链接，快速了解自媒体侧的新游</span></summary>
       <div class="cc">
-        <ul>
-          <li><b>为什么需要</b>：新游扫描要看 B 站游戏 UP 主最近发了哪些新游，人工翻投稿低效。</li>
-          <li><b>亮点</b>：日期字符串先统一解析成 datetime 再比较；用官方库异步抓取标题 / 链接 / 发布时间，按发布时间倒序，翻到早于起始时间的投稿即提前退出，避免无谓翻页。</li>
-        </ul>
+        <p class="subh">为什么需要</p><ul class="bul"><li>新游扫描要看 B 站游戏 UP 主最近发了哪些新游，人工翻投稿低效。</li></ul><p class="subh">怎么做</p><ul class="bul"><li>日期字符串先统一解析成 datetime 再比较；用官方库异步抓取标题 / 链接 / 发布时间，按发布时间倒序，翻到早于起始时间的投稿即提前退出，避免无谓翻页。</li></ul>
       </div>
     </details>
             </div>
@@ -303,15 +306,12 @@
       <div class="rcard" id="r-minigame">
         <div class="rt">微信小游戏畅销榜监测 · 2025 年 10 月期</div>
         <div class="rm">月度监测系列</div>
-        <dl class="kv">
-          <dt>我的角色</dt><dd>负责 2025 年 10 月期榜单的扫描、分析与成稿</dd>
-          <dt>数据与工具</dt><dd><ul class="bul"><li><b>榜单</b>：微信小游戏畅销榜 Top100 月度扫描（扫描节点为每月 20 日）。</li><li><b>标签体系</b>：自建品类标签归类（MMO、卡牌、塔防、RPG、SLG、合成+ 等），细分到传奇 like、咸鱼 like、几何王国 like 等玩法模型。</li><li><b>拆解方式</b>：新入榜产品结合榜单数据与实际体验逐款拆解。</li></ul></dd>
-          <dt>研究问题</dt><dd>本月小游戏畅销榜格局怎么变，新入榜产品靠什么进来</dd>
-          <dt>整体格局</dt><dd><ul class="bul"><li>10 月 Top100 品类座次：MMO（22 款）、卡牌（18）、RPG（12）、塔防（11）、合成+（9）、SLG（9）。</li><li>环比变化最大的是卡牌（14→18，+4）和塔防（15→11，-4）。</li></ul></dd>
-          <dt>变化归因</dt><dd>拆三条主线：<ul class="bul"><li><b>卡牌增长全部来自放置卡牌</b>：5 款新品中 4 款是放置卡牌，其中 2 款为拳皇 IP 几何王国 like（《最强斗王》《拳皇98终极之战WEB》），经典 IP 套成熟玩法框架，进榜即上量；另有《三国猛将传》（《巨神军师》换名）、《云端之约》（《影之守卫》换名）两款老产品重上。</li><li><b>塔防减少集中在合成+塔防</b>：《快来当领主》《塔防精灵》《一步两步》《进击荣誉》4 款掉出榜单，且无新入榜产品补位。</li><li><b>MMO 数量持平但波动最大</b>：单月 4 款新品进榜、5 款掉榜。新品中传奇 like 占 2 款（《王者战绩》《巅峰霸业》），剑侠情缘 IP 的《剑侠世界：起源》靠自动寻路、挂机奖励领取等轻度化设计进榜。</li></ul></dd>
-          <dt>结论</dt><dd><ul class="bul"><li>10 月榜单格局整体稳定，变化集中在卡牌和塔防：卡牌靠放置卡牌新品和 IP 产品放量（+4），塔防因合成+塔防 4 款掉榜且无新品补位（-4）。</li><li>MMO 上榜下榜频繁、波动最大，新品仍以传奇 like 和经典 IP 产品为主。</li><li>8、9 月上新的抛物线射击、射击产品本月全部掉出。</li></ul></dd>
-          <dt>产出</dt><dd>月度监测报告（品类数量矩阵与环比 + 新入榜产品逐款拆解）</dd>
-        </dl>
+        <div class="meta-row"><b>我的角色</b>负责 2025 年 10 月期榜单的扫描、分析与成稿<br><b>数据与工具</b><ul class="bul"><li><b>榜单</b>：微信小游戏畅销榜 Top100 月度扫描（扫描节点为每月 20 日）。</li><li><b>标签体系</b>：自建品类标签归类（MMO、卡牌、塔防、RPG、SLG、合成+ 等），细分到传奇 like、咸鱼 like、几何王国 like 等玩法模型。</li><li><b>拆解方式</b>：新入榜产品结合榜单数据与实际体验逐款拆解。</li></ul></div>
+        <div class="blk"><div class="bt">研究问题</div>本月小游戏畅销榜格局怎么变，新入榜产品靠什么进来</div>
+        <div class="blk"><div class="bt">整体格局</div><ul class="bul"><li>10 月 Top100 品类座次：MMO（22 款）、卡牌（18）、RPG（12）、塔防（11）、合成+（9）、SLG（9）。</li><li>环比变化最大的是卡牌（14→18，+4）和塔防（15→11，-4）。</li></ul></div>
+        <div class="blk"><div class="bt">变化归因</div>拆三条主线：<ul class="bul"><li><b>卡牌增长全部来自放置卡牌</b>：5 款新品中 4 款是放置卡牌，其中 2 款为拳皇 IP 几何王国 like（《最强斗王》《拳皇98终极之战WEB》），经典 IP 套成熟玩法框架，进榜即上量；另有《三国猛将传》（《巨神军师》换名）、《云端之约》（《影之守卫》换名）两款老产品重上。</li><li><b>塔防减少集中在合成+塔防</b>：《快来当领主》《塔防精灵》《一步两步》《进击荣誉》4 款掉出榜单，且无新入榜产品补位。</li><li><b>MMO 数量持平但波动最大</b>：单月 4 款新品进榜、5 款掉榜。新品中传奇 like 占 2 款（《王者战绩》《巅峰霸业》），剑侠情缘 IP 的《剑侠世界：起源》靠自动寻路、挂机奖励领取等轻度化设计进榜。</li></ul></div>
+        <div class="blk key"><div class="bt">结论</div><ul class="bul"><li>10 月榜单格局整体稳定，变化集中在卡牌和塔防：卡牌靠放置卡牌新品和 IP 产品放量（+4），塔防因合成+塔防 4 款掉榜且无新品补位（-4）。</li><li>MMO 上榜下榜频繁、波动最大，新品仍以传奇 like 和经典 IP 产品为主。</li><li>8、9 月上新的抛物线射击、射击产品本月全部掉出。</li></ul></div>
+        <div class="foot-line"><b>产出</b>月度监测报告（品类数量矩阵与环比 + 新入榜产品逐款拆解）</div>
       </div>
             </div>
           </div>
@@ -335,11 +335,7 @@
     <details class="codecard">
       <summary><span class="nm">concept_test_stats.py</span><span class="ln">问卷批处理</span><span class="one">多轮问卷的批量清洗与统计：样本量 / 下载意愿 / 尖叫度 / 游玩时长 / 原因占比</span></summary>
       <div class="cc">
-        <ul>
-          <li><b>为什么需要</b>：多轮概念测试会回收一批问卷 Excel，每轮都要清洗、按同一套口径算下载意愿 / 尖叫度 / 游玩时长，手工做慢且口径难一致。</li>
-          <li><b>亮点</b>：列名自适应——问卷题号 / 措辞在多轮里会变，用正则 + 关键词自动识别「游玩时长列」「已填写字段」「品类问题列」，换一轮问卷不用改代码。</li>
-          <li><b>亮点</b>：统计口径严谨——下载意愿分母 = 有效爱好用户 + 已查看未填写；尖叫度只在「愿意试玩」子集取均值；游玩时长占比分母 = 已填写样本。</li>
-        </ul>
+        <p class="subh">为什么需要</p><ul class="bul"><li>多轮概念测试会回收一批问卷 Excel，每轮都要清洗、按同一套口径算下载意愿 / 尖叫度 / 游玩时长，手工做慢且口径难一致。</li></ul><p class="subh">怎么做</p><ul class="bul"><li>列名自适应——问卷题号 / 措辞在多轮里会变，用正则 + 关键词自动识别「游玩时长列」「已填写字段」「品类问题列」，换一轮问卷不用改代码。</li><li>统计口径严谨——下载意愿分母 = 有效爱好用户 + 已查看未填写；尖叫度只在「愿意试玩」子集取均值；游玩时长占比分母 = 已填写样本。</li></ul>
       </div>
     </details>
             </div>
@@ -356,61 +352,49 @@
       <div class="rcard" id="r-us-genre">
         <div class="rt">2021–2025 美国手游品类趋势研究</div>
         <div class="rm">年度报告 · 美国板块</div>
-        <dl class="kv">
-          <dt>我的角色</dt><dd>负责美国品类板块的数据整理、分析与成稿</dd>
-          <dt>数据与工具</dt><dd>基于 Sensor Tower 双平台数据（品类、产品两级原始表），Excel 透视表汇总，Python 计算集中度与新品贡献结构；买量素材取自广大大</dd>
-          <dt>研究问题</dt><dd>五年里美国各玩法品类怎么演化，还有哪些赛道值得进</dd>
-          <dt>整体盘子</dt><dd>下载 51 亿降到 37 亿次（CAGR -8%），收入 173 亿涨到 185 亿美元（CAGR +2%），2025 年收入几乎零增长（+0.3%），是存量市场</dd>
-          <dt>品类趋势</dt><dd>下载、收入各取 Top20，分「24–25 同比」和「五年持续」两层看。<ul class="bul"><li><b>下载侧</b>：涨的是方块解谜（+28%）、纸牌接龙（+19%）、4X 策略（+17%）。前两个 RPD 低、收入高度集中（纸牌接龙收入 Top10 占 95%），进入性价比有限；4X 量价兼备，Kingshot 说明「塔防吸量 + SLG 变现」的新品路径仍走得通。</li><li><b>收入侧</b>：二合（+82%）、即时策略（+81%）、卡牌对战（+59%）增速最高，但增长压在一两款头部上——Gossip Harbor 占二合收入 57%，Clash Royale 一款的增量就超过即时策略品类全部增量，<span class="hl">是头部在放量，不是赛道在扩容</span>。</li><li><b>五年持续维度</b>：持续增长的品类很少——下载侧只有方块解谜、纸牌接龙、4X，收入侧只有二合。</li></ul></dd>
-          <dt>归因与深挖</dt><dd>对涨跌 Top 品类逐一拆增长来源（整体盘子 vs 个别新品），并对卡牌、SLG、模拟经营、塔防四个方向做持续跟踪。横向看有三个跨品类判断：<ul class="bul"><li><b>素材端</b>：核心玩法展示持续让位给数字门、数字祖玛这类休闲副玩法，「素材玩法 ≠ 游戏玩法」成了获量常态。</li><li><b>用户端</b>：会话次数普降、单次时长稳定在 7–10 分钟，使用越来越碎片。</li><li><b>商业化端</b>：礼包占比在多个品类反超直充。</li></ul></dd>
-          <dt>结论</dt><dd><ul class="bul"><li><span class="hl">4X、二合、对消可关注</span>，但需靠题材或剧情差异化切入。</li><li>卡牌对战、即时策略的机会绑在顶级 IP 上，不适合正面进。</li><li>平台 / 跑酷、定制、沙盒等连续收缩的赛道不建议进。</li></ul></dd>
-          <dt>产出</dt><dd>完整研究报告（数据底表 + 品类趋势 + 重点方向拆解 + 头部产品案例）</dd>
-        </dl>
+        <div class="meta-row"><b>我的角色</b>负责美国品类板块的数据整理、分析与成稿<br><b>数据与工具</b>基于 Sensor Tower 双平台数据（品类、产品两级原始表），Excel 透视表汇总，Python 计算集中度与新品贡献结构；买量素材取自广大大</div>
+        <div class="blk"><div class="bt">研究问题</div>五年里美国各玩法品类怎么演化，还有哪些赛道值得进</div>
+        <div class="blk"><div class="bt">整体盘子</div>下载 51 亿降到 37 亿次（CAGR -8%），收入 173 亿涨到 185 亿美元（CAGR +2%），2025 年收入几乎零增长（+0.3%），是存量市场</div>
+        <div class="blk"><div class="bt">品类趋势</div>下载、收入各取 Top20，分「24–25 同比」和「五年持续」两层看。<ul class="bul"><li><b>下载侧</b>：涨的是方块解谜（+28%）、纸牌接龙（+19%）、4X 策略（+17%）。前两个 RPD 低、收入高度集中（纸牌接龙收入 Top10 占 95%），进入性价比有限；4X 量价兼备，Kingshot 说明「塔防吸量 + SLG 变现」的新品路径仍走得通。</li><li><b>收入侧</b>：二合（+82%）、即时策略（+81%）、卡牌对战（+59%）增速最高，但增长压在一两款头部上——Gossip Harbor 占二合收入 57%，Clash Royale 一款的增量就超过即时策略品类全部增量，<span class="hl">是头部在放量，不是赛道在扩容</span>。</li><li><b>五年持续维度</b>：持续增长的品类很少——下载侧只有方块解谜、纸牌接龙、4X，收入侧只有二合。</li></ul></div>
+        <div class="blk"><div class="bt">归因与深挖</div>对涨跌 Top 品类逐一拆增长来源（整体盘子 vs 个别新品），并对卡牌、SLG、模拟经营、塔防四个方向做持续跟踪。横向看有三个跨品类判断：<ul class="bul"><li><b>素材端</b>：核心玩法展示持续让位给数字门、数字祖玛这类休闲副玩法，「素材玩法 ≠ 游戏玩法」成了获量常态。</li><li><b>用户端</b>：会话次数普降、单次时长稳定在 7–10 分钟，使用越来越碎片。</li><li><b>商业化端</b>：礼包占比在多个品类反超直充。</li></ul></div>
+        <div class="blk key"><div class="bt">结论</div><ul class="bul"><li><span class="hl">4X、二合、对消可关注</span>，但需靠题材或剧情差异化切入。</li><li>卡牌对战、即时策略的机会绑在顶级 IP 上，不适合正面进。</li><li>平台 / 跑酷、定制、沙盒等连续收缩的赛道不建议进。</li></ul></div>
+        <div class="foot-line"><b>产出</b>完整研究报告（数据底表 + 品类趋势 + 重点方向拆解 + 头部产品案例）</div>
       </div>
 
       <div class="rcard" id="r-us-theme">
         <div class="rt">2021–2025 美国手游题材趋势研究</div>
         <div class="rm">年度报告 · 美国板块</div>
-        <dl class="kv">
-          <dt>我的角色</dt><dd>负责美国题材板块的数据整理、分析与成稿</dd>
-          <dt>数据与工具</dt><dd>基于 Sensor Tower 双平台数据（Game IQ 主题标签、月度原始表），Excel 透视表按题材汇总下载 / 收入 / RPD（中英对照表 VLOOKUP）；头部产品数据取自 ST 应用排行榜；题材内产品按五年均 RPD 划分轻度 / 中重度</dd>
-          <dt>研究问题</dt><dd>五年里美国各游戏题材的盘子怎么变，题材和玩法怎么组合还有进入机会</dd>
-          <dt>整体格局</dt><dd><ul class="bul"><li>题材大盘以轻度休闲为主，头部格局稳定——烹饪（1.03 亿）、时尚（8,869 万）、汽车（8,296 万）、装饰（7,437 万）四个题材年下载均在 7,000 万以上，座次与去年相比基本不变。</li><li>题材主要承担吸量功能，因此趋势判断以下载为主、RPD 定轻重。</li></ul></dd>
-          <dt>题材趋势</dt><dd>下载 Top20，分「24–25 同比」和「五年持续」两层看。<ul class="bul"><li><b>增长侧</b>：烹饪是唯一收入、下载双增的头部题材（下载 +6%、收入 +50%，五年 CAGR 分别 +6% / +12%），由 Cookingdom、Good Coffee, Great Coffee 等新品带动；帝国建造下载 +15%，RPD 24.4 美元，量价齐升；丧尸题材下载持平（五年 CAGR 0%）但收入 +39%，由 Last War: Survival（单款增收 2.7 亿美元）和 Last Z 两款 SLG 驱动。</li><li><b>下降侧</b>：时尚（-20%，五年 CAGR -21%）、犯罪（-24%）、军事（-21%）领跌，共性是头部老产品衰退、新品承接不足；载具汽车下载 -11% 但收入 +40%（Car Match 单款增收 963 万美元），属存量深耕而非盘子扩容。</li></ul></dd>
-          <dt>归因与深挖</dt><dd>对重点题材逐一拆增长来源并下钻到产品级。横向看有四个跨题材判断：<ul class="bul"><li><b>获量端</b>：ASMR 成为轻度题材新品的共性手段——烹饪的 Cookingdom、Jelly Master，时尚的 Skincare Time、Satiszone 都靠「ASMR 音效 + 即时反馈 + 无压力进度」支撑下载，题材内新老产品代际更替明显。</li><li><b>玩法端</b>：合成玩法持续向题材渗透——烹饪收入 Top5 中 4 款是合成（Tasty Travels、Merge Cooking、Flambé 贡献超七成收入增量），装饰题材的头部增量也来自「合成 + 剧情」（Matching Story、Seaside Escape）。</li><li><b>变现端</b>：「轻题材吸量 + 重度玩法变现」在多个题材被验证——冒险题材的 X-Clash 用画线救狗 / 数字门超休素材吸量、后期转 SLG；犯罪题材的 Lands of Jail 以监狱经营为壳、框架对标 Whiteout Survival，RPD 9.84 美元；丧尸题材 Last War / Last Z 同为超休射击素材 + 4X 变现。</li><li><b>供给端</b>：成熟题材内的换皮矩阵仍有效（Supercent 商店经营系列单款美国均超 700 万下载），「低成本验证—换皮迭代」的题材打法成立。</li></ul></dd>
-          <dt>结论</dt><dd><ul class="bul"><li><span class="hl">可关注</span>：烹饪 + 合成 / 模拟经营、丧尸 + 休闲副玩法 + 4X。</li><li><b>需差异化切入（女性向）</b>：时尚 + 二合 / 换装、装饰 + 收纳整理。</li><li><b>不建议进入</b>：军事、农场、动物猫、载具汽车等玩法同质、RPD 偏低的题材。</li></ul></dd>
-          <dt>产出</dt><dd>完整研究报告（题材五年汇总底表 + 下载 / 收入趋势图 + 重点题材产品级拆解）</dd>
-        </dl>
+        <div class="meta-row"><b>我的角色</b>负责美国题材板块的数据整理、分析与成稿<br><b>数据与工具</b>基于 Sensor Tower 双平台数据（Game IQ 主题标签、月度原始表），Excel 透视表按题材汇总下载 / 收入 / RPD（中英对照表 VLOOKUP）；头部产品数据取自 ST 应用排行榜；题材内产品按五年均 RPD 划分轻度 / 中重度</div>
+        <div class="blk"><div class="bt">研究问题</div>五年里美国各游戏题材的盘子怎么变，题材和玩法怎么组合还有进入机会</div>
+        <div class="blk"><div class="bt">整体格局</div><ul class="bul"><li>题材大盘以轻度休闲为主，头部格局稳定——烹饪（1.03 亿）、时尚（8,869 万）、汽车（8,296 万）、装饰（7,437 万）四个题材年下载均在 7,000 万以上，座次与去年相比基本不变。</li><li>题材主要承担吸量功能，因此趋势判断以下载为主、RPD 定轻重。</li></ul></div>
+        <div class="blk"><div class="bt">题材趋势</div>下载 Top20，分「24–25 同比」和「五年持续」两层看。<ul class="bul"><li><b>增长侧</b>：烹饪是唯一收入、下载双增的头部题材（下载 +6%、收入 +50%，五年 CAGR 分别 +6% / +12%），由 Cookingdom、Good Coffee, Great Coffee 等新品带动；帝国建造下载 +15%，RPD 24.4 美元，量价齐升；丧尸题材下载持平（五年 CAGR 0%）但收入 +39%，由 Last War: Survival（单款增收 2.7 亿美元）和 Last Z 两款 SLG 驱动。</li><li><b>下降侧</b>：时尚（-20%，五年 CAGR -21%）、犯罪（-24%）、军事（-21%）领跌，共性是头部老产品衰退、新品承接不足；载具汽车下载 -11% 但收入 +40%（Car Match 单款增收 963 万美元），属存量深耕而非盘子扩容。</li></ul></div>
+        <div class="blk"><div class="bt">归因与深挖</div>对重点题材逐一拆增长来源并下钻到产品级。横向看有四个跨题材判断：<ul class="bul"><li><b>获量端</b>：ASMR 成为轻度题材新品的共性手段——烹饪的 Cookingdom、Jelly Master，时尚的 Skincare Time、Satiszone 都靠「ASMR 音效 + 即时反馈 + 无压力进度」支撑下载，题材内新老产品代际更替明显。</li><li><b>玩法端</b>：合成玩法持续向题材渗透——烹饪收入 Top5 中 4 款是合成（Tasty Travels、Merge Cooking、Flambé 贡献超七成收入增量），装饰题材的头部增量也来自「合成 + 剧情」（Matching Story、Seaside Escape）。</li><li><b>变现端</b>：「轻题材吸量 + 重度玩法变现」在多个题材被验证——冒险题材的 X-Clash 用画线救狗 / 数字门超休素材吸量、后期转 SLG；犯罪题材的 Lands of Jail 以监狱经营为壳、框架对标 Whiteout Survival，RPD 9.84 美元；丧尸题材 Last War / Last Z 同为超休射击素材 + 4X 变现。</li><li><b>供给端</b>：成熟题材内的换皮矩阵仍有效（Supercent 商店经营系列单款美国均超 700 万下载），「低成本验证—换皮迭代」的题材打法成立。</li></ul></div>
+        <div class="blk key"><div class="bt">结论</div><ul class="bul"><li><span class="hl">可关注</span>：烹饪 + 合成 / 模拟经营、丧尸 + 休闲副玩法 + 4X。</li><li><b>需差异化切入（女性向）</b>：时尚 + 二合 / 换装、装饰 + 收纳整理。</li><li><b>不建议进入</b>：军事、农场、动物猫、载具汽车等玩法同质、RPD 偏低的题材。</li></ul></div>
+        <div class="foot-line"><b>产出</b>完整研究报告（题材五年汇总底表 + 下载 / 收入趋势图 + 重点题材产品级拆解）</div>
       </div>
 
       <div class="rcard" id="r-mmo">
         <div class="rt">2021–2025 中国 MMO 头部产品趋势研究</div>
         <div class="rm">年度报告 · 中国板块 · 热门方向</div>
-        <dl class="kv">
-          <dt>我的角色</dt><dd>负责热门方向中国 MMO 部分的数据整理、分析与成稿</dd>
-          <dt>数据与工具</dt><dd>基于 Sensor Tower 中国 iOS 端数据，MMO 采用多标签加权口径（下载 = MMORPG + 0.3×放置 RPG + 0.07×回合 RPG；收入 = MMORPG + 0.3×放置 RPG + 0.25×回合 RPG）；买量素材来自 adx（卖点打标签聚类）；内购结构取自 ST 头部应用内购买记录</dd>
-          <dt>研究问题</dt><dd>MMO 盘子五年变成了什么样，头部产品靠什么维持，新品还有没有进榜路径</dd>
-          <dt>规模概况</dt><dd><ul class="bul"><li>五年持续萎缩——下载从 1.30 亿降至 3,794 万（CAGR -26%），收入从 21.1 亿降至 8.8 亿美元（CAGR -20%）。</li><li>但 <span class="hl">RPD 从 16.3 美元一路升到 23.2 美元</span>：盘子在收缩，留下来的用户付费深度在提高，是明确的存量深耕市场。</li><li>五年中唯一明显的缓冲是 2023 年《逆水寒》通过买休闲用户扩量，成为上线首年下载最高的 MMO。</li></ul></dd>
-          <dt>头部格局</dt><dd><ul class="bul"><li>固化且获量极难：2025 年收入 Top10 中 6 款是上线近十年的老产品（梦幻西游、大话西游、问道等），iOS 端年下载超 100 万的仅 6 款。</li><li>仅两款新品进入 Top10：《龙之谷世界》走龙之谷 IP 怀旧 + 端游还原，《仙遇》主打「遇见端游时代的自己」，靠轻日常、轻社交做减负。</li><li><span class="hl">新品的共同生存策略是经典 IP + 降低负担</span>。</li></ul></dd>
-          <dt>买量素材</dt><dd>即时制与回合制同向变化：<ul class="bul"><li><b>即时制</b>：高福利卖点从 4% 升至 23%（快速升级、高爆率），是最大变化；高品质美术从 58% 微降至 54%。</li><li><b>回合制</b>：高福利从 15% 升至 29%，高品质美术从 63% 降至 44%。</li><li><b>判断</b>：仙侠、武侠美术和职业展示对玩家已不构成差异点，两类产品同时在减少美术卖点、加注福利卖点——玩家更吃「低门槛、高回报」的数值爽点；新品则靠 IP / 情怀卖点补位（龙之谷世界、新剑侠情缘）。</li></ul></dd>
-          <dt>内购结构</dt><dd>直充是绝对主体，但结构变化要拆开归因：<ul class="bul"><li><b>即时制</b>：直充 50% + 礼包 37% 为主；占比上升主要由《仙遇》《龙之谷世界》《新剑侠情缘》三款新进榜产品带动，老产品内购结构基本没动。</li><li><b>回合制</b>：直充占比高达 83%（梦幻西游 RPD 131.9、幻唐志 RPD 227.9，付费深度极端）；占比上升主因是《新石器时代》《长安幻想》两款出榜——是榜单结构变化，不是在榜产品的行为变化。</li></ul></dd>
-          <dt>结论</dt><dd><ul class="bul"><li>MMO 盘子收缩、头部固化、获量成本高，<b>不建议正面进入</b>。</li><li>可行路径已被两款新品验证：<span class="hl">经典 IP 情怀打底 + 高福利素材买量 + 轻负担设计</span>。</li><li>回合制的超高 RPD 由十年老产品支撑，不能外推给新品。</li></ul></dd>
-          <dt>产出</dt><dd>研究报告章节（规模趋势 + Top10 产品表 + 素材卖点聚类 + 内购结构）</dd>
-        </dl>
+        <div class="meta-row"><b>我的角色</b>负责热门方向中国 MMO 部分的数据整理、分析与成稿<br><b>数据与工具</b>基于 Sensor Tower 中国 iOS 端数据，MMO 采用多标签加权口径（下载 = MMORPG + 0.3×放置 RPG + 0.07×回合 RPG；收入 = MMORPG + 0.3×放置 RPG + 0.25×回合 RPG）；买量素材来自 adx（卖点打标签聚类）；内购结构取自 ST 头部应用内购买记录</div>
+        <div class="blk"><div class="bt">研究问题</div>MMO 盘子五年变成了什么样，头部产品靠什么维持，新品还有没有进榜路径</div>
+        <div class="blk"><div class="bt">规模概况</div><ul class="bul"><li>五年持续萎缩——下载从 1.30 亿降至 3,794 万（CAGR -26%），收入从 21.1 亿降至 8.8 亿美元（CAGR -20%）。</li><li>但 <span class="hl">RPD 从 16.3 美元一路升到 23.2 美元</span>：盘子在收缩，留下来的用户付费深度在提高，是明确的存量深耕市场。</li><li>五年中唯一明显的缓冲是 2023 年《逆水寒》通过买休闲用户扩量，成为上线首年下载最高的 MMO。</li></ul></div>
+        <div class="blk"><div class="bt">头部格局</div><ul class="bul"><li>固化且获量极难：2025 年收入 Top10 中 6 款是上线近十年的老产品（梦幻西游、大话西游、问道等），iOS 端年下载超 100 万的仅 6 款。</li><li>仅两款新品进入 Top10：《龙之谷世界》走龙之谷 IP 怀旧 + 端游还原，《仙遇》主打「遇见端游时代的自己」，靠轻日常、轻社交做减负。</li><li><span class="hl">新品的共同生存策略是经典 IP + 降低负担</span>。</li></ul></div>
+        <div class="blk"><div class="bt">买量素材</div>即时制与回合制同向变化：<ul class="bul"><li><b>即时制</b>：高福利卖点从 4% 升至 23%（快速升级、高爆率），是最大变化；高品质美术从 58% 微降至 54%。</li><li><b>回合制</b>：高福利从 15% 升至 29%，高品质美术从 63% 降至 44%。</li><li><b>判断</b>：仙侠、武侠美术和职业展示对玩家已不构成差异点，两类产品同时在减少美术卖点、加注福利卖点——玩家更吃「低门槛、高回报」的数值爽点；新品则靠 IP / 情怀卖点补位（龙之谷世界、新剑侠情缘）。</li></ul></div>
+        <div class="blk"><div class="bt">内购结构</div>直充是绝对主体，但结构变化要拆开归因：<ul class="bul"><li><b>即时制</b>：直充 50% + 礼包 37% 为主；占比上升主要由《仙遇》《龙之谷世界》《新剑侠情缘》三款新进榜产品带动，老产品内购结构基本没动。</li><li><b>回合制</b>：直充占比高达 83%（梦幻西游 RPD 131.9、幻唐志 RPD 227.9，付费深度极端）；占比上升主因是《新石器时代》《长安幻想》两款出榜——是榜单结构变化，不是在榜产品的行为变化。</li></ul></div>
+        <div class="blk key"><div class="bt">结论</div><ul class="bul"><li>MMO 盘子收缩、头部固化、获量成本高，<b>不建议正面进入</b>。</li><li>可行路径已被两款新品验证：<span class="hl">经典 IP 情怀打底 + 高福利素材买量 + 轻负担设计</span>。</li><li>回合制的超高 RPD 由十年老产品支撑，不能外推给新品。</li></ul></div>
+        <div class="foot-line"><b>产出</b>研究报告章节（规模趋势 + Top10 产品表 + 素材卖点聚类 + 内购结构）</div>
       </div>
 
       <div class="rcard" id="r-rpg">
         <div class="rt">2021–2025 中美日韩 RPG 类市场研究</div>
         <div class="rm">独立专题</div>
-        <dl class="kv">
-          <dt>我的角色</dt><dd>负责四国 RPG 数据的整理、细分赛道分析与成稿</dd>
-          <dt>数据与工具</dt><dd>基于 Sensor Tower 2021.1–2025.12 中美日韩四国 RPG 游戏的下载、收入、RPD、产品数量数据（颗粒度到天），按 MMORPG、放置、卡牌（组队 + 回合制）、开放世界四条赛道拆解；CR 与在榜产品底表由配套 Python 脚本产出（见上方「数据分析工具」）</dd>
-          <dt>研究问题</dt><dd>五年里中美日韩 RPG 大类怎么演化，四条细分赛道的机会结构差在哪里</dd>
-          <dt>整体盘面</dt><dd><ul class="bul"><li>四国 RPG 收入 2025 年全部处于五年最低位，中国、日本较 2021 年缩减最多（中国收入约腰斩）。</li><li>盘子结构：中国最大（仅 iOS 下载就超过其他三国双端），日本 RPD 最高，韩国次之。</li><li>供给端也在退潮——四国产品数量只有美国 25 年小幅回升，中日韩持续下降。</li></ul></dd>
-          <dt>细分赛道</dt><dd>按「规模—集中度—头部粘性—进入路径」拆四条：<ul class="bul"><li><b>MMORPG</b>：四国下载 2025 年齐创五年新低，付费能力分化极端——韩日 RPD 55 美元以上，中国仅 23 美元左右。头部固化：中国收入 CR10 为 60%、韩国 71%，且除《逆水寒》《冒险岛：枫之传说》外，新品几乎无法在收入 Top10 维持满两年。可行路径是怀旧 IP + 数值轻度化。</li><li><b>放置 RPG</b>：四条赛道中近年唯一还有过增长的（美日韩 2024 年见顶、2025 年小幅回落）。韩国下载量最大（3,220 万），日本 RPD 最高；收入集中度也最高——中国 CR10 达 84%。爆款生命周期极短（韩国《菇勇者传说》收入一年跌 90%），怀旧 IP 是跨市场验证过的确定性打法（冒险岛 Idle 在美日韩同时进榜）。</li><li><b>卡牌 RPG</b>：日本 RPD 42.6 美元、四国最高，中国不足 15 美元、最低。老牌 IP 粘性接近事实垄断：美国《RAID》连续五年收入榜首，日本《FGO》22–25 年连续榜首；韩国 2025 年靠重制 IP《七骑士 Re:BIRTH》（RPD 46.3 美元）拉动回升。美日韩进入难度都大，建议止步于差异化题材观察。</li><li><b>开放世界</b>：高门槛、高风险，无顶级研发配置不建议进入——<span class="hl">《原神》之后五年仅 7 个项目熬到上线、其中 2 款速死</span>，没熬过研发期的项目是这个数量的数十倍。存活路径只有两条：《鸣潮》式挖掘未被满足的需求，或《燕云十六声》《无限暖暖》式切入差异化人群，共同前提是顶尖美术与玩作品质，且获量靠营销与社媒自传播而非买量。</li></ul></dd>
-          <dt>结论</dt><dd><ul class="bul"><li><b>可关注</b>——放置 RPG（差异化吸量题材 + 怀旧 IP 矩阵）、中韩 MMORPG（怀旧 IP + 轻度化）。</li><li><b>谨慎</b>——卡牌 RPG（头部 IP 粘性垄断，美日韩均不宜正面进入）。</li><li><span class="hl">不建议——开放世界</span>（研发资源门槛决定这不是选题问题，是禀赋问题）。</li></ul></dd>
-          <dt>产出</dt><dd>独立研究报告（四国 RPG 市场底表 + 赛道 × 国家矩阵分析 + 分赛道进入建议）</dd>
-        </dl>
+        <div class="meta-row"><b>我的角色</b>负责四国 RPG 数据的整理、细分赛道分析与成稿<br><b>数据与工具</b>基于 Sensor Tower 2021.1–2025.12 中美日韩四国 RPG 游戏的下载、收入、RPD、产品数量数据（颗粒度到天），按 MMORPG、放置、卡牌（组队 + 回合制）、开放世界四条赛道拆解；CR 与在榜产品底表由配套 Python 脚本产出（见上方「数据分析工具」）</div>
+        <div class="blk"><div class="bt">研究问题</div>五年里中美日韩 RPG 大类怎么演化，四条细分赛道的机会结构差在哪里</div>
+        <div class="blk"><div class="bt">整体盘面</div><ul class="bul"><li>四国 RPG 收入 2025 年全部处于五年最低位，中国、日本较 2021 年缩减最多（中国收入约腰斩）。</li><li>盘子结构：中国最大（仅 iOS 下载就超过其他三国双端），日本 RPD 最高，韩国次之。</li><li>供给端也在退潮——四国产品数量只有美国 25 年小幅回升，中日韩持续下降。</li></ul></div>
+        <div class="blk"><div class="bt">细分赛道</div>按「规模—集中度—头部粘性—进入路径」拆四条：<ul class="bul"><li><b>MMORPG</b>：四国下载 2025 年齐创五年新低，付费能力分化极端——韩日 RPD 55 美元以上，中国仅 23 美元左右。头部固化：中国收入 CR10 为 60%、韩国 71%，且除《逆水寒》《冒险岛：枫之传说》外，新品几乎无法在收入 Top10 维持满两年。可行路径是怀旧 IP + 数值轻度化。</li><li><b>放置 RPG</b>：四条赛道中近年唯一还有过增长的（美日韩 2024 年见顶、2025 年小幅回落）。韩国下载量最大（3,220 万），日本 RPD 最高；收入集中度也最高——中国 CR10 达 84%。爆款生命周期极短（韩国《菇勇者传说》收入一年跌 90%），怀旧 IP 是跨市场验证过的确定性打法（冒险岛 Idle 在美日韩同时进榜）。</li><li><b>卡牌 RPG</b>：日本 RPD 42.6 美元、四国最高，中国不足 15 美元、最低。老牌 IP 粘性接近事实垄断：美国《RAID》连续五年收入榜首，日本《FGO》22–25 年连续榜首；韩国 2025 年靠重制 IP《七骑士 Re:BIRTH》（RPD 46.3 美元）拉动回升。美日韩进入难度都大，建议止步于差异化题材观察。</li><li><b>开放世界</b>：高门槛、高风险，无顶级研发配置不建议进入——<span class="hl">《原神》之后五年仅 7 个项目熬到上线、其中 2 款速死</span>，没熬过研发期的项目是这个数量的数十倍。存活路径只有两条：《鸣潮》式挖掘未被满足的需求，或《燕云十六声》《无限暖暖》式切入差异化人群，共同前提是顶尖美术与玩作品质，且获量靠营销与社媒自传播而非买量。</li></ul></div>
+        <div class="blk key"><div class="bt">结论</div><ul class="bul"><li><b>可关注</b>——放置 RPG（差异化吸量题材 + 怀旧 IP 矩阵）、中韩 MMORPG（怀旧 IP + 轻度化）。</li><li><b>谨慎</b>——卡牌 RPG（头部 IP 粘性垄断，美日韩均不宜正面进入）。</li><li><span class="hl">不建议——开放世界</span>（研发资源门槛决定这不是选题问题，是禀赋问题）。</li></ul></div>
+        <div class="foot-line"><b>产出</b>独立研究报告（四国 RPG 市场底表 + 赛道 × 国家矩阵分析 + 分赛道进入建议）</div>
       </div>
 
             </div>
@@ -428,15 +412,14 @@
       <h3>手游品类 / 题材数据分析工具 <span>Python</span></h3>
       <p class="gsub">报告要判断「这个品类值不值得进」，依据是市场结构而不是总量规模。这套脚本把这些结构指标按品类 × 年份算齐，输出分页签底表，作为各品类章节的取证来源。</p>
       <details class="codecard">
-        <summary><span class="nm">genre_analysis.py</span><span class="ln">品类 / 题材分析</span><span class="one">一次运行输出 6 张底表的指标引擎；换数据文件夹即可复用于其他国家 / 年份</span></summary>
+        <summary><span class="nm">genre_analysis.py</span><span class="ln">品类 / 题材分析</span><span class="one">一次运行输出 6 张底表的指标引擎</span></summary>
         <div class="cc">
           <p class="subh">背景</p>
           <ul>
             <li>报告需对每个品类形成「是否值得进入」的判断，依据是市场结构而非总量规模：头部垄断程度、增长由哪一层产品贡献、新品的渗透与变现水平、头部产品所处的生命周期阶段、赛道内产品的同质化程度。</li>
             <li>上述结构指标须按品类 × 年份逐一计算且全程口径一致，故编写 Python 脚本统一处理，输出按分析维度分页签的指标底表，作为各品类章节的取证来源。</li>
           </ul>
-          <p class="subh">我的角色</p>
-          <p>独立设计指标口径并编写全部代码，品类、题材两个维度复用同一套流程。</p>
+          <div class="meta-row"><b>我的角色</b>独立设计指标口径并编写全部代码，品类、题材两个维度复用同一套流程。</div>
           <p class="subh">做了什么</p>
           <ul>
             <li><b>数据清洗</b>：兼容 Sensor Tower 导出的多种格式（tab 分隔，utf-16 / utf-8 / gbk 三编码自动回退），5 年数据分块读取、内存降级（float32 / int32），20 多个原始英文字段统一成标准口径。</li>
@@ -450,10 +433,7 @@
             </li>
             <li><b>输出</b>：6 张底表 Excel（集中度 / 吸量效率 / 新品 / 存量 / 聚类汇总 / Top10 详情）+ CR5、吸量效率五年对比图。</li>
           </ul>
-          <p class="subh">应用</p>
-          <p>报告成稿前的品类结构量化分析，覆盖透视无法计算的指标；换数据文件夹即可复用于其他国家 / 年份。</p>
-          <p class="subh">产出</p>
-          <p>可运行脚本 + 全字段指标字典。</p>
+          <div class="foot-line"><b>应用</b>报告成稿前的品类结构量化分析，覆盖透视无法计算的指标；换数据文件夹即可复用于其他国家 / 年份。　<b>产出</b>可运行脚本 + 全字段指标字典。</div>
         </div>
       </details>
     </div>
@@ -468,16 +448,12 @@
         <ul>
           <li>两类证据均涉及 4 国 × 4 赛道 × 5 年的排名与份额计算，且 CR 须按下载、收入各自的排名分别取值，首发日期格式混杂直接影响上线年份判定，故编写脚本统一计算并生成格式化底表，直接用于报告正文。</li>
         </ul>
-        <p class="subh">我的角色</p>
-        <p>为 RPG 专题协作编写数据处理与报表脚本，负责口径设计与实现。</p>
+        <div class="meta-row"><b>我的角色</b>为 RPG 专题协作编写数据处理与报表脚本，负责口径设计与实现。</div>
         <p class="subh">做了什么</p>
         <ul>
           <li><b>CR 与头部产品底表</b>：按国家 × 品类 × 年份计算 CR4 / CR5 / CR10 及 Top10 产品表。口径上做了两个设计决策：下载 CR 按下载排名、收入 CR 按收入排名分别计算，不用同一名单；Open World 品类因产品数量少，CR 基数由 5 调整为 4。当年首发产品在表内自动标黄。</li>
         </ul>
-        <p class="subh">应用</p>
-        <p>报告中的集中度数字（如中国 MMORPG 收入 CR10 为 60%、韩国为 71%）和「连续五年在榜」的头部产品名单，均由脚本直接产出，随报告交付。</p>
-        <p class="subh">产出</p>
-        <p>可复用脚本 + 格式化 Excel 底表。</p>
+        <div class="foot-line"><b>应用</b>报告中的集中度数字（如中国 MMORPG 收入 CR10 为 60%、韩国为 71%）和「连续五年在榜」的头部产品名单，均由脚本直接产出，随报告交付。　<b>产出</b>可复用脚本 + 格式化 Excel 底表。</div>
       </div>
     </details>
     <details class="codecard">
@@ -487,16 +463,12 @@
         <ul>
           <li>专题需要逐产品的在榜年份记录，用于区分五年始终在榜与短暂进榜的产品。</li>
         </ul>
-        <p class="subh">我的角色</p>
-        <p>为 RPG 专题协作编写数据处理与报表脚本，负责口径设计与实现。</p>
+        <div class="meta-row"><b>我的角色</b>为 RPG 专题协作编写数据处理与报表脚本，负责口径设计与实现。</div>
         <p class="subh">做了什么</p>
         <ul>
           <li><b>长线在榜产品底表</b>：以「五年内在本品类下载或收入任一进入 Top20」为在榜标准，将产品分为始终在榜、曾经在榜、从未在榜三类，输出带本品类逐年排名的明细表；统一了多种格式的首发日期解析，修正上线年份误判。</li>
         </ul>
-        <p class="subh">应用</p>
-        <p>「连续五年在榜」的头部产品名单由脚本直接产出，随报告交付。</p>
-        <p class="subh">产出</p>
-        <p>可复用脚本 + 格式化 Excel 底表。</p>
+        <div class="foot-line"><b>应用</b>「连续五年在榜」的头部产品名单由脚本直接产出，随报告交付。　<b>产出</b>可复用脚本 + 格式化 Excel 底表。</div>
       </div>
     </details>
     </div>
