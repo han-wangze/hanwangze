@@ -141,7 +141,7 @@
   pre .c{color:var(--muted)}
   .codefoot{font-size:12px;color:var(--muted);margin-top:8px}
   /* 代码分组 + 折叠 + 职责链接 */
-  .codegroup{margin-bottom:26px}
+  .codegroup{margin-top:20px;margin-bottom:26px}
   .codegroup>h3{font-size:17px;font-weight:800;margin-bottom:2px;display:flex;align-items:center;gap:10px}
   .codegroup>h3 span{font-size:12.5px;font-weight:500;color:var(--muted)}
   .codegroup .gsub{font-size:13px;color:var(--muted);margin-bottom:14px}
@@ -172,6 +172,16 @@
   .kv dd .hl{background:#fef3c7;border-radius:4px;padding:0 4px}
   .note{font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
     border-radius:12px;padding:14px 16px;margin-top:16px;box-shadow:var(--shadow)}
+  /* 09-25：职责卡机制条目 / 工具卡字段小标题 / 单列报告卡 */
+  .mech{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+  .mech>li{font-size:13.5px;color:var(--muted);padding-left:15px;position:relative}
+  .mech>li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:2px;background:var(--primary);opacity:.45}
+  .mech>li>b{color:var(--ink);font-weight:700;margin-right:6px}
+  .role code,.codecard code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:12.5px;background:#f1f5f9;border-radius:5px;padding:1px 5px;color:#334155}
+  .subh{font-size:13px;font-weight:800;color:var(--ink);margin:14px 0 5px}
+  .subh:first-child{margin-top:0}
+  .reports.wide{grid-template-columns:1fr}
   /* 技能栈 */
   .stackrow{display:grid;grid-template-columns:88px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);align-items:start}
   .stackrow:last-child{border-bottom:0}
@@ -247,314 +257,20 @@
       <div class="role" id="r-scan">
         <div class="h">🔍 新品机会扫描</div>
         <div class="d"><b>输出值得关注的新品清单。</b>从 Sensor Tower 榜单、Steam、YouTube / B站自媒体等渠道扫描新游，按玩法差异化、吸量、买量依赖、同质化程度几个维度筛选。</div>
-      </div>
-      <div class="role" id="r-concept">
-        <div class="h">🧪 概念测试与立项评估</div>
-        <div class="d"><b>负责潜力产品的早期验证。</b>玩法视频剪辑、世界观包装、问卷配置与投放回收，按「下载意愿 ≥ 70% 且尖叫度 ≥ 1.5」筛出高潜方向；多轮回收数据用 Python 批量处理并输出统计结论。</div>
-      </div>
-      <div class="role" id="r-report">
-        <div class="h">📑 市场研究与报告撰写</div>
-        <div class="d"><b>撰写年度报告子模块与专项研究。</b>负责美国品类、美国题材与中国 MMO 头部产品三个年度子模块（2021–2025），参与完成中美日韩 RPG 类市场研究。美国两条线基于 Sensor Tower 双平台数据，按「规模—趋势—归因—建议」梳理市场规模与下载 / 收入 Top20，并把每条增长归因到产品与机制层，形成赛道进入判断；MMO 专题结合 ADX、广大大买量素材与头部内购信息，拆解头部格局以及买量与商业化的迁移。另完成 1 份微信小游戏畅销榜 Top100 产品分析报告。</div>
-        <details class="expand" id="reports">
-          <summary>查看报告摘要</summary>
+        <details class="expand" id="scan-src">
+          <summary>查看扫描机制与渠道</summary>
           <div class="ebody">
-            <div class="reports">
-      <div class="rcard" id="r-us-genre">
-        <div class="rt">2021–2025 美国手游品类趋势研究</div>
-        <div class="rm">年度报告子模块</div>
-        <dl class="kv">
-          <dt>研究问题</dt><dd>美国手游近五年各玩法品类的规模演化，以及哪些品类仍存在进入机会</dd>
-          <dt>我的角色</dt><dd>负责美国品类板块的数据整理、分析与成稿</dd>
-          <dt>数据工具</dt><dd>Sensor Tower 双平台数据 + RPD 指标；集中度与分层贡献用 Python 计算</dd>
-          <dt>分析框架</dt><dd>下载与收入双维度 × 品类前 20 × 增长率分层（近两年变化 / 五年趋势）× RPD × 新品贡献结构</dd>
-          <dt>发现</dt><dd>下载量五年从 51 亿降至 37 亿次（CAGR -8%），收入由 173 亿微增至 185 亿美元（CAGR +2%），2025 年收入同比仅 +0.3%，存量特征明确。下载侧：方块解谜（+28%）、纸牌接龙（+19%）虽在增长，但 RPD 低、进入性价比有限；4X 策略（+17%）量价兼备，仍有新品空间。收入侧：二合（+82%）、即时策略（+81%）、卡牌对战（+59%）增速最高，但增长高度集中于单一头部产品，头部集中度也明显高于下载侧。据此对重点品类给出<span class="hl">可关注 / 需差异化切入 / 不建议进入</span>的判断</dd>
-          <dt>产出形态</dt><dd>研究报告</dd>
-        </dl>
-      </div>
+            <ul class="mech">
+              <li><b>ST 免费榜</b>每周扫榜筛选 2025 年新品；导出文件由 <code>新品扫描.py</code> 处理——自动统一两种导出格式，对照已累计的去重表剔掉收录过的产品，剩下的就是本周新增。</li>
+              <li><b>B 站</b>跟踪游戏 UP 主的新游相关投稿；<code>bilibili_crawler.py</code> 按设定的时间窗抓投稿，翻到比窗口更早的就停，不做多余翻页。</li>
+              <li><b>Steam / YouTube</b>按同一套维度（玩法差异化、吸量、买量依赖、同质化）筛选。</li>
+            </ul>
 
-      <div class="rcard" id="r-us-theme">
-        <div class="rt">2021–2025 美国手游题材研究</div>
-        <div class="rm">年度报告子模块</div>
-        <dl class="kv">
-          <dt>研究问题</dt><dd>从题材视角看，哪些题材在吸量、哪些在变现，差异化空间落在哪里</dd>
-          <dt>我的角色</dt><dd>负责美国题材板块，与品类研究共用同一套分析引擎</dd>
-          <dt>数据工具</dt><dd>Sensor Tower 双平台数据；RPD 趋势与题材内产品名聚类用 Python 计算</dd>
-          <dt>分析框架</dt><dd>下载 Top20 题材 × 五年趋势 × RPD 分层 × 轻度 / 中重度分层 × 10 个重点题材的代表产品拆解</dd>
-          <dt>发现</dt><dd>下载规模、收入与 RPD 三者并不一致。<span class="hl">下载榜与变现榜明显错位</span>：烹饪以 1.03 亿次下载居首、收入增长 50%，其中合成类产品贡献七成以上增量，支持「美食 + 合成 / 经营」方向；丧尸题材下载同比下降 7%、收入却增长 39%，头部产品跑通「休闲副玩法吸量 + 4X 承接变现」的路径。也有反例：装饰题材单用户价值不低，收入却在 2025 年同比转负、五年趋势同样向下。结论按题材分别给出，差异化机会落在题材与玩法的组合方式上</dd>
-          <dt>产出形态</dt><dd>专题研究</dd>
-        </dl>
-      </div>
-
-      <div class="rcard" id="r-rpg">
-        <div class="rt">中美日韩 RPG 类市场研究</div>
-        <div class="rm">专项研究</div>
-        <dl class="kv">
-          <dt>研究问题</dt><dd>四个市场的 RPG 赛道规模与结构如何演变，不同细分品类的进入条件差在哪</dd>
-          <dt>我的角色</dt><dd>参与四国数据整理与相关量化分析</dd>
-          <dt>数据工具</dt><dd>Sensor Tower 日粒度数据（下载 / 收入 / 产品数量），Python 做规模测算与效率指标</dd>
-          <dt>分析框架</dt><dd>四国市场对比 × 规模与 RPD × 产品数量供给 × 四个细分品类（MMORPG / 放置 RPG / 卡牌 / 开放世界）× 研发门槛与回收周期</dd>
-          <dt>发现</dt><dd>四国 RPG 收入在 2025 年均处于五年低位，整体收缩，机会主要来自结构性差异：中国 MMO 走怀旧端游 IP 路线，美国 MMO 靠轻度化与题材差异化突围，韩国 MMORPG 以高 RPD 叠加老 IP 运营见长，放置 RPG 的大盘 RPD 则明显受新品带动。<span class="hl">细分赛道的进入条件差距远大于市场规模差距</span>——开放世界给出明确负向判断：原神之后五年仅 7 款产品走到上线、其中 2 款快速退场；数百人团队、三年以上研发与持续内容供给都是前置条件，不具备成熟研发体系时不宜机会型进入</dd>
-          <dt>产出形态</dt><dd>研究，含各细分品类的进入条件评估</dd>
-        </dl>
-      </div>
-
-      <div class="rcard" id="r-mmo">
-        <div class="rt">中国 MMO 头部产品趋势研究</div>
-        <div class="rm">年度报告子模块</div>
-        <dl class="kv">
-          <dt>研究问题</dt><dd>头部 MMO 的竞争壁垒由什么构成，近两年在往哪个方向迁移</dd>
-          <dt>我的角色</dt><dd>负责 MMO 子模块，买量素材与内购结构双主线拆解</dd>
-          <dt>数据工具</dt><dd>Sensor Tower 榜单与规模数据 + ADX 买量素材数据；份额与分层贡献用 Python 计算</dd>
-          <dt>分析框架</dt><dd>多标签加权口径（MMO 无原生标签，用 MMORPG 叠加放置 / 回合 RPG 加权构造代理口径）× 即时制 / 回合制分层 × 买量素材卖点演化 × 内购结构变化</dd>
-          <dt>发现</dt><dd>市场持续收缩：下载量五年从 1.30 亿降至 3794 万次，收入由 21.1 亿降至 8.79 亿美元，但 RPD 从 16.3 升至 23.17 美元，用户规模与单体价值反向移动。头部格局固化，2025 年收入 Top10 中仅 2 款新品进榜。买量素材的诉求重心从<span class="hl">高品质美术、玩法展示</span>转向<span class="hl">福利向卖点</span>（即时制占比 4%→23%，回合制 15%→29%），内购结构仍以直充为主、并向直充进一步集中。据此判断该赛道进入窗口收窄，数值成长与低门槛回报是比美术更有效的转化抓手</dd>
-          <dt>产出形态</dt><dd>专题研究</dd>
-        </dl>
-      </div>
-
-      <div class="rcard" id="r-minigame" style="grid-column:1/-1">
-        <div class="rt">微信小游戏产品分析报告</div>
-        <dl class="kv">
-          <dt>研究问题</dt><dd>微信小游戏供给端正在发生什么结构性变化</dd>
-          <dt>我的角色</dt><dd>负责该份报告，品类标签口径与新游拆解模板自行定义</dd>
-          <dt>数据工具</dt><dd>微信小游戏畅销榜 Top100（2025 年 10 月单期快照）</dd>
-          <dt>分析框架</dt><dd>品类数量变化 × 新进 / 回榜 / 掉出产品 × 新游四段拆解（玩法 → 核心循环 → 养成系统 → 商业化）</dd>
-          <dt>发现</dt><dd>单期榜单出现明显的品类轮动：部分品类因<span class="hl">IP 化新品集中入榜</span>而扩张，同时有品类因子类产品批量掉榜、没有新品补位而收缩，IP 化是当期新品快速起量的路径之一。对当期上榜新品按玩法、核心循环、养成系统与商业化四层逐一拆解，沉成品类标签与新游拆解模板</dd>
-          <dt>产出形态</dt><dd>产品分析报告</dd>
-        </dl>
-      </div>
-
-    
-            </div>
-          </div>
-        </details>
-      </div>
-      <div class="role" id="r-data">
-        <div class="h">🐍 数据分析与流程自动化</div>
-        <div class="d"><b>建指标体系，把重复工作脚本化。</b>分析侧：为美国品类 / 题材建指标体系（集中度、吸量效率、新品 / 存量表现、Top10 贡献）与产品名聚类引擎，并为 RPG 专项开发集中度计算与跨年榜单分类工具。自动化侧：覆盖新品扫描、问卷批处理、内容抓取等每周重复的环节。</div>
-        <details class="expand" id="code">
-          <summary>查看代码说明</summary>
-          <div class="ebody">
-<div class="codegroup" id="code-ds">
-      <h3>数据分析 <span>统计与指标计算</span></h3>
-      <p class="gsub">三张卡：美国品类 / 题材的分析引擎（多维指标 + 产品名聚类），以及 RPG 专项配套的集中度计算与跨年榜单分类工具。</p>
-<!-- 5 -->
+            <div class="codegroup" id="code-scan">
+              <h3>相关脚本片段</h3>
+              <p class="gsub">两个脚本各解决一个具体问题：导出格式不统一、翻页浪费时间。</p>
     <details class="codecard">
-      <summary><span class="nm">genre_analysis.py</span><span class="ln">品类 / 题材分析</span><span class="one">品类 / 题材的多维分析引擎：集中度、吸量效率、新品 / 存量、Top10 贡献、文本聚类，输出多页签 Excel</span></summary>
-      <div class="cc">
-        <ul>
-          <li><b>为什么需要</b>：品类 / 题材研究要了解市场、写报告，需要构建一整套数据字段——集中度、吸量效率、新品 / 存量表现、Top10 贡献，以及按产品名关键词的聚类，单靠人工统计难以横向对比。</li>
-          <li><b>亮点</b>：多维指标：集中度、吸量效率、新品 / 存量、Top10 贡献分开计算、各成体系；文本聚类：产品名 TF-IDF 向量化后 KMeans 聚成关键词簇（如「princess / makeov / 3d」），逐簇比平均 RPD、收入贡献率、下载增长贡献；同一套引擎换输入即做题材分析。</li>
-        </ul>
-<details class="code"><summary>查看代码片段</summary><pre><span class="c">    # 优化 TF-IDF 参数，降低稀疏度</span>
-    tfidf = TfidfVectorizer(
-        max_features=min(50, len(set(' '.join(valid_names).split()))),  <span class="c"># 动态特征数</span>
-        min_df=2,                    <span class="c"># 至少出现在 2 个文档中</span>
-        stop_words='english'
-    )
-    tfidf_matrix = tfidf.fit_transform(valid_names)
-
-    <span class="c"># 遍历候选 K，用轮廓系数自动选最优</span>
-    start_k, end_k = cluster_range
-    best_k, best_score, all_scores = start_k, -1, []
-
-    for k in range(start_k, end_k + 1):
-        if k &gt;= len(valid_names):
-            break
-        kmeans = KMeans(n_clusters=k, random_state=42, n_init=Config.KMEANS_N_INIT)
-        labels = kmeans.fit_predict(tfidf_matrix)
-
-        <span class="c"># 聚类数少于 2 无法计算轮廓系数，跳过</span>
-        if len(set(labels)) &lt; 2:
-            continue
-        score = silhouette_score(tfidf_matrix, labels)
-        all_scores.append((k, score))
-
-        <span class="c"># 轮廓系数范围 [-1, 1]，&gt; 0 表示聚类有效</span>
-        if score &gt; 0 and score &gt; best_score:
-            best_score, best_k = score, k
-
-    <span class="c"># 兜底：所有 K 都无效时，退化为最接近 2 的有效值</span>
-    if best_score &lt;= 0 and all_scores:
-        ...</pre></details>
-      </div>
-    </details>
-
-    <!-- 3 -->
-    <details class="codecard">
-      <summary><span class="nm">concentration_cr.py</span><span class="ln">集中度 CR（RPG 专项）</span><span class="one">按国家 × 品类 × 年份算头部集中度，输出多工作表 Excel</span></summary>
-      <div class="cc">
-        <ul>
-          <li><b>为什么需要</b>：判断一个赛道是"头部垄断"还是"仍有新位置"，需要一个可横比的口径。</li>
-          <li><b>亮点</b>：下载集中度按下载排名取前 N、收入集中度按收入排名取前 N，两套排序分开算，避免口径互相污染；开放世界用 CR4、其余品类用 CR5；输出多工作表 Excel，并高亮当年首发产品。</li>
-        </ul>
-<details class="code"><summary>查看代码片段</summary><pre><span class="c">    # ========== 分别按收入 / 下载量排序 ==========</span>
-    <span class="c"># 收入维度：按收入降序（用于收入集中度 + 前 10 产品展示）</span>
-    sorted_by_revenue  = filtered_df.sort_values('收入', ascending=False).reset_index(drop=True)
-    <span class="c"># 下载量维度：按下载量降序（仅用于下载集中度）</span>
-    sorted_by_download = filtered_df.sort_values('下载', ascending=False).reset_index(drop=True)
-
-    <span class="c"># 精准判断"当年首发"，排除日期解析误差</span>
-    target_year = int(year)
-    sorted_by_revenue['是否当年首发'] = (sorted_by_revenue['首发年份_精准'] == target_year)
-
-    top10_revenue  = sorted_by_revenue.head(10).copy()
-    top10_download = sorted_by_download.head(10).copy()
-    <span class="c"># ...（省略产品明细打印）</span>
-
-    <span class="c"># ========== 按品类确定集中度基数 ==========</span>
-    cr_base = 4 if genre == 'Open World' else 5     <span class="c"># CR4 / CR5 切换</span>
-    total_download = filtered_df['下载'].sum()
-    total_revenue  = filtered_df['收入'].sum()
-
-    <span class="c"># 下载集中度：按下载排名取前 N 名</span>
-    cr_download = round(
-        (sorted_by_download.head(cr_base)['下载'].sum() / total_download * 100)
-    ) if total_download &gt; 0 else 0
-    <span class="c"># 收入集中度：按收入排名取前 N 名</span>
-    cr_revenue = round(
-        (sorted_by_revenue.head(cr_base)['收入'].sum() / total_revenue * 100)
-    ) if total_revenue &gt; 0 else 0</pre></details>
-      </div>
-    </details>
-
-    <!-- 4 -->
-    <details class="codecard">
-      <summary><span class="nm">lifecycle_classify.py</span><span class="ln">跨年榜单分类（RPG 专项）</span><span class="one">按本品类内的下载 / 收入 Top20 排名，给产品打「始终 / 曾经 / 从未在榜」标签</span></summary>
-      <div class="cc">
-        <ul>
-          <li><b>为什么需要</b>：判断哪些产品能长期留在榜单里——新品不仅要进榜，还要面对数年不下榜的老产品，这本身就是进入壁垒的一部分。</li>
-          <li><b>亮点</b>：排名只在「年份 × 国家 × 品类」内计算，避免跨品类混排；按「下载或收入在本品类 Top20」判定是否在榜（任一进入即可）；缺数据的年份记为「无数据」并排除出分母，避免把还没上市的年份误判成掉榜。</li>
-        </ul>
-<details class="code"><summary>查看代码片段</summary><pre><span class="c">def classify_products(df, top20_dict):</span>
-    <span class="c">"""</span>
-    <span class="c">    始终在榜：有数据的年份里，每年都在本品类榜内</span>
-    <span class="c">    曾经在榜：至少一年在榜，但不是所有年份都在榜</span>
-    <span class="c">    从未在榜：从未进入本品类榜内</span>
-    <span class="c">"""</span>
-    <span class="c"># 按 产品-国家-品类 维度去重</span>
-    all_units = df[['Unified Name', '国家', '合并后品类']].drop_duplicates()
-    years = ['2021', '2022', '2023', '2024', '2025']
-
-    for _, row in all_units.iterrows():
-        product_name, country, genre = row['Unified Name'], row['国家'], row['合并后品类']
-        yearly_status, total_years_in_top20 = {}, 0
-
-        for year in years:
-            <span class="c"># 先判断该产品该年是否有数据；没有则记"无数据"，不进入分母</span>
-            mask = ((df['年份'] == year) &amp; (df['国家'] == country) &amp;
-                    (df['合并后品类'] == genre) &amp; (df['Unified Name'] == product_name))
-            if len(df[mask]) == 0:
-                yearly_status[year] = '无数据'
-                continue
-
-            <span class="c"># 本品类内下载或收入任一进入前 20 即算在榜</span>
-            in_dl  = product_name in top20_dict['download'].get((year, country, genre), [])
-            in_rev = product_name in top20_dict['revenue'].get((year, country, genre), [])
-            if in_dl or in_rev:
-                yearly_status[year] = '在榜'
-                total_years_in_top20 += 1
-            else:
-                yearly_status[year] = '不在榜'
-
-        <span class="c"># 以"有数据的年份"为分母，避免缺数据被误判为掉榜</span>
-        years_with_data = sum(1 for v in yearly_status.values() if v != '无数据')
-        if years_with_data &gt; 0 and total_years_in_top20 == years_with_data:
-            classification = '始终在榜'
-        elif total_years_in_top20 &gt; 0:
-            classification = '曾经在榜'
-        else:
-            classification = '从未在榜'</pre></details>
-      </div>
-    </details>
-    </div>
-
-<div class="codegroup" id="code-auto">
-      <h3>自动化 <span>把重复工作脚本化</span></h3>
-      <p class="gsub">问卷批处理、内容抓取、新品扫描——把每周重复的人工操作压成可复用命令。</p>
-<!-- 6 -->
-    <details class="codecard">
-      <summary><span class="nm">concept_test_stats.py</span><span class="ln">问卷批处理</span><span class="one">多轮问卷的批量清洗与统计：样本量 / 下载意愿 / 尖叫度 / 游玩时长 / 原因占比</span></summary>
-      <div class="cc">
-        <ul>
-          <li><b>为什么需要</b>：多轮概念测试会回收一批问卷 Excel，每轮都要清洗、按同一套口径算下载意愿 / 尖叫度 / 游玩时长，手工做慢且口径难一致。</li>
-          <li><b>亮点</b>：列名自适应：问卷题号 / 措辞在多轮里会变，用正则 + 关键词自动识别「游玩时长列」「已填写字段」「品类问题列」，换一轮问卷不用改代码。</li>
-          <li><b>亮点</b>：统计口径严谨：下载意愿分母 = 有效爱好用户 + 已查看未填写；尖叫度只在「愿意试玩」子集取均值；游玩时长占比分母 = 已填写样本。</li>
-        </ul>
-<details class="code"><summary>查看代码片段</summary><pre><span class="c">def calculate_statistics(df_clean, category_name, category_col):</span>
-    <span class="c">"""核心统计函数：基于"已填写"字段判断分母"""</span>
-    metrics = {'样本用户属性': category_name}
-
-    df_clean['是否愿意']  = df_clean['是否愿意'].apply(safe_string_convert)
-    df_clean['1试玩意愿'] = df_clean['1试玩意愿'].apply(safe_string_convert)
-
-    <span class="c"># 分母口径：有效爱好用户 + 已查看未填写用户</span>
-    hobby_users    = df_clean[df_clean[category_col] == '有出于爱好体验过']
-    willing_no_choice = df_clean[(df_clean['是否愿意'] == '愿意') &amp;
-                                (df_clean['1试玩意愿'].isin(['', '-']))]
-    sample_users = pd.concat([hobby_users, willing_no_choice]).drop_duplicates(subset=['序号'])
-    metrics['样本量'] = len(sample_users)
-
-    <span class="c"># 整体下载意愿</span>
-    hobby_willing = hobby_users[hobby_users['1试玩意愿'] == '愿意试玩']
-    metrics['整体下载意愿'] = (f'{len(hobby_willing) / metrics["样本量"]:.0%}'
-                              if metrics['样本量'] else '0%')
-
-    <span class="c"># 尖叫度：仅在"愿意试玩"子集内取均值</span>
-    df_clean['1尖叫度'] = df_clean['1尖叫度'].apply(safe_string_convert)
-    valid_scream = hobby_willing[hobby_willing['1尖叫度'] != '-']['1尖叫度']
-    scream_values = []
-    for val in valid_scream:
-        try:
-            scream_values.append(float(val))
-        except (ValueError, TypeError):
-            continue
-    metrics['尖叫度-愿意下载'] = f'{np.mean(scream_values):.2f}' if scream_values else '0.00'
-
-    <span class="c"># 游玩时长：分母 = "已填写"字段为正向值的样本</span>
-    duration_col = auto_detect_play_duration_column(df_clean.columns)
-    filled_col   = auto_detect_filled_column(df_clean.columns)</pre></details>
-      </div>
-    </details><!-- 7 -->
-    <details class="codecard">
-      <summary><span class="nm">bilibili_crawler.py</span><span class="ln">B站内容抓取</span><span class="one">抓取游戏 UP 主投稿的标题和链接，快速了解自媒体侧的新游</span></summary>
-      <div class="cc">
-        <ul>
-          <li><b>为什么需要</b>：新游扫描要看 B 站游戏 UP 主最近发了哪些新游，人工翻投稿低效。</li>
-          <li><b>亮点</b>：日期字符串先统一解析成 datetime 再比较；用官方库异步抓取标题 / 链接 / 发布时间，按发布时间倒序，翻到早于起始时间的投稿即提前退出，避免无谓翻页。</li>
-        </ul>
-<details class="code"><summary>查看代码片段</summary><pre><span class="c">def parse_date(date_str):</span>
-    <span class="c">"""把 "2025-12-25" 这类字符串转成 datetime，供时间比较用"""</span>
-    return datetime.strptime(date_str, "%Y-%m-%d")
-
-<span class="c">async def get_up_videos_in_range(uid, start_date, end_date, credential=None):</span>
-    <span class="c">"""获取指定时间范围内单个 UP 主的投稿"""</span>
-    start = parse_date(start_date)
-    end   = parse_date(end_date)
-    u = user.User(uid=uid, credential=credential)
-    up_name = (await u.get_user_info())["name"]
-    all_videos = []
-
-    while True:
-        videos = await u.get_videos()            <span class="c"># 官方库分页拉取</span>
-        if not videos.get("list", {}).get("vlist"):
-            break                                <span class="c"># 没有更多视频</span>
-        for v in videos["list"]["vlist"]:
-            pub_date = datetime.fromtimestamp(v["created"])
-            if start &lt;= pub_date &lt;= end:
-                all_videos.append({
-                    "up主名称": up_name,
-                    "视频标题": v["title"],       <span class="c"># 标题</span>
-                    "视频链接": f"https://www.bilibili.com/video/{v['bvid']}",
-                    "发布时间": pub_date.strftime("%Y-%m-%d %H:%M:%S")
-                })
-            elif pub_date &lt; start:
-                <span class="c"># 发布时间早于起始时间，后续都更早，提前退出</span>
-                return all_videos
-    return all_videos</pre></details>
-      </div>
-    </details><!-- 1 -->
-    <details class="codecard">
-      <summary><span class="nm">new_release_scanner.py</span><span class="ln">新品扫描</span><span class="one">扫描 Sensor Tower 的 App Store 免费榜，筛 2025 年新上线产品，去重输出每周新品清单</span></summary>
+      <summary><span class="nm">new_release_scanner.py</span><span class="ln">新品扫描</span><span class="one">扫描 Sensor Tower 免费榜，筛 2025 年新上线产品，去重后输出每周新品清单</span></summary>
       <div class="cc">
         <ul>
           <li><b>为什么需要</b>：每周要从 Sensor Tower 的 App Store 免费榜（top free）里筛出 2025 年新上线的新品，人工比对历史名单重复且易错。</li>
@@ -595,6 +311,378 @@
 
         print(f"去重结果: 原始 {len(df)} 条 -> 去重后 {len(dedup)} 条")
         return dedup</pre></details>
+      </div>
+    </details>
+    <details class="codecard">
+      <summary><span class="nm">bilibili_crawler.py</span><span class="ln">B站内容抓取</span><span class="one">抓取游戏 UP 主投稿的标题和链接，快速了解自媒体侧的新游</span></summary>
+      <div class="cc">
+        <ul>
+          <li><b>为什么需要</b>：新游扫描要看 B 站游戏 UP 主最近发了哪些新游，人工翻投稿低效。</li>
+          <li><b>亮点</b>：日期字符串先统一解析成 datetime 再比较；用官方库异步抓取标题 / 链接 / 发布时间，按发布时间倒序，翻到早于起始时间的投稿即提前退出，避免无谓翻页。</li>
+        </ul>
+<details class="code"><summary>查看代码片段</summary><pre><span class="c">def parse_date(date_str):</span>
+    <span class="c">"""把 "2025-12-25" 这类字符串转成 datetime，供时间比较用"""</span>
+    return datetime.strptime(date_str, "%Y-%m-%d")
+
+<span class="c">async def get_up_videos_in_range(uid, start_date, end_date, credential=None):</span>
+    <span class="c">"""获取指定时间范围内单个 UP 主的投稿"""</span>
+    start = parse_date(start_date)
+    end   = parse_date(end_date)
+    u = user.User(uid=uid, credential=credential)
+    up_name = (await u.get_user_info())["name"]
+    all_videos = []
+
+    while True:
+        videos = await u.get_videos()            <span class="c"># 官方库分页拉取</span>
+        if not videos.get("list", {}).get("vlist"):
+            break                                <span class="c"># 没有更多视频</span>
+        for v in videos["list"]["vlist"]:
+            pub_date = datetime.fromtimestamp(v["created"])
+            if start &lt;= pub_date &lt;= end:
+                all_videos.append({
+                    "up主名称": up_name,
+                    "视频标题": v["title"],       <span class="c"># 标题</span>
+                    "视频链接": f"https://www.bilibili.com/video/{v['bvid']}",
+                    "发布时间": pub_date.strftime("%Y-%m-%d %H:%M:%S")
+                })
+            elif pub_date &lt; start:
+                <span class="c"># 发布时间早于起始时间，后续都更早，提前退出</span>
+                return all_videos
+    return all_videos</pre></details>
+      </div>
+    </details>
+            </div>
+
+            <div class="codegroup" id="code-mini">
+              <h3>微信小游戏畅销榜监测 <span>月度监测系列</span></h3>
+              <p class="gsub">月榜是这条扫描线里唯一自成体系的一支：不只挑新品，而是把整个 Top100 的品类格局与环比变化一起盯住。</p>
+      <div class="rcard" id="r-minigame">
+        <div class="rt">微信小游戏畅销榜监测 · 2025 年 10 月期</div>
+        <div class="rm">月度监测系列</div>
+        <dl class="kv">
+          <dt>我的角色</dt><dd>负责 2025 年 10 月期榜单的扫描、分析与成稿</dd>
+          <dt>数据与工具</dt><dd>微信小游戏畅销榜 Top100 月度扫描（扫描节点为每月 20 日）；基于自建品类标签体系归类（MMO、卡牌、塔防、RPG、SLG、合成+ 等，细分到传奇 like、咸鱼 like、几何王国 like 等玩法模型）；新入榜产品拆解结合榜单数据与实际体验</dd>
+          <dt>研究问题</dt><dd>本月小游戏畅销榜格局怎么变，新入榜产品靠什么进来</dd>
+          <dt>整体格局</dt><dd>10 月 Top100 品类座次为 MMO（22 款）、卡牌（18）、RPG（12）、塔防（11）、合成+（9）、SLG（9）。环比变化最大的是卡牌（14→18，+4）和塔防（15→11，-4）</dd>
+          <dt>变化归因</dt><dd>拆三条主线：<br><b>卡牌增长全部来自放置卡牌</b>——5 款新品中 4 款是放置卡牌，其中 2 款为拳皇 IP 几何王国 like（《最强斗王》《拳皇98终极之战WEB》），经典 IP 套成熟玩法框架，进榜即上量；另有《三国猛将传》（《巨神军师》换名）、《云端之约》（《影之守卫》换名）两款老产品重上。<br><b>塔防减少集中在合成+塔防</b>——《快来当领主》《塔防精灵》《一步两步》《进击荣誉》4 款掉出榜单，且无新入榜产品补位。<br><b>MMO 数量持平但波动最大</b>——单月 4 款新品进榜、5 款掉榜。新品中传奇 like 占 2 款（《王者战绩》《巅峰霸业》），剑侠情缘 IP 的《剑侠世界：起源》靠自动寻路、挂机奖励领取等轻度化设计进榜</dd>
+          <dt>结论</dt><dd>10 月榜单格局整体稳定，变化集中在卡牌和塔防——卡牌靠放置卡牌新品和 IP 产品放量（+4），塔防因合成+塔防 4 款掉榜且无新品补位（-4）；MMO 上榜下榜频繁、波动最大，新品仍以传奇 like 和经典 IP 产品为主；8、9 月上新的抛物线射击、射击产品本月全部掉出</dd>
+          <dt>产出</dt><dd>月度监测报告（品类数量矩阵与环比 + 新入榜产品逐款拆解）</dd>
+        </dl>
+      </div>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <div class="role" id="r-concept">
+        <div class="h">🧪 概念测试与立项评估</div>
+        <div class="d"><b>负责潜力产品的早期验证。</b>玩法视频剪辑、世界观包装、问卷配置与投放回收，按「下载意愿 ≥ 70% 且尖叫度 ≥ 1.5」筛出高潜方向；多轮回收数据用 Python 批量处理并输出统计结论。</div>
+        <details class="expand" id="concept-flow">
+          <summary>查看测试流程与统计口径</summary>
+          <div class="ebody">
+            <ul class="mech">
+              <li><b>玩法视频与包装</b>剪辑玩法视频、完成世界观包装。</li>
+              <li><b>问卷投放与回收</b>配置问卷、投放、回收样本。</li>
+              <li><b>清洗与统计</b>回收多批问卷数据 Excel 表后批量清洗，用正则 + 关键词自动识别「游玩时长列」「已填写字段」「品类问题列」；按同一套口径算下载意愿 / 尖叫度 / 游玩时长——下载意愿分母 = 有效爱好用户 + 已查看未填写，尖叫度只在「愿意试玩」子集取均值，游玩时长占比分母 = 已填写样本。（<code>concept_test_stats.py</code>）</li>
+            </ul>
+            <div class="codegroup">
+              <h3>相关脚本片段</h3>
+              <p class="gsub">多轮问卷的题号与措辞会变，所以列名靠识别而不是写死。</p>
+    <details class="codecard">
+      <summary><span class="nm">concept_test_stats.py</span><span class="ln">问卷批处理</span><span class="one">多轮问卷的批量清洗与统计：样本量 / 下载意愿 / 尖叫度 / 游玩时长 / 原因占比</span></summary>
+      <div class="cc">
+        <ul>
+          <li><b>为什么需要</b>：多轮概念测试会回收一批问卷 Excel，每轮都要清洗、按同一套口径算下载意愿 / 尖叫度 / 游玩时长，手工做慢且口径难一致。</li>
+          <li><b>亮点</b>：列名自适应——问卷题号 / 措辞在多轮里会变，用正则 + 关键词自动识别「游玩时长列」「已填写字段」「品类问题列」，换一轮问卷不用改代码。</li>
+          <li><b>亮点</b>：统计口径严谨——下载意愿分母 = 有效爱好用户 + 已查看未填写；尖叫度只在「愿意试玩」子集取均值；游玩时长占比分母 = 已填写样本。</li>
+        </ul>
+<details class="code"><summary>查看代码片段</summary><pre><span class="c">def calculate_statistics(df_clean, category_name, category_col):</span>
+    <span class="c">"""核心统计函数：基于"已填写"字段判断分母"""</span>
+    metrics = {'样本用户属性': category_name}
+
+    df_clean['是否愿意']  = df_clean['是否愿意'].apply(safe_string_convert)
+    df_clean['1试玩意愿'] = df_clean['1试玩意愿'].apply(safe_string_convert)
+
+    <span class="c"># 分母口径：有效爱好用户 + 已查看未填写用户</span>
+    hobby_users    = df_clean[df_clean[category_col] == '有出于爱好体验过']
+    willing_no_choice = df_clean[(df_clean['是否愿意'] == '愿意') &amp;
+                                (df_clean['1试玩意愿'].isin(['', '-']))]
+    sample_users = pd.concat([hobby_users, willing_no_choice]).drop_duplicates(subset=['序号'])
+    metrics['样本量'] = len(sample_users)
+
+    <span class="c"># 整体下载意愿</span>
+    hobby_willing = hobby_users[hobby_users['1试玩意愿'] == '愿意试玩']
+    metrics['整体下载意愿'] = (f'{len(hobby_willing) / metrics["样本量"]:.0%}'
+                              if metrics['样本量'] else '0%')
+
+    <span class="c"># 尖叫度：仅在"愿意试玩"子集内取均值</span>
+    df_clean['1尖叫度'] = df_clean['1尖叫度'].apply(safe_string_convert)
+    valid_scream = hobby_willing[hobby_willing['1尖叫度'] != '-']['1尖叫度']
+    scream_values = []
+    for val in valid_scream:
+        try:
+            scream_values.append(float(val))
+        except (ValueError, TypeError):
+            continue
+    metrics['尖叫度-愿意下载'] = f'{np.mean(scream_values):.2f}' if scream_values else '0.00'
+
+    <span class="c"># 游玩时长：分母 = "已填写"字段为正向值的样本</span>
+    duration_col = auto_detect_play_duration_column(df_clean.columns)
+    filled_col   = auto_detect_filled_column(df_clean.columns)</pre></details>
+      </div>
+    </details>
+            </div>
+          </div>
+        </details>
+      </div>
+      <div class="role" id="r-report">
+        <div class="h">📑 行业研究与报告撰写</div>
+        <div class="d"><b>参与中美日韩 RPG 手游市场专题研究，独立负责美国手游品类、题材和中国 MMO 方向三个年度报告子板块。</b>覆盖数据清洗、指标计算、五年趋势分析与增长归因，逐品类输出赛道进入判断，形成「数据 → 洞察 → 建议」的完整链条，报告支持立项讨论。</div>
+        <details class="expand" id="reports">
+          <summary>查看报告摘要</summary>
+          <div class="ebody">
+            <div class="reports wide">
+      <div class="rcard" id="r-us-genre">
+        <div class="rt">2021–2025 美国手游品类趋势研究</div>
+        <div class="rm">年度报告 · 美国板块</div>
+        <dl class="kv">
+          <dt>我的角色</dt><dd>负责美国品类板块的数据整理、分析与成稿</dd>
+          <dt>数据与工具</dt><dd>基于 Sensor Tower 双平台数据（品类、产品两级原始表），Excel 透视表汇总，Python 计算集中度与新品贡献结构；买量素材取自广大大</dd>
+          <dt>研究问题</dt><dd>五年里美国各玩法品类怎么演化，还有哪些赛道值得进</dd>
+          <dt>整体盘子</dt><dd>下载 51 亿降到 37 亿次（CAGR -8%），收入 173 亿涨到 185 亿美元（CAGR +2%），2025 年收入几乎零增长（+0.3%），是存量市场</dd>
+          <dt>品类趋势</dt><dd>下载、收入各取 Top20，分「24–25 同比」和「五年持续」两层看。<br><b>下载侧</b>：涨的是方块解谜（+28%）、纸牌接龙（+19%）、4X 策略（+17%）。前两个 RPD 低、收入高度集中（纸牌接龙收入 Top10 占 95%），进入性价比有限；4X 量价兼备，Kingshot 说明「塔防吸量 + SLG 变现」的新品路径仍走得通。<br><b>收入侧</b>：二合（+82%）、即时策略（+81%）、卡牌对战（+59%）增速最高，但增长压在一两款头部上——Gossip Harbor 占二合收入 57%，Clash Royale 一款的增量就超过即时策略品类全部增量，<span class="hl">是头部在放量，不是赛道在扩容</span>。<br><b>五年持续维度</b>：持续增长的品类很少——下载侧只有方块解谜、纸牌接龙、4X，收入侧只有二合</dd>
+          <dt>归因与深挖</dt><dd>对涨跌 Top 品类逐一拆增长来源（整体盘子 vs 个别新品），并对卡牌、SLG、模拟经营、塔防四个方向做持续跟踪。横向看有三个跨品类判断：<br><b>素材端</b>：核心玩法展示持续让位给数字门、数字祖玛这类休闲副玩法，「素材玩法 ≠ 游戏玩法」成了获量常态。<br><b>用户端</b>：会话次数普降、单次时长稳定在 7–10 分钟，使用越来越碎片。<br><b>商业化端</b>：礼包占比在多个品类反超直充</dd>
+          <dt>结论</dt><dd><span class="hl">4X、二合、对消可关注</span>，但需靠题材或剧情差异化切入；卡牌对战、即时策略的机会绑在顶级 IP 上，不适合正面进；平台 / 跑酷、定制、沙盒等连续收缩的赛道不建议进</dd>
+          <dt>产出</dt><dd>完整研究报告（数据底表 + 品类趋势 + 重点方向拆解 + 头部产品案例）</dd>
+        </dl>
+      </div>
+
+      <div class="rcard" id="r-us-theme">
+        <div class="rt">2021–2025 美国手游题材趋势研究</div>
+        <div class="rm">年度报告 · 美国板块</div>
+        <dl class="kv">
+          <dt>我的角色</dt><dd>负责美国题材板块的数据整理、分析与成稿</dd>
+          <dt>数据与工具</dt><dd>基于 Sensor Tower 双平台数据（Game IQ 主题标签、月度原始表），Excel 透视表按题材汇总下载 / 收入 / RPD（中英对照表 VLOOKUP）；头部产品数据取自 ST 应用排行榜；题材内产品按五年均 RPD 划分轻度 / 中重度</dd>
+          <dt>研究问题</dt><dd>五年里美国各游戏题材的盘子怎么变，题材和玩法怎么组合还有进入机会</dd>
+          <dt>整体格局</dt><dd>题材大盘以轻度休闲为主，头部格局稳定——烹饪（1.03 亿）、时尚（8,869 万）、汽车（8,296 万）、装饰（7,437 万）四个题材年下载均在 7,000 万以上，座次与去年相比基本不变。题材主要承担吸量功能，因此趋势判断以下载为主、RPD 定轻重</dd>
+          <dt>题材趋势</dt><dd>下载 Top20，分「24–25 同比」和「五年持续」两层看。<br><b>增长侧</b>：烹饪是唯一收入、下载双增的头部题材（下载 +6%、收入 +50%，五年 CAGR 分别 +6% / +12%），由 Cookingdom、Good Coffee, Great Coffee 等新品带动；帝国建造下载 +15%，RPD 24.4 美元，量价齐升；丧尸题材下载持平（五年 CAGR 0%）但收入 +39%，由 Last War: Survival（单款增收 2.7 亿美元）和 Last Z 两款 SLG 驱动。<br><b>下降侧</b>：时尚（-20%，五年 CAGR -21%）、犯罪（-24%）、军事（-21%）领跌，共性是头部老产品衰退、新品承接不足；载具汽车下载 -11% 但收入 +40%（Car Match 单款增收 963 万美元），属存量深耕而非盘子扩容</dd>
+          <dt>归因与深挖</dt><dd>对重点题材逐一拆增长来源并下钻到产品级。横向看有四个跨题材判断：<br><b>获量端</b>：ASMR 成为轻度题材新品的共性手段——烹饪的 Cookingdom、Jelly Master，时尚的 Skincare Time、Satiszone 都靠「ASMR 音效 + 即时反馈 + 无压力进度」支撑下载，题材内新老产品代际更替明显。<br><b>玩法端</b>：合成玩法持续向题材渗透——烹饪收入 Top5 中 4 款是合成（Tasty Travels、Merge Cooking、Flambé 贡献超七成收入增量），装饰题材的头部增量也来自「合成 + 剧情」（Matching Story、Seaside Escape）。<br><b>变现端</b>：「轻题材吸量 + 重度玩法变现」在多个题材被验证——冒险题材的 X-Clash 用画线救狗 / 数字门超休素材吸量、后期转 SLG；犯罪题材的 Lands of Jail 以监狱经营为壳、框架对标 Whiteout Survival，RPD 9.84 美元；丧尸题材 Last War / Last Z 同为超休射击素材 + 4X 变现。<br><b>供给端</b>：成熟题材内的换皮矩阵仍有效（Supercent 商店经营系列单款美国均超 700 万下载），「低成本验证—换皮迭代」的题材打法成立</dd>
+          <dt>结论</dt><dd><span class="hl">烹饪 + 合成 / 模拟经营、丧尸 + 休闲副玩法 + 4X 可关注</span>；时尚 + 二合 / 换装、装饰 + 收纳整理需靠题材和剧情差异化切入（女性向）；军事、农场、动物猫、载具汽车等玩法同质、RPD 偏低的题材不建议进入</dd>
+          <dt>产出</dt><dd>完整研究报告（题材五年汇总底表 + 下载 / 收入趋势图 + 重点题材产品级拆解）</dd>
+        </dl>
+      </div>
+
+      <div class="rcard" id="r-mmo">
+        <div class="rt">2021–2025 中国 MMO 头部产品趋势研究</div>
+        <div class="rm">年度报告 · 中国板块 · 热门方向</div>
+        <dl class="kv">
+          <dt>我的角色</dt><dd>负责热门方向中国 MMO 部分的数据整理、分析与成稿</dd>
+          <dt>数据与工具</dt><dd>基于 Sensor Tower 中国 iOS 端数据，MMO 采用多标签加权口径（下载 = MMORPG + 0.3×放置 RPG + 0.07×回合 RPG；收入 = MMORPG + 0.3×放置 RPG + 0.25×回合 RPG）；买量素材来自 adx（卖点打标签聚类）；内购结构取自 ST 头部应用内购买记录</dd>
+          <dt>研究问题</dt><dd>MMO 盘子五年变成了什么样，头部产品靠什么维持，新品还有没有进榜路径</dd>
+          <dt>规模概况</dt><dd>五年持续萎缩。下载从 1.30 亿降至 3,794 万（CAGR -26%），收入从 21.1 亿降至 8.8 亿美元（CAGR -20%），但 <span class="hl">RPD 从 16.3 美元一路升到 23.2 美元</span>——盘子在收缩，留下来的用户付费深度在提高，是明确的存量深耕市场。五年中唯一明显的缓冲是 2023 年《逆水寒》通过买休闲用户扩量，成为上线首年下载最高的 MMO</dd>
+          <dt>头部格局</dt><dd>固化且获量极难。2025 年收入 Top10 中 6 款是上线近十年的老产品（梦幻西游、大话西游、问道等），iOS 端年下载超 100 万的仅 6 款。仅两款新品进入 Top10：《龙之谷世界》走龙之谷 IP 怀旧 + 端游还原，《仙遇》主打「遇见端游时代的自己」，靠轻日常、轻社交做减负——<span class="hl">新品的共同生存策略是经典 IP + 降低负担</span></dd>
+          <dt>买量素材</dt><dd>即时制与回合制同向变化，拆两条看：<br><b>即时制</b>：高福利卖点从 4% 升至 23%（快速升级、高爆率），是最大变化；高品质美术从 58% 微降至 54%。<br><b>回合制</b>：高福利从 15% 升至 29%，高品质美术从 63% 降至 44%。<br><b>判断</b>：仙侠、武侠美术和职业展示对玩家已不构成差异点，两类产品同时在减少美术卖点、加注福利卖点——玩家更吃「低门槛、高回报」的数值爽点；新品则靠 IP / 情怀卖点补位（龙之谷世界、新剑侠情缘）</dd>
+          <dt>内购结构</dt><dd>直充是绝对主体，但结构变化要拆开归因：<br><b>即时制</b>：直充 50% + 礼包 37% 为主；占比上升主要由《仙遇》《龙之谷世界》《新剑侠情缘》三款新进榜产品带动，老产品内购结构基本没动。<br><b>回合制</b>：直充占比高达 83%（梦幻西游 RPD 131.9、幻唐志 RPD 227.9，付费深度极端）；占比上升主因是《新石器时代》《长安幻想》两款出榜——是榜单结构变化，不是在榜产品的行为变化</dd>
+          <dt>结论</dt><dd>MMO 盘子收缩、头部固化、获量成本高，不建议正面进入；可行的切入路径已被两款新品验证——<span class="hl">经典 IP 情怀打底 + 高福利素材买量 + 轻负担设计</span>。回合制的超高 RPD 由十年老产品支撑，不能外推给新品</dd>
+          <dt>产出</dt><dd>研究报告章节（规模趋势 + Top10 产品表 + 素材卖点聚类 + 内购结构）</dd>
+        </dl>
+      </div>
+
+      <div class="rcard" id="r-rpg">
+        <div class="rt">2021–2025 中美日韩 RPG 类市场研究</div>
+        <div class="rm">独立专题</div>
+        <dl class="kv">
+          <dt>我的角色</dt><dd>负责四国 RPG 数据的整理、细分赛道分析与成稿</dd>
+          <dt>数据与工具</dt><dd>基于 Sensor Tower 2021.1–2025.12 中美日韩四国 RPG 游戏的下载、收入、RPD、产品数量数据（颗粒度到天），按 MMORPG、放置、卡牌（组队 + 回合制）、开放世界四条赛道拆解；CR 与在榜产品底表由配套 Python 脚本产出（见上方「数据分析工具」）</dd>
+          <dt>研究问题</dt><dd>五年里中美日韩 RPG 大类怎么演化，四条细分赛道的机会结构差在哪里</dd>
+          <dt>整体盘面</dt><dd>四国 RPG 收入 2025 年全部处于五年最低位，中国、日本较 2021 年缩减最多（中国收入约腰斩）；中国盘子最大（仅 iOS 下载就超过其他三国双端），日本 RPD 最高，韩国次之。供给端也在退潮——四国产品数量只有美国 25 年小幅回升，中日韩持续下降</dd>
+          <dt>细分赛道</dt><dd>按「规模—集中度—头部粘性—进入路径」拆四条：<br><b>MMORPG</b>：四国下载 2025 年齐创五年新低，付费能力分化极端——韩日 RPD 55 美元以上，中国仅 23 美元左右。头部固化：中国收入 CR10 为 60%、韩国 71%，且除《逆水寒》《冒险岛：枫之传说》外，新品几乎无法在收入 Top10 维持满两年。可行路径是怀旧 IP + 数值轻度化。<br><b>放置 RPG</b>：四条赛道中近年唯一还有过增长的（美日韩 2024 年见顶、2025 年小幅回落）。韩国下载量最大（3,220 万），日本 RPD 最高；收入集中度也最高——中国 CR10 达 84%。爆款生命周期极短（韩国《菇勇者传说》收入一年跌 90%），怀旧 IP 是跨市场验证过的确定性打法（冒险岛 Idle 在美日韩同时进榜）。<br><b>卡牌 RPG</b>：日本 RPD 42.6 美元、四国最高，中国不足 15 美元、最低。老牌 IP 粘性接近事实垄断：美国《RAID》连续五年收入榜首，日本《FGO》22–25 年连续榜首；韩国 2025 年靠重制 IP《七骑士 Re:BIRTH》（RPD 46.3 美元）拉动回升。美日韩进入难度都大，建议止步于差异化题材观察。<br><b>开放世界</b>：高门槛、高风险，无顶级研发配置不建议进入——<span class="hl">《原神》之后五年仅 7 个项目熬到上线、其中 2 款速死</span>，没熬过研发期的项目是这个数量的数十倍。存活路径只有两条：《鸣潮》式挖掘未被满足的需求，或《燕云十六声》《无限暖暖》式切入差异化人群，共同前提是顶尖美术与玩作品质，且获量靠营销与社媒自传播而非买量</dd>
+          <dt>结论</dt><dd><b>可关注</b>——放置 RPG（差异化吸量题材 + 怀旧 IP 矩阵）、中韩 MMORPG（怀旧 IP + 轻度化）；<b>谨慎</b>——卡牌 RPG（头部 IP 粘性垄断，美日韩均不宜正面进入）；<span class="hl">不建议——开放世界</span>（研发资源门槛决定这不是选题问题，是禀赋问题）</dd>
+          <dt>产出</dt><dd>独立研究报告（四国 RPG 市场底表 + 赛道 × 国家矩阵分析 + 分赛道进入建议）</dd>
+        </dl>
+      </div>
+
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <div class="role" id="r-data">
+        <div class="h">🐍 数据分析工具与指标口径建设</div>
+        <div class="d"><b>AI 辅助脚本开发，把多轮重复分析脚本化，统一指标口径与统计标准。</b>品类 / 题材结构指标（集中度分层、生命周期、增长贡献）、CR 与在榜产品底表、问卷批量统计、新品扫描与内容抓取；含机器学习模块（产品名无监督聚类）。</div>
+        <details class="expand" id="code">
+          <summary>查看工具说明</summary>
+          <div class="ebody">
+    <div class="codegroup" id="code-ds">
+      <h3>手游品类 / 题材数据分析工具 <span>Python</span></h3>
+      <p class="gsub">报告要判断「这个品类值不值得进」，依据是市场结构而不是总量规模。这套脚本把这些结构指标按品类 × 年份算齐，输出分页签底表，作为各品类章节的取证来源。</p>
+      <details class="codecard">
+        <summary><span class="nm">genre_analysis.py</span><span class="ln">品类 / 题材分析</span><span class="one">一次运行输出 6 张底表的指标引擎；换数据文件夹即可复用于其他国家 / 年份</span></summary>
+        <div class="cc">
+          <p class="subh">背景</p>
+          <ul>
+            <li>报告需对每个品类形成「是否值得进入」的判断，依据是市场结构而非总量规模：头部垄断程度、增长由哪一层产品贡献、新品的渗透与变现水平、头部产品所处的生命周期阶段、赛道内产品的同质化程度。</li>
+            <li>上述结构指标须按品类 × 年份逐一计算且全程口径一致，故编写 Python 脚本统一处理，输出按分析维度分页签的指标底表，作为各品类章节的取证来源。</li>
+          </ul>
+          <p class="subh">我的角色</p>
+          <p>独立设计指标口径并编写全部代码，品类、题材两个维度复用同一套流程。</p>
+          <p class="subh">做了什么</p>
+          <ul>
+            <li><b>数据清洗</b>：兼容 Sensor Tower 导出的多种格式（tab 分隔，utf-16 / utf-8 / gbk 三编码自动回退），5 年数据分块读取、内存降级（float32 / int32），20 多个原始英文字段统一成标准口径。</li>
+            <li><b>结构指标计算（30 余项，按四类问题组织）</b>
+              <ul>
+                <li><b>集中度</b>：CR3/5/10 及高 / 中 / 低垄断分层；头部 / 中腰部 / 尾部（40% / 70% 阈值）增长贡献；Top10 产品下载与收入双维度贡献。</li>
+                <li><b>效率</b>：分层吸量效率，及增长（增长值 ÷ 上线天数）、留存（DAU ÷ 下载）、变现（RPD）三个效率维度。</li>
+                <li><b>生命周期</b>：新品渗透率、增长贡献、RPD 溢价；存量按成熟（1–3 年）/ 衰退（3 年以上）分层，计算产品年龄与下载增长的 Pearson 相关。</li>
+                <li><b>机器学习聚类</b>：以产品名为输入做无监督聚类，流程为文本预处理（去停用词、词干提取）→ TF-IDF 向量化 → K-Means，用轮廓系数在 2–8 中自动选择聚类数，输出各簇关键词。产出两个层面：各聚类的产品数、下载与收入占比、RPD 及增长贡献对比；以及两个校验——头部收入前三是否集中在同一聚类、新品进入头部聚类的比例，用于观察头部产品是否趋同。</li>
+              </ul>
+            </li>
+            <li><b>输出</b>：6 张底表 Excel（集中度 / 吸量效率 / 新品 / 存量 / 聚类汇总 / Top10 详情）+ CR5、吸量效率五年对比图。</li>
+          </ul>
+          <p class="subh">应用</p>
+          <p>报告成稿前的品类结构量化分析，覆盖透视无法计算的指标；换数据文件夹即可复用于其他国家 / 年份。</p>
+          <p class="subh">产出</p>
+          <p>可运行脚本 + 全字段指标字典。</p>
+<details class="code"><summary>查看代码片段</summary><pre><span class="c">    # 优化 TF-IDF 参数，降低稀疏度</span>
+    tfidf = TfidfVectorizer(
+        max_features=min(50, len(set(' '.join(valid_names).split()))),  <span class="c"># 动态特征数</span>
+        min_df=2,                    <span class="c"># 至少出现在 2 个文档中</span>
+        stop_words='english'
+    )
+    tfidf_matrix = tfidf.fit_transform(valid_names)
+
+    <span class="c"># 遍历候选 K，用轮廓系数自动选最优</span>
+    start_k, end_k = cluster_range
+    best_k, best_score, all_scores = start_k, -1, []
+
+    for k in range(start_k, end_k + 1):
+        if k &gt;= len(valid_names):
+            break
+        kmeans = KMeans(n_clusters=k, random_state=42, n_init=Config.KMEANS_N_INIT)
+        labels = kmeans.fit_predict(tfidf_matrix)
+
+        <span class="c"># 聚类数少于 2 无法计算轮廓系数，跳过</span>
+        if len(set(labels)) &lt; 2:
+            continue
+        score = silhouette_score(tfidf_matrix, labels)
+        all_scores.append((k, score))
+
+        <span class="c"># 轮廓系数范围 [-1, 1]，&gt; 0 表示聚类有效</span>
+        if score &gt; 0 and score &gt; best_score:
+            best_score, best_k = score, k
+
+    <span class="c"># 兜底：所有 K 都无效时，退化为最接近 2 的有效值</span>
+    if best_score &lt;= 0 and all_scores:
+        ...</pre></details>
+        </div>
+      </details>
+    </div>
+
+    <div class="codegroup" id="code-rpg">
+      <h3>RPG 专题数据底表工具 <span>Python × 2</span></h3>
+      <p class="gsub">服务 2021–2025 中美日韩 RPG 类市场研究：专题要论证「头部固化、新品难留榜」，靠的是 CR 集中度序列与逐产品的在榜年份记录这两类量化证据。</p>
+    <details class="codecard">
+      <summary><span class="nm">concentration_cr.py</span><span class="ln">RPG 专项 · CR 与头部产品底表</span><span class="one">按国家 × 品类 × 年份算 CR4 / CR5 / CR10 及 Top10 产品表，下载与收入各按自己的排名取值</span></summary>
+      <div class="cc">
+        <p class="subh">背景</p>
+        <ul>
+          <li>两类证据均涉及 4 国 × 4 赛道 × 5 年的排名与份额计算，且 CR 须按下载、收入各自的排名分别取值，首发日期格式混杂直接影响上线年份判定，故编写脚本统一计算并生成格式化底表，直接用于报告正文。</li>
+        </ul>
+        <p class="subh">我的角色</p>
+        <p>为 RPG 专题协作编写数据处理与报表脚本，负责口径设计与实现。</p>
+        <p class="subh">做了什么</p>
+        <ul>
+          <li><b>CR 与头部产品底表</b>：按国家 × 品类 × 年份计算 CR4 / CR5 / CR10 及 Top10 产品表。口径上做了两个设计决策：下载 CR 按下载排名、收入 CR 按收入排名分别计算，不用同一名单；Open World 品类因产品数量少，CR 基数由 5 调整为 4。当年首发产品在表内自动标黄。</li>
+        </ul>
+        <p class="subh">应用</p>
+        <p>报告中的集中度数字（如中国 MMORPG 收入 CR10 为 60%、韩国为 71%）和「连续五年在榜」的头部产品名单，均由脚本直接产出，随报告交付。</p>
+        <p class="subh">产出</p>
+        <p>可复用脚本 + 格式化 Excel 底表。</p>
+<details class="code"><summary>查看代码片段</summary><pre><span class="c">    # ========== 分别按收入 / 下载量排序 ==========</span>
+    <span class="c"># 收入维度：按收入降序（用于收入集中度 + 前 10 产品展示）</span>
+    sorted_by_revenue  = filtered_df.sort_values('收入', ascending=False).reset_index(drop=True)
+    <span class="c"># 下载量维度：按下载量降序（仅用于下载集中度）</span>
+    sorted_by_download = filtered_df.sort_values('下载', ascending=False).reset_index(drop=True)
+
+    <span class="c"># 精准判断"当年首发"，排除日期解析误差</span>
+    target_year = int(year)
+    sorted_by_revenue['是否当年首发'] = (sorted_by_revenue['首发年份_精准'] == target_year)
+
+    top10_revenue  = sorted_by_revenue.head(10).copy()
+    top10_download = sorted_by_download.head(10).copy()
+    <span class="c"># ...（省略产品明细打印）</span>
+
+    <span class="c"># ========== 按品类确定集中度基数 ==========</span>
+    cr_base = 4 if genre == 'Open World' else 5     <span class="c"># CR4 / CR5 切换</span>
+    total_download = filtered_df['下载'].sum()
+    total_revenue  = filtered_df['收入'].sum()
+
+    <span class="c"># 下载集中度：按下载排名取前 N 名</span>
+    cr_download = round(
+        (sorted_by_download.head(cr_base)['下载'].sum() / total_download * 100)
+    ) if total_download &gt; 0 else 0
+    <span class="c"># 收入集中度：按收入排名取前 N 名</span>
+    cr_revenue = round(
+        (sorted_by_revenue.head(cr_base)['收入'].sum() / total_revenue * 100)
+    ) if total_revenue &gt; 0 else 0</pre></details>
+      </div>
+    </details>
+    <details class="codecard">
+      <summary><span class="nm">lifecycle_classify.py</span><span class="ln">RPG 专项 · 跨年榜单分类</span><span class="one">按本品类内的下载 / 收入 Top20 排名，给产品打「始终 / 曾经 / 从未在榜」标签</span></summary>
+      <div class="cc">
+        <p class="subh">背景</p>
+        <ul>
+          <li>专题需要逐产品的在榜年份记录，用于区分五年始终在榜与短暂进榜的产品。</li>
+        </ul>
+        <p class="subh">我的角色</p>
+        <p>为 RPG 专题协作编写数据处理与报表脚本，负责口径设计与实现。</p>
+        <p class="subh">做了什么</p>
+        <ul>
+          <li><b>长线在榜产品底表</b>：以「五年内在本品类下载或收入任一进入 Top20」为在榜标准，将产品分为始终在榜、曾经在榜、从未在榜三类，输出带本品类逐年排名的明细表；统一了多种格式的首发日期解析，修正上线年份误判。</li>
+        </ul>
+        <p class="subh">应用</p>
+        <p>「连续五年在榜」的头部产品名单由脚本直接产出，随报告交付。</p>
+        <p class="subh">产出</p>
+        <p>可复用脚本 + 格式化 Excel 底表。</p>
+<details class="code"><summary>查看代码片段</summary><pre><span class="c">def classify_products(df, top20_dict):</span>
+    <span class="c">"""</span>
+    <span class="c">    始终在榜：有数据的年份里，每年都在本品类榜内</span>
+    <span class="c">    曾经在榜：至少一年在榜，但不是所有年份都在榜</span>
+    <span class="c">    从未在榜：从未进入本品类榜内</span>
+    <span class="c">"""</span>
+    <span class="c"># 按 产品-国家-品类 维度去重</span>
+    all_units = df[['Unified Name', '国家', '合并后品类']].drop_duplicates()
+    years = ['2021', '2022', '2023', '2024', '2025']
+
+    for _, row in all_units.iterrows():
+        product_name, country, genre = row['Unified Name'], row['国家'], row['合并后品类']
+        yearly_status, total_years_in_top20 = {}, 0
+
+        for year in years:
+            <span class="c"># 先判断该产品该年是否有数据；没有则记"无数据"，不进入分母</span>
+            mask = ((df['年份'] == year) &amp; (df['国家'] == country) &amp;
+                    (df['合并后品类'] == genre) &amp; (df['Unified Name'] == product_name))
+            if len(df[mask]) == 0:
+                yearly_status[year] = '无数据'
+                continue
+
+            <span class="c"># 本品类内下载或收入任一进入前 20 即算在榜</span>
+            in_dl  = product_name in top20_dict['download'].get((year, country, genre), [])
+            in_rev = product_name in top20_dict['revenue'].get((year, country, genre), [])
+            if in_dl or in_rev:
+                yearly_status[year] = '在榜'
+                total_years_in_top20 += 1
+            else:
+                yearly_status[year] = '不在榜'
+
+        <span class="c"># 以"有数据的年份"为分母，避免缺数据被误判为掉榜</span>
+        years_with_data = sum(1 for v in yearly_status.values() if v != '无数据')
+        if years_with_data &gt; 0 and total_years_in_top20 == years_with_data:
+            classification = '始终在榜'
+        elif total_years_in_top20 &gt; 0:
+            classification = '曾经在榜'
+        else:
+            classification = '从未在榜'</pre></details>
       </div>
     </details>
     </div>
