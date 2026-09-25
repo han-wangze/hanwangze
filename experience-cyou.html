@@ -188,6 +188,13 @@
   .hl{background:#fef3c7;border-radius:4px;padding:0 4px}
   .role code,.codecard code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
     font-size:12px;background:#f1f5f9;border-radius:5px;padding:1px 5px;color:#334155}
+  /* 09-25：脚本名外链到 GitHub（脱敏开源仓库）。与旁边纯展示的 code 小块刻意区分：主色 + 淡靛底 + ↗ */
+  .clink{display:inline-block;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:12px;background:#eef2ff;border:1px solid #dcdffb;border-radius:5px;padding:0 6px;
+    color:var(--primary);font-weight:600;text-decoration:none;white-space:nowrap}
+  .clink:hover{background:#e0e4ff;border-color:var(--primary)}
+  /* ↗ 由 CSS 生成：不进纯文本内容，文本镜像（简历内容源）里就不会留一个孤零零的箭头 */
+  .clink::after{content:"\2197";margin-left:3px;opacity:.75}
   .subh{font-size:12.5px;font-weight:800;color:var(--primary);letter-spacing:.3px;margin:13px 0 5px}
   .subh:first-child{margin-top:0}
   .codecard .cc p{font-size:13px;line-height:1.6;color:var(--muted)}
@@ -291,8 +298,8 @@
           <summary>查看扫描机制</summary>
           <div class="ebody">
 <ul class="mech">
-              <li><b>ST 免费榜</b>每周扫榜筛选 2025 年新品；导出文件由 <code>新品扫描.py</code> 处理——自动统一两种导出格式，对照已累计的去重表剔掉收录过的产品，剩下的就是本周新增。</li>
-              <li><b>B 站</b>跟踪游戏 UP 主的新游相关投稿；<code>bilibili_crawler.py</code> 按设定的时间窗抓投稿，翻到比窗口更早的就停，不做多余翻页。</li>
+              <li><b>ST 免费榜</b>每周扫榜筛选 2025 年新品；导出文件由 <a class="clink" href="https://github.com/han-wangze/game-market-research-tools/blob/main/new_release_scanner.py" target="_blank" rel="noopener">new_release_scanner.py</a> 处理——自动统一两种导出格式，对照已累计的去重表剔掉收录过的产品，剩下的就是本周新增。</li>
+              <li><b>B 站</b>跟踪游戏 UP 主的新游相关投稿；<a class="clink" href="https://github.com/han-wangze/game-market-research-tools/blob/main/bilibili_crawler.py" target="_blank" rel="noopener">bilibili_crawler.py</a> 按设定的时间窗抓投稿，翻到比窗口更早的就停，不做多余翻页。</li>
               <li><b>Steam / YouTube</b>按同一套维度（玩法差异化、吸量、买量依赖、同质化）筛选。</li>
             </ul>
           </div>
@@ -307,7 +314,7 @@
 <ul class="mech">
               <li><b>玩法视频与包装</b>剪辑玩法视频、完成世界观包装。</li>
               <li><b>问卷投放与回收</b>配置问卷、投放、回收样本。</li>
-              <li><b>清洗与统计</b>回收多批问卷数据 Excel 表后批量清洗，用正则 + 关键词自动识别「游玩时长列」「已填写字段」「品类问题列」；按同一套口径算下载意愿 / 尖叫度 / 游玩时长——下载意愿分母 = 有效爱好用户 + 已查看未填写，尖叫度只在「愿意试玩」子集取均值，游玩时长占比分母 = 已填写样本。（<code>concept_test_stats.py</code>）</li>
+              <li><b>清洗与统计</b>回收多批问卷数据 Excel 表后批量清洗，用正则 + 关键词自动识别「游玩时长列」「已填写字段」「品类问题列」；按同一套口径算下载意愿 / 尖叫度 / 游玩时长——下载意愿分母 = 有效爱好用户 + 已查看未填写，尖叫度只在「愿意试玩」子集取均值，游玩时长占比分母 = 已填写样本。（<a class="clink" href="https://github.com/han-wangze/game-market-research-tools/blob/main/concept_test_stats.py" target="_blank" rel="noopener">concept_test_stats.py</a>）</li>
             </ul>
           </div>
         </details>
@@ -319,7 +326,7 @@
       </div>
       <div class="role" id="r-data">
         <div class="h">🐍 数据分析工具与指标口径建设</div>
-        <div class="d"><b>AI 辅助脚本开发，把多轮重复分析脚本化，统一指标口径与统计标准。</b>品类 / 题材结构指标（集中度分层、生命周期、增长贡献）、CR 与在榜产品底表、问卷批量统计、新品扫描与内容抓取；含机器学习模块（产品名无监督聚类）。</div>
+        <div class="d"><b>AI 辅助脚本开发，把多轮重复分析脚本化，统一指标口径与统计标准。</b>品类 / 题材结构指标（集中度分层、生命周期、增长贡献）、RPG 专题的 CR 与在榜产品底表；含机器学习模块（产品名无监督聚类）。</div>
         <a class="go" href="#tools">查看数据工具 →</a>
       </div>
     </div>
@@ -425,24 +432,7 @@
     <div class="sec-head">
       <div class="k">Tools · 数据工具</div>
       <h2>数据工具与指标口径</h2>
-      <p>把重复的分析流程脚本化、口径统一。展开每张卡看它解决什么问题、怎么做的。</p>
-    </div>
-    <div class="codegroup" id="code-auto">
-      <h3>自动化脚本 <span>Python × 3</span></h3>
-      <p class="gsub">把每周、每轮都要重复一遍的动作压成一条命令：扫榜、抓自媒体、清洗问卷。</p>
-<details class="codecard">
-      <summary><span class="nm">new_release_scanner.py</span><span class="ln">新品扫描</span><span class="one">扫描 Sensor Tower 免费榜，筛 2025 年新上线产品，去重后输出每周新品清单</span></summary>
-      <div class="cc">
-        <p class="subh">为什么需要</p><ul class="bul"><li>每周要从 Sensor Tower 的 App Store 免费榜（top free）里筛出 2025 年新上线的新品，人工比对历史名单重复且易错。</li></ul><p class="subh">怎么做</p><ul class="bul"><li>榜单有两种导出格式（列名不同），自动识别并映射成统一字段；筛选、去重、回写拆成独立方法，改一处不碰其他。</li></ul>
-      </div><details class="codecard">
-      <summary><span class="nm">bilibili_crawler.py</span><span class="ln">B站内容抓取</span><span class="one">抓取游戏 UP 主投稿的标题和链接，快速了解自媒体侧的新游</span></summary>
-      <div class="cc">
-        <p class="subh">为什么需要</p><ul class="bul"><li>新游扫描要看 B 站游戏 UP 主最近发了哪些新游，人工翻投稿低效。</li></ul><p class="subh">怎么做</p><ul class="bul"><li>日期字符串先统一解析成 datetime 再比较；用官方库异步抓取标题 / 链接 / 发布时间，按发布时间倒序，翻到早于起始时间的投稿即提前退出，避免无谓翻页。</li></ul>
-      </div><details class="codecard">
-      <summary><span class="nm">concept_test_stats.py</span><span class="ln">问卷批处理</span><span class="one">多轮问卷的批量清洗与统计：样本量 / 下载意愿 / 尖叫度 / 游玩时长 / 原因占比</span></summary>
-      <div class="cc">
-        <p class="subh">为什么需要</p><ul class="bul"><li>多轮概念测试会回收一批问卷 Excel，每轮都要清洗、按同一套口径算下载意愿 / 尖叫度 / 游玩时长，手工做慢且口径难一致。</li></ul><p class="subh">怎么做</p><ul class="bul"><li>列名自适应——问卷题号 / 措辞在多轮里会变，用正则 + 关键词自动识别「游玩时长列」「已填写字段」「品类问题列」，换一轮问卷不用改代码。</li><li>统计口径严谨——下载意愿分母 = 有效爱好用户 + 已查看未填写；尖叫度只在「愿意试玩」子集取均值；游玩时长占比分母 = 已填写样本。</li></ul>
-      </div>
+      <p>品类侧的分析脚本：把重复的指标计算流程脚本化、口径统一，展开每张卡看它解决什么问题、怎么做的。另有三个自动化脚本（榜单新品扫描 / B 站内容抓取 / 问卷批处理），代码已脱敏开源 → <a class="clink" href="https://github.com/han-wangze/game-market-research-tools" target="_blank" rel="noopener">GitHub</a></p>
     </div>
 <div class="codegroup" id="code-ds">
       <h3>手游品类 / 题材数据分析工具 <span>Python</span></h3>
