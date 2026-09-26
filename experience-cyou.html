@@ -131,7 +131,7 @@
   details.codecard[open] > summary::after{content:"收起 \25BE"}
 
   details.codecard > summary .nm{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;font-weight:700}
-  details.codecard > summary .ln{font-size:11.5px;color:var(--primary);border:1px solid var(--line);border-radius:999px;padding:2px 9px}
+  details.codecard > summary .ln{font-size:12px;color:var(--primary);border:1px solid var(--line);border-radius:999px;padding:2px 9px}
   details.codecard > summary .one{font-size:13px;color:var(--muted);flex-basis:100%}
   details.codecard > summary:hover{background:#f8fafc}
   details.codecard[open] > summary{border-bottom:1px solid var(--line)}
@@ -158,7 +158,7 @@
   .method{background:var(--bg);border:1px dashed #cbd5e1;border-radius:14px;padding:15px 16px}
   .method .t{font-weight:700;font-size:14px;display:flex;align-items:center;gap:7px}
   .method .d{font-size:12px;color:var(--muted);margin-top:6px}
-  .method .tag{font-size:11px;color:#0e7490;background:#ecfeff;border-radius:999px;padding:2px 8px;display:inline-block;margin-top:9px}
+  .method .tag{font-size:12px;color:#0e7490;background:#ecfeff;border-radius:999px;padding:2px 8px;display:inline-block;margin-top:9px}
   /* 报告提要 */
   .reports{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
   @media(max-width:760px){.reports{grid-template-columns:1fr}}
@@ -177,7 +177,7 @@
   .bul>li:last-child{margin-bottom:0}
   .bul>li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:2px;background:var(--primary);opacity:.38}
   .bul>li>b{font-weight:700}
-  .role .d .bul>li.sub{margin-left:1.5em;opacity:.82}
+  .role .d .bul>li.sub{margin-left:1.5em;padding-left:30px;opacity:.82}
   .role .d .bul>li.sub::before{content:"";position:absolute;left:3px;top:4px;width:13px;height:13px;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2.5 1.6 L2.5 9 L11 9' fill='none' stroke='%233730a3' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11 6.9 L13 9 L11 11.1' fill='none' stroke='%233730a3' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/13px 13px no-repeat}
   /* 字段分块：左描边 + 小标题（沿用站内 #smart 决策卡的语言） */
   .blk{margin-top:13px;padding-left:13px;border-left:2px solid var(--line);font-size:13px}
@@ -210,7 +210,7 @@
   /* 第十轮：删 gap:0 / rt 15px 等覆盖，统一用上方 .rcard gap:12px 与 .rcard .rt 16px；.gsub 回落 L151 的 13px */
   .reports.wide{grid-template-columns:1fr}
   /* 09-25 结构改造：分区版式（职责卡只做导航；报告/工具升级为分区） */
-  .rq{font-size:13px;color:var(--ink);font-style:italic;margin-top:0}
+  .rq{font-size:13px;color:var(--muted);font-weight:600;margin-top:0}
   /* 职责卡里的「入口条」：展开（▸）与跳转（→）共用一套外观，只靠左侧标记区分 */
   .role .go{display:flex;align-items:center;gap:7px;margin-top:12px;padding:8px 0 2px;
     border-top:1px dashed var(--line);font-size:13px;font-weight:700;color:var(--primary)}
@@ -219,7 +219,7 @@
   /* 阅读宽度：长文不再跑满 960px（两列卡自然窄，宽卡与工具卡靠这条收住） */
   .blk,.bul{max-width:760px}
   /* codecard 摘要行：一句话跟在脚本名同行，过长省略号截断 */
-  details.codecard > summary .one{flex:1 1 auto;min-width:0;font-size:12.5px;
+  details.codecard > summary .one{flex:1 1 auto;min-width:0;font-size:12px;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   details.codecard > summary{padding-right:112px}
   /* 分区：报告区两列 + 分区之间拉开节奏 */
@@ -230,9 +230,13 @@
   .rcard .sum .st{font-size:12px;font-weight:800;color:var(--primary);letter-spacing:.3px;margin-bottom:3px}
   .rcard .sum .sd{font-size:13px;line-height:1.6;color:var(--ink);font-weight:400}
   .rcard .chips2{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:0}
-  .rcard .chips2 .stat{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 11px;display:flex;flex-direction:column;gap:2px}
-  .rcard .chips2 .stat b{font-size:16px;font-weight:700;color:var(--primary);line-height:1.2}
+  .rcard .chips2 .stat{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 11px;display:flex;flex-direction:column;gap:2px;overflow:hidden}
+  .rcard .chips2 .stat b{font-size:15px;font-weight:700;color:var(--primary);line-height:1.2;white-space:nowrap}
   .rcard .chips2 .stat span{font-size:12px;color:var(--muted);line-height:1.4}
+  /* 面层一句话洞察（标黄强调，与展开层 .hl 同色）；窄屏降两列防长值溢出 */
+  .rcard .take{margin-top:2px;background:#fef3c7;border-radius:8px;padding:9px 12px;font-size:13px;line-height:1.62;color:var(--ink)}
+  .rcard .take b{font-weight:700}
+  @media(max-width:560px){.rcard .chips2{grid-template-columns:repeat(2,1fr)}}
   .rcard details.rdet{margin-top:0}
   .rcard details.rdet>summary{list-style:none;cursor:pointer;user-select:none;display:flex;align-items:center;gap:7px;
     border:0;background:none;padding:4px 0;font-size:13px;font-weight:600;color:var(--primary);transition:.15s}
@@ -387,6 +391,7 @@
             <li><b>新品＝成熟框架换皮 / 换名</b>：经典 IP ＋ 轻度化是确定的进榜路径，单玩法休闲产品在畅销榜留不住。</li>
           </ul>
         </div>
+        <div class="take">进榜路径已收敛为「经典 IP 套成熟玩法框架 + 轻度化」，单玩法休闲在畅销榜留不住。</div>
         <div class="verdict"><span class="vtag">进入判断</span>：可关注经典 IP 套成熟玩法框架（几何王国 like / 传奇 like / 率土 like）＋ 轻度化；不宜做单玩法休闲或纯创新玩法。</div>
         <div class="chips2"><div class="stat"><b>+4 / −4</b><span>卡牌 / 塔防 座次变动</span></div><div class="stat"><b>22 款</b><span>MMO 居品类之首</span></div><div class="stat"><b>4 / 5</b><span>新品为放置卡牌</span></div></div>
         <details class="rdet"><summary>展开查看报告摘要</summary>
@@ -409,8 +414,8 @@
 <section id="reports">
   <div class="wrap">
     <div class="sec-head">
-      <div class="k">Research · 核心提要</div>
-      <h2>四份报告 · 摘要</h2>
+      <div class="k">Research</div>
+      <h2>核心提要</h2>
     </div>
     <div class="reports">
       <div class="rcard" id="r-us-genre">
@@ -424,6 +429,7 @@
             <li><b>增长压在头部 1–2 款</b>：增速最高的二合（+82%）、即时策略（+81%）、卡牌对战（+59%）是头部在放量，不是赛道在扩容。</li>
           </ul>
         </div>
+        <div class="take">美国手游已进入存量市场：量价俱佳的赛道极少，增长全压在头部 1–2 款。</div>
         <div class="verdict"><span class="vtag">进入判断</span>：可关注 4X、二合、对消（靠题材或剧情差异化切入）；卡牌对战、即时策略需绑顶级 IP；平台 / 跑酷、沙盒等连续收缩赛道不建议进入。</div>
         <div class="chips2"><div class="stat"><b>51 → 37 亿</b><span>下载次数（五年）</span></div><div class="stat"><b>173 → 185 亿</b><span>收入（美元，五年）</span></div><div class="stat"><b>+0.3%</b><span>2025 收入增速</span></div></div>
         <details class="rdet"><summary>展开查看报告摘要</summary>
@@ -449,6 +455,7 @@
             <li>时尚、犯罪、军事领跌（头部老产品衰退、新品承接不足）。</li>
           </ul>
         </div>
+        <div class="take">题材大盘头部固化，增量只来自少数「轻题材吸量 + 重度玩法变现」组合。</div>
         <div class="verdict"><span class="vtag">进入判断</span>：可关注 烹饪 + 合成 / 模拟经营、丧尸 + 休闲副玩法 + 4X；军事、农场、载具汽车等玩法同质、RPD 偏低的题材不建议进入。</div>
         <div class="chips2"><div class="stat"><b>+50%</b><span>烹饪题材收入</span></div><div class="stat"><b>+39%</b><span>丧尸题材收入</span></div><div class="stat"><b>超七成</b><span>合成渗透贡献增量</span></div></div>
         <details class="rdet"><summary>展开查看报告摘要</summary>
@@ -473,6 +480,7 @@
             <li><b>头部固化</b>：2025 年收入 Top10 中 6 款是近十年老产品，仅 2 款新品进榜，共同策略是经典 IP ＋ 降低负担。</li>
           </ul>
         </div>
+        <div class="take">MMO 盘子五年持续萎缩、头部固化，留下来的用户付费更深。</div>
         <div class="verdict"><span class="vtag">进入判断</span>：不建议正面进入；可行路径已被新品验证——经典 IP 情怀打底 ＋ 高福利素材买量 ＋ 轻负担设计。</div>
         <div class="chips2"><div class="stat"><b>−26%</b><span>下载 CAGR</span></div><div class="stat"><b>−20%</b><span>收入 CAGR</span></div><div class="stat"><b>16.3 → 23.2 美元</b><span>RPD 付费深度</span></div></div>
         <details class="rdet"><summary>展开查看报告摘要</summary>
@@ -498,6 +506,7 @@
             <li><b>中国盘子最大</b>（仅 iOS 下载超其他三国双端），日本 RPD 最高；供给端四国产品数量普遍下降。</li>
           </ul>
         </div>
+        <div class="take">四国 RPG 收入 2025 全处五年最低，放置 RPG 是四条赛道中唯一近年有过增长的。</div>
         <div class="verdict"><span class="vtag">进入判断</span>：可关注 放置 RPG（怀旧 IP + 轻度化）与中韩 MMORPG（怀旧 IP + 数值轻度化）；卡牌 RPG 美日韩均不宜正面进；开放世界不建议进。</div>
         <div class="chips2"><div class="stat"><b>唯一增长</b><span>放置 RPG 赛道</span></div><div class="stat"><b>怀旧 IP</b><span>中韩 MMORPG 路径</span></div><div class="stat"><b>7 项目</b><span>开放世界五年上线</span></div></div>
         <details class="rdet"><summary>展开查看报告摘要</summary>
