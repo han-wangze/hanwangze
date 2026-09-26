@@ -101,6 +101,10 @@
   .role{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--primary);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow)}
   .role .h{font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px}
   .role .d{font-size:14px;color:var(--muted);margin-top:6px}
+  /* 职责卡里的分条展示（09-26 卡④内容较长，改用 bullet）；文字与同卡正文保持一致的对比度 */
+  .role .d .bul{margin-top:8px}
+  .role .d .bul>li{color:var(--muted)}
+  .role .d .bul>li>b{color:var(--ink);font-weight:700}
   .arch{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);overflow-x:auto;margin-bottom:24px}
   .arch svg{width:100%;height:auto;min-width:640px}
   .flow-step{fill:#eef2ff;stroke:var(--primary);stroke-width:1.5}
@@ -293,7 +297,7 @@
     <div class="roles">
       <div class="role" id="r-scan">
         <div class="h">🔍 新品机会扫描</div>
-        <div class="d"><b>输出值得关注的新品清单。</b>从 Sensor Tower 榜单、Steam、YouTube / B站自媒体等渠道扫描新游，按玩法差异化、吸量、买量依赖、同质化程度几个维度筛选。</div>
+        <div class="d"><b>输出值得关注的新品清单。</b>从 Sensor Tower 榜单、Steam、YouTube / B站自媒体等渠道扫描新游，按<b>玩法差异化、吸量、买量依赖、同质化程度</b>几个维度筛选。</div>
         <details class="expand" id="scan-src">
           <summary>查看扫描机制</summary>
           <div class="ebody">
@@ -304,30 +308,31 @@
             </ul>
           </div>
         </details>
+        <a class="go" href="#monitor">查看微信小游戏畅销榜监测 · 2025 年 10 月期 →</a>
       </div>
       <div class="role" id="r-concept">
         <div class="h">🧪 概念测试与立项评估</div>
-        <div class="d"><b>负责潜力产品的早期验证。</b>玩法视频剪辑、世界观包装、问卷配置与投放回收，按「下载意愿 ≥ 70% 且尖叫度 ≥ 1.5」筛出高潜方向；多轮回收数据用 Python 批量处理并输出统计结论。</div>
+        <div class="d"><b>负责潜力产品的早期验证。</b>玩法视频剪辑、世界观包装、问卷配置与投放回收，按<b>「下载意愿 ≥ 70% 且尖叫度 ≥ 1.5」</b>筛出高潜方向；多轮回收数据用 <b>Python 批量处理</b>并输出统计结论。</div>
         <details class="expand" id="concept-flow">
           <summary>查看测试口径</summary>
           <div class="ebody">
 <ul class="mech">
               <li><b>玩法视频与包装</b>剪辑玩法视频、完成世界观包装。</li>
               <li><b>问卷投放与回收</b>配置问卷、投放、回收样本。</li>
-              <li><b>清洗与统计（<a class="clink" href="https://github.com/han-wangze/game-market-research-tools/blob/main/concept_test_stats.py" target="_blank" rel="noopener">concept_test_stats.py</a>）</b>回收多批问卷数据 Excel 表后批量清洗，用正则 + 关键词自动识别「游玩时长列」「已填写字段」「品类问题列」；按同一套口径算下载意愿 / 尖叫度 / 游玩时长，下载意愿分母 = 有效爱好用户 + 已查看未填写；尖叫度只在「愿意试玩」子集取均值；游玩时长占比分母 = 已填写样本。</li>
+              <li><b>清洗与统计（<a class="clink" href="https://github.com/han-wangze/game-market-research-tools/blob/main/concept_test_stats.py" target="_blank" rel="noopener">concept_test_stats.py</a>）</b>回收多批问卷数据 Excel 表后批量清洗，用正则 + 关键词自动识别「游玩时长列」「已填写字段」「品类问题列」；按同一套口径计算下载意愿 / 尖叫度 / 游玩时长，下载意愿分母 = 有效爱好用户 + 已查看未填写；尖叫度只在「愿意试玩」子集取均值；游玩时长占比分母 = 已填写样本。</li>
             </ul>
           </div>
         </details>
       </div>
       <div class="role" id="r-report">
         <div class="h">📑 行业研究与报告撰写</div>
-        <div class="d"><b>负责美国手游品类、题材两个年度报告板块与中国 MMO 方向，参与中美日韩 RPG 专题。</b>覆盖数据清洗、指标计算、五年趋势分析与增长归因，逐品类输出赛道进入判断，形成「数据 → 洞察 → 建议」的完整链条，报告支持立项讨论。</div>
+        <div class="d"><b>负责美国手游品类、题材和中国 MMO 方向三个年度报告板块内容，参与中美日韩 RPG 专题研究。</b>覆盖数据清洗、指标计算、五年趋势分析与增长归因，逐品类输出赛道进入判断，形成「数据 → 洞察 → 建议」的完整链条，报告支持立项讨论。</div>
         <a class="go" href="#reports">查看 4 份报告摘要 →</a>
       </div>
       <div class="role" id="r-data">
         <div class="h">🐍 数据分析与指标体系建设（Python）</div>
-        <div class="d"><b>把 Sensor Tower 导出的原始数据清洗、计算成报告直接使用的指标和底表。</b>品类 / 题材结构指标（看每个品类集中度高不高、增长靠头部还是腰尾部、新品还有没有空间）；产品名聚类分析（无监督机器学习：把产品名聚类，比较各簇产品的下载、收入、RPD 表现，看头部是否趋同、新品有没有挤进头部）；RPG 专题的底表（四国 × 四赛道 × 五年的下载 / 收入 CR 集中度序列，和逐产品的长线表现——看哪些能连续五年守住品类收入 / 下载前 20，哪些只是短暂上榜）。</div>
-        <a class="go" href="#tools">查看数据工具 →</a>
+        <div class="d"><b>把 Sensor Tower 导出的原始数据清洗、计算成报告直接使用的指标和底表。</b><ul class="bul"><li><b>品类 / 题材结构指标</b>：看每个品类集中度高不高、增长靠头部还是腰尾部、新品还有没有空间</li><li><b>产品名聚类分析</b>：把产品名聚类，比较各簇产品的下载、收入、RPD 表现，看头部是否趋同、新品有没有挤进头部</li><li><b>RPG 专题底表</b>：四国 × 四赛道 × 五年的下载 / 收入 CR 集中度序列，和逐产品的长线表现——看哪些能连续五年守住品类收入 / 下载前 20，哪些只是短暂上榜</li></ul></div>
+        <a class="go" href="#tools">查看数据分析工具 →</a>
       </div>
     </div>
   </div>
@@ -430,12 +435,11 @@
 <section id="tools" class="alt">
   <div class="wrap">
     <div class="sec-head">
-      <div class="k">Tools · 数据工具</div>
-      <h2>数据工具与指标口径</h2>
-      <p>品类侧的分析脚本：把重复的指标计算流程脚本化、口径统一，展开每张卡看它解决什么问题、怎么做的。另有三个自动化脚本（榜单新品扫描 / B 站内容抓取 / 问卷批处理），代码已脱敏开源 → <a class="clink" href="https://github.com/han-wangze/game-market-research-tools" target="_blank" rel="noopener">GitHub</a></p>
+      <div class="k">Tools · 数据分析</div>
+      <h2>数据分析工具</h2>
     </div>
 <div class="codegroup" id="code-ds">
-      <h3>手游品类 / 题材数据分析工具 <span>Python</span></h3>
+      <h3>美国手游品类 / 题材数据分析工具</h3>
       <p class="gsub">报告要判断「这个品类值不值得进」，依据是市场结构而不是总量规模。这套脚本把这些结构指标按品类 × 年份算齐，输出分页签底表，作为各品类章节的取证来源。</p>
       <details class="codecard">
         <summary><span class="nm">genre_analysis.py</span><span class="ln">品类 / 题材分析</span><span class="one">一次运行输出 6 张底表的指标引擎</span></summary>
@@ -464,7 +468,7 @@
       </details>
     </div>
 <div class="codegroup" id="code-rpg">
-      <h3>RPG 专题数据底表工具 <span>Python × 2</span></h3>
+      <h3>中美日韩 RPG 专题研究数据分析工具 <span>Python × 2</span></h3>
       <p class="gsub">服务 2021–2025 中美日韩 RPG 类市场研究：专题要论证「头部固化、新品难留榜」，靠的是 CR 集中度序列与逐产品的在榜年份记录这两类量化证据。</p>
     <details class="codecard">
       <summary><span class="nm">concentration_cr.py</span><span class="ln">RPG 专项 · CR 与头部产品底表</span><span class="one">按国家 × 品类 × 年份算 CR4 / CR5 / CR10 及 Top10 产品表，下载与收入各按自己的排名取值</span></summary>
