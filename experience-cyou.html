@@ -99,7 +99,7 @@
   details.expand .ebody .reports{margin-top:0}
   details.expand .ebody .codegroup:first-child{margin-top:0}
   .role{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--primary);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow)}
-  .role .h{font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px}
+  .role .h{font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px}
   .role .d{font-size:14px;color:var(--muted);margin-top:6px}
   /* 职责卡里的分条展示（09-26 卡④内容较长，改用 bullet）；文字与同卡正文保持一致的对比度 */
   .role .d .bul{margin-top:8px}
@@ -117,8 +117,8 @@
   .line{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow)}
   .line .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
   .line .no{font-size:12px;font-weight:800;color:#fff;background:var(--primary);border-radius:6px;padding:2px 8px}
-  .line .t{font-weight:800;font-size:17px}
-  .line .chain{font-size:13.5px;color:var(--muted);margin-top:8px}
+  .line .t{font-weight:700;font-size:16px}
+  .line .chain{font-size:13px;color:var(--muted);margin-top:8px}
   .line .foot{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px}
   .pill{background:#eef2ff;color:var(--primary);border-radius:999px;padding:3px 10px;font-weight:600}
   .pill.g{background:#f1f5f9;color:#475569}
@@ -137,17 +137,17 @@
   details.codecard[open] > summary{border-bottom:1px solid var(--line)}
   details.codecard .cc{padding:0 18px 18px}
   .codecard .cc .lead{font-size:14px;margin-bottom:10px}
-  .codecard .cc ul{margin:0 0 12px 18px;font-size:13.5px;color:var(--muted)}
+  .codecard .cc ul{margin:0 0 12px 18px;font-size:13px;color:var(--muted)}
   .codecard .cc ul li{margin-bottom:3px}
-  .codecard .iter{font-size:12.5px;color:#b45309;background:#fff7ed;border-radius:8px;padding:8px 11px;margin-bottom:12px}
+  .codecard .iter{font-size:12px;color:#b45309;background:#fff7ed;border-radius:8px;padding:8px 11px;margin-bottom:12px}
   pre{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto;
-    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.75;color:#334155}
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;line-height:1.75;color:#334155}
   pre .c{color:var(--muted)}
   .codefoot{font-size:12px;color:var(--muted);margin-top:8px}
   /* 代码分组 + 折叠 + 职责链接 */
   .codegroup{margin-top:20px;margin-bottom:26px}
-  .codegroup>h3{font-size:17px;font-weight:800;margin-bottom:2px;display:flex;align-items:center;gap:10px}
-  .codegroup>h3 span{font-size:12.5px;font-weight:500;color:var(--muted)}
+  .codegroup>h3{font-size:16px;font-weight:700;margin-bottom:2px;display:flex;align-items:center;gap:10px}
+  .codegroup>h3 span{font-size:12px;font-weight:500;color:var(--muted)}
   .codegroup .gsub{font-size:13px;color:var(--muted);margin-bottom:14px}
   /* 09-25：代码片段块已全部移除（用户要求），details.code 相关样式一并删除 */
   .role .d a{color:var(--primary);font-weight:600;border-bottom:1px solid rgba(55,48,163,.35)}
@@ -157,13 +157,13 @@
   @media(max-width:720px){.methods{grid-template-columns:1fr}}
   .method{background:var(--bg);border:1px dashed #cbd5e1;border-radius:14px;padding:15px 16px}
   .method .t{font-weight:700;font-size:14px;display:flex;align-items:center;gap:7px}
-  .method .d{font-size:12.5px;color:var(--muted);margin-top:6px}
+  .method .d{font-size:12px;color:var(--muted);margin-top:6px}
   .method .tag{font-size:11px;color:#0e7490;background:#ecfeff;border-radius:999px;padding:2px 8px;display:inline-block;margin-top:9px}
   /* 报告提要 */
   .reports{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
   @media(max-width:760px){.reports{grid-template-columns:1fr}}
-  .rcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
-  .rcard .rt{font-weight:800;font-size:16px;line-height:1.4}
+  .rcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+  .rcard .rt{font-weight:700;font-size:16px;line-height:1.4}
   .rcard .rm{font-size:12px;color:var(--muted)}
   .note{font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
     border-radius:12px;padding:14px 16px;margin-top:16px;box-shadow:var(--shadow)}
@@ -178,16 +178,17 @@
   .bul>li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:2px;background:var(--primary);opacity:.38}
   .bul>li>b{font-weight:700}
   /* 字段分块：左描边 + 小标题（沿用站内 #smart 决策卡的语言） */
-  .blk{margin-top:13px;padding-left:13px;border-left:2px solid var(--line)}
-  .blk>.bt{font-size:12.5px;font-weight:800;color:var(--primary);letter-spacing:.3px;margin-bottom:5px}
+  .blk{margin-top:13px;padding-left:13px;border-left:2px solid var(--line);font-size:13px}
+  .blk>.bt{font-size:12px;font-weight:800;color:var(--primary);letter-spacing:.3px;margin-bottom:5px}
   /* 结论块：底色 + 主色左条，让判断落点跳出来 */
-  .blk.key{margin-top:15px;padding:11px 14px 11px 12px;border-left:3px solid var(--primary);
-    background:#eef2ff;border-radius:0 10px 10px 0}
+  .blk.key{margin-top:15px;padding:11px 14px 11px 12px;border-left:3px solid var(--accent);
+    background:#f0fdfa;border-radius:0 10px 10px 0}
+  .blk.key>.bt{color:var(--accent)}
   .blk.key>.bul>li::before{opacity:.55}
   /* 元信息行 / 脚注行：低对比度，不抢主体 */
-  .meta-row{font-size:12.5px;line-height:1.62;color:var(--muted);margin-top:8px}
+  .meta-row{font-size:13px;line-height:1.62;color:var(--muted);margin-top:8px}
   .meta-row b{color:var(--ink);font-weight:600;margin-right:5px}
-  .foot-line{font-size:12.5px;line-height:1.6;color:var(--muted);margin-top:13px;padding-top:10px;border-top:1px dashed var(--line)}
+  .foot-line{font-size:12px;line-height:1.6;color:var(--muted);margin-top:13px;padding-top:10px;border-top:1px dashed var(--line)}
   .foot-line b{color:var(--ink);font-weight:600;margin-right:4px}
   .hl{background:#fef3c7;border-radius:4px;padding:0 4px}
   .role code,.codecard code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
@@ -199,19 +200,15 @@
   .clink:hover{background:#e0e4ff;border-color:var(--primary)}
   /* ↗ 由 CSS 生成：不进纯文本内容，文本镜像（简历内容源）里就不会留一个孤零零的箭头 */
   .clink::after{content:"\2197";margin-left:3px;opacity:.75}
-  .subh{font-size:12.5px;font-weight:800;color:var(--primary);letter-spacing:.3px;margin:13px 0 5px}
+  .subh{font-size:12px;font-weight:800;color:var(--primary);letter-spacing:.3px;margin:13px 0 5px}
   .subh:first-child{margin-top:0}
   .codecard .cc p{font-size:13px;line-height:1.6;color:var(--muted)}
   .codecard .cc ul{font-size:13px}
   .codecard .cc ul li{margin-bottom:4px}
-  .codegroup>h3{font-size:15px}
-  .codegroup .gsub{font-size:12.5px}
-  .rcard{gap:0}
-  .rcard .rt{font-size:15px}
-  .rcard .rm{font-size:12px;margin-top:3px}
+  /* 第十轮：删 gap:0 / rt 15px 等覆盖，统一用上方 .rcard gap:12px 与 .rcard .rt 16px；.gsub 回落 L151 的 13px */
   .reports.wide{grid-template-columns:1fr}
   /* 09-25 结构改造：分区版式（职责卡只做导航；报告/工具升级为分区） */
-  .rq{font-size:12.5px;color:var(--muted);margin-top:6px}
+  .rq{font-size:13px;color:var(--ink);font-style:italic;margin-top:0}
   /* 职责卡里的「入口条」：展开（▸）与跳转（→）共用一套外观，只靠左侧标记区分 */
   .role .go{display:flex;align-items:center;gap:7px;margin-top:12px;padding:8px 0 2px;
     border-top:1px dashed var(--line);font-size:13px;font-weight:700;color:var(--primary)}
@@ -227,15 +224,16 @@
   section#monitor .reports{margin-top:0}
   section#reports .reports,section#tools .codegroup{margin-top:0}
   /* 09-26 报告摘要改版：面层 = 核心发现(find) + 进入判断(verdict) + 数字要点，分析正文收进 details；展开时该卡占满两列 */
-  .rcard .sum{margin-top:12px;padding:10px 13px;background:#f7f8ff;border-left:3px solid var(--primary);
-    border-radius:0 10px 10px 0}
+  .rcard .sum{margin-top:0;padding:0}
   .rcard .sum .st{font-size:12px;font-weight:800;color:var(--primary);letter-spacing:.3px;margin-bottom:3px}
-  .rcard .sum .sd{font-size:13.5px;line-height:1.6;color:var(--ink);font-weight:600}
-  .rcard .chips2{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-  .rcard .chips2 span{font-size:12px;background:#f1f5f9;color:#334155;border-radius:999px;padding:3px 10px}
-  .rcard details.rdet{margin-top:12px}
+  .rcard .sum .sd{font-size:13px;line-height:1.6;color:var(--ink);font-weight:400}
+  .rcard .chips2{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:0}
+  .rcard .chips2 .stat{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 11px;display:flex;flex-direction:column;gap:2px}
+  .rcard .chips2 .stat b{font-size:16px;font-weight:700;color:var(--primary);line-height:1.2}
+  .rcard .chips2 .stat span{font-size:12px;color:var(--muted);line-height:1.4}
+  .rcard details.rdet{margin-top:0}
   .rcard details.rdet>summary{list-style:none;cursor:pointer;user-select:none;display:flex;align-items:center;gap:7px;
-    border:1px solid var(--line);border-radius:10px;padding:9px 13px;font-size:13px;font-weight:700;color:var(--primary);transition:.15s}
+    border:0;background:none;padding:4px 0;font-size:13px;font-weight:600;color:var(--primary);transition:.15s}
   .rcard details.rdet>summary::-webkit-details-marker{display:none}
   .rcard details.rdet>summary::before{content:"\25B8";font-size:10px;line-height:1;transition:transform .18s}
   .rcard details.rdet[open]>summary::before{transform:rotate(90deg)}
@@ -245,19 +243,20 @@
     .reports.wide .blk,.reports.wide .bul,.reports.wide .meta-row{max-width:680px}
   }
   /* 09-26 报告卡面层：核心发现（find）+ 进入判断（verdict） */
-  .rcard .find{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
-  .rcard .find>li{font-size:13.5px;line-height:1.62;color:var(--ink);padding-left:16px;position:relative}
-  .rcard .find>li::before{content:"\25B8";position:absolute;left:0;top:1px;color:var(--primary);font-weight:700;font-size:12px}
+  .rcard .find{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
+  .rcard .find>li{font-size:14px;line-height:1.62;color:var(--ink);padding-left:16px;position:relative}
+  .rcard .find>li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:2px;background:var(--primary);opacity:.4}
   .rcard .find>li>b{font-weight:700}
-  .rcard .verdict{margin-top:11px;padding:10px 13px;background:#eef2ff;border-left:3px solid var(--primary);
+  .rcard .verdict{margin-top:0;padding:10px 13px;background:#eef2ff;border-left:3px solid var(--primary);
     border-radius:0 10px 10px 0;font-size:13px;line-height:1.62;color:var(--ink)}
   .rcard .verdict b{font-weight:700;color:var(--primary)}
+  .rcard .verdict .vtag{font-size:12px;font-weight:800;color:var(--primary);margin-right:2px}
   /* 技能栈 */
   .stackrow{display:grid;grid-template-columns:88px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);align-items:start}
   .stackrow:last-child{border-bottom:0}
   .stackrow .sl{font-weight:700;font-size:14px;color:var(--primary);padding-top:3px}
   .chips{display:flex;flex-wrap:wrap;gap:7px}
-  .chip{font-size:12.5px;background:#f1f5f9;color:#334155;border-radius:8px;padding:4px 10px}
+  .chip{font-size:12px;background:#f1f5f9;color:#334155;border-radius:8px;padding:4px 10px}
   .backrow{padding:14px 0 0;font-size:14px;font-weight:600}
   .backrow a{color:var(--primary)}
   footer{padding:36px 0 56px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
@@ -269,7 +268,7 @@
   .sitemap .sg:last-child{margin-bottom:0}
   .sitemap .sg b{display:inline-block;min-width:88px;color:var(--ink);font-weight:700}
   .sitemap .sg a{margin-right:16px}
-  h1,h2,.paper .pt,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif}
+  /* 区标题改无衬线：删除 Georgia/宋体，继承 body 无衬线栈（第十轮视觉审计） */
 </style>
 </head>
 <body>
@@ -371,7 +370,7 @@
 <section id="monitor" class="alt">
   <div class="wrap">
     <div class="sec-head">
-      <div class="k">Monitor · 核心提要</div>
+      <div class="k">Monitor · 月报摘要</div>
       <h2>微信小游戏畅销榜监测</h2>
     </div>
     <div class="reports wide">
@@ -386,11 +385,12 @@
             <li><b>新品＝成熟框架换皮 / 换名</b>：经典 IP ＋ 轻度化是确定的进榜路径，单玩法休闲产品在畅销榜留不住。</li>
           </ul>
         </div>
-        <div class="verdict">进入判断：可关注经典 IP 套成熟玩法框架（几何王国 like / 传奇 like / 率土 like）＋ 轻度化；不宜做单玩法休闲或纯创新玩法。</div>
-        <div class="chips2"><span>卡牌 +4 / 塔防 −4</span><span>MMO 22 款居首</span><span>放置卡牌 4/5 新品</span></div>
+        <div class="verdict"><span class="vtag">进入判断</span>：可关注经典 IP 套成熟玩法框架（几何王国 like / 传奇 like / 率土 like）＋ 轻度化；不宜做单玩法休闲或纯创新玩法。</div>
+        <div class="chips2"><div class="stat"><b>+4 / −4</b><span>卡牌 / 塔防 座次变动</span></div><div class="stat"><b>22 款</b><span>MMO 居品类之首</span></div><div class="stat"><b>4 / 5</b><span>新品为放置卡牌</span></div></div>
         <details class="rdet"><summary>展开查看报告摘要</summary>
         <div class="subh">报告摘要</div>
-                <div class="meta-row"><b>我的角色</b>负责 2025 年 10 月期榜单的扫描、分析与成稿<br><b>数据与工具</b><ul class="bul"><li><b>榜单</b>：微信小游戏畅销榜 Top100 月度扫描（扫描节点为每月 20 日）。</li><li><b>标签体系</b>：自建品类标签归类（MMO、卡牌、塔防、RPG、SLG、合成+ 等），细分到传奇 like、咸鱼 like、几何王国 like 等玩法模型。</li><li><b>拆解方式</b>：新入榜产品结合榜单数据与实际体验逐款从核心玩法、养成系统、社交设计、商业化等角度拆解。</li></ul></div>
+                <div class="blk"><div class="bt">我的角色</div>负责 2025 年 10 月期榜单的扫描、分析与成稿</div>
+        <div class="blk"><div class="bt">数据与工具</div><ul class="bul"><li><b>榜单</b>：微信小游戏畅销榜 Top100 月度扫描（扫描节点为每月 20 日）。</li><li><b>标签体系</b>：自建品类标签归类（MMO、卡牌、塔防、RPG、SLG、合成+ 等），细分到传奇 like、咸鱼 like、几何王国 like 等玩法模型。</li><li><b>拆解方式</b>：新入榜产品结合榜单数据与实际体验逐款从核心玩法、养成系统、社交设计、商业化等角度拆解。</li></ul></div>
         
         
         <div class="blk"><div class="bt">整体格局</div>10 月榜单格局整体稳定，变化集中在卡牌与塔防：卡牌靠放置卡牌新品放量（+4），塔防因合成 + 塔防掉榜且无新品补位（−4）。畅销榜新品以成熟玩法框架的换皮 / 换名为主；经典 IP ＋ 轻度化设计是确定的进榜路径；单玩法休闲产品在畅销榜留不住。</div>
@@ -408,7 +408,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="k">Research · 核心提要</div>
-      <h2>核心提要</h2>
+      <h2>四份报告 · 摘要</h2>
     </div>
     <div class="reports">
       <div class="rcard" id="r-us-genre">
@@ -422,11 +422,12 @@
             <li><b>增长压在头部 1–2 款</b>：增速最高的二合（+82%）、即时策略（+81%）、卡牌对战（+59%）是头部在放量，不是赛道在扩容。</li>
           </ul>
         </div>
-        <div class="verdict">进入判断：可关注 4X、二合、对消（靠题材或剧情差异化切入）；卡牌对战、即时策略需绑顶级 IP；平台 / 跑酷、沙盒等连续收缩赛道不建议进入。</div>
-        <div class="chips2"><span>下载 51 → 37 亿次</span><span>收入 173 → 185 亿</span><span>2025 +0.3%</span></div>
+        <div class="verdict"><span class="vtag">进入判断</span>：可关注 4X、二合、对消（靠题材或剧情差异化切入）；卡牌对战、即时策略需绑顶级 IP；平台 / 跑酷、沙盒等连续收缩赛道不建议进入。</div>
+        <div class="chips2"><div class="stat"><b>51 → 37 亿</b><span>下载次数（五年）</span></div><div class="stat"><b>173 → 185 亿</b><span>收入（美元，五年）</span></div><div class="stat"><b>+0.3%</b><span>2025 收入增速</span></div></div>
         <details class="rdet"><summary>展开查看报告摘要</summary>
         <div class="subh">报告摘要</div>
-        <div class="meta-row"><b>我的角色</b>负责美国品类板块的数据整理、分析与成稿<br><b>数据与工具</b>基于 Sensor Tower 双平台数据（品类、产品两级原始表），Excel 透视表汇总，Python 计算集中度与新品贡献结构；买量素材取自广大大</div>
+        <div class="blk"><div class="bt">我的角色</div>负责美国品类板块的数据整理、分析与成稿</div>
+        <div class="blk"><div class="bt">数据与工具</div>基于 Sensor Tower 双平台数据（品类、产品两级原始表），Excel 透视表汇总，Python 计算集中度与新品贡献结构；买量素材取自广大大</div>
         <div class="blk"><div class="bt">整体盘子</div>五年间美国手游下载量从 51 亿降至 37 亿次（CAGR -8%），收入从 173 亿升至 185 亿美元（CAGR +2%），2025 年收入几乎零增长（+0.3%），已是存量市场；其中量价表现都好的赛道很少，4X、二合是主要的两个。</div>
         <div class="blk"><div class="bt">品类趋势</div><ul class="bul"><li>下载增长靠前的品类中，方块解谜、纸牌接龙 RPD 低、收入高度集中，进入性价比有限；4X 量价表现都好，Kingshot 验证了「塔防吸量＋SLG 变现」的新品路径。</li><li>收入增速最高的二合（+82%）、即时策略（+81%）、卡牌对战（+59%），增长压在一两款头部产品上，是头部在放量，不是赛道在扩容。</li><li>五年持续增长的品类极少：下载侧仅方块解谜、纸牌接龙、4X，收入侧仅二合。</li></ul></div>
         <div class="blk key"><div class="bt">结论</div><ul class="bul"><li>4X、二合、对消可关注，需靠题材或剧情差异化切入。</li><li>卡牌对战、即时策略 + 顶级 IP 可以跑出较好收入，不适合正面进。</li><li>平台 / 跑酷、沙盒等连续收缩的赛道不建议进入。</li></ul></div>
@@ -446,11 +447,12 @@
             <li>时尚、犯罪、军事领跌（头部老产品衰退、新品承接不足）。</li>
           </ul>
         </div>
-        <div class="verdict">进入判断：可关注 烹饪 + 合成 / 模拟经营、丧尸 + 休闲副玩法 + 4X；军事、农场、载具汽车等玩法同质、RPD 偏低的题材不建议进入。</div>
-        <div class="chips2"><span>烹饪 收入 +50%</span><span>丧尸 收入 +39%</span><span>合成渗透 贡献超七成增量</span></div>
+        <div class="verdict"><span class="vtag">进入判断</span>：可关注 烹饪 + 合成 / 模拟经营、丧尸 + 休闲副玩法 + 4X；军事、农场、载具汽车等玩法同质、RPD 偏低的题材不建议进入。</div>
+        <div class="chips2"><div class="stat"><b>+50%</b><span>烹饪题材收入</span></div><div class="stat"><b>+39%</b><span>丧尸题材收入</span></div><div class="stat"><b>超七成</b><span>合成渗透贡献增量</span></div></div>
         <details class="rdet"><summary>展开查看报告摘要</summary>
         <div class="subh">报告摘要</div>
-        <div class="meta-row"><b>我的角色</b>负责美国题材板块的数据整理、分析与成稿<br><b>数据与工具</b>基于 Sensor Tower 双平台数据（Game IQ 主题标签、月度原始表），Excel 透视表按题材汇总下载 / 收入 / RPD（中英对照表 VLOOKUP）；头部产品数据取自 ST 应用排行榜；题材内产品按五年均 RPD 划分轻度 / 中重度</div>
+        <div class="blk"><div class="bt">我的角色</div>负责美国题材板块的数据整理、分析与成稿</div>
+        <div class="blk"><div class="bt">数据与工具</div>基于 Sensor Tower 双平台数据（Game IQ 主题标签、月度原始表），Excel 透视表按题材汇总下载 / 收入 / RPD（中英对照表 VLOOKUP）；头部产品数据取自 ST 应用排行榜；题材内产品按五年均 RPD 划分轻度 / 中重度</div>
         <div class="blk"><div class="bt">整体格局</div>美国手游题材大盘以轻度休闲为主、头部格局稳定；题材主要承担吸量功能，多个题材验证了「轻题材吸量＋重度玩法变现」的路径。</div>
         <div class="blk"><div class="bt">题材趋势</div><ul class="bul"><li>烹饪是唯一收入、下载双增的头部题材（下载 +6%、收入 +50%），由新品带动；丧尸题材下载持平但收入 +39%，由两款 SLG 驱动。</li><li>时尚、犯罪、军事领跌，共性是头部老产品衰退、新品承接不足。</li><li>合成玩法持续向题材渗透：烹饪收入 Top5 中 4 款是合成，装饰题材的头部增量也来自「合成 + 剧情」。</li></ul></div>
         <div class="blk key"><div class="bt">结论</div><ul class="bul"><li>可关注：烹饪 + 合成 / 模拟经营、丧尸 + 休闲副玩法 + 4X。</li><li>不建议进入：军事、农场、载具汽车等玩法同质、RPD 偏低的题材。</li></ul></div>
@@ -469,11 +471,12 @@
             <li><b>头部固化</b>：2025 年收入 Top10 中 6 款是近十年老产品，仅 2 款新品进榜，共同策略是经典 IP ＋ 降低负担。</li>
           </ul>
         </div>
-        <div class="verdict">进入判断：不建议正面进入；可行路径已被新品验证——经典 IP 情怀打底 ＋ 高福利素材买量 ＋ 轻负担设计。</div>
-        <div class="chips2"><span>下载 CAGR -26%</span><span>收入 CAGR -20%</span><span>RPD 16.3 → 23.2 美元</span></div>
+        <div class="verdict"><span class="vtag">进入判断</span>：不建议正面进入；可行路径已被新品验证——经典 IP 情怀打底 ＋ 高福利素材买量 ＋ 轻负担设计。</div>
+        <div class="chips2"><div class="stat"><b>−26%</b><span>下载 CAGR</span></div><div class="stat"><b>−20%</b><span>收入 CAGR</span></div><div class="stat"><b>16.3 → 23.2 美元</b><span>RPD 付费深度</span></div></div>
         <details class="rdet"><summary>展开查看报告摘要</summary>
         <div class="subh">报告摘要</div>
-        <div class="meta-row"><b>我的角色</b>负责热门方向中国 MMO 部分的数据整理、分析与成稿<br><b>数据与工具</b>基于 Sensor Tower 中国 iOS 端数据，MMO 采用多标签加权口径（下载 = MMORPG + 0.3×放置 RPG + 0.07×回合 RPG；收入 = MMORPG + 0.3×放置 RPG + 0.25×回合 RPG）；买量素材来自 adx（卖点打标签聚类）；内购结构取自 ST 头部应用内购买记录</div>
+        <div class="blk"><div class="bt">我的角色</div>负责热门方向中国 MMO 部分的数据整理、分析与成稿</div>
+        <div class="blk"><div class="bt">数据与工具</div>基于 Sensor Tower 中国 iOS 端数据，MMO 采用多标签加权口径（下载 = MMORPG + 0.3×放置 RPG + 0.07×回合 RPG；收入 = MMORPG + 0.3×放置 RPG + 0.25×回合 RPG）；买量素材来自 adx（卖点打标签聚类）；内购结构取自 ST 头部应用内购买记录</div>
         <div class="blk"><div class="bt">规模概况</div>五年持续萎缩——下载从 1.30 亿降至 3,794 万（CAGR -26%），收入从 21.1 亿降至 8.8 亿美元（CAGR -20%）。但 RPD 从 16.3 美元升至 23.2 美元：盘子在收缩，留下来的用户付费深度在提高，是明确的存量深耕市场。</div>
         <div class="blk"><div class="bt">头部格局</div><ul class="bul"><li>固化且获量极难：2025 年收入 Top10 中 6 款是上线近十年的老产品；仅两款新品进入 Top10：《龙之谷世界》走龙之谷 IP 怀旧 + 端游还原，《仙遇》主打「遇见端游时代的自己」，靠轻日常、轻社交做减负。</li><li>新品的共同生存策略是经典 IP + 降低负担。</li></ul></div>
         <div class="blk"><div class="bt">买量素材</div>即时制与回合制同向变化：高福利卖点上升、高品质美术卖点下降——玩家更吃「低门槛、高回报」的数值爽点；新品靠 IP / 情怀卖点补位。</div>
@@ -493,11 +496,12 @@
             <li><b>中国盘子最大</b>（仅 iOS 下载超其他三国双端），日本 RPD 最高；供给端四国产品数量普遍下降。</li>
           </ul>
         </div>
-        <div class="verdict">进入判断：可关注 放置 RPG（怀旧 IP + 轻度化）与中韩 MMORPG（怀旧 IP + 数值轻度化）；卡牌 RPG 美日韩均不宜正面进；开放世界不建议进。</div>
-        <div class="chips2"><span>放置 RPG 唯一增长赛道</span><span>中韩 MMORPG 怀旧 IP + 轻度化</span><span>开放世界 五年仅 7 项目上线</span></div>
+        <div class="verdict"><span class="vtag">进入判断</span>：可关注 放置 RPG（怀旧 IP + 轻度化）与中韩 MMORPG（怀旧 IP + 数值轻度化）；卡牌 RPG 美日韩均不宜正面进；开放世界不建议进。</div>
+        <div class="chips2"><div class="stat"><b>唯一增长</b><span>放置 RPG 赛道</span></div><div class="stat"><b>怀旧 IP</b><span>中韩 MMORPG 路径</span></div><div class="stat"><b>7 项目</b><span>开放世界五年上线</span></div></div>
         <details class="rdet"><summary>展开查看报告摘要</summary>
         <div class="subh">报告摘要</div>
-        <div class="meta-row"><b>我的角色</b>参与四国 RPG 数据的整理、细分赛道分析与成稿<br><b>数据与工具</b>基于 Sensor Tower 2021.1–2025.12 中美日韩四国 RPG 游戏的下载、收入、RPD、产品数量数据（颗粒度到天），按 MMORPG、放置、卡牌（组队 + 回合制）、开放世界四条赛道拆解；CR 与在榜产品底表由配套 Python 脚本产出（见下方数据工具）</div>
+        <div class="blk"><div class="bt">我的角色</div>参与四国 RPG 数据的整理、细分赛道分析与成稿</div>
+        <div class="blk"><div class="bt">数据与工具</div>基于 Sensor Tower 2021.1–2025.12 中美日韩四国 RPG 游戏的下载、收入、RPD、产品数量数据（颗粒度到天），按 MMORPG、放置、卡牌（组队 + 回合制）、开放世界四条赛道拆解；CR 与在榜产品底表由配套 Python 脚本产出（见下方数据工具）</div>
         <div class="blk"><div class="bt">整体盘面</div><ul class="bul"><li>四国 RPG 收入 2025 年全部处于五年最低位，中国、日本较 2021 年缩减最多（中国收入约腰斩）。</li><li>盘子结构：中国最大（仅 iOS 下载就超过其他三国双端），日本 RPD 最高，韩国次之。</li><li>供给端也在退潮——四国产品数量只有美国 25 年小幅回升，中日韩持续下降。</li></ul></div>
         <div class="blk"><div class="bt">细分赛道</div>按「规模—集中度—头部粘性—进入路径」拆四条：<ul class="bul"><li><b>MMORPG</b>：四国下载 2025 年齐创五年新低，付费能力分化极端——韩日 RPD 55 美元以上，中国约 23 美元。头部固化：中国收入 CR10 为 60%、韩国 71%，新品几乎无法在收入 Top10 维持满两年；可行路径是怀旧 IP + 数值轻度化。</li><li><b>放置 RPG</b>：四条赛道中近年唯一还有过增长的（美日韩 2024 年见顶、2025 年小幅回落）。韩国下载量最大，日本 RPD 最高；收入集中度也最高——中国 CR10 达 84%。爆款生命周期极短（韩国《菇勇者传说》收入一年跌 90%），怀旧 IP 是跨市场验证过的确定性打法（冒险岛 Idle 在美日韩同时进榜）。</li><li><b>卡牌 RPG</b>：日本 RPD 42.6 美元、四国最高，中国不足 15 美元、最低。老牌 IP 粘性接近事实垄断：美国《RAID》连续五年收入榜首，日本《FGO》22–25 年连续榜首；美日韩进入难度都大，不宜正面进入。</li><li><b>开放世界</b>：高门槛、高风险，无顶级研发配置不建议进入——《原神》之后五年仅 7 个项目熬到上线、其中 2 款速死；存活前提是顶尖美术与玩作品质，获量靠营销与社媒自传播而非买量。</li></ul></div>
         <div class="blk key"><div class="bt">结论</div><ul class="bul"><li><b>可关注</b>——放置 RPG（差异化吸量题材 + 怀旧 IP 矩阵）、中韩 MMORPG（怀旧 IP + 轻度化）。</li><li><b>谨慎</b>——卡牌 RPG（头部 IP 粘性垄断，美日韩均不宜正面进入）。</li><li><span class="hl">不建议——开放世界</span>（研发资源门槛决定这不是选题问题，是禀赋问题）。</li></ul></div>
