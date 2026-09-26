@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>战略分析实习 · 搜狐畅游 | 韩王泽</title>
-<meta name="description" content="搜狐畅游战略分析实习（2025.11–2026.02）：新品机会扫描、概念测试与立项评估、行业研究与报告撰写、数据分析工具与指标口径建设。" />
+<meta name="description" content="搜狐畅游战略分析实习（2025.11–2026.02）：新品机会扫描、概念测试与立项评估、行业研究与报告撰写、数据分析与指标体系建设（Python）。" />
 <meta name="author" content="韩王泽" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
 <meta property="og:locale" content="zh_CN" />
 <meta property="og:title" content="战略分析实习 · 搜狐畅游 | 韩王泽" />
-<meta property="og:description" content="新品机会扫描、概念测试与立项评估、行业研究与报告撰写、数据分析工具与指标口径建设。" />
+<meta property="og:description" content="新品机会扫描、概念测试与立项评估、行业研究与报告撰写、数据分析与指标体系建设（Python）。" />
 <meta property="og:url" content="https://han-wangze.github.io/hanwangze/experience-cyou.html" />
 <meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <meta property="og:image:width" content="1200" />
@@ -23,7 +23,7 @@
 <meta property="og:image:alt" content="韩王泽个人主页：教育经历、实习经历与项目作品" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="战略分析实习 · 搜狐畅游 | 韩王泽" />
-<meta name="twitter:description" content="新品机会扫描、概念测试与立项评估、行业研究与报告撰写、数据分析工具与指标口径建设。" />
+<meta name="twitter:description" content="新品机会扫描、概念测试与立项评估、行业研究与报告撰写、数据分析与指标体系建设（Python）。" />
 <meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <style>
   :root{
@@ -307,26 +307,26 @@
       </div>
       <div class="role" id="r-concept">
         <div class="h">🧪 概念测试与立项评估</div>
-        <div class="d"><b>负责潜力产品的早期验证。</b>玩法视频剪辑、世界观包装、问卷配置与投放回收，按「下载意愿 ≥ 70% 且尖叫度 ≥ 1.5」筛出高潜方向。</div>
+        <div class="d"><b>负责潜力产品的早期验证。</b>玩法视频剪辑、世界观包装、问卷配置与投放回收，按「下载意愿 ≥ 70% 且尖叫度 ≥ 1.5」筛出高潜方向；多轮回收数据用 Python 批量处理并输出统计结论。</div>
         <details class="expand" id="concept-flow">
           <summary>查看测试口径</summary>
           <div class="ebody">
 <ul class="mech">
               <li><b>玩法视频与包装</b>剪辑玩法视频、完成世界观包装。</li>
               <li><b>问卷投放与回收</b>配置问卷、投放、回收样本。</li>
-              <li><b>清洗与统计</b>回收多批问卷数据 Excel 表后批量清洗，用正则 + 关键词自动识别「游玩时长列」「已填写字段」「品类问题列」；按同一套口径算下载意愿 / 尖叫度 / 游玩时长——下载意愿分母 = 有效爱好用户 + 已查看未填写，尖叫度只在「愿意试玩」子集取均值，游玩时长占比分母 = 已填写样本。（<a class="clink" href="https://github.com/han-wangze/game-market-research-tools/blob/main/concept_test_stats.py" target="_blank" rel="noopener">concept_test_stats.py</a>）</li>
+              <li><b>清洗与统计（<a class="clink" href="https://github.com/han-wangze/game-market-research-tools/blob/main/concept_test_stats.py" target="_blank" rel="noopener">concept_test_stats.py</a>）</b>回收多批问卷数据 Excel 表后批量清洗，用正则 + 关键词自动识别「游玩时长列」「已填写字段」「品类问题列」；按同一套口径算下载意愿 / 尖叫度 / 游玩时长，下载意愿分母 = 有效爱好用户 + 已查看未填写；尖叫度只在「愿意试玩」子集取均值；游玩时长占比分母 = 已填写样本。</li>
             </ul>
           </div>
         </details>
       </div>
       <div class="role" id="r-report">
         <div class="h">📑 行业研究与报告撰写</div>
-        <div class="d"><b>参与中美日韩 RPG 手游市场专题研究，独立负责美国手游品类、题材和中国 MMO 方向三个年度报告子板块。</b>覆盖数据清洗、指标计算、五年趋势分析与增长归因，逐品类输出赛道进入判断，形成「数据 → 洞察 → 建议」的完整链条。</div>
+        <div class="d"><b>负责美国手游品类、题材两个年度报告板块与中国 MMO 方向，参与中美日韩 RPG 专题。</b>覆盖数据清洗、指标计算、五年趋势分析与增长归因，逐品类输出赛道进入判断，形成「数据 → 洞察 → 建议」的完整链条，报告支持立项讨论。</div>
         <a class="go" href="#reports">查看 4 份报告摘要 →</a>
       </div>
       <div class="role" id="r-data">
-        <div class="h">🐍 数据分析工具与指标口径建设</div>
-        <div class="d"><b>AI 辅助脚本开发，把多轮重复分析脚本化，统一指标口径与统计标准。</b>品类 / 题材结构指标（集中度分层、生命周期、增长贡献）、RPG 专题的 CR 与在榜产品底表；含机器学习模块（产品名无监督聚类）。</div>
+        <div class="h">🐍 数据分析与指标体系建设（Python）</div>
+        <div class="d"><b>把 Sensor Tower 导出的原始数据清洗、计算成报告直接使用的指标和底表。</b>品类 / 题材结构指标（看每个品类集中度高不高、增长靠头部还是腰尾部、新品还有没有空间）；产品名聚类分析（无监督机器学习：把产品名聚类，比较各簇产品的下载、收入、RPD 表现，看头部是否趋同、新品有没有挤进头部）；RPG 专题的底表（四国 × 四赛道 × 五年的下载 / 收入 CR 集中度序列，和逐产品的长线表现——看哪些能连续五年守住品类收入 / 下载前 20，哪些只是短暂上榜）。</div>
         <a class="go" href="#tools">查看数据工具 →</a>
       </div>
     </div>
@@ -339,7 +339,7 @@
     <div class="sec-head">
       <div class="k">Research · 研究报告</div>
       <h2>研究报告</h2>
-      <p>年度报告里由我负责的四个板块：美国品类、美国题材、中国 MMO 头部产品，以及中美日韩 RPG 专题。</p>
+      <p>年度报告里我经手的四个板块：美国品类、美国题材、中国 MMO 头部产品，以及中美日韩 RPG 专题。</p>
     </div>
     <div class="reports">
       <div class="rcard" id="r-us-genre">
@@ -389,7 +389,7 @@
         <div class="rt">2021–2025 中美日韩 RPG 类市场研究</div>
         <div class="rm">独立专题</div>
         <div class="rq">研究问题：五年里中美日韩 RPG 大类怎么演化，四条细分赛道的机会结构差在哪里</div>
-        <div class="meta-row"><b>我的角色</b>负责四国 RPG 数据的整理、细分赛道分析与成稿<br><b>数据与工具</b>基于 Sensor Tower 2021.1–2025.12 中美日韩四国 RPG 游戏的下载、收入、RPD、产品数量数据（颗粒度到天），按 MMORPG、放置、卡牌（组队 + 回合制）、开放世界四条赛道拆解；CR 与在榜产品底表由配套 Python 脚本产出（见上方「数据分析工具」）</div>
+        <div class="meta-row"><b>我的角色</b>负责四国 RPG 数据的整理、细分赛道分析与成稿<br><b>数据与工具</b>基于 Sensor Tower 2021.1–2025.12 中美日韩四国 RPG 游戏的下载、收入、RPD、产品数量数据（颗粒度到天），按 MMORPG、放置、卡牌（组队 + 回合制）、开放世界四条赛道拆解；CR 与在榜产品底表由配套 Python 脚本产出（见下方数据工具）</div>
         
         
         <div class="blk"><div class="bt">整体盘面</div><ul class="bul"><li>四国 RPG 收入 2025 年全部处于五年最低位，中国、日本较 2021 年缩减最多（中国收入约腰斩）。</li><li>盘子结构：中国最大（仅 iOS 下载就超过其他三国双端），日本 RPD 最高，韩国次之。</li><li>供给端也在退潮——四国产品数量只有美国 25 年小幅回升，中日韩持续下降。</li></ul></div>
