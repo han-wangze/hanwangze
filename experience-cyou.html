@@ -242,7 +242,6 @@
   .rcard details.rdet>summary:hover{background:#f8fafc}
   .rcard details.rdet[open]>summary{margin-bottom:10px}
   @media(min-width:761px){
-    .reports>.rcard:has(details.rdet[open]){grid-column:1/-1}
     .reports.wide .blk,.reports.wide .bul,.reports.wide .meta-row{max-width:680px}
   }
   /* 09-26 报告卡面层：核心发现（find）+ 进入判断（verdict） */
@@ -372,7 +371,7 @@
 <section id="monitor" class="alt">
   <div class="wrap">
     <div class="sec-head">
-      <div class="k">Monitor · 报告摘要</div>
+      <div class="k">Monitor · 核心提要</div>
       <h2>微信小游戏畅销榜监测</h2>
     </div>
     <div class="reports wide">
@@ -380,13 +379,25 @@
         <div class="rt">微信小游戏畅销榜监测 · 2025 年 10 月期</div>
         <div class="rm">月度监测系列</div>
         <div class="rq">研究问题：本月小游戏畅销榜格局怎么变，新入榜产品靠什么进来</div>
-        <div class="meta-row"><b>我的角色</b>负责 2025 年 10 月期榜单的扫描、分析与成稿<br><b>数据与工具</b><ul class="bul"><li><b>榜单</b>：微信小游戏畅销榜 Top100 月度扫描（扫描节点为每月 20 日）。</li><li><b>标签体系</b>：自建品类标签归类（MMO、卡牌、塔防、RPG、SLG、合成+ 等），细分到传奇 like、咸鱼 like、几何王国 like 等玩法模型。</li><li><b>拆解方式</b>：新入榜产品结合榜单数据与实际体验逐款从核心玩法、养成系统、社交设计、商业化等角度拆解。</li></ul></div>
+        <div class="sum">
+          <div class="st">核心发现</div>
+          <ul class="find">
+            <li><b>格局稳定，变化集中在卡牌（+4）与塔防（−4）</b>：卡牌靠放置卡牌新品放量，塔防因无新品补位掉榜。</li>
+            <li><b>新品＝成熟框架换皮 / 换名</b>：经典 IP ＋ 轻度化是确定的进榜路径，单玩法休闲产品在畅销榜留不住。</li>
+          </ul>
+        </div>
+        <div class="verdict">进入判断：可关注经典 IP 套成熟玩法框架（几何王国 like / 传奇 like / 率土 like）＋ 轻度化；不宜做单玩法休闲或纯创新玩法。</div>
+        <div class="chips2"><span>卡牌 +4 / 塔防 −4</span><span>MMO 22 款居首</span><span>放置卡牌 4/5 新品</span></div>
+        <details class="rdet"><summary>展开查看报告摘要</summary>
+        <div class="subh">报告摘要</div>
+                <div class="meta-row"><b>我的角色</b>负责 2025 年 10 月期榜单的扫描、分析与成稿<br><b>数据与工具</b><ul class="bul"><li><b>榜单</b>：微信小游戏畅销榜 Top100 月度扫描（扫描节点为每月 20 日）。</li><li><b>标签体系</b>：自建品类标签归类（MMO、卡牌、塔防、RPG、SLG、合成+ 等），细分到传奇 like、咸鱼 like、几何王国 like 等玩法模型。</li><li><b>拆解方式</b>：新入榜产品结合榜单数据与实际体验逐款从核心玩法、养成系统、社交设计、商业化等角度拆解。</li></ul></div>
         
         
         <div class="blk"><div class="bt">整体格局</div>10 月榜单格局整体稳定，变化集中在卡牌与塔防：卡牌靠放置卡牌新品放量（+4），塔防因合成 + 塔防掉榜且无新品补位（−4）。畅销榜新品以成熟玩法框架的换皮 / 换名为主；经典 IP ＋ 轻度化设计是确定的进榜路径；单玩法休闲产品在畅销榜留不住。</div>
         <div class="blk"><div class="bt">品类座次</div>品类座次：MMO（22 款）、卡牌（18）、RPG（12）、塔防（11）、合成＋（9）、SLG（9）。卡牌增长全部来自放置卡牌：5 款新品中 4 款是放置卡牌，其中 2 款为拳皇 IP 几何王国 like，经典 IP 套成熟玩法框架。MMO 数量持平但波动最大：单月 4 款进榜、5 款掉榜，新品仍以传奇 like 和经典 IP 产品为主。8、9 月上新的抛物线射击、射击产品本月全部掉出。</div>
         <div class="blk key"><div class="bt">进榜路径</div>新品 / 回榜产品几乎全部套成熟玩法框架（几何王国 like、传奇 like、少年名将 like、率土 like 等）并多为数值养成类，差异点在 IP、题材、轻度化。</div>
         <div class="foot-line"><b>产出</b>月度监测报告（品类数量矩阵与环比 + 新入榜产品逐款拆解）</div>
+        </details>
       </div>
     </div>
   </div>
@@ -396,8 +407,8 @@
 <section id="reports">
   <div class="wrap">
     <div class="sec-head">
-      <div class="k">Research · 报告摘要</div>
-      <h2>研究报告摘要</h2>
+      <div class="k">Research · 核心提要</div>
+      <h2>核心提要</h2>
     </div>
     <div class="reports">
       <div class="rcard" id="r-us-genre">
@@ -413,7 +424,8 @@
         </div>
         <div class="verdict">进入判断：可关注 4X、二合、对消（靠题材或剧情差异化切入）；卡牌对战、即时策略需绑顶级 IP；平台 / 跑酷、沙盒等连续收缩赛道不建议进入。</div>
         <div class="chips2"><span>下载 51 → 37 亿次</span><span>收入 173 → 185 亿</span><span>2025 +0.3%</span></div>
-        <details class="rdet"><summary>展开完整分析</summary>
+        <details class="rdet"><summary>展开查看报告摘要</summary>
+        <div class="subh">报告摘要</div>
         <div class="meta-row"><b>我的角色</b>负责美国品类板块的数据整理、分析与成稿<br><b>数据与工具</b>基于 Sensor Tower 双平台数据（品类、产品两级原始表），Excel 透视表汇总，Python 计算集中度与新品贡献结构；买量素材取自广大大</div>
         <div class="blk"><div class="bt">整体盘子</div>五年间美国手游下载量从 51 亿降至 37 亿次（CAGR -8%），收入从 173 亿升至 185 亿美元（CAGR +2%），2025 年收入几乎零增长（+0.3%），已是存量市场；其中量价表现都好的赛道很少，4X、二合是主要的两个。</div>
         <div class="blk"><div class="bt">品类趋势</div><ul class="bul"><li>下载增长靠前的品类中，方块解谜、纸牌接龙 RPD 低、收入高度集中，进入性价比有限；4X 量价表现都好，Kingshot 验证了「塔防吸量＋SLG 变现」的新品路径。</li><li>收入增速最高的二合（+82%）、即时策略（+81%）、卡牌对战（+59%），增长压在一两款头部产品上，是头部在放量，不是赛道在扩容。</li><li>五年持续增长的品类极少：下载侧仅方块解谜、纸牌接龙、4X，收入侧仅二合。</li></ul></div>
@@ -436,7 +448,8 @@
         </div>
         <div class="verdict">进入判断：可关注 烹饪 + 合成 / 模拟经营、丧尸 + 休闲副玩法 + 4X；军事、农场、载具汽车等玩法同质、RPD 偏低的题材不建议进入。</div>
         <div class="chips2"><span>烹饪 收入 +50%</span><span>丧尸 收入 +39%</span><span>合成渗透 贡献超七成增量</span></div>
-        <details class="rdet"><summary>展开完整分析</summary>
+        <details class="rdet"><summary>展开查看报告摘要</summary>
+        <div class="subh">报告摘要</div>
         <div class="meta-row"><b>我的角色</b>负责美国题材板块的数据整理、分析与成稿<br><b>数据与工具</b>基于 Sensor Tower 双平台数据（Game IQ 主题标签、月度原始表），Excel 透视表按题材汇总下载 / 收入 / RPD（中英对照表 VLOOKUP）；头部产品数据取自 ST 应用排行榜；题材内产品按五年均 RPD 划分轻度 / 中重度</div>
         <div class="blk"><div class="bt">整体格局</div>美国手游题材大盘以轻度休闲为主、头部格局稳定；题材主要承担吸量功能，多个题材验证了「轻题材吸量＋重度玩法变现」的路径。</div>
         <div class="blk"><div class="bt">题材趋势</div><ul class="bul"><li>烹饪是唯一收入、下载双增的头部题材（下载 +6%、收入 +50%），由新品带动；丧尸题材下载持平但收入 +39%，由两款 SLG 驱动。</li><li>时尚、犯罪、军事领跌，共性是头部老产品衰退、新品承接不足。</li><li>合成玩法持续向题材渗透：烹饪收入 Top5 中 4 款是合成，装饰题材的头部增量也来自「合成 + 剧情」。</li></ul></div>
@@ -458,7 +471,8 @@
         </div>
         <div class="verdict">进入判断：不建议正面进入；可行路径已被新品验证——经典 IP 情怀打底 ＋ 高福利素材买量 ＋ 轻负担设计。</div>
         <div class="chips2"><span>下载 CAGR -26%</span><span>收入 CAGR -20%</span><span>RPD 16.3 → 23.2 美元</span></div>
-        <details class="rdet"><summary>展开完整分析</summary>
+        <details class="rdet"><summary>展开查看报告摘要</summary>
+        <div class="subh">报告摘要</div>
         <div class="meta-row"><b>我的角色</b>负责热门方向中国 MMO 部分的数据整理、分析与成稿<br><b>数据与工具</b>基于 Sensor Tower 中国 iOS 端数据，MMO 采用多标签加权口径（下载 = MMORPG + 0.3×放置 RPG + 0.07×回合 RPG；收入 = MMORPG + 0.3×放置 RPG + 0.25×回合 RPG）；买量素材来自 adx（卖点打标签聚类）；内购结构取自 ST 头部应用内购买记录</div>
         <div class="blk"><div class="bt">规模概况</div>五年持续萎缩——下载从 1.30 亿降至 3,794 万（CAGR -26%），收入从 21.1 亿降至 8.8 亿美元（CAGR -20%）。但 RPD 从 16.3 美元升至 23.2 美元：盘子在收缩，留下来的用户付费深度在提高，是明确的存量深耕市场。</div>
         <div class="blk"><div class="bt">头部格局</div><ul class="bul"><li>固化且获量极难：2025 年收入 Top10 中 6 款是上线近十年的老产品；仅两款新品进入 Top10：《龙之谷世界》走龙之谷 IP 怀旧 + 端游还原，《仙遇》主打「遇见端游时代的自己」，靠轻日常、轻社交做减负。</li><li>新品的共同生存策略是经典 IP + 降低负担。</li></ul></div>
@@ -481,7 +495,8 @@
         </div>
         <div class="verdict">进入判断：可关注 放置 RPG（怀旧 IP + 轻度化）与中韩 MMORPG（怀旧 IP + 数值轻度化）；卡牌 RPG 美日韩均不宜正面进；开放世界不建议进。</div>
         <div class="chips2"><span>放置 RPG 唯一增长赛道</span><span>中韩 MMORPG 怀旧 IP + 轻度化</span><span>开放世界 五年仅 7 项目上线</span></div>
-        <details class="rdet"><summary>展开完整分析</summary>
+        <details class="rdet"><summary>展开查看报告摘要</summary>
+        <div class="subh">报告摘要</div>
         <div class="meta-row"><b>我的角色</b>参与四国 RPG 数据的整理、细分赛道分析与成稿<br><b>数据与工具</b>基于 Sensor Tower 2021.1–2025.12 中美日韩四国 RPG 游戏的下载、收入、RPD、产品数量数据（颗粒度到天），按 MMORPG、放置、卡牌（组队 + 回合制）、开放世界四条赛道拆解；CR 与在榜产品底表由配套 Python 脚本产出（见下方数据工具）</div>
         <div class="blk"><div class="bt">整体盘面</div><ul class="bul"><li>四国 RPG 收入 2025 年全部处于五年最低位，中国、日本较 2021 年缩减最多（中国收入约腰斩）。</li><li>盘子结构：中国最大（仅 iOS 下载就超过其他三国双端），日本 RPD 最高，韩国次之。</li><li>供给端也在退潮——四国产品数量只有美国 25 年小幅回升，中日韩持续下降。</li></ul></div>
         <div class="blk"><div class="bt">细分赛道</div>按「规模—集中度—头部粘性—进入路径」拆四条：<ul class="bul"><li><b>MMORPG</b>：四国下载 2025 年齐创五年新低，付费能力分化极端——韩日 RPD 55 美元以上，中国约 23 美元。头部固化：中国收入 CR10 为 60%、韩国 71%，新品几乎无法在收入 Top10 维持满两年；可行路径是怀旧 IP + 数值轻度化。</li><li><b>放置 RPG</b>：四条赛道中近年唯一还有过增长的（美日韩 2024 年见顶、2025 年小幅回落）。韩国下载量最大，日本 RPD 最高；收入集中度也最高——中国 CR10 达 84%。爆款生命周期极短（韩国《菇勇者传说》收入一年跌 90%），怀旧 IP 是跨市场验证过的确定性打法（冒险岛 Idle 在美日韩同时进榜）。</li><li><b>卡牌 RPG</b>：日本 RPD 42.6 美元、四国最高，中国不足 15 美元、最低。老牌 IP 粘性接近事实垄断：美国《RAID》连续五年收入榜首，日本《FGO》22–25 年连续榜首；美日韩进入难度都大，不宜正面进入。</li><li><b>开放世界</b>：高门槛、高风险，无顶级研发配置不建议进入——《原神》之后五年仅 7 个项目熬到上线、其中 2 款速死；存活前提是顶尖美术与玩作品质，获量靠营销与社媒自传播而非买量。</li></ul></div>
