@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>战略分析实习 · 搜狐畅游 | 韩王泽</title>
-<meta name="description" content="搜狐畅游战略分析实习（2025.11–2026.02）：新品机会扫描、概念测试与立项评估、行业研究与报告撰写、数据分析与指标体系建设（Python）。" />
+<meta name="description" content="搜狐畅游战略分析实习（2025.11–2026.02）：市场扫描、概念测试与立项评估、行业研究与报告撰写、数据分析与指标体系建设（Python）。" />
 <meta name="author" content="韩王泽" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
 <meta property="og:locale" content="zh_CN" />
 <meta property="og:title" content="战略分析实习 · 搜狐畅游 | 韩王泽" />
-<meta property="og:description" content="新品机会扫描、概念测试与立项评估、行业研究与报告撰写、数据分析与指标体系建设（Python）。" />
+<meta property="og:description" content="市场扫描、概念测试与立项评估、行业研究与报告撰写、数据分析与指标体系建设（Python）。" />
 <meta property="og:url" content="https://han-wangze.github.io/hanwangze/experience-cyou.html" />
 <meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <meta property="og:image:width" content="1200" />
@@ -23,7 +23,7 @@
 <meta property="og:image:alt" content="韩王泽个人主页：教育经历、实习经历与项目作品" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="战略分析实习 · 搜狐畅游 | 韩王泽" />
-<meta name="twitter:description" content="新品机会扫描、概念测试与立项评估、行业研究与报告撰写、数据分析与指标体系建设（Python）。" />
+<meta name="twitter:description" content="市场扫描、概念测试与立项评估、行业研究与报告撰写、数据分析与指标体系建设（Python）。" />
 <meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <style>
   :root{
@@ -212,8 +212,11 @@
   .reports.wide{grid-template-columns:1fr}
   /* 09-25 结构改造：分区版式（职责卡只做导航；报告/工具升级为分区） */
   .rq{font-size:12.5px;color:var(--muted);margin-top:6px}
-  .role .go{display:inline-block;margin-top:11px;font-size:12.5px;font-weight:700;color:var(--primary)}
-  .role .go:hover{text-decoration:underline}
+  /* 职责卡里的「入口条」：展开（▸）与跳转（→）共用一套外观，只靠左侧标记区分 */
+  .role .go{display:flex;align-items:center;gap:7px;margin-top:12px;padding:8px 0 2px;
+    border-top:1px dashed var(--line);font-size:13px;font-weight:700;color:var(--primary)}
+  .role .go::before{content:"\2192";font-size:13px;line-height:1}
+  .role .go:hover{opacity:.78}
   /* 阅读宽度：长文不再跑满 960px（两列卡自然窄，宽卡与工具卡靠这条收住） */
   .blk,.bul{max-width:760px}
   /* codecard 摘要行：一句话跟在脚本名同行，过长省略号截断 */
@@ -296,8 +299,8 @@
     </div>
     <div class="roles">
       <div class="role" id="r-scan">
-        <div class="h">🔍 新品机会扫描</div>
-        <div class="d"><b>输出值得关注的新品清单。</b>从 Sensor Tower 榜单、Steam、YouTube / B站自媒体等渠道扫描新游，按<b>玩法差异化、吸量、买量依赖、同质化程度</b>几个维度筛选。</div>
+        <div class="h">🔍 市场扫描</div>
+        <div class="d"><b>输出值得关注的新品清单，跟踪市场格局变化。</b>从 Sensor Tower 榜单、Steam、YouTube / B 站等渠道周度扫描新游；按月监测微信小游戏畅销榜，归因品类波动来源（哪个细分打法退潮、哪个新品批次进榜），逐款拆解新入榜产品。</div>
         <details class="expand" id="scan-src">
           <summary>查看扫描机制</summary>
           <div class="ebody">
@@ -308,7 +311,7 @@
             </ul>
           </div>
         </details>
-        <a class="go" href="#monitor">查看微信小游戏畅销榜监测 · 2025 年 10 月期 →</a>
+        <a class="go" href="#monitor">查看微信小游戏畅销榜监测 · 2025 年 10 月期</a>
       </div>
       <div class="role" id="r-concept">
         <div class="h">🧪 概念测试与立项评估</div>
@@ -327,19 +330,43 @@
       <div class="role" id="r-report">
         <div class="h">📑 行业研究与报告撰写</div>
         <div class="d"><b>负责美国手游品类、题材和中国 MMO 方向三个年度报告板块内容，参与中美日韩 RPG 专题研究。</b>覆盖数据清洗、指标计算、五年趋势分析与增长归因，逐品类输出赛道进入判断，形成「数据 → 洞察 → 建议」的完整链条，报告支持立项讨论。</div>
-        <a class="go" href="#reports">查看 4 份报告摘要 →</a>
+        <a class="go" href="#reports">查看 4 份报告摘要</a>
       </div>
       <div class="role" id="r-data">
         <div class="h">🐍 数据分析与指标体系建设（Python）</div>
         <div class="d"><b>把 Sensor Tower 导出的原始数据清洗、计算成报告直接使用的指标和底表。</b><ul class="bul"><li><b>品类 / 题材结构指标</b>：看每个品类集中度高不高、增长靠头部还是腰尾部、新品还有没有空间</li><li><b>产品名聚类分析</b>：把产品名聚类，比较各簇产品的下载、收入、RPD 表现，看头部是否趋同、新品有没有挤进头部</li><li><b>RPG 专题底表</b>：四国 × 四赛道 × 五年的下载 / 收入 CR 集中度序列，和逐产品的长线表现——看哪些能连续五年守住品类收入 / 下载前 20，哪些只是短暂上榜</li></ul></div>
-        <a class="go" href="#tools">查看数据分析工具 →</a>
+        <a class="go" href="#tools">查看数据分析工具</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 02 研究报告 ============ -->
-<section id="reports" class="alt">
+<!-- ============ 02 微信小游戏月报摘要 ============ -->
+<section id="monitor" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Monitor · 报告摘要</div>
+      <h2>微信小游戏畅销榜监测</h2>
+    </div>
+    <div class="reports wide">
+      <div class="rcard" id="r-minigame">
+        <div class="rt">微信小游戏畅销榜监测 · 2025 年 10 月期</div>
+        <div class="rm">月度监测系列</div>
+        <div class="rq">研究问题：本月小游戏畅销榜格局怎么变，新入榜产品靠什么进来</div>
+        <div class="meta-row"><b>我的角色</b>负责 2025 年 10 月期榜单的扫描、分析与成稿<br><b>数据与工具</b><ul class="bul"><li><b>榜单</b>：微信小游戏畅销榜 Top100 月度扫描（扫描节点为每月 20 日）。</li><li><b>标签体系</b>：自建品类标签归类（MMO、卡牌、塔防、RPG、SLG、合成+ 等），细分到传奇 like、咸鱼 like、几何王国 like 等玩法模型。</li><li><b>拆解方式</b>：新入榜产品结合榜单数据与实际体验逐款拆解。</li></ul></div>
+        
+        
+        <div class="blk"><div class="bt">整体格局</div><ul class="bul"><li>10 月 Top100 品类座次：MMO（22 款）、卡牌（18）、RPG（12）、塔防（11）、合成+（9）、SLG（9）。</li><li>环比变化最大的是卡牌（14→18，+4）和塔防（15→11，-4）。</li></ul></div>
+        <div class="blk"><div class="bt">变化归因</div>拆三条主线：<ul class="bul"><li><b>卡牌增长全部来自放置卡牌</b>：5 款新品中 4 款是放置卡牌，其中 2 款为拳皇 IP 几何王国 like（《最强斗王》《拳皇98终极之战WEB》），经典 IP 套成熟玩法框架，进榜即上量；另有《三国猛将传》（《巨神军师》换名）、《云端之约》（《影之守卫》换名）两款老产品重上。</li><li><b>塔防减少集中在合成+塔防</b>：《快来当领主》《塔防精灵》《一步两步》《进击荣誉》4 款掉出榜单，且无新入榜产品补位。</li><li><b>MMO 数量持平但波动最大</b>：单月 4 款新品进榜、5 款掉榜。新品中传奇 like 占 2 款（《王者战绩》《巅峰霸业》），剑侠情缘 IP 的《剑侠世界：起源》靠自动寻路、挂机奖励领取等轻度化设计进榜。</li></ul></div>
+        <div class="blk key"><div class="bt">结论</div><ul class="bul"><li>10 月榜单格局整体稳定，变化集中在卡牌和塔防：卡牌靠放置卡牌新品和 IP 产品放量（+4），塔防因合成+塔防 4 款掉榜且无新品补位（-4）。</li><li>MMO 上榜下榜频繁、波动最大，新品仍以传奇 like 和经典 IP 产品为主。</li><li>8、9 月上新的抛物线射击、射击产品本月全部掉出。</li></ul></div>
+        <div class="foot-line"><b>产出</b>月度监测报告（品类数量矩阵与环比 + 新入榜产品逐款拆解）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 研究报告 ============ -->
+<section id="reports">
   <div class="wrap">
     <div class="sec-head">
       <div class="k">Research · 研究报告</div>
@@ -401,31 +428,6 @@
         <div class="blk"><div class="bt">细分赛道</div>按「规模—集中度—头部粘性—进入路径」拆四条：<ul class="bul"><li><b>MMORPG</b>：四国下载 2025 年齐创五年新低，付费能力分化极端——韩日 RPD 55 美元以上，中国仅 23 美元左右。头部固化：中国收入 CR10 为 60%、韩国 71%，且除《逆水寒》《冒险岛：枫之传说》外，新品几乎无法在收入 Top10 维持满两年。可行路径是怀旧 IP + 数值轻度化。</li><li><b>放置 RPG</b>：四条赛道中近年唯一还有过增长的（美日韩 2024 年见顶、2025 年小幅回落）。韩国下载量最大（3,220 万），日本 RPD 最高；收入集中度也最高——中国 CR10 达 84%。爆款生命周期极短（韩国《菇勇者传说》收入一年跌 90%），怀旧 IP 是跨市场验证过的确定性打法（冒险岛 Idle 在美日韩同时进榜）。</li><li><b>卡牌 RPG</b>：日本 RPD 42.6 美元、四国最高，中国不足 15 美元、最低。老牌 IP 粘性接近事实垄断：美国《RAID》连续五年收入榜首，日本《FGO》22–25 年连续榜首；韩国 2025 年靠重制 IP《七骑士 Re:BIRTH》（RPD 46.3 美元）拉动回升。美日韩进入难度都大，建议止步于差异化题材观察。</li><li><b>开放世界</b>：高门槛、高风险，无顶级研发配置不建议进入——《原神》之后五年仅 7 个项目熬到上线、其中 2 款速死，没熬过研发期的项目是这个数量的数十倍。存活路径只有两条：《鸣潮》式挖掘未被满足的需求，或《燕云十六声》《无限暖暖》式切入差异化人群，共同前提是顶尖美术与玩作品质，且获量靠营销与社媒自传播而非买量。</li></ul></div>
         <div class="blk key"><div class="bt">结论</div><ul class="bul"><li><b>可关注</b>——放置 RPG（差异化吸量题材 + 怀旧 IP 矩阵）、中韩 MMORPG（怀旧 IP + 轻度化）。</li><li><b>谨慎</b>——卡牌 RPG（头部 IP 粘性垄断，美日韩均不宜正面进入）。</li><li><span class="hl">不建议——开放世界</span>（研发资源门槛决定这不是选题问题，是禀赋问题）。</li></ul></div>
         <div class="foot-line"><b>产出</b>独立研究报告（四国 RPG 市场底表 + 赛道 × 国家矩阵分析 + 分赛道进入建议）</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 03 常态化监测 ============ -->
-<section id="monitor">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="k">Monitor · 常态化监测</div>
-      <h2>常态化监测</h2>
-      <p>月榜监测独立于年度报告：每月固定节点扫描一次，跟踪品类格局与环比波动。</p>
-    </div>
-    <div class="reports wide">
-      <div class="rcard" id="r-minigame">
-        <div class="rt">微信小游戏畅销榜监测 · 2025 年 10 月期</div>
-        <div class="rm">月度监测系列</div>
-        <div class="rq">研究问题：本月小游戏畅销榜格局怎么变，新入榜产品靠什么进来</div>
-        <div class="meta-row"><b>我的角色</b>负责 2025 年 10 月期榜单的扫描、分析与成稿<br><b>数据与工具</b><ul class="bul"><li><b>榜单</b>：微信小游戏畅销榜 Top100 月度扫描（扫描节点为每月 20 日）。</li><li><b>标签体系</b>：自建品类标签归类（MMO、卡牌、塔防、RPG、SLG、合成+ 等），细分到传奇 like、咸鱼 like、几何王国 like 等玩法模型。</li><li><b>拆解方式</b>：新入榜产品结合榜单数据与实际体验逐款拆解。</li></ul></div>
-        
-        
-        <div class="blk"><div class="bt">整体格局</div><ul class="bul"><li>10 月 Top100 品类座次：MMO（22 款）、卡牌（18）、RPG（12）、塔防（11）、合成+（9）、SLG（9）。</li><li>环比变化最大的是卡牌（14→18，+4）和塔防（15→11，-4）。</li></ul></div>
-        <div class="blk"><div class="bt">变化归因</div>拆三条主线：<ul class="bul"><li><b>卡牌增长全部来自放置卡牌</b>：5 款新品中 4 款是放置卡牌，其中 2 款为拳皇 IP 几何王国 like（《最强斗王》《拳皇98终极之战WEB》），经典 IP 套成熟玩法框架，进榜即上量；另有《三国猛将传》（《巨神军师》换名）、《云端之约》（《影之守卫》换名）两款老产品重上。</li><li><b>塔防减少集中在合成+塔防</b>：《快来当领主》《塔防精灵》《一步两步》《进击荣誉》4 款掉出榜单，且无新入榜产品补位。</li><li><b>MMO 数量持平但波动最大</b>：单月 4 款新品进榜、5 款掉榜。新品中传奇 like 占 2 款（《王者战绩》《巅峰霸业》），剑侠情缘 IP 的《剑侠世界：起源》靠自动寻路、挂机奖励领取等轻度化设计进榜。</li></ul></div>
-        <div class="blk key"><div class="bt">结论</div><ul class="bul"><li>10 月榜单格局整体稳定，变化集中在卡牌和塔防：卡牌靠放置卡牌新品和 IP 产品放量（+4），塔防因合成+塔防 4 款掉榜且无新品补位（-4）。</li><li>MMO 上榜下榜频繁、波动最大，新品仍以传奇 like 和经典 IP 产品为主。</li><li>8、9 月上新的抛物线射击、射击产品本月全部掉出。</li></ul></div>
-        <div class="foot-line"><b>产出</b>月度监测报告（品类数量矩阵与环比 + 新入榜产品逐款拆解）</div>
       </div>
     </div>
   </div>
