@@ -177,6 +177,8 @@
   .bul>li:last-child{margin-bottom:0}
   .bul>li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:2px;background:var(--primary);opacity:.38}
   .bul>li>b{font-weight:700}
+  .role .d .bul>li.sub{margin-left:1.5em;opacity:.82}
+  .role .d .bul>li.sub::before{content:"↳";left:2px;top:1px;width:auto;height:auto;background:none;border-radius:0;font-size:13px;color:var(--muted);opacity:1}
   /* 字段分块：左描边 + 小标题（沿用站内 #smart 决策卡的语言） */
   .blk{margin-top:13px;padding-left:13px;border-left:2px solid var(--line);font-size:13px}
   .blk>.bt{font-size:12px;font-weight:800;color:var(--primary);letter-spacing:.3px;margin-bottom:5px}
@@ -359,7 +361,7 @@
       </div>
       <div class="role" id="r-data">
         <div class="h">🐍 数据分析与指标体系建设（Python）</div>
-        <div class="d"><b>把 Sensor Tower 导出的原始数据清洗、计算成报告直接使用的指标和底表。</b><ul class="bul"><li><b>品类 / 题材结构指标</b>：看每个品类集中度高不高、增长靠头部还是腰尾部、新品还有没有空间</li><li><b>产品名聚类分析</b>：把产品名聚类，比较各簇产品的下载、收入、RPD 表现，看头部是否趋同、新品有没有挤进头部</li><li><b>RPG 专题底表</b>：四国 × 四赛道 × 五年的下载 / 收入 CR 集中度序列，和逐产品的长线表现——看哪些能连续五年守住品类收入 / 下载前 20，哪些只是短暂上榜</li></ul></div>
+        <div class="d"><b>把 Sensor Tower 导出的原始数据清洗、计算成报告直接使用的指标和底表。</b><ul class="bul"><li><b>品类 / 题材结构指标</b>：看每个品类集中度高不高、增长靠头部还是腰尾部、新品还有没有空间</li><li class="sub"><b>产品名聚类分析</b>：把产品名聚类，比较各簇产品的下载、收入、RPD 表现，看头部是否趋同、新品有没有挤进头部</li><li><b>RPG 专题底表</b>：四国 × 四赛道 × 五年的下载 / 收入 CR 集中度序列，和逐产品的长线表现——看哪些能连续五年守住品类收入 / 下载前 20，哪些只是短暂上榜</li></ul></div>
         <a class="go" href="#tools">查看数据分析工具</a>
       </div>
     </div>
