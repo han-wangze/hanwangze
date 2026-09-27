@@ -146,6 +146,8 @@
   .blk.key>.bul>li::before{opacity:.55}
   /* 元信息行 / 脚注行：低对比度，不抢主体 */
   .meta-row{font-size:13px;line-height:1.62;color:var(--muted);margin-top:8px}
+  mark.hl{background:linear-gradient(180deg,transparent 55%,#FAC775 55%);color:inherit;
+    padding:0 1px;border-radius:2px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .meta-row b{color:var(--ink);font-weight:600;margin-right:5px}
   .foot-line{font-size:12px;line-height:1.6;color:var(--muted);margin-top:13px;padding-top:10px;border-top:1px dashed var(--line)}
   .foot-line b{color:var(--ink);font-weight:600;margin-right:4px}
@@ -396,7 +398,7 @@
             <li><b>增长压在头部 1–2 款</b>：增速最高的二合（+82%）、即时策略（+81%）、卡牌对战（+59%）是头部在放量，不是赛道在扩容。</li>
           </ul>
         </div>
-        <div class="verdict"><span class="vtag">进入判断</span>：可关注 4X、二合、对消（对战消除，靠题材或剧情差异化切入）；卡牌对战、即时策略需绑顶级 IP；平台 / 跑酷、沙盒等连续收缩赛道不建议进入。</div>
+        <div class="verdict"><span class="vtag">进入判断</span>：可关注 4X、二合、对消（对战消除，<mark class="hl">靠题材或剧情差异化切入</mark>）；卡牌对战、即时策略需绑顶级 IP；平台 / 跑酷、沙盒等连续收缩赛道不建议进入。</div>
         <div class="chips2"><div class="stat"><b>51 → 37 亿</b><span>下载次数（五年）</span></div><div class="stat"><b>173 → 185 亿</b><span>收入（美元，五年）</span></div><div class="stat"><b>+0.3%</b><span>2025 收入增速</span></div></div>
         <details class="rdet"><summary>展开查看报告摘要</summary>
         <div class="subh">报告摘要</div>
@@ -506,7 +508,7 @@
           <ul>
             <li>报告需对每个品类形成「是否值得进入」的判断。通过计算下载 / 收入集中度、分层增长贡献、新品渗透与变现、存量产品生命周期、产品命名的同质程度，可以对市场结构有更完整的了解；这些指标须按品类 × 年份逐一计算且口径一致，故编写 Python 脚本统一处理。</li>
           </ul>
-          <div class="meta-row"><b>我的角色</b>独立设计指标口径并编写全部代码，品类、题材两个维度复用同一套流程。</div>
+          <div class="meta-row"><b>我的角色</b><mark class="hl">独立设计指标口径</mark>并编写全部代码，品类、题材两个维度复用同一套流程。</div>
           <p class="subh">怎么做的 · 结构指标 30 余项</p>
           <ul>
             <li><b>数据清洗</b>：兼容 Sensor Tower 导出的多种格式（tab 分隔，utf-16 / utf-8 / gbk 三编码自动回退），5 年数据分块读取、内存降级（float32 / int32），20 多个原始英文字段统一成标准口径。</li>
