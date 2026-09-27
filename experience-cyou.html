@@ -27,9 +27,9 @@
 <meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <style>
   :root{
-    --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
-    --primary:#3730a3; --primary-d:#312e81; --accent:#0f766e; --signal:#b45309;
-    --ok:#16a34a; --warn:#f59e0b; --line:#e5e7eb;
+    --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#59616e;
+    --primary:#3730a3; --accent:#0f766e;
+    --line:#e5e7eb;
     --shadow:0 1px 3px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -49,7 +49,7 @@
   .navdrop>a{display:inline-flex;align-items:center;gap:6px}
   .navdrop .caret{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid currentColor;opacity:.55;margin-top:2px}
   .navdrop .menu{position:absolute;top:100%;left:0;min-width:180px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:6px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .15s,transform .15s,visibility .15s;z-index:70}
-  .navdrop:hover .menu{opacity:1;visibility:visible;transform:translateY(0)}
+  .navdrop:hover .menu,.navdrop:focus-within .menu{opacity:1;visibility:visible;transform:translateY(0)}
   .navdrop .menu a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border-radius:8px;font-size:13.5px;color:var(--ink);white-space:nowrap}
   .navdrop .menu a:hover{background:#eef2ff;color:var(--primary)}
   .navdrop .menu a.on{background:#eef2ff;color:var(--primary);font-weight:600}
@@ -59,8 +59,8 @@
   header.hero{padding:64px 0 48px;background:
     radial-gradient(1200px 400px at 80% -10%,rgba(55,48,163,.12),transparent),
     radial-gradient(900px 360px at 0% 0%,rgba(15,118,110,.10),transparent);}
-  .hero h1{font-size:38px;line-height:1.2;font-weight:800;letter-spacing:-.5px}
-  .hero h1 .grad{color:var(--primary)}
+  .hero h1{font-size:clamp(28px,6vw,38px);line-height:1.2;font-weight:800;letter-spacing:-.5px}
+  .hero h1 .grad{color:var(--primary);white-space:nowrap}
   .hero .meta{margin-top:14px;font-size:15px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 18px}
   .hero p.sub{margin-top:16px;font-size:17px;color:var(--muted);max-width:700px}
   /* hero 圆框标签 */
@@ -71,12 +71,6 @@
     transition:border-color .15s,background .15s}
   .hero-tags li:hover{border-color:var(--primary);background:#fff}
   @media(max-width:640px){.hero-tags{gap:8px;margin-top:18px}.hero-tags li{height:30px;padding:0 13px;font-size:13px}}
-  .cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:12px;font-weight:600;font-size:14px;transition:.15s}
-  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(55,48,163,.35)}
-  .btn.primary:hover{background:var(--primary-d)}
-  .btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
-  .btn.ghost:hover{border-color:var(--primary);color:var(--primary)}
   section{padding:48px 0}
   section.alt{background:linear-gradient(180deg,rgba(55,48,163,.035),transparent)}
   .sec-head{margin-bottom:26px}
@@ -105,24 +99,6 @@
   .role .d .bul{margin-top:8px}
   .role .d .bul>li{color:var(--muted)}
   .role .d .bul>li>b{color:var(--ink);font-weight:700}
-  .arch{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);overflow-x:auto;margin-bottom:24px}
-  .arch svg{width:100%;height:auto;min-width:640px}
-  .flow-step{fill:#eef2ff;stroke:var(--primary);stroke-width:1.5}
-  .flow-step.t{fill:#ecfeff;stroke:var(--accent)}
-  .flow-arrow{stroke:var(--muted);stroke-width:2;fill:none}
-  .flow-label{font-size:14px;fill:var(--ink);font-weight:700}
-  .flow-sub{font-size:11.5px;fill:var(--muted)}
-  /* 能力线 */
-  .lines{display:flex;flex-direction:column;gap:14px}
-  .line{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow)}
-  .line .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-  .line .no{font-size:12px;font-weight:800;color:#fff;background:var(--primary);border-radius:6px;padding:2px 8px}
-  .line .t{font-weight:700;font-size:16px}
-  .line .chain{font-size:13px;color:var(--muted);margin-top:8px}
-  .line .foot{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px}
-  .pill{background:#eef2ff;color:var(--primary);border-radius:999px;padding:3px 10px;font-weight:600}
-  .pill.g{background:#f1f5f9;color:#475569}
-  .pill.o{background:#fff7ed;color:#b45309}
   /* 代码卡 */
   details.codecard{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px}
   details.codecard > summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;user-select:none;position:relative;padding-right:104px;transition:background .15s}
@@ -139,11 +115,6 @@
   .codecard .cc .lead{font-size:14px;margin-bottom:10px}
   .codecard .cc ul{margin:0 0 12px 18px;font-size:13px;color:var(--muted)}
   .codecard .cc ul li{margin-bottom:3px}
-  .codecard .iter{font-size:12px;color:#b45309;background:#fff7ed;border-radius:8px;padding:8px 11px;margin-bottom:12px}
-  pre{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto;
-    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;line-height:1.75;color:#334155}
-  pre .c{color:var(--muted)}
-  .codefoot{font-size:12px;color:var(--muted);margin-top:8px}
   /* 代码分组 + 折叠 + 职责链接 */
   .codegroup{margin-top:20px;margin-bottom:26px}
   .codegroup>h3{font-size:16px;font-weight:700;margin-bottom:2px;display:flex;align-items:center;gap:10px}
@@ -152,21 +123,7 @@
   /* 09-25：代码片段块已全部移除（用户要求），details.code 相关样式一并删除 */
   .role .d a{color:var(--primary);font-weight:600;border-bottom:1px solid rgba(55,48,163,.35)}
   .role .d a:hover{border-bottom-color:var(--primary)}
-  /* 配套方法条 */
-  .methods{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
-  @media(max-width:720px){.methods{grid-template-columns:1fr}}
-  .method{background:var(--bg);border:1px dashed #cbd5e1;border-radius:14px;padding:15px 16px}
-  .method .t{font-weight:700;font-size:14px;display:flex;align-items:center;gap:7px}
-  .method .d{font-size:12px;color:var(--muted);margin-top:6px}
-  .method .tag{font-size:12px;color:#0e7490;background:#ecfeff;border-radius:999px;padding:2px 8px;display:inline-block;margin-top:9px}
-  /* 报告提要 */
-  .reports{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-  @media(max-width:760px){.reports{grid-template-columns:1fr}}
-  .rcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
-  .rcard .rt{font-weight:700;font-size:16px;line-height:1.4}
-  .rcard .rm{font-size:12px;color:var(--muted)}
-  .note{font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
-    border-radius:12px;padding:14px 16px;margin-top:16px;box-shadow:var(--shadow)}
+  /* 09-25：脚本名外链到 GitHub（脱敏开源仓库）。与旁边纯展示的 code 小块刻意区分：主色 + 淡靛底 + ↗ */
   /* 09-25：下拉内容排版体系（13px 正文 + bullet + 左描边分块） */
   .mech{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
   .mech>li{font-size:13px;line-height:1.6;color:var(--muted);padding-left:14px;position:relative}
@@ -195,6 +152,12 @@
   .role code,.codecard code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
     font-size:12px;background:#f1f5f9;border-radius:5px;padding:1px 5px;color:#334155}
   /* 09-25：脚本名外链到 GitHub（脱敏开源仓库）。与旁边纯展示的 code 小块刻意区分：主色 + 淡靛底 + ↗ */
+  /* 报告提要：align-items:start 防展开时兄弟卡被拉伸 */
+  .reports{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;align-items:start}
+  @media(max-width:760px){.reports{grid-template-columns:1fr}}
+  .rcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+  .rcard .rt{font-weight:700;font-size:16px;line-height:1.4}
+  .rcard .rm{font-size:12px;color:var(--muted)}
   .clink{display:inline-block;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
     font-size:12px;background:#eef2ff;border:1px solid #dcdffb;border-radius:5px;padding:0 6px;
     color:var(--primary);font-weight:600;text-decoration:none;white-space:nowrap}
@@ -243,7 +206,11 @@
   .rcard details.rdet[open]>summary{margin-bottom:10px}
   @media(min-width:761px){
     .reports.wide .blk,.reports.wide .bul,.reports.wide .meta-row{max-width:680px}
+    .reports .rcard:has(details.rdet[open]){grid-column:1/-1}
   }
+  /* 锚点跳转预留吸顶导航高度 */
+  section[id],.role[id],.rcard[id],details[id]{scroll-margin-top:72px}
+  @media(max-width:760px){section[id],.role[id],.rcard[id],details[id]{scroll-margin-top:110px}}
   /* 09-26 报告卡面层：核心发现（find）+ 进入判断（verdict） */
   .rcard .find{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
   .rcard .find>li{font-size:14px;line-height:1.62;color:var(--ink);padding-left:16px;position:relative}
@@ -266,11 +233,15 @@
   .sitemap b{color:var(--ink);font-weight:600}
   .sitemap a{color:var(--muted);border-bottom:1px solid transparent;transition:.15s}
   .sitemap a:hover{color:var(--primary);border-bottom-color:var(--primary)}
-  .sitemap .sg{margin-bottom:8px}
+  .sitemap .sg{margin-bottom:8px;display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline}
   .sitemap .sg:last-child{margin-bottom:0}
   .sitemap .sg b{display:inline-block;min-width:88px;color:var(--ink);font-weight:700}
-  .sitemap .sg a{margin-right:16px}
+  .sitemap .sg a{white-space:nowrap}
   /* 区标题改无衬线：删除 Georgia/宋体，继承 body 无衬线栈（第十轮视觉审计） */
+  /* 键盘焦点可见 + 尊重系统减动画偏好 */
+  details.expand>summary:focus-visible,details.codecard>summary:focus-visible,.rcard details.rdet>summary:focus-visible,
+  .navdrop>a:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:4px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
@@ -308,6 +279,7 @@
       <span>·</span>
       <span>搜狐畅游</span>
     </div>
+    <p class="sub">用数据回答「这个赛道值不值得进」：4 份研究报告 + 1 期月度监测，30 余项结构指标，3 个开源分析脚本</p>
     <ul class="hero-tags">
       <li>市场扫描</li>
       <li>概念测试</li>
