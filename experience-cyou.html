@@ -500,62 +500,60 @@
       <h3>美国手游品类 / 题材数据分析工具</h3>
       <p class="gsub">品类报告要判断「这个品类值不值得进入」。这套脚本按品类 × 年份计算下载 / 收入集中度、吸量效率、新品与存量产品表现、命名聚类等结构指标，输出分页签底表，供各品类章节取数。</p>
       <details class="codecard">
-        <summary><a class="clink" href="https://github.com/han-wangze/game-structure-analysis-tools/blob/main/genre_analysis.py" target="_blank" rel="noopener">genre_analysis.py</a><span class="ln">品类 / 题材分析</span><span class="one">一次运行输出 6 张底表的指标引擎</span></summary>
+        <summary><a class="clink" href="https://github.com/han-wangze/game-structure-analysis-tools/blob/main/genre_analysis.py" target="_blank" rel="noopener">genre_analysis.py</a><span class="ln">品类 / 题材分析</span><span class="one">为「这个品类值不值得进入」的判断提供结构指标</span></summary>
         <div class="cc">
-          <p class="subh">背景</p>
+          <p class="subh">为什么做</p>
           <ul>
-            <li>报告需对每个品类形成「是否值得进入」的判断。通过计算下载 / 收入集中度、分层增长贡献、新品渗透与变现、存量产品生命周期、产品命名的同质程度，可以对市场结构有更完整的了解。</li>
-            <li>这些指标须按品类 × 年份逐一计算且口径一致，故编写 Python 脚本统一处理，输出按分析维度分页签的底表，直接供报告正文取数。</li>
+            <li>报告需对每个品类形成「是否值得进入」的判断。通过计算下载 / 收入集中度、分层增长贡献、新品渗透与变现、存量产品生命周期、产品命名的同质程度，可以对市场结构有更完整的了解；这些指标须按品类 × 年份逐一计算且口径一致，故编写 Python 脚本统一处理。</li>
           </ul>
           <div class="meta-row"><b>我的角色</b>独立设计指标口径并编写全部代码，品类、题材两个维度复用同一套流程。</div>
-          <p class="subh">做了什么</p>
+          <p class="subh">怎么做的 · 结构指标 30 余项</p>
           <ul>
             <li><b>数据清洗</b>：兼容 Sensor Tower 导出的多种格式（tab 分隔，utf-16 / utf-8 / gbk 三编码自动回退），5 年数据分块读取、内存降级（float32 / int32），20 多个原始英文字段统一成标准口径。</li>
-            <li><b>结构指标计算（30 余项，按四类问题组织）</b>
-              <ul>
-                <li><b>集中度</b>：CR3/5/10 及高 / 中 / 低垄断分层；头部 / 中腰部 / 尾部（40% / 70% 阈值）增长贡献；Top10 产品下载与收入双维度贡献。</li>
-                <li><b>效率</b>：分层吸量效率，及增长（增长值 ÷ 上线天数）、留存（DAU ÷ 下载）、变现（RPD）三个效率维度。</li>
-                <li><b>生命周期</b>：新品渗透率、增长贡献、RPD 溢价；存量按成熟（1–3 年）/ 衰退（3 年以上）分层，计算产品年龄与下载增长的 Pearson 相关。</li>
-                <li><b>机器学习聚类</b>：以产品名为输入做无监督聚类，流程为文本预处理（去停用词、词干提取）→ TF-IDF 向量化 → K-Means，用轮廓系数 + 提升阈值自动选 K（避免单调爬升到上限），按「簇内相对全局的对比度」提取各簇关键词。产出两个层面：各聚类的产品数、下载与收入占比、RPD 及增长贡献对比；以及两个校验——收入 Top3 中同簇产品数（仅高垄断品类）、新品向大盘命名簇的集中倍数（新品落入比例 ÷ 全部产品落入比例，>1 即新品更集中于此），用于观察头部产品是否趋同。</li>
-              </ul>
-            </li>
-            <li><b>输出</b>：6 张底表 Excel（集中度 / 吸量效率 / 新品表现 / 存量产品表现 / 聚类分析 / Top10 产品详情）+ CR5、吸量效率五年对比图。</li>
+            <li><b>集中度</b>：CR3/5/10 及高 / 中 / 低垄断分层；头部 / 中腰部 / 尾部（40% / 70% 阈值）增长贡献；Top10 产品下载与收入双维度贡献。</li>
+            <li><b>吸量效率</b>：分层吸量效率，及增长（增长值 ÷ 上线天数）、留存（DAU ÷ 下载）、变现（RPD）三个效率维度。</li>
+            <li><b>生命周期</b>：新品渗透率、增长贡献、RPD 溢价；存量按成熟（1–3 年）/ 衰退（3 年以上）分层，计算产品年龄与下载增长的 Pearson 相关。</li>
+            <li><b>命名聚类</b>：以产品名为输入做无监督聚类，流程为文本预处理（去停用词、词干提取）→ TF-IDF 向量化 → K-Means，用轮廓系数 + 提升阈值自动选 K，按「簇内相对全局的对比度」提取各簇关键词。产出两个层面：各聚类的产品数、下载与收入占比、RPD 及增长贡献对比；以及两个校验——收入 Top3 中同簇产品数（仅高垄断品类）、新品向大盘命名簇的集中倍数（新品落入比例 ÷ 全部产品落入比例，>1 即新品更集中于此），用于观察头部产品是否趋同。</li>
           </ul>
-          <div class="foot-line"><b>应用</b>报告成稿前的品类结构量化分析——补齐透视表难以计算的指标（分层增长贡献、生命周期分层、命名聚类等）；换数据文件夹即可复用于其他国家 / 年份。　<b>产出</b>可运行脚本 + 全字段指标字典。</div>
+          <p class="subh">输出</p>
+          <ul>
+            <li>6 张底表 Excel（集中度 / 吸量效率 / 新品表现 / 存量产品表现 / 聚类分析 / Top10 产品详情）+ CR5、吸量效率五年对比图，逐字段口径见仓库字段说明。</li>
+          </ul>
+          <div class="foot-line"><b>应用</b>报告成稿前的品类结构量化分析——补齐透视表难以计算的指标（分层增长贡献、生命周期分层、命名聚类等）。</div>
         </div>
       </details>
     </div>
 <div class="codegroup" id="code-rpg">
       <h3>中美日韩 RPG 专题研究数据分析工具</h3>
-      <p class="gsub">这套脚本服务 2021–2025 中美日韩 RPG 类市场研究：通过计算各品类下载 / 收入集中度刻画市场结构；通过整理哪些产品能长期保持下载 / 收入表现的在榜记录，辅助市场判断与进入建议的作出。</p>
+      <p class="gsub">这套脚本服务 2021–2025 中美日韩 RPG 类市场研究：通过计算各品类下载 / 收入集中度刻画市场结构；通过整理哪些产品能长期保持下载 / 收入表现的在榜记录，辅助判断某个品类是否值得进入。</p>
     <details class="codecard">
-      <summary><a class="clink" href="https://github.com/han-wangze/game-structure-analysis-tools/blob/main/concentration_cr.py" target="_blank" rel="noopener">concentration_cr.py</a><span class="ln">RPG 专项 · CR 与头部产品底表</span><span class="one">按国家 × 品类 × 年份算 CR4 / CR5 / CR10 及 Top10 产品表，下载与收入各按自己的排名取值</span></summary>
+      <summary><a class="clink" href="https://github.com/han-wangze/game-structure-analysis-tools/blob/main/concentration_cr.py" target="_blank" rel="noopener">concentration_cr.py</a><span class="ln">RPG 专项 · CR 与头部产品底表</span><span class="one">跨 4 国 × 4 赛道 × 5 年统一 CR 口径</span></summary>
       <div class="cc">
-        <p class="subh">背景</p>
+        <p class="subh">为什么做</p>
         <ul>
           <li>CR 与 Top10 名单涉及 4 国 × 4 赛道 × 5 年的排名与份额计算：下载 CR 与收入 CR 须按各自的排名分别取值；当年首发的判定依赖首发日期解析。为避免手工透视口径不一，编写脚本统一计算并生成格式化底表，直接用于报告正文。</li>
         </ul>
         <div class="meta-row"><b>我的角色</b>为 RPG 专题协作编写数据处理与报表脚本，负责口径设计与实现。</div>
-        <p class="subh">做了什么</p>
+        <p class="subh">怎么做的</p>
         <ul>
           <li><b>CR 与头部产品底表</b>：按国家 × 品类 × 年份计算 CR4 / CR5 / CR10 及 Top10 产品表。口径上做了两个设计决策：下载 CR 按下载排名、收入 CR 按收入排名分别计算，不用同一名单；Open World 品类因产品数量少，CR 基数由 5 调整为 4。当年首发产品在表内自动标黄。</li>
         </ul>
-        <div class="foot-line"><b>应用</b>报告中的集中度数字（如中国 MMORPG 收入 CR10 为 60%、韩国为 71%）由脚本直接产出，随报告交付。　<b>产出</b>可复用脚本 + 格式化 Excel 底表。</div>
+        <div class="foot-line"><b>应用</b>报告中的集中度数字（如中国 MMORPG 收入 CR10 为 60%、韩国为 71%）由脚本直接产出，随报告交付。</div>
       </div>
     </details>
     <details class="codecard">
-      <summary><a class="clink" href="https://github.com/han-wangze/game-structure-analysis-tools/blob/main/lifecycle_classify.py" target="_blank" rel="noopener">lifecycle_classify.py</a><span class="ln">RPG 专项 · 跨年榜单分类</span><span class="one">按本品类内的下载 / 收入 Top20 排名，给产品打「始终 / 曾经 / 从未在榜」标签</span></summary>
+      <summary><a class="clink" href="https://github.com/han-wangze/game-structure-analysis-tools/blob/main/lifecycle_classify.py" target="_blank" rel="noopener">lifecycle_classify.py</a><span class="ln">RPG 专项 · 跨年榜单分类</span><span class="one">区分长线在榜与短暂进榜的产品</span></summary>
       <div class="cc">
-        <p class="subh">背景</p>
+        <p class="subh">为什么做</p>
         <ul>
           <li>市场判断需要区分长线在榜产品与短暂进榜产品。为每款产品整理逐年是否进入本品类 Top20 的在榜记录，作为判断依据。</li>
         </ul>
         <div class="meta-row"><b>我的角色</b>为 RPG 专题协作编写数据处理与报表脚本，负责口径设计与实现。</div>
-        <p class="subh">做了什么</p>
+        <p class="subh">怎么做的</p>
         <ul>
           <li><b>长线在榜产品底表</b>：以「本品类内下载或收入任一进入当年 Top20」为在榜标准，将产品分为始终在榜（上市以来每年在榜）、曾经在榜、从未在榜三类，输出带本品类逐年排名的明细表。</li>
         </ul>
-        <div class="foot-line"><b>应用</b>「始终在榜」的长线产品名单由脚本直接产出，随报告交付。　<b>产出</b>可复用脚本 + 格式化 Excel 底表。</div>
+        <div class="foot-line"><b>应用</b>「始终在榜」的长线产品名单由脚本直接产出，随报告交付。</div>
       </div>
     </details>
     </div>
