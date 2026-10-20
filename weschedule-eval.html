@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>解析质量评测报告 · WeSchedule | 韩王泽</title>
-<meta name="description" content="WeSchedule 解析链路的确定性回归测试：100 条语料、8:2 固定切分（种子 20260717）、五层指标，提示词三版迭代后端到端完全正确率 66.2% → 70.0% → 75.0%，dev / test 双达标。" />
+<meta name="description" content="WeSchedule 解析链路的回归测试：100 条语料、8:2 固定切分（种子 20260717）、六项指标，提示词三版迭代后整条消息全对率 77.9% → 82.4% → 88.2%（dev 60/68、test 15/17）。" />
 <meta name="author" content="韩王泽" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
 <meta property="og:locale" content="zh_CN" />
 <meta property="og:title" content="解析质量评测报告 · WeSchedule" />
-<meta property="og:description" content="100 条语料、8:2 固定切分、五层指标的确定性回归测试：提示词三版迭代后端到端 66.2% → 75.0%，dev / test 双达标，含 badcase 明细与已知边界。" />
+<meta property="og:description" content="100 条语料、8:2 固定切分、六项指标的回归测试：三版提示词迭代后整条消息全对率 77.9% → 88.2%，含 badcase 明细与这套评测测不到什么。" />
 <meta property="og:url" content="https://han-wangze.github.io/hanwangze/weschedule-eval.html" />
 <meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <meta property="og:image:width" content="1200" />
@@ -23,7 +23,7 @@
 <meta property="og:image:alt" content="WeSchedule 解析质量评测报告 · 韩王泽" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="解析质量评测报告 · WeSchedule" />
-<meta name="twitter:description" content="100 条语料、五层指标的确定性回归测试：端到端 66.2% → 75.0%，dev / test 双达标。" />
+<meta name="twitter:description" content="100 条语料、六项指标的回归测试：三版提示词迭代后整条消息全对率 77.9% → 88.2%（dev 60/68、test 15/17）。" />
 <meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <style>
   :root{
@@ -144,12 +144,12 @@
 <header class="hero">
   <div class="wrap">
     <h1>解析质量评测报告</h1>
-    <p class="sub">这是 WeSchedule 解析链路的<b>确定性回归测试</b>：100 条群聊语料、固定切分、五层指标，用来判断一次提示词改动之后，这次是变好还是变坏。</p>
+    <p class="sub">这是 WeSchedule 解析链路的回归测试：100 条群聊语料、固定切分、六项指标，用来判断一次提示词改动之后，这次是变好还是变坏。</p>
     <div class="badges">
       <span class="badge"><b>100</b> 条语料 · 7 类</span>
       <span class="badge"><b>8:2</b> 固定切分</span>
-      <span class="badge"><b>5</b> 层指标</span>
-      <span class="badge"><b>75.0%</b> 端到端（dev/test 双达标）</span>
+      <span class="badge"><b>6</b> 项指标</span>
+      <span class="badge"><b>88.2%</b> 整条全对（dev 60/68 · test 15/17）</span>
     </div>
     <div class="cta">
       <a class="btn primary" href="#result">看迭代结果</a>
@@ -181,7 +181,7 @@
       <b>来源构成</b>：100 条里 <b>93 条是手写构造</b>（按上表七类逐类补齐），<b>7 条来自真实群聊脱敏</b>，原始种子就取自实际群聊，脱敏后保留原样。
     </p>
     <p class="note" style="margin-top:12px">
-      <b>切分方式</b>：按 <code>seed=20260717</code> 做一次固定随机切分，dev 80 条 / test 20 条，切分结果落盘在 <code>eval/.split.json</code>。同一份切分贯穿全部三个版本，因此版本之间的差值只来自提示词本身。
+      <b>切分方式</b>：按 <code>seed=20260717</code> 做一次固定随机切分，dev 80 条 / test 20 条，切分结果落盘在 <code>eval/.split.json</code>。同一份切分贯穿全部三个版本，三版运行又都在同一天完成、模型版本没变，所以版本之间的差值可以归到提示词本身——跨天重跑不保证这一点。
     </p>
   </div>
 </section>
@@ -190,20 +190,24 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="k">Metrics · 指标口径</div>
-      <h2>五层指标与达标线</h2>
+      <h2>六项指标与口径</h2>
     </div>
     <table class="tbl">
-      <thead><tr><th style="width:22%">层级</th><th>怎么算</th><th style="width:18%">达标线</th></tr></thead>
+      <thead><tr><th style="width:22%">指标</th><th>怎么算</th><th style="width:19%">目标 / 备注</th></tr></thead>
       <tbody>
-        <tr><td><b>has_schedule 判定</b></td><td>这条消息该不该生成日程（P / R / F1）</td><td>F1 = 100</td></tr>
-        <tr><td><b>误报率</b></td><td>E 类（无日程）被判成有日程的比例</td><td>≤ 5%</td></tr>
-        <tr><td><b>事件级 P / R</b></td><td>抽出来的事件与标注事件逐个配对后的查准 / 查全</td><td>—</td></tr>
-        <tr><td><b>字段准确率</b></td><td>在命中事件里，<code>date</code> / <code>time</code> / <code>location</code> 与标准答案完全一致的比例</td><td>90% / 80% / 70%</td></tr>
-        <tr><td><b>端到端完全正确率</b></td><td>该条消息<b>所有</b>标注事件都命中、且每条命中的 date / time / location 全对、且没有多报，才算这条通过</td><td>≥ 75%</td></tr>
+        <tr><td><b>has_schedule 判定</b></td><td>这条消息该不该生成日程（P / R / F1）</td><td>F1 目标 100；test 仅 20 条，作旁证</td></tr>
+        <tr><td><b>误报率</b></td><td>15 条无日程样本里，被判成"有日程"的比例</td><td>≤ 5%</td></tr>
+        <tr><td><b>事件级 P / R</b></td><td>抽出来的事件与标注事件逐个配对后的查准 / 查全</td><td>看趋势，不设线</td></tr>
+        <tr><td><b>字段准确率</b></td><td>在配对上的事件里，<code>time</code> / <code>location</code> 与标注完全一致的比例</td><td>≥ 80% / ≥ 70%</td></tr>
+        <tr><td><b>整条消息全对率</b></td><td>该条消息的<b>所有</b>标注事件都配上、<code>time</code> 与 <code>location</code> 全对、且没有多报，才算这条通过。<b>分母只算该有日程的消息</b>，15 条无日程样本不参与</td><td>直接给分子/分母，不设线</td></tr>
+        <tr><td><b>编造率</b>（新增）</td><td>标注里本该为空、模型却填了值的次数（<code>time</code> / <code>location</code> 分别计）——用来抓"AI 猜时间"这类用户最难发现的错</td><td>越低越好；本期未统计</td></tr>
       </tbody>
     </table>
     <p class="note" style="margin-top:16px">
-      <b>关于 75% 这个口径</b>：端到端是"整条消息完全正确"的严格口径，任何一处字段不一致就判该条失败。它不等于"准确率只有四分之三"：同一次运行的字段准确率是 <code>date</code> 100%、<code>time</code> 89.4%、<code>location</code> 100%。
+      <b>为什么没有"date 准确率"这一行</b>：事件配对的条件本身要求日期相等，配上了再比日期必然成立——那是一个恒等于 100% 的伪指标。日期错的真实代价体现在事件级 P / R 上：日期不对的事件配不上，直接算漏报。<code>date</code> 只作为配对键使用。
+    </p>
+    <p class="note" style="margin-top:12px">
+      <b>关于分母（这一版改过）</b>：整条全对率的分母只算"该有日程"的消息。15 条闲聊样本没有标注事件，判不出"解析对不对"，放进分母等于把它们全部记成失败。旧版把 E 类留在分母、又从分子里跳过，dev 的 60/68 被写成了 60/80（75.0%）；本页按修正后的口径重算，同一次运行是 88.2%。
     </p>
   </div>
 </section>
@@ -213,32 +217,34 @@
     <div class="sec-head">
       <div class="k">Result · 迭代结果</div>
       <h2>三版提示词，dev 集逐版对比</h2>
-      <p>原始日志在 <code>eval/reports/</code>，下面的数字全部来自日志原文，未做二次整理。</p>
+      <p>原始日志在 <code>eval/reports/</code>，指标取自日志原文；"整条全对率"一项按本页修正后的分母重算，重算方式见表下脚注。</p>
     </div>
     <div class="metric-row">
-      <div class="metric"><div class="n">66.2%</div><div class="l">v1 端到端</div></div>
-      <div class="metric"><div class="n">70.0%</div><div class="l">v1.1 端到端</div></div>
-      <div class="metric"><div class="n">75.0%</div><div class="l">v1.2 端到端</div></div>
-      <div class="metric"><div class="n">75.0%</div><div class="l">v1.2 · test 集</div></div>
+      <div class="metric"><div class="n">77.9%</div><div class="l">v1 整条全对</div></div>
+      <div class="metric"><div class="n">82.4%</div><div class="l">v1.1 整条全对</div></div>
+      <div class="metric"><div class="n">88.2%</div><div class="l">v1.2 整条全对</div></div>
+      <div class="metric"><div class="n">88.2%</div><div class="l">v1.2 · test 集</div></div>
     </div>
     <table class="tbl">
-      <thead><tr><th style="width:34%">指标</th><th>v1 (dev 80)</th><th>v1.1 (dev 80)</th><th>v1.2 (dev 80)</th><th>v1.2 (test 20)</th></tr></thead>
+      <thead><tr><th style="width:34%">指标</th><th>v1 · dev</th><th>v1.1 · dev</th><th>v1.2 · dev</th><th>v1.2 · test</th></tr></thead>
       <tbody>
         <tr><td>has_schedule 判定 F1</td><td class="num">99.2 *</td><td class="num">97.0</td><td class="num ok">100.0</td><td class="num ok">100.0</td></tr>
         <tr><td>误报率（E 类判有）</td><td class="num ok">0.0%</td><td class="num ok">0.0%</td><td class="num ok">0.0%</td><td class="num ok">0.0%</td></tr>
         <tr><td>事件级 P / R</td><td class="num">89.5 / 88.3</td><td class="num">94.5 / 89.6</td><td class="num">94.8 / 94.8</td><td class="num">95.0 / 95.0</td></tr>
-        <tr><td>date 准确率</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td></tr>
         <tr><td>time 准确率</td><td class="num">83.3%</td><td class="num">89.4%</td><td class="num">89.4%</td><td class="num">87.5%</td></tr>
         <tr><td>location 准确率</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td></tr>
-        <tr><td><b>端到端完全正确率</b></td><td class="num bad">66.2%</td><td class="num bad">70.0%</td><td class="num ok"><span class="hl">75.0%</span></td><td class="num ok"><span class="hl">75.0%</span></td></tr>
+        <tr><td><b>整条消息全对率</b><br><span style="font-size:12px;color:var(--muted)">分母=该有日程的消息</span></td><td class="num bad">77.9%<br><span style="font-size:12px">53/68</span></td><td class="num bad">82.4%<br><span style="font-size:12px">56/68</span></td><td class="num ok"><span class="hl">88.2%</span><br><span style="font-size:12px">60/68</span></td><td class="num ok"><span class="hl">88.2%</span><br><span style="font-size:12px">15/17</span></td></tr>
         <tr><td>badcase 条数</td><td class="num">15</td><td class="num">12</td><td class="num">8</td><td class="num">2</td></tr>
       </tbody>
     </table>
     <p class="note" style="margin-top:16px">
+      <b>数字的来源</b>：全部取自 2026-08-21 四次运行的原始日志（<code>eval/reports/*_run.log</code>）。其中"整条消息全对率"一项按本页修正后的分母口径重算——日志当时的打印值用的是旧分母（66.2% / 70.0% / 75.0%），分子（53 / 56 / 60）与 badcase 条数没变，重算只是把分母从 80 换成 68。其余各项照录日志。
+    </p>
+    <p class="note" style="margin-top:16px">
       <b>* 一处历史显示 bug（未改动历史日志）</b>：v1 那次运行里 has_schedule F1 打印成了 <code>9924.4</code>，原因是当时脚本在百分比换算上重复乘了一次 100，正确值应为 <code>99.2</code>。后续版本已修正，v1.1 之后的日志数值正常。
     </p>
     <p class="note" style="margin-top:12px">
-      <b>为什么只看端到端</b>：v1.1 那一次，has_schedule 判定准确率从 98.8% 掉到 95.0%（同一版 F1 从 99.2 掉到 97.0），而事件级与端到端同期上升。单层指标会互相拉扯，所以判断一次改动的好坏只认端到端完全正确率：五层指标都留着，但只有这一层参与决策。
+      <b>为什么只看整条全对率</b>：v1.1 那一次，has_schedule 判定准确率从 98.8% 掉到 95.0%（同一版 F1 从 99.2 掉到 97.0），而事件级与整条全对率同期在涨。单项指标会互相拉扯，所以判断一次改动的好坏只认这一个终值：六项指标都留着看，只有它参与决策。
     </p>
   </div>
 </section>
@@ -266,7 +272,7 @@
       </div>
       <div class="card">
         <h3 style="font-size:16px;font-weight:700;margin-bottom:8px">v1.2 修掉了什么</h3>
-        <p style="font-size:14px;color:var(--muted)">加了"只要表达了未来的行动意图就必须提取"这条规则，把此前被当成闲聊丢掉的"晚上有空的话一起自习吧"这类消息救回来了。这一版把 C 类 badcase 清零，端到端首次到 75%。</p>
+        <p style="font-size:14px;color:var(--muted)">加了"只要表达了未来的行动意图就必须提取"这条规则，把此前被当成闲聊丢掉的"晚上有空的话一起自习吧"这类消息救回来了。这一版把 C 类 badcase 清零，整条全对率首次过 88%。</p>
       </div>
     </div>
     <p class="note" style="margin-top:16px">
@@ -286,7 +292,9 @@
       <tbody>
         <tr><td>语料以手写构造为主</td><td>93 / 100 条是我按失败模式写的，真实群聊脱敏只有 7 条。它能验证"我预想到的问题有没有被修掉"，不能代表真实流量分布。</td></tr>
         <tr><td>金标准与达标线都是自定的</td><td>标注、指标口径、75% 这条线都由我定义，属于确定性回归测试，<b>数字不能与公开 benchmark 类比</b>。</td></tr>
-        <tr><td>端到端口径极严</td><td>整条消息全对才算通过。这也是 75% 看起来不高、但字段准确率接近满分的原因。</td></tr>
+        <tr><td>整条全对的判定很硬</td><td>一条消息里任何一个字段不一致就整条判失败。所以它比"单条事件的字段准确率"低，比"这条消息能不能用"高——两个数不能直接比。</td></tr>
+        <tr><td>编造率还没有数字</td><td>这项指标这一版才加进脚本，历史三次运行没统计。没有为它单独重跑：重跑会跨模型版本，三版之间的比较就不再成立。</td></tr>
+        <tr><td>模型本身不可控</td><td><code>temperature=0</code> 不等于严格可复现，服务端模型版本与路由都可能变；只有同一天内的重跑可以互相比。</td></tr>
         <tr><td>未做多模型对比</td><td>只测了线上实际使用的 <code>deepseek-chat</code>（temperature=0，JSON 模式），没有横向对比其他模型。</td></tr>
         <tr><td>没有线上真实流量回流</td><td>评测集是离线固定的，尚未把线上解析日志接进评测闭环；这是下一步的第一优先项。</td></tr>
       </tbody>
@@ -327,7 +335,7 @@
     <table class="tbl">
       <thead><tr><th style="width:42%">文件</th><th>内容</th></tr></thead>
       <tbody>
-        <tr><td><code>eval/run_eval.py</code></td><td>评测主脚本：固定切分、五层指标计算、badcase 落盘、提示词内嵌</td></tr>
+        <tr><td><code>eval/run_eval.py</code></td><td>评测主脚本：固定切分、六项指标计算、badcase 落盘、提示词内嵌</td></tr>
         <tr><td><code>eval/corpus/sample.jsonl</code></td><td>100 条语料与金标准标注</td></tr>
         <tr><td><code>eval/gen_corpus.py</code></td><td>语料生成器（相对时间锚点 <code>2026-07-17</code> 写死其中）</td></tr>
         <tr><td><code>eval/.split.json</code></td><td>dev / test 固定切分结果</td></tr>
