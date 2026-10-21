@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>WeSchedule · 韩王泽</title>
-<meta name="description" content="WeSchedule：微信小程序 MVP，把微信群聊消息一键变成手机日程，含冲突检测与预备提醒。87 人调研、87.4% 接受度；100 条语料测得整条消息全对率 88.2%。" />
+<meta name="description" content="WeSchedule：微信小程序 MVP，把微信群聊消息一键变成手机日程，含冲突检测与预备提醒。87 人调研、87.4% 接受度；100 条语料测得整条消息全对率 95.6%。" />
 <meta name="author" content="韩王泽" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
 <meta property="og:locale" content="zh_CN" />
 <meta property="og:title" content="WeSchedule · 把群聊消息变成日程的微信小程序" />
-<meta property="og:description" content="复制群消息即可解析为日程，含冲突检测与预备提醒。87 人调研、87.4% 接受度；100 条语料测得整条消息全对率 88.2%，附实操 Demo 视频。" />
+<meta property="og:description" content="复制群消息即可解析为日程，含冲突检测与预备提醒。87 人调研、87.4% 接受度；100 条语料测得整条消息全对率 95.6%，附实操 Demo 视频。" />
 <meta property="og:url" content="https://han-wangze.github.io/hanwangze/weschedule.html" />
 <meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <meta property="og:image:width" content="1200" />
@@ -23,7 +23,7 @@
 <meta property="og:image:alt" content="WeSchedule 项目详情 · 韩王泽" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="WeSchedule · 把群聊消息变成日程的微信小程序" />
-<meta name="twitter:description" content="复制群消息即可解析为日程，含冲突检测与预备提醒。87 人调研、87.4% 接受度；100 条语料测得整条消息全对率 88.2%。" />
+<meta name="twitter:description" content="复制群消息即可解析为日程，含冲突检测与预备提醒。87 人调研、87.4% 接受度；100 条语料测得整条消息全对率 95.6%。" />
 <meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <style>
   :root{
@@ -200,12 +200,12 @@
 <header class="hero">
   <div class="wrap">
     <h1>WeSchedule</h1>
-    <p class="sub">微信小程序 MVP：把微信群聊消息变成可管理的日程。复制群消息 → 自动解析 → 确认保存 → 订阅消息提醒。在此之上做了软/硬分级的<b>冲突检测</b>、DDL 区间识别与<b>预备提醒</b>，回答"日程装不装得下"。87 人调研、87.4% 接受度；解析质量用 100 条语料测，整条消息全对率 91.2%。</p>
+    <p class="sub">微信小程序 MVP：把微信群聊消息变成可管理的日程。复制群消息 → 自动解析 → 确认保存 → 订阅消息提醒。在此之上做了软/硬分级的<b>冲突检测</b>、DDL 区间识别与<b>预备提醒</b>，回答"日程装不装得下"。87 人调研、87.4% 接受度；解析质量用 100 条语料测，整条消息全对率 95.6%。</p>
     <div class="badges">
       <span class="badge"><b>微信小程序</b></span>
       <span class="badge"><b>云开发</b></span>
       <span class="badge"><b>DeepSeek</b></span>
-      <span class="badge"><b>91.2%</b> 整条消息全对率</span>
+      <span class="badge"><b>95.6%</b> 整条消息全对率</span>
       <span class="badge"><b>冲突检测</b> 软硬分级</span>
       <span class="badge"><b>预备提醒</b> 提前一晚</span>
     </div>
@@ -356,14 +356,14 @@
         <div class="k">Tech · 解析质量</div>
         <h2>先解决"怎么知道改好了"</h2>
         <p>第一版提示词跑完，整条消息全对率 77.9%，15 条 badcase 里有 9 条出在"明天""下周""傍晚"这类时间表述上。改一版提示词到底是变好还是变坏，光翻几条语料判断不了：有的从错变对，有的从对变错。所以先造 100 条语料覆盖七类消息形态，按 8:2 固定切分、种子写死，每改一版重跑全量。</p>
-        <p>到第三版 91.2%（dev 62/68），test 是 88.2%（15/17）。判断一版提示词留不留只看这一个数：v1.1 那版 has_schedule 的 F1 从 99.2 掉到 97.0，可同期的整条全对率在涨——单项指标会互相打架，需要一个能一次结算的终值。</p>
-        <p>同一份 prompt 隔两个月各跑一次，dev 是 88.2% 与 91.2%。两次差 2 条、没有一条变差——这差不多就是 100 条语料的分辨率：它能告诉你有没有变好，报不出小数点后面的精度。</p>
+        <p>到第三版 95.6%（dev 65/68），test 是 94.1%（16/17）。判断一版提示词留不留只看这一个数：v1.1 那版 has_schedule 的 F1 从 99.2 掉到 97.0，可同期的整条全对率在涨——单项指标会互相打架，需要一个能一次结算的终值。</p>
+        <p>同一份 prompt 隔两个月跑了三次，dev 是 88.2%、91.2%、95.6%。前两次差 2 条、没有一条变差，这是 <code>temperature=0</code> 也不逐字可复现的证据；第三次的 +3 条来自修正标注（原标注给"周二小组答辩""后天体检"这类原文没时间的日程填了钟点，模型没编造反而被判错），<b>不是模型变好</b>。合起来说：100 条语料的分辨率约 ±2 条，它给你量级，给不了小数点后的精度。</p>
       </div>
       <div class="metric-row">
-        <div class="metric"><div class="n">91.2%</div><div class="l">整条消息全对率<br>(dev 62/68 · test 88.2%)</div></div>
+        <div class="metric"><div class="n">95.6%</div><div class="l">整条消息全对率<br>(dev 65/68 · test 94.1%)</div></div>
         <div class="metric"><div class="n">100</div><div class="l">评测语料<br>(七类消息形态 · 8:2 切分)</div></div>
         <div class="metric"><div class="n">0%</div><div class="l">闲聊误报率<br>(15 条无日程样本)</div></div>
-        <div class="metric"><div class="n">15 → 8</div><div class="l">badcase 条数<br>(dev v1 → v1.2)</div></div>
+        <div class="metric"><div class="n">15 → 3</div><div class="l">badcase 条数<br>(dev v1 → 最新重跑)</div></div>
       </div>
       <p class="l" style="margin-top:22px;color:var(--muted);font-size:13px">
         可复现资产：<code>eval/run_eval.py</code> · <code>eval/corpus/sample.jsonl</code>（切分由写死的 seed 生成，日志与 badcase 跑完落在本地 <code>eval/reports/</code>，不入库）。线上云函数与评测脚本各存一份提示词，两边逐字一致（各 1804 字符），改时必须同时改两处。逐版指标、badcase 明细，以及这套评测测不到什么，见 <a href="weschedule-eval.html" style="color:var(--primary);font-weight:700">解析质量评测报告 →</a>
