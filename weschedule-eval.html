@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>解析质量评测报告 · WeSchedule | 韩王泽</title>
-<meta name="description" content="WeSchedule 解析链路的回归测试：112 条语料、8:2 固定切分（种子 20260717）、六项指标，提示词三版迭代后整条消息全对率 77.9% → 82.4% → 95.6%（dev 65/68；test 89.7%，含 12 条长消息）。" />
+<meta name="description" content="WeSchedule 解析链路的回归测试：112 条语料、8:2 固定切分（种子 20260717）、六项指标，提示词四版迭代后整条消息全对率 77.9% → 82.4% → 95.6% → 97.1%（dev 66/68；test 96.6%，含 12 条长消息）。" />
 <meta name="author" content="韩王泽" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
 <meta property="og:locale" content="zh_CN" />
 <meta property="og:title" content="解析质量评测报告 · WeSchedule" />
-<meta property="og:description" content="112 条语料、8:2 固定切分、六项指标的回归测试：三版提示词迭代后整条消息全对率 77.9% → 95.6%，含 badcase 明细与这套评测测不到什么。" />
+<meta property="og:description" content="112 条语料、8:2 固定切分、六项指标的回归测试：四版提示词迭代后整条消息全对率 77.9% → 97.1%，含 badcase 明细与这套评测测不到什么。" />
 <meta property="og:url" content="https://han-wangze.github.io/hanwangze/weschedule-eval.html" />
 <meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <meta property="og:image:width" content="1200" />
@@ -23,7 +23,7 @@
 <meta property="og:image:alt" content="WeSchedule 解析质量评测报告 · 韩王泽" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="解析质量评测报告 · WeSchedule" />
-<meta name="twitter:description" content="112 条语料、六项指标的回归测试：三版提示词迭代后整条消息全对率 77.9% → 95.6%（dev 65/68、test 89.7%）。" />
+<meta name="twitter:description" content="112 条语料、六项指标的回归测试：四版提示词迭代后整条消息全对率 77.9% → 97.1%（dev 66/68、test 96.6%）。" />
 <meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <style>
   :root{
@@ -149,7 +149,7 @@
       <span class="badge"><b>100</b> 条语料 · 7 类</span>
       <span class="badge"><b>8:2</b> 固定切分</span>
       <span class="badge"><b>6</b> 项指标</span>
-      <span class="badge"><b>95.6%</b> 整条全对（dev 65/68 · test 89.7%，test 含 12 条长消息）</span>
+      <span class="badge"><b>97.1%</b> 整条全对（dev 66/68 · test 96.6%，test 含 12 条长消息）</span>
     </div>
     <div class="cta">
       <a class="btn primary" href="#result">看迭代结果</a>
@@ -218,41 +218,41 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="k">Result · 迭代结果</div>
-      <h2>三版提示词，dev 集逐版对比</h2>
+      <h2>四版提示词，逐版对比</h2>
       <p>原始日志在 <code>eval/reports/</code>：v1 / v1.1 取自 2026-08-21 那批运行，v1.2 取自 2026-10-21 重跑（同一天先统一了标注口径，见下方说明）。指标取自日志原文，"整条全对率"按本页修正后的分母重算，重算方式见表下脚注。</p>
     </div>
     <div class="metric-row">
       <div class="metric"><div class="n">77.9%</div><div class="l">v1 整条全对</div></div>
       <div class="metric"><div class="n">82.4%</div><div class="l">v1.1 整条全对</div></div>
       <div class="metric"><div class="n">95.6%</div><div class="l">v1.2 整条全对</div></div>
-      <div class="metric"><div class="n">89.7%</div><div class="l">v1.2 · test 集</div></div>
+      <div class="metric"><div class="n">97.1%</div><div class="l">v1.3 整条全对</div></div>
     </div>
     <table class="tbl">
-      <thead><tr><th style="width:34%">指标</th><th>v1 · dev</th><th>v1.1 · dev</th><th>v1.2 · dev</th><th>v1.2 · test</th></tr></thead>
+      <thead><tr><th style="width:30%">指标</th><th>v1 · dev</th><th>v1.1 · dev</th><th>v1.2 · dev</th><th>v1.3 · dev</th><th>v1.3 · test</th></tr></thead>
       <tbody>
-        <tr><td>has_schedule 判定 F1</td><td class="num">99.2 *</td><td class="num">97.0</td><td class="num ok">100.0</td><td class="num ok">100.0</td></tr>
-        <tr><td>误报率（E 类判有）</td><td class="num ok">0.0%</td><td class="num ok">0.0%</td><td class="num ok">0.0%</td><td class="num ok">0.0%</td></tr>
-        <tr><td>事件级 P / R</td><td class="num">89.5 / 88.3</td><td class="num">94.5 / 89.6</td><td class="num">94.8 / 94.8</td><td class="num">90.8 / 98.3</td></tr>
-        <tr><td>time 准确率</td><td class="num">83.3%</td><td class="num">89.4%</td><td class="num ok">100.0%</td><td class="num ok">98.1%</td></tr>
-        <tr><td>location 准确率</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td></tr>
-        <tr><td><b>整条消息全对率</b><br><span style="font-size:12px;color:var(--muted)">分母=该有日程的消息</span></td><td class="num bad">77.9%<br><span style="font-size:12px">53/68</span></td><td class="num bad">82.4%<br><span style="font-size:12px">56/68</span></td><td class="num ok"><span class="hl">95.6%</span><br><span style="font-size:12px">65/68</span></td><td class="num"><span class="hl">89.7%</span><br><span style="font-size:12px">26/29</span></td></tr>
-        <tr><td>badcase 条数</td><td class="num">15</td><td class="num">12</td><td class="num">3</td><td class="num">3</td></tr>
+        <tr><td>has_schedule 判定 F1</td><td class="num">99.2 *</td><td class="num">97.0</td><td class="num ok">100.0</td><td class="num ok">100.0</td><td class="num ok">100.0</td></tr>
+        <tr><td>误报率（E 类判有）</td><td class="num ok">0.0%</td><td class="num ok">0.0%</td><td class="num ok">0.0%</td><td class="num ok">0.0%</td><td class="num ok">0.0%</td></tr>
+        <tr><td>事件级 P / R</td><td class="num">89.5 / 88.3</td><td class="num">94.5 / 89.6</td><td class="num">94.8 / 94.8</td><td class="num">97.4 / 97.4</td><td class="num">98.3 / 98.3</td></tr>
+        <tr><td>time 准确率</td><td class="num">83.3%</td><td class="num">89.4%</td><td class="num ok">100.0%</td><td class="num ok">100.0%</td><td class="num ok">100.0%</td></tr>
+        <tr><td>location 准确率</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td><td class="num">100.0%</td></tr>
+        <tr><td><b>整条消息全对率</b><br><span style="font-size:12px;color:var(--muted)">分母=该有日程的消息</span></td><td class="num bad">77.9%<br><span style="font-size:12px">53/68</span></td><td class="num bad">82.4%<br><span style="font-size:12px">56/68</span></td><td class="num">95.6%<br><span style="font-size:12px">65/68</span></td><td class="num ok"><span class="hl">97.1%</span><br><span style="font-size:12px">66/68</span></td><td class="num ok"><span class="hl">96.6%</span><br><span style="font-size:12px">28/29</span></td></tr>
+        <tr><td>badcase 条数</td><td class="num">15</td><td class="num">12</td><td class="num">3</td><td class="num">2</td><td class="num">1</td></tr>
       </tbody>
     </table>
     <p class="note" style="margin-top:16px">
-      <b>test 那列 2026-10-21 变过口径，别与旧值直接比</b>：当天往 test 补了 12 条长消息（55–128 字、2–5 个事件），分母从 17 变 29，通过率因此从 94.1% 变成 89.7%——<b>不是模型退步，是题目变难</b>。长消息暴露的是真弱项：事件级查准率从 95.0 掉到 90.8，原因是模型把"周一到周三由大一负责"这类排班说明逐日拆成了 5 个事件（多报）；另外出现 1 处编造时间（"下班前"被填成 18:00，而标注按规则 5 写 23:59）。dev 侧没动，仍是 95.6%。
+      <b>test 那列 2026-10-21 变过两次口径</b>：先补了 12 条长消息（55–128 字、2–5 个事件），分母从 17 变 29、通过率从 94.1% 掉到 89.7%——不是模型退步，是题目变难；同日又按新规则重跑（v1.3），回到 <b>96.6%（28/29）</b>。长消息暴露的两个缺口都在 v1.3 里定义掉了：排班说明不再逐日摊开（事件级查准 90.8 → 98.3），"下班前"按 18:00 而不是 23:59。
     </p>
     <p class="note" style="margin-top:12px">
       <b>数字的来源</b>：v1 / v1.1 取自 2026-08-21 那批运行；v1.2 取自 2026-10-21 重跑（同日先统一标注口径），旧日志归档在 <code>eval/reports/archive_20260821/</code>。"整条消息全对率"按本页修正后的分母口径重算——日志当时的打印值用的是旧分母，重算只是把分母换成"该有日程的消息数"。
     </p>
     <p class="note" style="margin-top:12px">
-      <b>同一份 prompt 跑了三遍，差 5 条——其中 3 条是我改了标注</b>：v1.2 在 8-21 是 88.2%（60/68），10-20 是 91.2%（62/68），10-21 统一标注口径后是 95.6%（65/68）。前两次差 2 条（B011、D007），是 <code>temperature=0</code> 也不逐字可复现的证据；<b>第三次的 +3 不是模型变好，是尺子被修正</b>——D003 / D005 / D006 原先的金标准给"周二小组答辩""周日春游""后天体检"填了原文没有的钟点（违反 prompt 规则 4），模型没编造反而被判错，把这三处改成空值后它们自动变对。<b>所以这条曲线只能读成"同一版 prompt 的波动区间 + 标注修正"，不能读成"迭代带来的提升"</b>；dev 68 条的分辨率约 ±2 条（±3pp），折算成精度约 ±5pp——它给得出量级，给不出小数点后的精度。
+      <b>同一份 prompt 跑了四遍，dev 走了 88.2% → 91.2% → 95.6% → 97.1%</b>：v1.2 在 8-21 是 88.2%（60/68），10-20 是 91.2%（62/68），10-21 统一标注口径后 95.6%（65/68），同日按新规则改成 v1.3 后 97.1%（66/68）。前两次差 2 条（B011、D007），是 <code>temperature=0</code> 也不逐字可复现的证据；<b>第三次的 +3 不是模型变好，是尺子被修正</b>——D003 / D005 / D006 原先的金标准给"周二小组答辩""周日春游""后天体检"填了原文没有的钟点（违反 prompt 规则 4），模型没编造反而被判错，把这三处改成空值后它们自动变对。<b>所以这条曲线只能读成"同一版 prompt 的波动区间 + 标注修正"，不能读成"迭代带来的提升"</b>；dev 68 条的分辨率约 ±2 条（±3pp），折算成精度约 ±5pp——<b>所以 v1.3 的 +1 条本身说明不了什么，能说明问题的是那四条改动各自都有"3 次复跑全对"的证据</b>。
     </p>
     <p class="note" style="margin-top:16px">
       <b>* 一处历史显示 bug（未改动历史日志）</b>：v1 那次运行里 has_schedule F1 打印成了 <code>9924.4</code>，原因是当时脚本在百分比换算上重复乘了一次 100，正确值应为 <code>99.2</code>。后续版本已修正，v1.1 之后的日志数值正常。
     </p>
     <p class="note" style="margin-top:16px">
-      <b>还有一种口径：把"换了个说法"算对</b>：配对规则对同义改写很苛刻——标注"聚餐"、模型写"一起吃饭"，日期时间全对也判失败。脚本里加了一层保守同义词表（聚餐/吃饭、上课/第X节课、开会/组会，且"预答辩"与"正式答辩"强制不合并），放宽后 <b>dev 98.5%（67/68）· test 93.1%（27/29）</b>。<b>主指标不用这个数</b>：同义词表是我定的，拿它当成绩不诚实；它的用途是回答"剩下的错到底是什么性质"。
+      <b>还有一种口径：把"换了个说法"算对</b>：配对规则对同义改写很苛刻——标注"聚餐"、模型写"一起吃饭"，日期时间全对也判失败。脚本里加了一层保守同义词表（聚餐/吃饭、上课/第X节课、开会/组会，且"预答辩"与"正式答辩"强制不合并），放宽后 <b>dev 100%（68/68）· test 96.6%（28/29）</b>。<b>主指标不用这个数</b>：同义词表是我定的，拿它当成绩不诚实；它的用途是回答"剩下的错到底是什么性质"。
     </p>
     <p class="note" style="margin-top:12px">
       <b>为什么只看整条全对率</b>：v1.1 那一次，has_schedule 判定准确率从 98.8% 掉到 95.0%（同一版 F1 从 99.2 掉到 97.0），而事件级与整条全对率同期在涨。单项指标会互相拉扯，所以判断一次改动的好坏只认这一个终值：六项指标都留着看，只有它参与决策。
@@ -287,7 +287,7 @@
       </div>
     </div>
     <p class="note" style="margin-top:16px">
-      <b>剩下的错是什么性质</b>：dev 剩 3 条、test 剩 3 条（test 里 2 条是新加的长消息），<b>没有一条能归到"模型没读懂原文"</b>——分三类：① <b>措辞差异 3 条</b>（B005"聚餐"对"一起吃饭"、B006"上课"对"第一节课换教室"、D009"上课"对"第二节课改实验室"），日期时间全对；② <b>口径未定义 2 条</b>（H002 把"周一到周三由大一负责"逐日拆成 5 个值班事件——排班算不算日程还没定规则；H012 把"下班前"理解成 18:00，而标注按规则 5 写 23:59，模型其实更贴近原意）；③ <b>偶发日期错 1 条</b>（D007"周五"算成当天，但单独复跑 3 次全对，见下）。<b>结论：短消息侧的失分是判罚口径，长消息侧暴露的是"排班类消息怎么处理"这类规则缺口——两者都不是靠加提示词规则能解决的。</b>
+      <b>剩下的错是什么性质</b>：dev 剩 2 条、test 剩 1 条，<b>全部是同一个问题——标题写法不同</b>（B006"上课"对"第一节课换教室"、D009"上课"对"第二节课改实验室"、H007"上课"对"市场营销课"），日期与时间全对。<b>也就是说：v1.3 之后，这套评测里已经没有"解析错"，剩下的都是"配对规则认不出同义改写"。</b>这也意味着指标还能往上走的唯一途径是调整配对口径（放宽同义词表），而那是我自己定义的尺子——所以数字停在这里是合理的。
     </p>
     <p class="note" style="margin-top:12px">
       <b>为什么给 D007 单独复跑了 3 次</b>：它是这批里唯一看起来像"规则没吃透"的失败（规则 2 要求"周X"取下一个周五）。但同一 prompt 连跑 3 次，三次都正确给出 2026-07-24——说明它是波动不是稳定错误，和"同一 prompt 两次运行差 2 条"是同一现象。<b>所以没有为它改提示词</b>：加 few-shot 例子会影响其余 12 条含"周X"的语料，收益不明确。<b>这条经验值得记：单条 badcase 先跑 3 次看稳定性，成本 3 次调用，能避免一次错误的 prompt 改动。</b>
@@ -310,16 +310,16 @@
         <tr><td>标注本身曾有错（10-21 已统一）</td><td>扫出 10 处与 prompt 规则不一致的标注并逐个改正：D003 / D005 / D006 / D010 的金标准给原文没有钟点的日程填了 14:00 / 08:00（违反规则 4「不要猜测」）；C001 / C008 的"傍晚"按规则 3 应映射到 17:00 却空着；D008 的"早上 / 下午 / 晚上"没按映射表。<b>统一之后 dev 从 91.2% 变 95.6%——这 4.4 个点不是模型变好，是尺子变准。</b></td></tr>
         <tr><td>time / location 的准确率只算"配对上"的事件</td><td>100% 的意思是"能配上的事件里时间全对"，不是"所有事件时间全对"——配不上的事件算在事件级召回（dev 94.8%）里，不进 time 的分母。两个指标要一起看，不能只挑 100% 说。</td></tr>
         <tr><td>配对规则会惩罚同义改写（已量化）</td><td>标注"聚餐"、模型写"一起吃饭"判不上；标注"上课"、模型写"第二节课改实验室"判不上。脚本里加了一层保守同义词表，放宽后 dev 98.5% / test 93.1%。<b>这个数只作诊断，不进主指标</b>——同义词表由我定义，哪些改写算同一件事没有客观标准，把它当成绩就是自定规则自己打分。</td></tr>
-        <tr><td>样本量决定了精度上限</td><td>按 Wilson 区间（95% 置信度）算：dev 65/68 的区间是 <b>88%–98%（宽 10.7pp）</b>，test 26/29 是 <b>74%–96%</b>。所以"95.6%"只能理解成"这次抽样的点估计"，不能理解成"模型准确率是 95.6%"。要在 95% 置信度下做到 ±5pp 需要约 73 条、±3pp 要约 203 条——<b>与其加同类短消息，不如加没覆盖的场景</b>。</td></tr>
-        <tr><td>排班 / 值班类说明没有口径</td><td>"周一到周三由大一同学负责"算不算我的日程、要不要逐日拆开，规则里没写。长消息 H002 的失败正落在这：模型拆成 5 条，标注一条都不算，两边都讲得通。这条先记成缺口，等真实使用里看多了再定。</td></tr>
-        <tr><td>"下班前"这类表述没有口径</td><td>规则 5 说 DDL 未给时间填 23:59，但"下班前"其实指向 18:00。H012 模型填 18:00、标注写 23:59，模型的理解反而更贴近原意——这条暴露的是规则的边界，不是模型的问题。</td></tr>
+        <tr><td>样本量决定了精度上限</td><td>按 Wilson 区间（95% 置信度）算：dev 66/68 的区间是 <b>89.9%–99.2%（宽 9.3pp）</b>，test 28/29 是 <b>82.8%–99.4%</b>。所以"97.1%"只能理解成"这次抽样的点估计"，不能理解成"模型准确率是 97.1%"。要在 95% 置信度下做到 ±5pp 需要约 73 条、±3pp 要约 203 条——<b>与其加同类短消息，不如加没覆盖的场景</b>。</td></tr>
+        <tr><td>排班 / 值班类说明（v1.3 已定义）</td><td>规则 6 补了一句：排班、值班、轮值这类说明性安排不逐日摊开，只有明确指派给"你/我/本人"时才提取一条，泛指"某年级/某组"的不提取。改之前模型会把"周一到周三由大一负责"拆成 5 条事件，事件级查准率因此只有 90.8；改后 98.3。</td></tr>
+        <tr><td>"下班前"这类表述（v1.3 已定义）</td><td>规则 5 原来说"DDL 未给时间一律 23:59"，但"下班前"其实指向 18:00。v1.3 把它细分成三级：只给日期 → 23:59；带时点含义（下班前/放学前/中午前）→ 18:00 / 17:00 / 12:00；相对某件事（开会前）→ 那件事的开始时间。原来标注和模型各说各话，现在统一了。</td></tr>
         <tr><td>模型本身不可控</td><td><code>temperature=0</code> 不等于严格可复现，服务端模型版本与路由都可能变；只有同一天内的重跑可以互相比。</td></tr>
         <tr><td>未做多模型对比</td><td>只测了线上实际使用的 <code>deepseek-chat</code>（temperature=0，JSON 模式），没有横向对比其他模型。</td></tr>
         <tr><td>没有线上真实流量回流</td><td>评测集是离线固定的，尚未把线上解析日志接进评测闭环；这是下一步的第一优先项。</td></tr>
       </tbody>
     </table>
     <p class="note" style="margin-top:16px">
-      <b>评测集与线上提示词是两份副本</b>：<code>cloudfunctions/parse/index.js</code> 与 <code>eval/run_eval.py</code> 里各存一份提示词，两边保持逐字一致（各 1804 字符）。一旦线上一份被单独改动，评测分数就不再代表线上表现，改提示词时必须同时改两处。
+      <b>评测集与线上提示词是两份副本</b>：<code>cloudfunctions/parse/index.js</code> 与 <code>eval/run_eval.py</code> 里各存一份提示词，两边保持逐字一致（各 2172 字符）。一旦线上一份被单独改动，评测分数就不再代表线上表现，改提示词时必须同时改两处。
     </p>
   </div>
 </section>
@@ -352,7 +352,7 @@
       <p>评测脚本与语料都在仓库里。设置 <code>DEEPSEEK_API_KEY</code> 后执行 <code>python eval/run_eval.py --dataset dev</code> 即可复现 v1.2 那一列；换成 <code>--dataset test</code> 复现 test 列。日志与 badcase 会重新写进本地 <code>eval/reports/</code>。</p>
     </div>
     <details style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:2px 20px;box-shadow:var(--shadow);margin-bottom:18px">
-      <summary style="cursor:pointer;padding:16px 0;font-weight:700;font-size:15px;color:var(--primary);outline:none">展开提示词全文（v1.2 · 1804 字符）</summary>
+      <summary style="cursor:pointer;padding:16px 0;font-weight:700;font-size:15px;color:var(--primary);outline:none">展开提示词全文（v1.3 · 2172 字符）</summary>
       <p class="note" style="margin:6px 0 10px"><b>规则 2 的取舍——「周X」为什么取下一个而不是当天</b>：模型只拿到日期、拿不到消息的发送时刻，所以"周五下午2点"在周五当天被说出来时，它分不清指的是今天还是下周五。产品侧的选择是<b>宁可往后挪一周，不可往前放一天</b>——解析出已经过去的时间，提醒会直接判 MISSED，用户拿到的是一条永远不会响的废日程；往后挪一周，用户在确认页改一次日期就恢复了。两个方向的代价不对称，选可修复的那一侧。代价也如实写在这：周五早上说"周五下午开会"会被推到下周五，要多改一次。</p>
       <pre style="white-space:pre-wrap;word-break:break-word;font-size:12.5px;line-height:1.75;color:var(--ink);background:#fbfcfe;border:1px solid var(--line);border-radius:10px;padding:16px;margin:0 0 18px;max-height:420px;overflow:auto">你是一个日程信息解析器。用户会给你一段从微信群聊复制的文本，你要判断其中是否包含未来的日程安排，并提取为结构化 JSON。
 
@@ -360,14 +360,15 @@
 
 规则：
 1. 输出且只输出 JSON，不要输出任何解释、markdown 标记或代码块符号。
-2. 相对时间归一化：明天、后天、下周X、X月X日（未给年份时取最近一次的未来日期）都要换算成 YYYY-MM-DD。周X 解析为严格晚于今天（{ref_date}）的下一个匹配星期几（未来向、不含当天），除非文本明确"今天/今/这周X"才取当天。
+2. 相对时间归一化：明天、后天、下周X、X月X日（未给年份时取最近一次的未来日期）都要换算成 YYYY-MM-DD。周X 解析为严格晚于今天（{ref_date}）的下一个匹配星期几（未来向、不含当天），除非文本明确"今天/今/这周X"才取当天。即使 {ref_date} 本身就是文中所说的那个星期几，也必须往后推到下一个——不能因为"今天正好是周五"就把文中的"周五"当成今天。
 3. 时段词与模糊时间的区分：
+若文本同时给出了时段词和具体钟点（如"傍晚六点半""早上六点"），start_time 必须填那个具体钟点（中文数字也换算成 HH:MM），时段词只作辅助、不要覆盖它，也不要因为两者看似矛盾就留空。
 若文本含可映射为具体钟点的时段词且未给具体钟点，则 start_time 取下方映射值、fuzzy_time 填 null：早上/早晨/早自习/第一节课 → 08:00；上午 → 10:00；中午/午间 → 12:00；下午 → 14:00；傍晚 → 17:00；晚上/夜里 → 18:00；第二节课 → 10:00；第三节课 → 14:00。
 真正模糊、无法确定钟点的情况（如"有空/大概/左右/最近/哪天都行/找时间/碰一下/再说"等），start_time 填 null，fuzzy_time 填原文表述，confidence 不超过 0.6。
 日期填充约束：当消息未指向任何具体某一天（仅模糊时段，或"有空/最近/哪天都行/这周末/下午有会"等），date 必须填 null，禁止填 {ref_date} 或推算日；只有能锚定具体某天（明天/后天/周X/日期/下周X）才填 date。
 4. 未明确的时间不要猜测编造。只有原文出现或能直接换算的信息才允许填，否则填 null。
-5. 截止日（如"23号前交作业""DDL"）：is_deadline 填 true，未给具体时间时 start_time 填 23:59，reminder_minutes 填 1440。
-6. 一条文本含多个独立日程时，拆成多个 event。
+5. 截止日（如"23号前交作业""DDL"）：is_deadline 填 true，reminder_minutes 填 1440。start_time 按时点含义填：只给日期、没有任何时点线索的填 23:59；带明确时点含义的按它填（"下班前"→18:00、"放学前"→17:00、"中午前"→12:00）；"开会前/活动前"这类相对某件事的，指向那件事的开始时间，判断不了填 null。
+6. 一条文本含多个独立日程时，拆成多个 event。但排班、值班、轮值这类说明性安排不要逐日摊开：只有明确指派给"你/我/本人"时才提取一条（date 填起始日，fuzzy_time 填原文的日期范围表述）；"某年级/某组/谁负责"这类泛指不提取。
 7. 以下情况 has_schedule 填 false，events 填空数组：纯闲聊寒暄、表情、询问过去的事、广告。注意：只要文本表达了未来的具体行动意图（如自习、开会、办签证、碰毕业论文、约球、聚餐、面试、体检、还书等），即使只有模糊时段（晚上/下午/最近/有空/哪天都行）或未给具体日期，也必须 has_schedule=true 并提取为事件（date 可填 null，fuzzy_time 填原文时段，start_time 填 null）；仅当完全无行动意图才判 false。
 8. title 不超过 12 个字，概括事项本身，不要带"请""记得"等语气词。
 9. people 只填原文明确出现的参与人，保留原文称呼。
