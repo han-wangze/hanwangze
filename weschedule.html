@@ -355,18 +355,18 @@
       <div class="sec-head">
         <div class="k">Tech · 解析质量</div>
         <h2>先解决"怎么知道改好了"</h2>
-        <p>第一版提示词跑完，整条消息全对率 77.9%，15 条 badcase 里有 9 条出在"明天""下周""傍晚"这类时间表述上。改一版提示词到底是变好还是变坏，光翻几条语料判断不了：有的从错变对，有的从对变错。所以先造 100 条语料覆盖七类消息形态，按 8:2 固定切分、种子写死，每改一版重跑全量。</p>
+        <p>第一版提示词跑完，整条消息全对率 77.9%，15 条 badcase 里有 9 条出在"明天""下周""傍晚"这类时间表述上。改一版提示词到底是变好还是变坏，光翻几条语料判断不了：有的从错变对，有的从对变错。所以先造 112 条语料覆盖八类消息形态，按 8:2 固定切分、种子写死，每改一版重跑全量（另有 12 条真实课程群聊作 heldout 冻结集、不参与切分）。</p>
         <p>到第三版 95.6%（dev 65/68），test 是 89.7%（26/29）；第四版 97.1%（dev 66/68）、test 96.6%（28/29）。判断一版提示词留不留只看这一个数：v1.1 那版 has_schedule 的 F1 从 99.2 掉到 97.0，可同期的整条全对率在涨——单项指标会互相打架，需要一个能一次结算的终值。剩下的 badcase 只有 3 条、且全是标题写法不同（"聚餐"对"一起吃饭"、"上课"对"第一节课换教室"），日期时间全对；把同义词算上 dev 是 100%，但那层口径是我自己定的，不拿来当成绩。</p>
-        <p>同一份 prompt 隔两个月跑了四次，dev 是 88.2%、91.2%、95.6%、97.1%。前两次差 2 条、没有一条变差，这是 <code>temperature=0</code> 也不逐字可复现的证据；第三次的 +3 条来自修正标注（原标注给"周二小组答辩""后天体检"这类原文没时间的日程填了钟点，模型没编造反而被判错），<b>不是模型变好</b>；第四版的 +1 条来自四条定向修改（明确钟点优先于时段词、"周X"即使等于今天也往后推、排班不逐日摊开、"下班前"按 18:00），每条都先单独复跑 3 次确认稳定。合起来说：<b>dev 68 条的分辨率约 ±2 条（±3pp）</b>，所以只差 1 条时不能声称变好——能判断改动有效，靠的是对单个失败项的复跑，不是看总数。</p>
+        <p>同一份 prompt 隔两个月跑了五次，dev 是 88.2%、91.2%、95.6%、97.1%（v1.4 与 v1.3 持平）。前两次差 2 条、没有一条变差，这是 <code>temperature=0</code> 也不逐字可复现的证据；第三次的 +3 条来自修正标注（原标注给"周二小组答辩""后天体检"这类原文没时间的日程填了钟点，模型没编造反而被判错），<b>不是模型变好</b>；第四版的 +1 条来自四条定向修改（明确钟点优先于时段词、"周X"即使等于今天也往后推、排班不逐日摊开、"下班前"按 18:00），每条都先单独复跑 3 次确认稳定。合起来说：<b>dev 68 条的分辨率约 ±2 条（±3pp）</b>，所以只差 1 条时不能声称变好——能判断改动有效，靠的是对单个失败项的复跑，不是看总数。第四版之后又拿 12 条真实课程群聊做了 heldout 冻结验证集，发现唯一稳定缺口是「本周内→周末截止」date 留空；v1.4 给规则 5 补了相对周期子规则，并用另一批 6 条新语料验证 18/18，heldout 保持冻结不回测（dev/test 与 v1.3 持平）。</p>
       </div>
       <div class="metric-row">
         <div class="metric"><div class="n">97.1%</div><div class="l">整条消息全对率<br>(dev 66/68 · test 96.6%)</div></div>
-        <div class="metric"><div class="n">100</div><div class="l">评测语料<br>(七类消息形态 · 8:2 切分)</div></div>
+        <div class="metric"><div class="n">112</div><div class="l">评测语料<br>(八类形态 · 8:2 切分)</div></div>
         <div class="metric"><div class="n">0%</div><div class="l">闲聊误报率<br>(15 条无日程样本)</div></div>
         <div class="metric"><div class="n">15 → 3</div><div class="l">badcase 条数<br>(dev v1 → 最新重跑)</div></div>
       </div>
       <p class="l" style="margin-top:22px;color:var(--muted);font-size:13px">
-        可复现资产：<code>eval/run_eval.py</code> · <code>eval/corpus/sample.jsonl</code>（切分由写死的 seed 生成，日志与 badcase 跑完落在本地 <code>eval/reports/</code>，不入库）。线上云函数与评测脚本各存一份提示词，两边逐字一致（各 2172 字符），改时必须同时改两处。逐版指标、badcase 明细，以及这套评测测不到什么，见 <a href="weschedule-eval.html" style="color:var(--primary);font-weight:700">解析质量评测报告 →</a>
+        可复现资产：<code>eval/run_eval.py</code> · <code>eval/corpus/sample.jsonl</code>（切分由写死的 seed 生成，日志与 badcase 跑完落在本地 <code>eval/reports/</code>，不入库）。线上云函数与评测脚本各存一份提示词，两边逐字一致（各 2387 字符），改时必须同时改两处。逐版指标、badcase 明细，以及这套评测测不到什么，见 <a href="weschedule-eval.html" style="color:var(--primary);font-weight:700">解析质量评测报告 →</a>
       </p>
     </div>
   </section>
