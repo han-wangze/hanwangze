@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>WeSchedule · 韩王泽</title>
-<meta name="description" content="WeSchedule：微信小程序 MVP，把微信群聊消息一键变成手机日程，含冲突检测与预备提醒。87 人调研、87.4% 接受度；112 条语料测得 dev 集整条消息全对率 97.1%。" />
+<meta name="description" content="WeSchedule：微信小程序，复制群聊消息自动解析为日程，含冲突检测与预备提醒。已完成真机测试，体验版小范围试用、尚未正式发布。单校问卷（n=87）中 87.4% 表示愿意尝试；dev 评测集整条消息全对率 97.1%（66/68，离线回归）。" />
 <meta name="author" content="韩王泽" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
 <meta property="og:locale" content="zh_CN" />
 <meta property="og:title" content="WeSchedule · 把群聊消息变成日程的微信小程序" />
-<meta property="og:description" content="复制群消息即可解析为日程，含冲突检测与预备提醒。87 人调研、87.4% 接受度；112 条语料测得整条消息全对率 97.1%，附实操 Demo 视频。" />
+<meta property="og:description" content="复制群聊消息自动解析为日程，含冲突检测与预备提醒。体验版小范围试用，尚未正式发布。单校问卷（n=87）中 87.4% 表示愿意尝试；dev 集整条消息全对率 97.1%（离线回归），附实操 Demo 视频。" />
 <meta property="og:url" content="https://han-wangze.github.io/hanwangze/weschedule.html" />
 <meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <meta property="og:image:width" content="1200" />
@@ -23,7 +23,7 @@
 <meta property="og:image:alt" content="WeSchedule 项目详情 · 韩王泽" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="WeSchedule · 把群聊消息变成日程的微信小程序" />
-<meta name="twitter:description" content="复制群消息即可解析为日程，含冲突检测与预备提醒。87 人调研、87.4% 接受度；112 条语料测得 dev 集整条消息全对率 97.1%。" />
+<meta name="twitter:description" content="复制群聊消息自动解析为日程，含冲突检测与预备提醒。体验版小范围试用，尚未正式发布。dev 评测集整条消息全对率 97.1%（66/68，离线回归）。" />
 <meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <style>
   :root{
@@ -200,12 +200,13 @@
 <header class="hero">
   <div class="wrap">
     <h1>WeSchedule</h1>
-    <p class="sub">微信小程序 MVP：把微信群聊消息变成可管理的日程。复制群消息 → 自动解析 → 确认保存 → 订阅消息提醒。在此之上做了软/硬分级的<b>冲突检测</b>、DDL 区间识别与<b>预备提醒</b>，回答"日程装不装得下"。87 人调研、87.4% 接受度；解析质量用 112 条语料测，dev 集整条消息全对率 97.1%（66/68）。</p>
+    <p class="sub">微信小程序：复制群聊消息后自动解析成日程，确认保存后通过微信订阅消息提醒。在此之上做了软/硬分级的<b>冲突检测</b>、截止日当天软提示与<b>预备提醒</b>；周负载、截止日堆积预警属于规划中功能。</p>
     <div class="badges">
+      <span class="badge"><b>体验版</b> 小范围试用 · 尚未正式发布</span>
       <span class="badge"><b>微信小程序</b></span>
       <span class="badge"><b>云开发</b></span>
       <span class="badge"><b>DeepSeek</b></span>
-      <span class="badge"><b>97.1%</b> 整条消息全对率</span>
+      <span class="badge"><b>97.1%</b> dev 集整条全对（离线回归）</span>
       <span class="badge"><b>冲突检测</b> 软硬分级</span>
       <span class="badge"><b>预备提醒</b> 提前一晚</span>
     </div>
@@ -215,19 +216,19 @@
     </div>
     <div class="toc">
       <b>本页内容</b>
-      <a href="#why">痛点与市场</a>
-      <a href="#arch">方案架构</a>
-      <a href="#smart">冲突检测与提醒策略</a>
+      <a href="#why">项目背景</a>
+      <a href="#arch">实现方式</a>
+      <a href="#smart">冲突检测与提醒</a>
       <a href="#tech">解析质量</a>
-      <a href="#position">竞争定位</a>
-      <a href="#demo">Demo 实机演示</a>
-      <a href="#devlog">排障记录</a>
+      <a href="#position">定位假设与风险</a>
+      <a href="#demo">实机演示</a>
+      <a href="#devlog">实现中的问题与修复</a>
     </div>
     <div class="toc" style="border-top:none;padding-top:0;margin-top:8px">
       <b>这个项目的另外三页</b>
       <a href="report.html">需求从哪来 · 调研摘要</a>
       <a href="weschedule-eval.html">测得怎么样 · 评测报告</a>
-      <a href="competition.html">凭什么是这个方向 · 竞品分析</a>
+      <a href="competition.html">定位假设与风险 · 竞品分析（补充阅读）</a>
     </div>
   </div>
 </header>
@@ -235,7 +236,7 @@
   <section id="why">
     <div class="wrap">
       <div class="sec-head">
-        <div class="k">Why · 痛点与市场</div>
+        <div class="k">项目背景</div>
         <h2>群消息太多，日程总漏</h2>
         <p>调研对象为 87 名大学生，问卷覆盖痛点、现有工具的使用情况与概念接受度。</p>
       </div>
@@ -253,7 +254,7 @@
         <div class="card stat">
           <div class="n">87.4%</div>
           <div class="l">对"微信消息转日程"表示愿意使用</div>
-          <div class="d">市场验证</div>
+          <div class="d">概念接受度（n=87，单校问卷）</div>
         </div>
       </div>
       <div class="why-foot">
@@ -265,9 +266,9 @@
   <section id="arch" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
     <div class="wrap">
       <div class="sec-head">
-        <div class="k">How · 方案架构</div>
+        <div class="k">实现方式</div>
         <h2>一条自动化的解析链路</h2>
-        <p>微信不支持把消息直接转发进小程序，入口只能是"复制 → 打开小程序 → 读取剪贴板"；云函数调用 DeepSeek 完成结构化解析，落库后通过微信订阅消息实现到点提醒。</p>
+        <p>微信不支持把消息直接转发进小程序，入口只能是"复制 → 打开小程序 → 用户点击授权后读取剪贴板"；云函数调用 DeepSeek 完成结构化解析，落库后通过微信订阅消息实现到点提醒。</p>
       </div>
       <div class="arch">
         <svg viewBox="0 0 920 250" role="img" aria-label="WeSchedule 架构流程图">
@@ -276,8 +277,8 @@
             <text class="flow-label" x="85" y="120" text-anchor="middle">复制群消息</text>
             <text class="flow-sub" x="85" y="140" text-anchor="middle">用户操作</text>
             <rect class="flow-step" x="200" y="95" width="150" height="60" rx="12"/>
-            <text class="flow-label" x="275" y="120" text-anchor="middle">读剪贴板</text>
-            <text class="flow-sub" x="275" y="140" text-anchor="middle">小程序 onShow</text>
+            <text class="flow-label" x="275" y="120" text-anchor="middle">读取剪贴板</text>
+            <text class="flow-sub" x="275" y="140" text-anchor="middle">用户点击后授权读取</text>
             <rect class="flow-step t" x="390" y="95" width="150" height="60" rx="12"/>
             <text class="flow-label" x="465" y="120" text-anchor="middle">parse 云函数</text>
             <text class="flow-sub" x="465" y="140" text-anchor="middle">调 DeepSeek</text>
@@ -306,8 +307,8 @@
   <section id="smart">
     <div class="wrap">
       <div class="sec-head">
-        <div class="k">Smart · 冲突检测与提醒策略</div>
-        <h2>把调研数据翻译成设计决策</h2>
+        <div class="k">冲突检测与提醒</div>
+        <h2>调研结果与功能设计</h2>
       </div>
 
       <article class="dec">
@@ -322,7 +323,7 @@
           </ul>
           <p>分级只看 <code>is_deadline</code> 这一个已经稳定的字段，不新增 AI 判断，避免"类型判错 → 冲突等级被放大"。</p>
           <div class="m">验收口径</div>
-          <p>分级走规则实现，只看 <code>is_deadline</code> 一个字段：零延迟、不会幻觉。没有做过量化测试，已知边界是语义级冲突（"午饭撞午饭"）不识别。</p>
+          <p>分级走规则实现，只看 <code>is_deadline</code> 一个字段，不经过模型。没有做过量化测试，已知边界是语义级冲突（"午饭撞午饭"）不识别。</p>
         </div>
       </article>
 
@@ -332,7 +333,7 @@
         <p class="lead">硬冲突给 1–2 个可一键采纳的备选时段（"改为周三 16:00？"点一下即改），默认不动用户原来的安排。</p>
         <div class="dec-body">
           <div class="m">备选时段怎么来</div>
-          <p>按事件时长在当天/次日 8:00–22:00 扫描日历空隙，用规则算而不是让模型提案：零延迟，也不会出现幻觉。</p>
+          <p>按事件时长在当天/次日 8:00–22:00 扫描日历空隙，用规则计算而不是让模型提案。</p>
         </div>
       </article>
 
@@ -353,8 +354,8 @@
   <section id="tech">
     <div class="wrap">
       <div class="sec-head">
-        <div class="k">Tech · 解析质量</div>
-        <h2>先解决"怎么知道改好了"</h2>
+        <div class="k">解析质量</div>
+        <h2>评测方法与结果</h2>
         <p>第一版提示词跑完，整条消息全对率 77.9%，15 条 badcase 里有 9 条出在"明天""下周""傍晚"这类时间表述上。改一版提示词到底是变好还是变坏，光翻几条语料判断不了：有的从错变对，有的从对变错。所以先造 112 条语料覆盖八类消息形态，按 8:2 固定切分、种子写死，每改一版重跑全量（另有 12 条真实课程群聊作 heldout 冻结集、不参与切分）。</p>
         <p>到第三版 95.6%（dev 65/68），test 是 89.7%（26/29）；第四版 97.1%（dev 66/68）、test 96.6%（28/29）。判断一版提示词留不留只看这一个数：v1.1 那版 has_schedule 的 F1 从 99.2 掉到 97.0，可同期的整条全对率在涨——单项指标会互相打架，需要一个能一次结算的终值。剩下的 badcase 只有 3 条、且全是标题写法不同（"聚餐"对"一起吃饭"、"上课"对"第一节课换教室"），日期时间全对；把同义词算上 dev 是 100%，但那层口径是我自己定的，不拿来当成绩。</p>
         <p>同一份 prompt 隔两个月跑了五次，dev 是 88.2%、91.2%、95.6%、97.1%（v1.4 与 v1.3 持平）。前两次差 2 条、没有一条变差，这是 <code>temperature=0</code> 也不逐字可复现的证据；第三次的 +3 条来自修正标注（原标注给"周二小组答辩""后天体检"这类原文没时间的日程填了钟点，模型没编造反而被判错），<b>不是模型变好</b>；第四版的 +1 条来自四条定向修改（明确钟点优先于时段词、"周X"即使等于今天也往后推、排班不逐日摊开、"下班前"按 18:00），每条都先单独复跑 3 次确认稳定。合起来说：<b>dev 68 条的分辨率约 ±2 条（±3pp）</b>，所以只差 1 条时不能声称变好——能判断改动有效，靠的是对单个失败项的复跑，不是看总数。第四版之后又拿 12 条真实课程群聊做了 heldout 冻结验证集，发现唯一稳定缺口是「本周内→周末截止」date 留空；v1.4 给规则 5 补了相对周期子规则，并用另一批 6 条新语料验证 18/18，heldout 保持冻结不回测（dev/test 与 v1.3 持平）。</p>
@@ -374,14 +375,14 @@
   <section id="position" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
     <div class="wrap">
       <div class="sec-head">
-        <div class="k">Position · 竞争定位</div>
-        <h2>不做"提醒生成"，做"日程治理"</h2>
-        <p>微信生态内已有小微（官方 AI 助手）、元宝、滴答清单等"消息 → 提醒"工具，但它们不维护可管理的日程库，也不回答"日程是否冲突、DDL 缓冲是否被透支"，而这恰是调研中的第一需求（70.1%）。本项目把价值落在治理层：解析只是入口。</p>
+        <div class="k">定位假设与风险</div>
+        <h2>与现有提醒工具的差异</h2>
+        <p>微信生态内已有小微（官方 AI 助手）、元宝、滴答清单等"消息 → 提醒"工具。与它们相比，WeSchedule 维护一份可管理的日程库，并在此基础上做同日冲突检测与提醒——冲突检测在调研中以 70.1% 排在智能功能偏好第一。</p>
       </div>
       <div class="card feat">
-        <h3>两个维度看差异：本项目选择"有日程库 × 容量视角"</h3>
-        <p>小微 / 元宝 = 提醒生成（无日程库、只处理单次时刻）；滴答清单 = 任务清单（有库、无冲突治理）；WeSchedule = 日程治理（冲突检测 + DDL 区间 + 容量视角）。若官方能力日后覆盖"消息转日程"，入口层会被稀释，治理层依赖的日程库积累是留下的部分。</p>
-        <p style="margin-top:10px"><a href="competition.html" style="color:var(--primary);font-weight:700">查看完整竞争格局与防御性分析 →</a></p>
+        <h3>按"有无日程库 × 是否做冲突检测"看差异</h3>
+        <p>小微 / 元宝只处理单次提醒，不维护日程库；滴答清单有任务清单，但没有基于日程库的冲突检测；WeSchedule 维护日程库，做同日冲突检测、截止日当天软提示与预备提醒。周负载、截止日堆积预警属于规划中功能。若微信官方能力日后覆盖"消息转日程"，解析入口会被稀释——这是本项目的主要定位风险，展开见竞品分析。</p>
+        <p style="margin-top:10px"><a href="competition.html" style="color:var(--primary);font-weight:700">查看竞争格局与定位假设（补充阅读） →</a></p>
       </div>
     </div>
   </section>
@@ -389,8 +390,8 @@
   <section id="demo" style="background:#fff;border-top:1px solid var(--line)">
     <div class="wrap">
       <div class="sec-head">
-        <div class="k">Demo · 实机演示</div>
-        <h2>一段录屏看懂它怎么用</h2>
+        <div class="k">实机演示</div>
+        <h2>实机录屏与页面截图</h2>
         <p>录屏展示"复制群消息 → 自动解析 → 冲突检测提示 → 确认保存 → 到点提醒"的完整链路。</p>
       </div>
       <a class="video-box" href="https://www.bilibili.com/video/BV1VDYR6YE6m/" target="_blank" rel="noopener">
@@ -419,9 +420,9 @@
   <section id="devlog" style="background:#fff;border-top:1px solid var(--line)">
     <div class="wrap">
       <div class="sec-head">
-        <div class="k">Dev Log · 排障记录</div>
+        <div class="k">实现中的问题与修复</div>
         <h2>三个故障，和怎么定位的</h2>
-        <p>小程序与云开发部署由我独立完成（编码过程借助 AI 辅助）；这三处故障的定位与修改由我完成。</p>
+        <p>小程序与云开发由本人部署（编码过程借助 AI 辅助）；这三处故障的定位与修改由本人完成。</p>
       </div>
       <ul class="log">
         <li><b>提醒锚点算错一天</b>：云函数运行在 UTC，北京时间 00:00–08:00 之间"今天"会被算成前一天，日程锚点落到过去，提醒不会触发。<span class="meta">改法：显式 +8 小时后再取日期；靠日志 scanned=12 / sent=0 反查到这一步</span></li>
