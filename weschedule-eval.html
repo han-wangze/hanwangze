@@ -144,7 +144,7 @@
 <header class="hero">
   <div class="wrap">
     <h1>解析质量评测报告</h1>
-    <p class="sub">这是 WeSchedule 解析链路的回归测试：112 条群聊语料、固定切分、六项指标，用来判断一次提示词改动之后，这次是变好还是变坏。</p>
+    <p class="sub">这是 WeSchedule 解析链路的回归测试：112 条群聊语料、固定切分、六项指标，用来判断一次提示词改动之后，这次是变好还是变坏。test 集曾参与提示词迭代，不作为独立验收结果（见「评测适用范围」一节）。</p>
     <div class="badges">
       <span class="badge"><b>112</b> 条语料 · 8 类</span>
       <span class="badge"><b>8:2</b> 固定切分</span>
@@ -267,7 +267,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="k">Badcase · 失败面</div>
-      <h2>改完提示词，错的地方换了位置</h2>
+      <h2>各版本的主要错误类型</h2>
       <p>逐版把 badcase 落盘对比，失败面发生了方向性迁移，数量也在下降。</p>
     </div>
     <table class="tbl">
@@ -293,7 +293,7 @@
       <b>剩下的错是什么性质</b>：dev 剩 2 条、test 剩 1 条，<b>全部是同一个问题——标题写法不同</b>（B006"上课"对"第一节课换教室"、D009"上课"对"第二节课改实验室"、H007"上课"对"市场营销课"），日期与时间全对。<b>也就是说：v1.3 之后，这套评测里已经没有"解析错"，剩下的都是"配对规则认不出同义改写"。</b>这也意味着指标还能往上走的唯一途径是调整配对口径（放宽同义词表），而那是我自己定义的尺子——所以数字停在这里是合理的。
     </p>
     <p class="note" style="margin-top:12px">
-      <b>为什么给 D007 单独复跑了 3 次</b>：它是这批里唯一看起来像"规则没吃透"的失败（规则 2 要求"周X"取下一个周五）。但同一 prompt 连跑 3 次，三次都正确给出 2026-07-24——说明它是波动不是稳定错误，和"同一 prompt 两次运行差 2 条"是同一现象。<b>所以没有为它改提示词</b>：加 few-shot 例子会影响其余 12 条含"周X"的语料，收益不明确。<b>这条经验值得记：单条 badcase 先跑 3 次看稳定性，成本 3 次调用，能避免一次错误的 prompt 改动。</b>
+      <b>为什么给 D007 单独复跑了 3 次</b>：它是这批里唯一看起来像"规则没吃透"的失败（规则 2 要求"周X"取下一个周五）。但同一 prompt 连跑 3 次，三次都正确给出 2026-07-24——说明它是波动不是稳定错误，和"同一 prompt 两次运行差 2 条"是同一现象。<b>所以没有为它改提示词</b>：加 few-shot 例子会影响其余 12 条含"周X"的语料，收益不明确——单条 badcase 先复跑 3 次看稳定性，能避免一次错误的提示词改动。</b>
     </p>
   </div>
 </section>
@@ -302,7 +302,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="k">Limits · 边界</div>
-      <h2>这套评测不能证明什么</h2>
+      <h2>评测适用范围</h2>
     </div>
     <table class="tbl">
       <thead><tr><th style="width:30%">边界</th><th>说明</th></tr></thead>
@@ -338,9 +338,11 @@
     <table class="tbl">
       <thead><tr><th style="width:30%">项目</th><th>处理方式</th></tr></thead>
       <tbody>
-        <tr><td>用户的原始消息文本</td><td><b>不保存</b>。日志里只留长度 <code>input_len</code> 与哈希 <code>input_hash</code>，可用于排查与去重，但不能还原原文。</td></tr>
+        <tr><td>用户的原始消息文本</td><td><b>不保存</b>。日志只记文本长度 <code>input_len</code>，不留原文，也不留任何能用于反查原文的标识。</td></tr>
         <tr><td>解析结果 JSON</td><td>会落库（<code>output_json</code>），用于回查解析质量。其中包含从消息里抽取的标题、时间、地点等字段。</td></tr>
-        <tr><td>其他日志字段</td><td><code>request_id</code> / <code>prompt_version</code> / <code>model</code> / <code>latency_ms</code> / <code>success</code> / <code>error_code</code> / <code>created_at</code>。</td></tr>
+        <tr><td>其他日志字段</td><td>账号标识（<code>_openid</code>，按人限流用）/ <code>request_id</code> / <code>prompt_version</code> / <code>model</code> / <code>latency_ms</code> / <code>success</code> / <code>error_code</code> / <code>created_at</code>。</td></tr>
+        <tr><td>第三方模型传输</td><td>解析时，群聊文本会<b>发送给 DeepSeek API（第三方模型服务）</b>，请避免粘贴不适合发给第三方的内容。</td></tr>
+        <tr><td>错误反馈</td><td>只有用户主动点「识别有误」并确认后，该条<b>原文才会连同账号标识存入反馈库</b>，用于修正解析问题，不对外提供。</td></tr>
         <tr><td>模型 API 密钥</td><td>只存在于本地 <code>.env</code> 与云函数环境变量，<b>不入仓库、不进对话</b>。仓库里只有 <code>.env.example</code>。</td></tr>
         <tr><td>剪贴板</td><td>读取由微信隐私授权控制，用户可拒绝；拒绝时仅该功能不可用，其余功能不受影响。</td></tr>
       </tbody>
@@ -353,55 +355,12 @@
     <div class="sec-head">
       <div class="k">Assets · 可复现资产</div>
       <h2>想自己跑一遍</h2>
-      <p>评测脚本与语料都在仓库里。设置 <code>DEEPSEEK_API_KEY</code> 后执行 <code>python eval/run_eval.py --dataset dev</code> 即可复现 v1.2 那一列；换成 <code>--dataset test</code> 复现 test 列。日志与 badcase 会重新写进本地 <code>eval/reports/</code>。</p>
+      <p>评测脚本与语料都在仓库里。设置 <code>DEEPSEEK_API_KEY</code> 后执行 <code>python eval/run_eval.py --dataset dev</code> 即可复现当前版本（v1.4）在 dev 集的结果（97.1%）；换成 <code>--dataset test</code> 复现 test 列（96.6%）。日志与 badcase 会重新写进本地 <code>eval/reports/</code>。历史版本（v1 / v1.1 / v1.2）的运行说明与口径沿革见 <code>docs/eval-method.md</code>。</p>
     </div>
     <details style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:2px 20px;box-shadow:var(--shadow);margin-bottom:18px">
-      <summary style="cursor:pointer;padding:16px 0;font-weight:700;font-size:15px;color:var(--primary);outline:none">展开提示词全文（v1.4 · 2387 字符）</summary>
+      <summary style="cursor:pointer;padding:16px 0;font-weight:700;font-size:15px;color:var(--primary);outline:none">提示词设计取舍与全文位置（v1.4）</summary>
       <p class="note" style="margin:6px 0 10px"><b>规则 2 的取舍——「周X」为什么取下一个而不是当天</b>：模型只拿到日期、拿不到消息的发送时刻，所以"周五下午2点"在周五当天被说出来时，它分不清指的是今天还是下周五。产品侧的选择是<b>宁可往后挪一周，不可往前放一天</b>——解析出已经过去的时间，提醒会直接判 MISSED，用户拿到的是一条永远不会响的废日程；往后挪一周，用户在确认页改一次日期就恢复了。两个方向的代价不对称，选可修复的那一侧。代价也如实写在这：周五早上说"周五下午开会"会被推到下周五，要多改一次。</p>
-      <pre style="white-space:pre-wrap;word-break:break-word;font-size:12.5px;line-height:1.75;color:var(--ink);background:#fbfcfe;border:1px solid var(--line);border-radius:10px;padding:16px;margin:0 0 18px;max-height:420px;overflow:auto">你是一个日程信息解析器。用户会给你一段从微信群聊复制的文本，你要判断其中是否包含未来的日程安排，并提取为结构化 JSON。
-
-今天的日期是 {ref_date}，星期{ref_weekday}。所有相对时间都必须以这个日期为锚点换算成绝对日期。
-
-规则：
-1. 输出且只输出 JSON，不要输出任何解释、markdown 标记或代码块符号。
-2. 相对时间归一化：明天、后天、下周X、X月X日（未给年份时取最近一次的未来日期）都要换算成 YYYY-MM-DD。周X 解析为严格晚于今天（{ref_date}）的下一个匹配星期几（未来向、不含当天），除非文本明确"今天/今/这周X"才取当天。即使 {ref_date} 本身就是文中所说的那个星期几，也必须往后推到下一个——不能因为"今天正好是周五"就把文中的"周五"当成今天。
-3. 时段词与模糊时间的区分：
-若文本同时给出了时段词和具体钟点（如"傍晚六点半""早上六点"），start_time 必须填那个具体钟点（中文数字也换算成 HH:MM），时段词只作辅助、不要覆盖它，也不要因为两者看似矛盾就留空。
-若文本含可映射为具体钟点的时段词且未给具体钟点，则 start_time 取下方映射值、fuzzy_time 填 null：早上/早晨/早自习/第一节课 → 08:00；上午 → 10:00；中午/午间 → 12:00；下午 → 14:00；傍晚 → 17:00；晚上/夜里 → 18:00；第二节课 → 10:00；第三节课 → 14:00。
-真正模糊、无法确定钟点的情况（如"有空/大概/左右/最近/哪天都行/找时间/碰一下/再说"等），start_time 填 null，fuzzy_time 填原文表述，confidence 不超过 0.6。
-日期填充约束：当消息未指向任何具体某一天（仅模糊时段，或"有空/最近/哪天都行/这周末/下午有会"等），date 必须填 null，禁止填 {ref_date} 或推算日；只有能锚定具体某天（明天/后天/周X/日期/下周X）才填 date。
-4. 未明确的时间不要猜测编造。只有原文出现或能直接换算的信息才允许填，否则填 null。
-5. 截止日（如"23号前交作业""DDL"）：is_deadline 填 true，reminder_minutes 填 1440。start_time 按时点含义填：只给日期、没有任何时点线索的填 23:59；带明确时点含义的按它填（"下班前"→18:00、"放学前"→17:00、"中午前"→12:00）；"开会前/活动前"这类相对某件事的，指向那件事的开始时间，判断不了填 null。
-若截止日用【相对周期】表达（"本周内""这周""本周""本月内""这个月""本季度内"等），date 必须基于 {ref_date} 推算出该周期的最末一天、不能留空：周以【周日】为周期末尾（本周内 → 本周日 23:59）；月 → 本月最后一天 23:59；季度 → 本季度最后一天 23:59；若 {ref_date} 已落在该周期末日，则取当天。start_time 填 23:59，is_deadline 填 true。
-6. 一条文本含多个独立日程时，拆成多个 event。但排班、值班、轮值这类说明性安排不要逐日摊开：只有明确指派给"你/我/本人"时才提取一条（date 填起始日，fuzzy_time 填原文的日期范围表述）；"某年级/某组/谁负责"这类泛指不提取。
-7. 以下情况 has_schedule 填 false，events 填空数组：纯闲聊寒暄、表情、询问过去的事、广告。注意：只要文本表达了未来的具体行动意图（如自习、开会、办签证、碰毕业论文、约球、聚餐、面试、体检、还书等），即使只有模糊时段（晚上/下午/最近/有空/哪天都行）或未给具体日期，也必须 has_schedule=true 并提取为事件（date 可填 null，fuzzy_time 填原文时段，start_time 填 null）；仅当完全无行动意图才判 false。
-8. title 不超过 12 个字，概括事项本身，不要带"请""记得"等语气词。
-9. people 只填原文明确出现的参与人，保留原文称呼。
-10. location 保留原文最具体的表述，不要补全或推测。
-11. confidence 取值 0 到 1，反映你对这条解析整体的把握。字段缺失越多分值越低。
-12. 默认提醒：会议和活动 reminder_minutes 填 30，截止日填 1440。
-
-输出 JSON 结构：
-{
-  "has_schedule": true 或 false,
-  "events": [
-    {
-      "title": "字符串",
-      "date": "YYYY-MM-DD",
-      "start_time": "HH:MM 或 null",
-      "end_time": "HH:MM 或 null",
-      "fuzzy_time": "字符串或 null",
-      "is_deadline": true 或 false,
-      "location": "字符串或 null",
-      "people": ["字符串"],
-      "reminder_minutes": 数字,
-      "confidence": 0 到 1 的数字,
-      "raw_snippet": "原文中最相关的一小段"
-    }
-  ],
-  "reject_reason": "has_schedule 为 false 时的一句话原因，否则为 null"
-}</pre>
-    </details>
+      <p class="note" style="margin:6px 0 10px"><b>提示词全文不在本页</b>：仓库 <code>docs/eval-method.md</code> 收录提示词全文与逐条设计意图；<code>eval/run_eval.py</code> 与线上云函数 <code>cloudfunctions/parse/index.js</code> 各存一份逐字一致的副本（各 2387 字符），改提示词必须两处同步。</p>
     <table class="tbl">
       <thead><tr><th style="width:42%">文件</th><th>内容</th></tr></thead>
       <tbody>
