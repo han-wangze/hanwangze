@@ -200,10 +200,8 @@
     </div>
     <div class="tagline" aria-label="项目涉及方向">
       <span class="t"><b>手游市场研究</b></span>
-      <span class="t">问卷与概念测试</span>
       <span class="t">Python 数据分析</span>
-      <span class="t">统计与预测建模</span>
-      <span class="t">微信小程序原型</span>
+      <span class="t">问卷与概念测试</span>
     </div>
     <div class="edu">
       <div class="edu-item">
@@ -227,6 +225,62 @@
     </div>
   </div>
 </header>
+
+<section id="featured">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">Selected Work · 精选作品</div>
+      <h2>精选作品</h2>
+    </div>
+    <div class="rcards">
+      <article class="rcard">
+        <div class="rt">搜狐畅游 · 手游市场研究与战略分析</div>
+        <div class="tags">
+          <span class="tag">实习</span>
+          <span class="tag">Sensor Tower</span>
+          <span class="tag">Python</span>
+        </div>
+        <div class="rd">围绕「哪些赛道值得进入」，完成美国手游品类、题材、中国 MMO 与四国 RPG 研究，并把重复的数据处理固化为 Python 工具。我在实习中负责三个年度报告板块，参与 RPG 专题，完成指标计算与趋势归因。</div>
+        <p class="evidence">4 份年度／专题研究 · 1 期月度监测 · 概念测试与新品扫描</p>
+        <div class="project-links">
+          <a href="experience-cyou.html">查看研究结论与方法</a>
+          <a class="secondary" href="https://github.com/han-wangze/game-structure-analysis-tools" target="_blank" rel="noopener noreferrer">工具源码</a>
+        </div>
+      </article>
+
+      <article class="rcard">
+        <div class="rt">WeSchedule · 群聊消息转日程</div>
+        <div class="tags">
+          <span class="tag">微信小程序原型</span>
+          <span class="tag">DeepSeek API</span>
+          <span class="tag">云开发</span>
+        </div>
+        <div class="rd">微信群消息里的日程容易被漏看。我负责需求调研、MVP 设计、小程序开发和解析质量评测，做出复制群消息后自动解析、冲突提示与订阅提醒的完整流程。</div>
+        <p class="evidence">已完成真机测试，体验版小范围试用，尚未正式发布。</p>
+        <div class="project-links">
+          <a href="weschedule.html">项目说明</a>
+          <a href="https://www.bilibili.com/video/BV1VDYR6YE6m/" target="_blank" rel="noopener noreferrer">32 秒实机演示</a>
+          <a class="secondary" href="https://github.com/han-wangze/weschedule" target="_blank" rel="noopener noreferrer">GitHub 源码</a>
+        </div>
+      </article>
+
+      <article class="rcard">
+        <div class="rt">Steam 早期评论与后续口碑</div>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">统计与预测建模</span>
+        </div>
+        <div class="rd">用首条评论后 30 天的评论特征，预测一款游戏之后会不会出现评价下滑。我采集并清洗了 2,526 款游戏的数据，按首条评论年份切分做时间验证，并搭了在线结果页。</div>
+        <p class="evidence">数据截至 2023-11，未用 2024 年后的游戏做外部验证。</p>
+        <div class="project-links">
+          <a href="https://han-wangze.github.io/steam-review-decline/" target="_blank" rel="noopener noreferrer">在线结果</a>
+          <a class="secondary" href="https://github.com/han-wangze/steam-review-decline" target="_blank" rel="noopener noreferrer">README 与源码</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
 
 <section id="about">
   <div class="wrap">
@@ -258,56 +312,15 @@
 <section id="projects" class="alt">
   <div class="wrap">
     <div class="sec-head">
-      <div class="k">Projects · 项目经历</div>
-      <h2>项目经历</h2>
-    </div>
-
-    <div class="proj-block">
-      <div class="proj-head">
-        <h3>产品原型</h3>
-      </div>
-      <div class="rcards single">
-        <article class="rcard">
-          <div class="rt">WeSchedule · 群聊消息转日程</div>
-          <div class="tags">
-            <span class="tag">微信小程序</span>
-            <span class="tag">DeepSeek API</span>
-            <span class="tag">云开发</span>
-            <span class="tag">体验版</span>
-          </div>
-          <div class="rd">用户复制群聊文本后，小程序提取日程信息；确认和编辑后，可保存到小程序并申请订阅提醒。已实现同日定点事项冲突提示、截止日当天软提示和预备提醒。目前小范围试用，尚未正式发布。<b>我的工作：</b>负责需求调研与 MVP 范围界定，开发小程序端、10 个云函数与云数据库配置，并搭建语料评测集、迭代解析提示词。</div>
-          <p class="evidence">单校问卷（n=87）中，87.4% 表示愿意尝试“消息转日程”；v1.4 在 dev 集通过 66/68 条含日程消息。该离线结果不代表真实用户场景的准确率；test 集曾用于提示词迭代。</p>
-          <div class="project-links">
-            <a href="weschedule.html">项目说明</a>
-            <a href="report.html">需求调研摘要</a>
-            <a href="weschedule-eval.html">评测口径</a>
-            <a href="https://www.bilibili.com/video/BV1VDYR6YE6m/" target="_blank" rel="noopener noreferrer">实机演示</a>
-            <a class="secondary" href="https://github.com/han-wangze/weschedule" target="_blank" rel="noopener noreferrer">GitHub 源码</a>
-          </div>
-        </article>
-      </div>
+      <div class="k">More Projects · 其他项目与工具</div>
+      <h2>其他项目与工具</h2>
     </div>
 
     <div class="proj-block" id="data">
       <div class="proj-head">
         <h3>数据分析与工具</h3>
       </div>
-      <div class="rcards two">
-        <article class="rcard">
-          <div class="rt">Steam 游戏早期评论研究</div>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">scikit-learn</span>
-            <span class="tag">时间切分</span>
-          </div>
-          <div class="rd">分析首条评论后 30 天的评论特征与之后新增评论评价变化的关系。研究标签由项目定义，不等同于 Steam 商店页显示的整体评价。<b>我的工作：</b>采集与清洗 2,526 款游戏的评论数据，构建特征与预测模型，生成在线结果页。</div>
-          <p class="evidence">样本 2,526 款；留出集 AUC 为 0.886，7 折滚动时间验证 AUC 中位数为 0.861。年份按首条评论时间划分；数据截至 2023-11，未用 2024 年后的游戏做外部验证。</p>
-          <div class="project-links">
-            <a href="https://han-wangze.github.io/steam-review-decline/" target="_blank" rel="noopener noreferrer">在线结果</a>
-            <a class="secondary" href="https://github.com/han-wangze/steam-review-decline" target="_blank" rel="noopener noreferrer">README 与源码</a>
-          </div>
-        </article>
-
+      <div class="rcards">
         <article class="rcard">
           <div class="rt">Game Radar · 四国免费榜跟踪</div>
           <div class="tags">
@@ -315,8 +328,8 @@
             <span class="tag">SQLite</span>
             <span class="tag">Apple RSS</span>
           </div>
-          <div class="rd">记录美国、中国、日本和韩国 App Store 免费游戏 Top 100，生成静态日报、周报和 SQL 分析。<b>我的工作：</b>编写定时采集脚本与 SQLite 台账，生成日报、周报页面与分析查询。</div>
-          <p class="evidence">公开页面展示的是 16 个榜日的历史快照。“首次出现”指观察窗内首次进入 Top 100；数据库未随仓库发布，无法在新环境重建这段历史。</p>
+          <div class="rd">记录美国、中国、日本和韩国 App Store 免费游戏 Top 100，生成静态日报、周报和 SQL 分析。我编写了定时采集脚本与 SQLite 台账，并生成日报、周报页面。</div>
+          <p class="evidence">基于 16 个榜日的历史快照；数据口径与复现限制见 README。</p>
           <div class="project-links">
             <a href="https://han-wangze.github.io/game-radar/" target="_blank" rel="noopener noreferrer">在线榜单</a>
             <a class="secondary" href="https://github.com/han-wangze/game-radar" target="_blank" rel="noopener noreferrer">README 与源码</a>
@@ -330,8 +343,8 @@
             <span class="tag">pandas</span>
             <span class="tag">Excel 报表</span>
           </div>
-          <div class="rd">处理 Sensor Tower 榜单导出，生成品类和题材的集中度、新品表现、产品模型及跨年 Top N 榜单分析表。<b>我的工作：</b>为实习中的品类与题材分析搭建这套处理流程和底表输出。</div>
-          <p class="evidence">2025 年美国收入榜三品类 CR5：Real-Time Strategy 88.8%、Card Battler 87.0%、Match Merge 2 79.5%；口径是榜单样本内，不等于全市场。原始数据不随仓库发布。</p>
+          <div class="rd">处理 Sensor Tower 榜单导出，生成品类和题材的集中度、新品表现、产品模型及跨年 Top N 榜单分析表。我用 Python 统一处理五年榜单，为年度报告提供底表，减少不同报告之间的口径差异。</div>
+          <p class="evidence">计算集中度、新品表现与跨年留存等 30 余项指标；原始数据不随仓库发布。</p>
           <div class="project-links">
             <a class="secondary" href="https://github.com/han-wangze/game-structure-analysis-tools" target="_blank" rel="noopener noreferrer">README、字段说明与源码</a>
           </div>
@@ -344,8 +357,8 @@
             <span class="tag">榜单筛选</span>
             <span class="tag">问卷批处理</span>
           </div>
-          <div class="rd">包含三个独立脚本，分别筛选免费榜新品候选、整理指定 B 站账号的投稿信息、批量统计概念测试问卷。投稿内容仍需人工判断是否与新游相关。<b>我的工作：</b>把实习期间三类重复流程写成脚本固化下来。</div>
-          <p class="evidence">输入数据需自备；新品筛选年份目前固定为 2025，问卷统计需检查列识别和异常提示。</p>
+          <div class="rd">三个独立脚本，分别筛选免费榜新品候选、整理指定 B 站账号的投稿信息、批量统计概念测试问卷。我把实习期间三类重复流程写成脚本固化下来，投稿内容仍需人工判断是否与新游相关。</div>
+          <p class="evidence">输入数据需自备，具体限制见 README。</p>
           <div class="project-links">
             <a class="secondary" href="https://github.com/han-wangze/workflow-optimization-tools" target="_blank" rel="noopener noreferrer">README 与源码</a>
           </div>
@@ -355,9 +368,9 @@
 
     <div class="proj-block">
       <div class="proj-head">
-        <h3>实证研究</h3>
+        <h3>研究与调查</h3>
       </div>
-      <div class="rcards single">
+      <div class="rcards two">
         <article class="rcard">
           <div class="rt">人工智能采用与企业多元化</div>
           <div class="tags">
@@ -372,14 +385,7 @@
             <a href="research.html#quant">研究摘要</a>
           </div>
         </article>
-      </div>
-    </div>
 
-    <div class="proj-block">
-      <div class="proj-head">
-        <h3>社会调查</h3>
-      </div>
-      <div class="rcards single">
         <article class="rcard">
           <div class="rt">一刻钟便民生活圈“小修小补”消费调查</div>
           <div class="tags">
@@ -398,7 +404,7 @@
     <div class="proj-block">
       <div class="proj-head">
         <h3>案例与课程研究</h3>
-        <div class="proj-mini">5 份：空间计算（2）·广告案例分析（2）·财政研究（1） · <a href="research.html#case">查看研究与案例 →</a></div>
+        <div class="proj-mini">5 份：空间计算（2）·广告案例分析（2）·财政研究（1） · <a href="research.html#case">查看归档 →</a></div>
       </div>
     </div>
   </div>
