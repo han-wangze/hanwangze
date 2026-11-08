@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>竞争格局与产品定位 · WeSchedule · 韩王泽</title>
-<meta name="description" content="WeSchedule 的竞争格局分析：对比微信生态内的提醒与日程工具（小微、元宝、滴答清单等），说明本项目选择「日程治理」方向的理由与防御性思考。" />
+<meta name="description" content="WeSchedule 的竞争格局分析：对比微信生态内的提醒与日程工具（小微、元宝、滴答清单等），说明本项目与它们的差异、定位假设与风险。对比信息查看于 2026-11。" />
 <meta name="author" content="韩王泽" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
 <meta property="og:locale" content="zh_CN" />
 <meta property="og:title" content="竞争格局与产品定位 · WeSchedule" />
-<meta property="og:description" content="对比微信生态内的提醒与日程工具（小微、元宝、滴答清单等），说明 WeSchedule 选择「日程治理」方向的理由与防御性思考。" />
+<meta property="og:description" content="对比微信生态内的提醒与日程工具（小微、元宝、滴答清单等），说明 WeSchedule 与它们的差异、定位假设与风险。对比信息查看于 2026-11。" />
 <meta property="og:url" content="https://han-wangze.github.io/hanwangze/competition.html" />
 <meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <meta property="og:image:width" content="1200" />
@@ -23,7 +23,7 @@
 <meta property="og:image:alt" content="WeSchedule 竞争格局与产品定位 · 韩王泽" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="竞争格局与产品定位 · WeSchedule" />
-<meta name="twitter:description" content="对比微信生态内的提醒与日程工具，说明 WeSchedule 选择「日程治理」方向的理由与防御性思考。" />
+<meta name="twitter:description" content="对比微信生态内的提醒与日程工具，说明 WeSchedule 与它们的差异、定位假设与风险。对比信息查看于 2026-11。" />
 <meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <style>
   :root{
@@ -136,7 +136,7 @@
 <header class="hero">
   <div class="wrap">
     <h1>竞争格局与产品定位</h1>
-    <p class="sub">微信生态内已有多款"消息 → 提醒"类工具。这一节对比它们与 WeSchedule 的差异，说明这个项目选择做<b>冲突检测与日程治理</b>而非单纯解析的原因，以及如果平台原生能力下场，项目的应对思路。</p>
+    <p class="sub">微信生态内已有多款"消息 → 提醒"类工具。这一节对比它们与 WeSchedule 的差异，说明这个项目在解析之外为什么做冲突检测，以及如果平台原生能力下场，项目的定位假设与风险。对比信息来自各产品页面与帮助文档，查看于 2026-11。</p>
     <p class="note">竞品信息截至 2026 年 9 月。</p>
   </div>
 </header>
@@ -144,7 +144,7 @@
 <section id="landscape">
   <div class="wrap">
     <div class="sec-head">
-      <div class="k">Landscape · 竞品全景</div>
+      <div class="k">竞品全景</div>
       <h2>微信生态内的同类工具</h2>
       <p>生态内与"消息转日程"直接相关的有四类：微信官方 AI 助手、腾讯元宝、滴答清单的微信入口、工作 IM 的原生日程。</p>
     </div>
@@ -197,8 +197,8 @@
 <section id="position" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div class="wrap">
     <div class="sec-head">
-      <div class="k">Position · 差异化定位</div>
-      <h2>不做"提醒生成"，做"日程治理"</h2>
+      <div class="k">定位假设</div>
+      <h2>两个维度看差异</h2>
       <p>把上面的产品放进两个维度里看：横轴是有没有<b>日程库</b>（能否积累并管理），纵轴是处理<b>时刻问题</b>（这件事几点发生、撞没撞）还是<b>容量问题</b>（这一周还排不排得下）。</p>
     </div>
     <div class="chart-card">
@@ -222,7 +222,7 @@
         <text x="664" y="58" text-anchor="end" font-size="13" fill="#6b7280">容量视角（排不排得下）↑</text>
         <text x="664" y="452" text-anchor="end" font-size="13" fill="#6b7280">↓ 时刻视角（几点、撞没撞）</text>
         <!-- 象限标注 -->
-        <text x="520" y="84" text-anchor="middle" font-size="13" font-weight="700" fill="#3730a3">日程治理（本项目所在）</text>
+        <text x="520" y="84" text-anchor="middle" font-size="13" font-weight="700" fill="#3730a3">有库 × 冲突检测（本项目所在）</text>
         <text x="180" y="66" text-anchor="middle" font-size="12" fill="var(--muted)">暂无产品占据</text>
         <text x="180" y="416" text-anchor="middle" font-size="13" font-weight="700" fill="#0f766e">提醒生成</text>
         <text x="520" y="416" text-anchor="middle" font-size="13" font-weight="700" fill="#f59e0b">任务清单</text>
@@ -236,36 +236,36 @@
         <circle cx="500" cy="150" r="14" fill="#fff" stroke="#3730a3" stroke-width="3" stroke-dasharray="5 4"/>
         <circle cx="500" cy="150" r="4.5" fill="#3730a3"/>
         <text x="500" y="124" text-anchor="middle" font-size="13" font-weight="700" fill="#3730a3">WeSchedule</text>
-        <text x="500" y="182" text-anchor="middle" font-size="11" fill="#6b7280">已实现：冲突检测 + DDL 分级</text>
+        <text x="500" y="182" text-anchor="middle" font-size="11" fill="#6b7280">已实现：冲突检测（软/硬分级）</text>
         <text x="500" y="197" text-anchor="middle" font-size="11" fill="#6b7280">规划中：容量视图</text>
       </svg>
       <div class="legend">
         <span><i style="background:#0f766e"></i>提醒生成（单次、无积累）</span>
-        <span><i style="background:#f59e0b"></i>任务清单（有库、无治理）</span>
-        <span><i style="background:#3730a3"></i>日程治理（本项目方向；空心 = 规划中）</span>
+        <span><i style="background:#f59e0b"></i>任务清单（有库、无冲突检测）</span>
+        <span><i style="background:#3730a3"></i>本项目方向（有库、做冲突检测；空心 = 规划中）</span>
       </div>
     </div>
-    <p class="note">观察：提醒类工具解决"别忘事"，但都不维护一份可管理的日程库，也不回答"日程之间是否冲突、DDL 的缓冲是否被透支"。这正好对应调研中的第一需求：冲突检测（70.1%）。</p>
+    <p class="note">观察：提醒类工具解决"别忘事"，但都不维护一份可管理的日程库，也不做基于日程库的冲突检测。这正好对应调研中的第一需求：冲突检测（70.1%）。</p>
   </div>
 </section>
 
 <section id="framework">
   <div class="wrap">
     <div class="sec-head">
-      <div class="k">Framework · 问题框架</div>
-      <h2>"别撞车" 与 "别过载" 是两件事</h2>
+      <div class="k">问题框架</div>
+      <h2>撞车与过载：两类不同的问题</h2>
     </div>
     <div class="grid2">
       <div class="card feat">
         <h3>撞车：时刻维度的冲突</h3>
         <ul>
           <li><b>硬冲突</b>：两个定点事项时间重叠（会议撞会议）——多数日历能做基础检测</li>
-          <li><b>软冲突</b>：定点事项落在 DDL 的缓冲区间内——DDL 不是"那一天"，而是"截止前的那段可支配时间"。周四答应聚餐，表面不撞车，实际透支了周日 DDL 的缓冲</li>
+          <li><b>软冲突</b>：定点事项与截止日落在同一天——实现上把 DDL 视为占用整天，当天的其他安排都可能挤压准备时间；两个截止日同天不提示，否则每个 DDL 日都会挂警示</li>
         </ul>
         <p style="margin-top:8px">WeSchedule 用 <code>is_deadline</code> 这一个可靠字段区分两者，刻意不引入新的 AI 类型判断，避免"类型判错 → 冲突等级被放大"。</p>
       </div>
       <div class="card feat">
-        <h3>过载：容量维度的冲突</h3>
+        <h3>过载：容量维度的冲突（规划中，尚未实现）</h3>
         <ul>
           <li><b>DDL 堆积</b>：三个作业同周末截止，每个录入时都"不冲突"，到期才发现排不开</li>
           <li><b>会议沼泽</b>：日程表不重叠，但一整天没有整块可支配时间</li>
@@ -280,14 +280,14 @@
 <section id="defense" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div class="wrap">
     <div class="sec-head">
-      <div class="k">Defense · 防御性思考</div>
-      <h2>如果平台原生能力下场，还剩什么</h2>
-      <p>「小微」正在内测，官方 Agent 天然拥有最短的入口和系统级通道。如果"消息转日程"被原生能力覆盖，这个项目的价值还剩什么。</p>
+      <div class="k">定位风险</div>
+      <h2>定位假设：如果平台原生能力下场</h2>
+      <p>「小微」正在内测，官方 Agent 天然拥有最短的入口和系统级通道。如果"消息转日程"被原生能力覆盖，这个项目的价值还剩什么——以下是定位假设，尚无实测数据支撑。</p>
     </div>
     <ul class="road">
-      <li><b>正视变量</b>：入口层（复制 → 解析）确实可能被原生能力替代，所以本项目不把"解析"当作壁垒，只把它当作入口。</li>
-      <li><b>价值落在治理层</b>：冲突检测、DDL 区间管理、负载提示依赖一份持续积累的日程库：用得越久，检测越准。提醒类工具是无状态的，用过即走；治理的价值随使用加深。</li>
-      <li><b>把平台约束转成设计决策</b>：个人主体小程序无法写系统日历，于是用"小程序内日程 + 订阅消息"；订阅消息"一次授权一次推送"，于是预备提醒复用同一授权改到前一晚；隐私合规要求下，解析日志只存 <code>input_hash</code> 不留原文。这些约束定义了产品的形态。</li>
+      <li><b>入口层可能被替代</b>：复制 → 解析这一段确实可能被原生能力覆盖，所以本项目不把"解析"当作壁垒，只把它当作入口。</li>
+      <li><b>价值假设落在日程库</b>：冲突检测与规划中的负载提示都建立在一份持续积累的日程库上；提醒类工具是无状态的，用过即走。这个差异是否足以留住用户，属于假设，需要真实使用数据验证。</li>
+      <li><b>把平台约束转成设计决策</b>：个人主体小程序无法写系统日历，于是用"小程序内日程 + 订阅消息"；订阅消息"一次授权一次推送"，于是预备提醒复用同一授权改到前一晚；隐私上解析日志不留原文，只记长度与元数据。这些约束定义了产品的形态。</li>
     </ul>
   </div>
 </section>
@@ -295,11 +295,11 @@
 <section id="next">
   <div class="wrap">
     <div class="sec-head">
-      <div class="k">Next · 下一步规划</div>
+      <div class="k">下一步规划</div>
       <h2>如果继续做，按这个顺序</h2>
     </div>
     <ul class="road">
-      <li><b>badcase 一键上报</b>：解析结果页加"识别有误？"上报入口，用真实 badcase 驱动 prompt 迭代——最新重跑整条全对率 97.1%，剩下 3 条失败全是标题措辞差异（"聚餐"对"一起吃饭"、"上课"对"第一节课换教室"），日期时间全对。</li>
+      <li><b>badcase 一键上报</b>：解析结果页加"识别有误？"上报入口，用真实 badcase 驱动 prompt 迭代——最新重跑 dev 集整条全对率 97.1%，dev 剩 2 条、test 剩 1 条失败，全是标题措辞差异（"聚餐"对"一起吃饭"、"上课"对"第一节课换教室"），日期时间全对。</li>
       <li><b>置信度驱动 UI</b>：低置信度字段标黄并要求确认，让"哪几项可能不准"对用户可见。</li>
       <li><b>确认页前置当日全景</b>：保存前展示当天已有日程，让首次使用者立刻感知冲突检测的价值。</li>
       <li><b>过载层（V1.1）</b>：周负载条 → DDL 堆积预警 → 准备块自动排程，复用现有 <code>is_prep</code> 与冲突引擎。</li>
