@@ -113,6 +113,7 @@
   .proj-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
   .proj-head h3{font-size:19px;font-weight:800}
   .rcards.single{grid-template-columns:1fr}
+  .rcards.two{grid-template-columns:repeat(2,1fr)}
   .proj-mini{font-size:13.5px;color:var(--muted)}
   .proj-mini b{color:var(--ink)}
   .proj-mini a{color:var(--primary);font-weight:700}
@@ -143,7 +144,7 @@
   @media(max-width:860px){.cap{grid-template-columns:1fr}}
   /* 研究卡 */
   .rcards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  @media(max-width:760px){.rcards{grid-template-columns:1fr}}
+  @media(max-width:760px){.rcards,.rcards.two{grid-template-columns:1fr}}
   .rcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);
     display:flex;flex-direction:column;gap:9px;transition:.15s}
   .rcard:hover{border-color:var(--primary);transform:translateY(-2px)}
@@ -191,6 +192,7 @@
         <a href="#projects">项目<span class="caret"></span></a>
         <div class="menu">
           <a href="weschedule.html">产品项目<span class="tag">WeSchedule</span></a>
+          <a href="#data">数据与工程<span class="tag">4 个仓库</span></a>
           <a href="research.html#quant">实证研究<span class="tag">3 份</span></a>
           <a href="research.html#survey">社会调查<span class="tag">1 份</span></a>
           <a href="research.html#case">案例研究<span class="tag">5 份</span></a>
@@ -282,8 +284,41 @@
         <a class="rcard" href="weschedule.html">
           <div class="rt">WeSchedule 日程助手</div>
           <div class="tags"><span class="tag">微信小程序</span><span class="tag">DeepSeek 解析</span><span class="tag">冲突检测</span><span class="tag">订阅消息提醒</span></div>
-          <div class="rd">立项依据是 87 人校园调研——「信息过载遗漏重要事项」为第一痛点、87.4% 接受「消息转日程」。据此搭出「复制 → 自动解析 → 确认保存 → 订阅消息提醒」链路，冲突检测按调研需求做软 / 硬分级；建 112 条语料评测集，五版提示词把整条消息全对率从 77.9% 提到 97.1%（v1.4 为相对周期→期末日的补丁，与 v1.3 持平），MVP 已真机上线并完成竞争格局定位。</div>
+          <div class="rd">立项依据是 87 人校园调研——「信息过载遗漏重要事项」为第一痛点、87.4% 接受「消息转日程」。据此搭出「复制 → 自动解析 → 确认保存 → 订阅消息提醒」链路，冲突检测按调研需求做软 / 硬分级；建 112 条语料评测集，四版提示词把 dev 集整条消息全对率从 77.9% 提到 97.1%（v1.4 为相对周期→期末日的补丁，与 v1.3 持平）；已完成真机测试并完成竞争格局定位，目前体验版小范围试用，尚未正式发布。</div>
           <div class="rf">进入项目详情 →</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="proj-block" id="data">
+      <div class="proj-head">
+        <h3>数据与工程</h3>
+        <div class="proj-mini">在线看板 · <a href="https://han-wangze.github.io/steam-review-decline/" target="_blank" rel="noopener">Steam 口碑变化</a> · <a href="https://han-wangze.github.io/game-radar/" target="_blank" rel="noopener">四国免费榜</a></div>
+      </div>
+      <div class="rcards two">
+        <a class="rcard" href="https://github.com/han-wangze/game-structure-analysis-tools" target="_blank" rel="noopener">
+          <div class="rt">手游市场结构分析工具</div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">榜单口径</span></div>
+          <div class="rd">处理手游榜单导出，算品类与题材的集中度、产品分层、新品表现和跨年留存，输出 Excel 底表与图表。2025 年美国收入榜三品类 CR5：Real-Time Strategy 88.8%、Card Battler 87.0%、Match Merge 2 79.5%；口径是榜单样本内，不等于全市场。</div>
+          <div class="rf">看仓库 →</div>
+        </a>
+        <a class="rcard" href="https://github.com/han-wangze/steam-review-decline" target="_blank" rel="noopener">
+          <div class="rt">Steam 早期评论与后续口碑</div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">时间切分</span></div>
+          <div class="rd">2,526 款 PC Steam 游戏，用首条评论后 30 天的评论结构预测第 30–365 天是否降档。按首条评论年份切分，留出集 AUC 0.886、7 折滚动中位 0.861；数据截至 2023-11，未在 2024 年后的新游戏上验证。</div>
+          <div class="rf">看仓库 →</div>
+        </a>
+        <a class="rcard" href="https://github.com/han-wangze/game-radar" target="_blank" rel="noopener">
+          <div class="rt">Game Radar · 四国免费榜台账</div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">SQLite</span><span class="tag">Apple RSS</span></div>
+          <div class="rd">每 12 小时抓美、中、日、韩免费游戏 Top100，16 个榜日、6,400 条榜位，产出静态日报周报与 SQL 分析。首次进榜指观察窗内的第一次出现；仓库不含完整历史库，换环境只能从当天重新累积。</div>
+          <div class="rf">看仓库 →</div>
+        </a>
+        <a class="rcard" href="https://github.com/han-wangze/workflow-optimization-tools" target="_blank" rel="noopener">
+          <div class="rt">工作流脚本</div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">自动化</span><span class="tag">脱敏示例</span></div>
+          <div class="rd">新品扫描、B 站投稿整理、概念测试问卷批量统计三个脚本，对应实习期间三类固定流程。输入需自备，去重只按产品名，问卷统计需人工核验异常值。</div>
+          <div class="rf">看仓库 →</div>
         </a>
       </div>
     </div>
@@ -362,7 +397,7 @@
         <div class="cap-kw">MVP 验证 · 需求定义 · 生成质量评测 · 小程序开发</div>
         <div class="cap-f">
           <a class="cap-fi" href="weschedule.html#smart"><span class="n"><span><b>需求界定</b> · 按痛点优先级划定 MVP 范围</span><span class="ar">→</span></span></a>
-          <a class="cap-fi" href="weschedule.html#arch"><span class="n"><span><b>开发上线</b> · 独立完成小程序与云开发部署</span><span class="ar">→</span></span></a>
+          <a class="cap-fi" href="weschedule.html#arch"><span class="n"><span><b>开发部署</b> · 小程序端、10 个云函数与云数据库配置</span><span class="ar">→</span></span></a>
           <a class="cap-fi" href="weschedule.html#tech"><span class="n"><span><b>评测迭代</b> · 整条全对率 77.9% → 97.1%</span><span class="ar">→</span></span></a>
         </div>
       </div>
@@ -433,7 +468,7 @@
   <div class="wrap">
     <div class="sitemap" style="margin-top:0">
       <div class="sg"><b>实习</b><a href="experience-cyou.html">搜狐畅游</a><a href="experience-zyf.html">中服云</a></div>
-      <div class="sg"><b>项目</b><a href="weschedule.html">产品项目</a><a href="research.html#quant">实证研究</a><a href="research.html#survey">社会调查</a><a href="research.html#case">案例研究</a></div>
+      <div class="sg"><b>项目</b><a href="weschedule.html">产品项目</a><a href="#data">数据与工程</a><a href="research.html#quant">实证研究</a><a href="research.html#survey">社会调查</a><a href="research.html#case">案例研究</a></div>
       <div class="sg"><b>源码</b><a href="https://github.com/han-wangze/hanwangze" target="_blank" rel="noopener">本站源码</a></div>
     </div>
     <div style="margin-top:16px">韩王泽 · 个人主页 · © 2026</div>

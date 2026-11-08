@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>解析质量评测报告 · WeSchedule | 韩王泽</title>
-<meta name="description" content="WeSchedule 解析链路的回归测试：112 条语料、8:2 固定切分（种子 20260717）、六项指标，提示词五版迭代后整条消息全对率 77.9% → 82.4% → 95.6% → 97.1%（dev 66/68；test 96.6%，含 12 条长消息）；v1.4 修复真实课程群聊 heldout 集暴露的「本周内→周末」相对周期缺口。" />
+<meta name="description" content="WeSchedule 解析链路的回归测试：112 条语料、8:2 固定切分（种子 20260717）、六项指标，提示词四版迭代后整条消息全对率 77.9% → 82.4% → 95.6% → 97.1%（dev 66/68；test 96.6%，含 12 条长消息）；v1.4 修复真实课程群聊 heldout 集暴露的「本周内→周末」相对周期缺口。" />
 <meta name="author" content="韩王泽" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
@@ -146,7 +146,7 @@
     <h1>解析质量评测报告</h1>
     <p class="sub">这是 WeSchedule 解析链路的回归测试：112 条群聊语料、固定切分、六项指标，用来判断一次提示词改动之后，这次是变好还是变坏。</p>
     <div class="badges">
-      <span class="badge"><b>100</b> 条语料 · 7 类</span>
+      <span class="badge"><b>112</b> 条语料 · 8 类</span>
       <span class="badge"><b>8:2</b> 固定切分</span>
       <span class="badge"><b>6</b> 项指标</span>
       <span class="badge"><b>97.1%</b> 整条全对（dev 66/68 · test 96.6%，test 含 12 条长消息）</span>
