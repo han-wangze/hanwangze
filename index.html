@@ -101,7 +101,9 @@
   .rcard .rt{font-weight:800;font-size:15px;line-height:1.45}
   .rcard .rmeta{font-size:12.5px;color:var(--muted);margin-top:-5px}
   .rcard .rd{font-size:13.5px;color:var(--muted);flex:1}
-  .rcard .rd p + p{margin-top:7px}
+  .rcard .rd p + p{margin-top:11px}
+  .rcard .rd + .project-links{padding-top:11px}
+  .rcard .rd .ask{color:var(--ink);font-weight:600}
   .rcard .rd b{color:var(--ink)}
   .sec-foot{margin-top:12px;font-size:13px;color:var(--muted)}
   .sec-foot a{color:var(--primary);font-weight:700}
@@ -112,7 +114,7 @@
   .project-links a.secondary{color:var(--muted);font-weight:600}
   .project-links a:hover{text-decoration:underline}
   .inline-row{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-top:14px;
-    font-size:13.5px;color:var(--muted);display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;box-shadow:var(--shadow)}
+    font-size:13.5px;color:var(--muted);display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;box-shadow:var(--shadow)}
   .inline-row b{color:var(--ink);font-size:14.5px}
   .inline-row .sep{color:var(--line)}
   .inline-row a{color:var(--primary);font-weight:700;white-space:nowrap;margin-left:auto}
@@ -208,8 +210,11 @@
           <span class="tag">概念测试</span>
           <span class="tag">Python</span>
         </div>
-        <div class="rd">负责美国品类、题材与中国 MMO 三块年度研究，参与四国 RPG 专题。工作从 Sensor Tower 五年榜单导出开始：清洗数据、算集中度与增长贡献、追踪新品与跨年轨迹，最后逐赛道给出「进 / 有条件进 / 不进」的判断。</div>
-        <p class="evidence">4 份年度／专题研究 · 1 期小游戏月报</p>
+        <div class="rd">
+          <p><b>年度研究</b>　基于 Sensor Tower 数据，负责美国手游品类、题材与中国 MMO 三块年度报告板块研究，参与中美日韩 RPG 专题研究；分析市场规模、集中度、增长来源与新品表现等，形成赛道进入判断</p>
+          <p><b>月度监测</b>　跟踪微信小游戏畅销榜 Top 100，分析月度格局变化，拆解新入榜产品</p>
+          <p><b>新游扫描与概念测试</b>　整理新品线索与测试结果，供立项讨论参考</p>
+        </div>
         <div class="project-links">
           <a href="experience-cyou.html">查看实习详情</a>
         </div>
@@ -317,8 +322,10 @@
           <span class="tag">云开发</span>
           <span class="tag">DeepSeek API</span>
         </div>
-        <div class="rd">微信群里的会议和作业截止日期容易被刷过去。做成了一个小程序：复制消息解析成日程，确认后保存，到点用订阅消息提醒。冲突检测和备选时段用规则算，不交给模型。</div>
-        <p class="evidence">97.1% 为 dev 集离线回归（66/68），不代表真实用户场景；体验版小范围试用，尚未正式发布。</p>
+        <div class="rd">
+          <p class="ask">微信群消息太多，容易遗漏怎么办？</p>
+          <p>预调研里，80% 的人漏过群里的重要事项，45.6% 嫌手动录入麻烦。做成了一个小程序：复制消息解析成日程，确认后保存，到点用订阅消息提醒；日程冲突会提示，并给出可一键采纳的备选时段。已上线体验版。</p>
+        </div>
         <div class="project-links">
           <a href="https://www.bilibili.com/video/BV1VDYR6YE6m/" target="_blank" rel="noopener noreferrer">32 秒实机演示</a>
           <a href="weschedule.html">项目说明</a>
