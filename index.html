@@ -108,7 +108,6 @@
   .sec-foot{margin-top:12px;font-size:13px;color:var(--muted)}
   .sec-foot a{color:var(--primary);font-weight:700}
   .rcard .rf{font-size:13px;font-weight:700;color:var(--primary)}
-  .rcard .evidence{font-size:12.5px;color:var(--muted);padding-top:6px;border-top:1px solid var(--line)}
   .project-links{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:auto;padding-top:4px;font-size:13px;font-weight:700}
   .project-links a{color:var(--primary)}
   .project-links a.secondary{color:var(--muted);font-weight:600}
@@ -242,7 +241,6 @@
           <p><b>方法：</b>以数据集里的首条评论时间为起点，前 30 天构造特征、第 30–365 天观察变化；L2 正则化逻辑回归，按首条评论年份做时间切分测试。</p>
           <p><b>结果：</b>测试集 AUC 0.886、AP 0.343；风险排序前 10% 的游戏里 30.2% 后来跌出好评档，约为基准率的 5 倍；滚动 7 折 AUC 中位 0.861。</p>
         </div>
-        <p class="evidence">看板可查样本外游戏的风险排序、前后期好评率与实际结果；数据截至 2023-11。</p>
         <div class="project-links">
           <a href="https://han-wangze.github.io/steam-review-decline/" target="_blank" rel="noopener noreferrer">在线看板</a>
           <a class="secondary" href="https://github.com/han-wangze/steam-review-decline" target="_blank" rel="noopener noreferrer">README 与源码</a>
@@ -261,7 +259,6 @@
           <p><b>方法：</b>五年榜单走同一套 Python 流程，算集中度、分层增长贡献、新品渗透和跨年轨迹；口径规则写进代码——总量与份额只在排序轴上算，跨年在榜只用固定 Top N。</p>
           <p><b>产出：</b>30 余项指标的 Excel 底表与字段说明，供四份年度报告直接取数。</p>
         </div>
-        <p class="evidence">原始数据不随仓库发布。</p>
         <div class="project-links">
           <a class="secondary" href="https://github.com/han-wangze/game-structure-analysis-tools" target="_blank" rel="noopener noreferrer">README、字段说明与源码</a>
         </div>
@@ -279,7 +276,6 @@
           <p><b>方法：</b>每 12 小时抓一次中美日韩 Top 100，用 Apple 公开接口取榜单与产品信息，名次和产品资料按榜日存进 SQLite。</p>
           <p><b>产出：</b>三页静态页——当日榜、前一榜日、周报；展示首次进榜、名次变化、上架时长与品类构成，玩法简介、玩法类型和中文译名由 LLM 辅助生成。</p>
         </div>
-        <p class="evidence">16 个榜日快照；129 项数字断言可逐条回查。</p>
         <div class="project-links">
           <a href="https://han-wangze.github.io/game-radar/" target="_blank" rel="noopener noreferrer">在线榜单</a>
           <a class="secondary" href="https://github.com/han-wangze/game-radar" target="_blank" rel="noopener noreferrer">README 与源码</a>
@@ -298,7 +294,6 @@
           <p><b>方法：</b>三个独立脚本，各自一个入口、一个输入目录、一个输出文件；榜单两种导出格式自动识别，B 站按时间窗抓、翻到更早的就停，问卷按同一套分母算指标。</p>
           <p><b>产出：</b>本周新品清单与去重表、投稿 CSV、问卷统计表，跑一次出结果。</p>
         </div>
-        <p class="evidence">输入数据需自备。</p>
         <div class="project-links">
           <a class="secondary" href="https://github.com/han-wangze/workflow-optimization-tools" target="_blank" rel="noopener noreferrer">README 与源码</a>
         </div>
@@ -359,7 +354,6 @@
           <span class="tag">Heckman</span>
         </div>
         <div class="rd">用 2010–2024 年 A 股 39,853 个企业—年度观测，以熵指数把多元化分解为相关与不相关，识别 AI 采用对企业多元化结构的因果效应；用多期 DID、PSM 与 Heckman 两阶段处理内生性。</div>
-        <p class="evidence">独立完成选题、数据处理与实证分析。</p>
         <div class="project-links">
           <a href="research.html#quant">研究摘要</a>
         </div>
@@ -373,7 +367,6 @@
           <span class="tag">腾飞杯二等奖</span>
         </div>
         <div class="rd">面向社区居民与从业者的双渠道问卷，用 SPSS 做信效度检验与多元回归，主要看社区支持、价格透明度、找人的时间成本这几项跟满意度有没有关系。</div>
-        <p class="evidence">主导问卷设计、投放与统计；供给端样本小，只做描述统计。</p>
         <div class="project-links">
           <a href="research.html#survey">研究设计与限制</a>
         </div>
