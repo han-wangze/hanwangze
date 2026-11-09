@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>韩王泽 · 个人主页</title>
-<meta name="description" content="韩王泽的个人主页：游戏行业战略分析实习、市场研究、数据分析与产品实践。" />
+<meta name="description" content="韩王泽的个人主页：按工作类型整理的实习、项目与研究作品——手游市场研究、数据分析与建模、产品设计与开发、实证研究与社会调查。" />
 <meta name="author" content="韩王泽" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
 <meta property="og:locale" content="zh_CN" />
 <meta property="og:title" content="韩王泽 · 个人主页" />
-<meta property="og:description" content="游戏行业战略分析实习、市场研究、数据分析与产品实践。" />
+<meta property="og:description" content="按工作类型整理的实习、项目与研究作品：手游市场研究、数据分析与建模、产品设计与开发、实证研究与社会调查。" />
 <meta property="og:url" content="https://han-wangze.github.io/hanwangze/" />
 <meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <meta property="og:image:width" content="1200" />
@@ -23,7 +23,7 @@
 <meta property="og:image:alt" content="韩王泽个人主页：教育经历、实习经历与项目作品" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="韩王泽 · 个人主页" />
-<meta name="twitter:description" content="游戏行业战略分析实习、市场研究、数据分析与产品实践。" />
+<meta name="twitter:description" content="按工作类型整理的实习、项目与研究作品：手游市场研究、数据分析与建模、产品设计与开发、实证研究与社会调查。" />
 <meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <style>
   :root{
@@ -59,16 +59,13 @@
   header.hero{padding:64px 0 48px;background:
     radial-gradient(1200px 400px at 80% -10%,rgba(55,48,163,.10),transparent),
     radial-gradient(900px 360px at 0% 0%,rgba(15,118,110,.08),transparent);}
-  .hero .eyebrow{font-size:12.5px;font-weight:700;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase}
-  .hero h1{font-size:40px;line-height:1.15;font-weight:800;letter-spacing:-.5px;margin-top:8px}
-  .hero .edu{margin-top:18px;display:flex;flex-direction:column;gap:12px;font-size:14px;color:var(--muted)}
-  .hero .edu .edu-item{display:flex;flex-direction:column;gap:4px}
+  .hero h1{font-size:40px;line-height:1.15;font-weight:800;letter-spacing:-.5px}
+  .hero .edu{margin-top:18px;display:flex;flex-direction:column;gap:14px;font-size:14px;color:var(--muted)}
+  .hero .edu .edu-item{display:flex;flex-direction:column;gap:3px}
   .hero .edu .school{font-weight:700;color:var(--ink);margin-right:8px}
   .hero .edu .major{color:var(--ink);margin-right:8px}
   .hero .edu .meta{color:var(--muted);font-size:13px}
-  .hero .edu .courses{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-left:16px;font-size:12.5px}
-  .hero .edu .courses .lbl{font-weight:700;color:var(--ink);margin-right:2px}
-  .hero .edu .courses .chip{font-size:12px;background:#eef2ff;color:var(--primary);border:1px solid #e0e7ff;border-radius:8px;padding:4px 10px;font-weight:500}
+  .hero .edu .courses{display:block;font-size:12.8px;color:var(--muted);letter-spacing:.15px}
   .hero .contact{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:12px;font-size:13.5px}
   .hero .contact a{display:inline-flex;align-items:center;gap:7px;color:var(--muted);transition:.15s}
   .hero .contact a:hover{color:var(--primary)}
@@ -88,40 +85,21 @@
   section{padding:48px 0;scroll-margin-top:64px}
   section.alt{background:#fafafc;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .sec-head{margin-bottom:24px}
-  .sec-head .k{font-size:12.5px;font-weight:700;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase}
+  .sec-head .k{font-size:12.5px;font-weight:700;color:var(--primary);letter-spacing:1.5px}
   .sec-head h2{font-size:24px;font-weight:800;margin-top:6px;letter-spacing:-.3px}
   .sec-head p{color:var(--muted);margin-top:8px;max-width:720px;font-size:14.5px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
-  /* 实习经历卡 */
-  .exp{display:flex;flex-direction:column;gap:16px}
-  .ecard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);
-    display:flex;flex-direction:column;gap:6px;transition:.15s}
-  .ecard:hover{border-color:var(--primary);transform:translateY(-2px)}
-  .ecard .ewhen{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.3px}
-  .ecard .ewhat{font-weight:800;font-size:17px}
-  .ecard .edesc{font-size:14px;color:var(--muted);margin-top:2px}
-  .ecard .edesc .erow{display:block;font-size:13.5px;line-height:1.55;color:var(--muted)}
-  .ecard .edesc .erow + .erow{margin-top:4px}
-  .ecard .edesc .erow b{color:var(--ink);margin-right:8px}
-  .ecard .edesc b{color:var(--ink)}
-  .ecard .ego{font-size:13px;font-weight:700;color:var(--primary);margin-top:6px}
-  /* 项目经历 */
-  .proj-block{margin-bottom:30px}
-  .proj-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
-  .proj-head h3{font-size:19px;font-weight:800}
-  .rcards.single{grid-template-columns:1fr}
-  .rcards.two{grid-template-columns:repeat(2,1fr)}
-  .proj-mini{font-size:13.5px;color:var(--muted)}
-  .proj-mini b{color:var(--ink)}
-  .proj-mini a{color:var(--primary);font-weight:700}
   .tags{display:flex;flex-wrap:wrap;gap:6px}
   .tag,.chip{font-size:12px;background:#f1f5f9;color:#475569;border-radius:8px;padding:4px 10px}
   .rcards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .rcards.two{grid-template-columns:repeat(2,1fr)}
+  .rcards.single{grid-template-columns:1fr}
   @media(max-width:760px){.rcards,.rcards.two{grid-template-columns:1fr}}
   .rcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);
     display:flex;flex-direction:column;gap:9px;transition:.15s}
   .rcard:hover{border-color:var(--primary);transform:translateY(-2px)}
   .rcard .rt{font-weight:800;font-size:15px;line-height:1.45}
+  .rcard .rmeta{font-size:12.5px;color:var(--muted);margin-top:-5px}
   .rcard .rd{font-size:13.5px;color:var(--muted);flex:1}
   .rcard .rd b{color:var(--ink)}
   .rcard .rf{font-size:13px;font-weight:700;color:var(--primary)}
@@ -130,7 +108,11 @@
   .project-links a{color:var(--primary)}
   .project-links a.secondary{color:var(--muted);font-weight:600}
   .project-links a:hover{text-decoration:underline}
-  /* 其他经历 */
+  .inline-row{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-top:14px;
+    font-size:13.5px;color:var(--muted);display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;box-shadow:var(--shadow)}
+  .inline-row b{color:var(--ink);font-size:14.5px}
+  .inline-row .sep{color:var(--line)}
+  .inline-row a{color:var(--primary);font-weight:700;white-space:nowrap;margin-left:auto}
   .more{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
   .mrow{display:grid;grid-template-columns:136px 1fr;gap:4px 16px;padding:15px 20px;border-bottom:1px solid var(--line)}
   .mrow:last-child{border-bottom:0}
@@ -156,7 +138,6 @@
   .sitemap .sg:last-child{margin-bottom:0}
   .sitemap .sg b{display:inline-block;min-width:88px;color:var(--ink);font-weight:700}
   .sitemap .sg a{margin-right:16px}
-  /* 键盘焦点可见；减少动态效果偏好 */
   a:focus-visible,summary:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
   h1,h2,.paper .pt,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif}
@@ -167,15 +148,15 @@
 <nav>
   <div class="wrap">
     <div class="brand"><span class="dot"></span>韩王泽</div>
-        <div class="navlinks">
+    <div class="navlinks">
       <a class="on" href="index.html">首页</a>
       <div class="navdrop">
-        <a href="#featured">实习与项目<span class="caret"></span></a>
+        <a href="#market">作品<span class="caret"></span></a>
         <div class="menu">
-          <a href="experience-cyou.html">搜狐畅游<span class="tag">战略分析</span></a>
-          <a href="experience-zyf.html">中服云<span class="tag">功能测试</span></a>
-          <a href="weschedule.html">WeSchedule<span class="tag">产品项目</span></a>
-          <a href="#data">数据分析与工具<span class="tag">3 项</span></a>
+          <a href="#market">市场研究与业务分析</a>
+          <a href="#data">数据分析与建模</a>
+          <a href="#product">产品设计与开发</a>
+          <a href="#empirical">实证研究与社会调查</a>
         </div>
       </div>
       <a href="research.html">研究作品</a>
@@ -186,7 +167,6 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">Han Wangze · Personal Homepage</div>
     <h1>韩王泽</h1>
     <div class="contact">
       <a href="mailto:wangzehan@link.cuhk.edu.cn"><span class="em">✉️</span> wangzehan@link.cuhk.edu.cn</a>
@@ -199,218 +179,242 @@
     </div>
     <div class="edu">
       <div class="edu-item">
-        <div class="edu-row"><span class="school">香港中文大学（深圳）</span><span class="major">信息管理与商业分析</span><span class="meta">硕士 · 2026.09–2028.07</span></div>
-        <div class="courses">
-          <span class="lbl">相关课程</span>
-          <span class="chip">商业机器学习</span>
-          <span class="chip">运营分析</span>
-          <span class="chip">决策科学与量化模型</span>
-        </div>
+        <div class="edu-row"><span class="school">香港中文大学（深圳）</span><span class="major">信息管理与商业分析 · 硕士</span><span class="meta">2026.09–2028.07</span></div>
+        <div class="courses">商业机器学习 · 运营分析 · 决策科学与量化模型</div>
       </div>
       <div class="edu-item">
         <div class="edu-row"><span class="school">西安交通大学</span><span class="major">经济与金融学院 · 贸易经济</span><span class="meta">本科 · 2022.09–2026.06</span></div>
-        <div class="courses">
-          <span class="lbl">相关课程</span>
-          <span class="chip">统计学</span>
-          <span class="chip">计量经济学</span>
-          <span class="chip">Python 数据处理</span>
-        </div>
+        <div class="courses">统计学 · 计量经济学 · Python 数据处理</div>
       </div>
     </div>
   </div>
 </header>
 
-<section id="featured">
+<section id="market">
   <div class="wrap">
     <div class="sec-head">
-      <div class="k">精选作品</div>
-      <h2>精选作品</h2>
+      <div class="k">01</div>
+      <h2>市场研究与业务分析</h2>
     </div>
-    <div class="rcards">
+    <div class="rcards single">
       <article class="rcard">
-        <div class="rt">搜狐畅游 · 手游市场研究与战略分析</div>
+        <div class="rt">搜狐畅游 · 手游市场研究</div>
+        <div class="rmeta">2025.11–2026.02 · 战略分析实习生</div>
         <div class="tags">
-          <span class="tag">实习</span>
           <span class="tag">Sensor Tower</span>
+          <span class="tag">概念测试</span>
           <span class="tag">Python</span>
         </div>
-        <div class="rd">围绕「哪些赛道值得进入」，完成美国手游品类、题材、中国 MMO 与四国 RPG 研究，并把重复的数据处理固化为 Python 工具。我在实习中负责三个年度报告板块，参与 RPG 专题，完成指标计算与趋势归因。</div>
-        <p class="evidence">4 份年度／专题研究 · 1 期月度监测 · 概念测试与新品扫描</p>
+        <div class="rd">用五年 Sensor Tower 榜单数据做四份年度／专题研究：美国品类、题材、中国 MMO 三块由我负责，四国 RPG 专题参与。每份报告最后都要说清这个赛道能不能进、怎么进。</div>
+        <p class="evidence">4 份年度／专题研究 · 1 期小游戏月报</p>
         <div class="project-links">
-          <a href="experience-cyou.html">查看研究结论与方法</a>
-          <a class="secondary" href="https://github.com/han-wangze/game-structure-analysis-tools" target="_blank" rel="noopener noreferrer">工具源码</a>
+          <a href="experience-cyou.html">查看实习详情</a>
         </div>
       </article>
+    </div>
+  </div>
+</section>
 
-      <article class="rcard">
-        <div class="rt">WeSchedule · 群聊消息转日程</div>
-        <div class="tags">
-          <span class="tag">微信小程序原型</span>
-          <span class="tag">DeepSeek API</span>
-          <span class="tag">云开发</span>
-        </div>
-        <div class="rd">微信群消息里的日程容易被漏看。我负责需求调研、MVP 设计、小程序开发和解析质量评测，做出复制群消息后自动解析、冲突提示与订阅提醒的完整流程。</div>
-        <p class="evidence">已完成真机测试，体验版小范围试用，尚未正式发布。</p>
-        <div class="project-links">
-          <a href="weschedule.html">项目说明</a>
-          <a href="https://www.bilibili.com/video/BV1VDYR6YE6m/" target="_blank" rel="noopener noreferrer">32 秒实机演示</a>
-          <a class="secondary" href="https://github.com/han-wangze/weschedule" target="_blank" rel="noopener noreferrer">GitHub 源码</a>
-        </div>
-      </article>
-
+<section id="data" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">02</div>
+      <h2>数据分析与建模</h2>
+    </div>
+    <div class="rcards two">
       <article class="rcard">
         <div class="rt">Steam 早期评论与后续口碑</div>
         <div class="tags">
           <span class="tag">Python</span>
           <span class="tag">scikit-learn</span>
-          <span class="tag">统计与预测建模</span>
+          <span class="tag">时间切分验证</span>
         </div>
-        <div class="rd">用首条评论后 30 天的评论特征，预测一款游戏之后会不会出现评价下滑。我采集并清洗了 2,526 款游戏的数据，按首条评论年份切分做时间验证，并搭了在线结果页。</div>
+        <div class="rd">基于 2,526 款游戏的早期评论数据，构建口碑下降风险预测模型；用按首条评论年份切分的时间验证，评估模型对后续年份游戏的样本外排序能力。</div>
         <p class="evidence">数据截至 2023-11，未用 2024 年后的游戏做外部验证。</p>
         <div class="project-links">
-          <a href="https://han-wangze.github.io/steam-review-decline/" target="_blank" rel="noopener noreferrer">在线结果</a>
+          <a href="https://han-wangze.github.io/steam-review-decline/" target="_blank" rel="noopener noreferrer">在线看板</a>
           <a class="secondary" href="https://github.com/han-wangze/steam-review-decline" target="_blank" rel="noopener noreferrer">README 与源码</a>
+        </div>
+      </article>
+
+      <article class="rcard">
+        <div class="rt">手游榜单结构分析工具</div>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">pandas</span>
+          <span class="tag">集中度与分层指标</span>
+        </div>
+        <div class="rd">处理 Sensor Tower 五年榜单导出，算出集中度、产品分层、新品表现和跨年轨迹，输出 Excel 底表给四份年度报告用。口径规则写在代码里，字段说明单独成文。</div>
+        <p class="evidence">原始数据不随仓库发布。</p>
+        <div class="project-links">
+          <a class="secondary" href="https://github.com/han-wangze/game-structure-analysis-tools" target="_blank" rel="noopener noreferrer">README、字段说明与源码</a>
+        </div>
+      </article>
+
+      <article class="rcard">
+        <div class="rt">Game Radar</div>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">Apple RSS</span>
+        </div>
+        <div class="rd">每 12 小时抓取美中日韩 App Store 免费游戏榜 Top100，存在 SQLite 里，生成三页静态站和 14 天分析报告，常用问题能直接跑 SQL 查。</div>
+        <p class="evidence">16 个榜日快照；129 项数字断言可逐条回查。</p>
+        <div class="project-links">
+          <a href="https://han-wangze.github.io/game-radar/" target="_blank" rel="noopener noreferrer">在线榜单</a>
+          <a class="secondary" href="https://github.com/han-wangze/game-radar" target="_blank" rel="noopener noreferrer">README 与源码</a>
+        </div>
+      </article>
+
+      <article class="rcard">
+        <div class="rt">工作流程优化脚本</div>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">pandas</span>
+          <span class="tag">批处理</span>
+        </div>
+        <div class="rd">实习时每周要手动比对榜单找新游、翻 B 站看 UP 主发了什么、统计一批问卷。后来分别写成三个脚本，跑一次出结果。</div>
+        <p class="evidence">输入数据需自备。</p>
+        <div class="project-links">
+          <a class="secondary" href="https://github.com/han-wangze/workflow-optimization-tools" target="_blank" rel="noopener noreferrer">README 与源码</a>
         </div>
       </article>
     </div>
   </div>
 </section>
 
-<section id="about">
+<section id="product">
   <div class="wrap">
     <div class="sec-head">
-      <div class="k">实习经历</div>
-      <h2>实习经历</h2>
+      <div class="k">03</div>
+      <h2>产品设计与开发</h2>
     </div>
-    <div class="exp">
-      <a class="ecard" href="experience-cyou.html">
-        <div class="ewhen">2025.11–2026.02</div>
-        <div class="ewhat">搜狐畅游 · 战略分析实习生</div>
-        <div class="edesc">
-          <span class="erow"><b>市场扫描</b>周度扫描 ST 榜单、Steam、YouTube / B 站新游，输出值得关注的新品清单；月度扫描微信小游戏畅销榜，归因榜单波动，拆解畅销新品</span>
-          <span class="erow"><b>概念测试</b>负责玩法视频、问卷投放与回收统计，按下载意愿 ≥ 70%、尖叫度（推荐／惊喜程度，项目内部指标）≥ 1.5 筛出高潜方向</span>
-          <span class="erow"><b>市场研究与数据分析</b>负责美国手游品类、题材与中国 MMO 三个年度报告板块，参与中美日韩 RPG 专题研究，完成指标计算、趋势归因与赛道进入判断</span>
+    <div class="rcards single">
+      <article class="rcard">
+        <div class="rt">WeSchedule · 群聊消息转日程</div>
+        <div class="rmeta">微信小程序 · 体验版</div>
+        <div class="tags">
+          <span class="tag">微信小程序</span>
+          <span class="tag">云开发</span>
+          <span class="tag">DeepSeek API</span>
         </div>
-        <div class="ego">查看实习内容 →</div>
-      </a>
-      <a class="ecard" href="experience-zyf.html">
-        <div class="ewhen">2025.07 · 本科专业实习</div>
-        <div class="ewhat">中服软件（西安）有限公司 · 功能测试实习生</div>
-        <div class="edesc">工业物联网平台功能测试，覆盖 6 大模块、20 余个页面，累计记录缺陷 45 项，以 Jira 缺陷单跟踪至闭环。</div>
-        <div class="ego">查看测试范围与缺陷类型 →</div>
-      </a>
+        <div class="rd">复制群消息解析成日程，确认后保存并到点提醒。冲突检测和备选时段是规则算的，没交给模型；解析质量有一套固定语料做回归测试。</div>
+        <p class="evidence">体验版小范围试用，尚未正式发布。</p>
+        <div class="project-links">
+          <a href="https://www.bilibili.com/video/BV1VDYR6YE6m/" target="_blank" rel="noopener noreferrer">32 秒实机演示</a>
+          <a href="weschedule.html">项目说明</a>
+          <a class="secondary" href="https://github.com/han-wangze/weschedule" target="_blank" rel="noopener noreferrer">GitHub 源码</a>
+        </div>
+      </article>
+    </div>
+    <div class="inline-row">
+      <b>中服云功能测试</b>
+      <span class="sep">｜</span>
+      <span>在工厂设备运维平台上做功能测试。45 条缺陷里有几个会出事的：删一条采购计划会把整批清空，已审核单据的单价还能直接改、不留痕。</span>
+      <a href="experience-zyf.html">查看 →</a>
     </div>
   </div>
 </section>
 
-<section id="projects" class="alt">
+<section id="empirical" class="alt">
   <div class="wrap">
     <div class="sec-head">
-      <div class="k">其他项目与工具</div>
-      <h2>其他项目与工具</h2>
+      <div class="k">04</div>
+      <h2>实证研究与社会调查</h2>
     </div>
+    <div class="rcards two">
+      <article class="rcard">
+        <div class="rt">人工智能采用与企业多元化</div>
+        <div class="tags">
+          <span class="tag">毕业论文</span>
+          <span class="tag">A 股面板</span>
+          <span class="tag">多期 DID</span>
+          <span class="tag">PSM</span>
+          <span class="tag">Heckman</span>
+        </div>
+        <div class="rd">用 2010–2024 年 A 股 39,853 个企业—年度观测，以熵指数把多元化分解为相关与不相关，识别 AI 采用对企业多元化结构的因果效应；用多期 DID、PSM 与 Heckman 两阶段处理内生性。</div>
+        <p class="evidence">独立完成选题、数据处理与实证分析。</p>
+        <div class="project-links">
+          <a href="research.html#quant">研究摘要</a>
+        </div>
+      </article>
 
-    <div class="proj-block" id="data">
-      <div class="proj-head">
-        <h3>数据分析与工具</h3>
-      </div>
-      <div class="rcards">
-        <article class="rcard">
-          <div class="rt">Game Radar · 四国免费榜跟踪</div>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">SQLite</span>
-            <span class="tag">Apple RSS</span>
-          </div>
-          <div class="rd">记录美国、中国、日本和韩国 App Store 免费游戏 Top 100，生成静态日报、周报和 SQL 分析。我编写了定时采集脚本与 SQLite 台账，并生成日报、周报页面。</div>
-          <p class="evidence">基于 16 个榜日的历史快照；数据口径与复现限制见 README。</p>
-          <div class="project-links">
-            <a href="https://han-wangze.github.io/game-radar/" target="_blank" rel="noopener noreferrer">在线榜单</a>
-            <a class="secondary" href="https://github.com/han-wangze/game-radar" target="_blank" rel="noopener noreferrer">README 与源码</a>
-          </div>
-        </article>
-
-        <article class="rcard">
-          <div class="rt">手游市场结构分析工具</div>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">pandas</span>
-            <span class="tag">Excel 报表</span>
-          </div>
-          <div class="rd">处理 Sensor Tower 榜单导出，生成品类和题材的集中度、新品表现、产品模型及跨年 Top N 榜单分析表。我用 Python 统一处理五年榜单，为年度报告提供底表，减少不同报告之间的口径差异。</div>
-          <p class="evidence">计算集中度、新品表现与跨年留存等 30 余项指标；原始数据不随仓库发布。</p>
-          <div class="project-links">
-            <a class="secondary" href="https://github.com/han-wangze/game-structure-analysis-tools" target="_blank" rel="noopener noreferrer">README、字段说明与源码</a>
-          </div>
-        </article>
-
-        <article class="rcard">
-          <div class="rt">手游市场研究辅助脚本</div>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">榜单筛选</span>
-            <span class="tag">问卷批处理</span>
-          </div>
-          <div class="rd">三个独立脚本，分别筛选免费榜新品候选、整理指定 B 站账号的投稿信息、批量统计概念测试问卷。我把实习期间三类重复流程写成脚本固化下来，投稿内容仍需人工判断是否与新游相关。</div>
-          <p class="evidence">输入数据需自备，具体限制见 README。</p>
-          <div class="project-links">
-            <a class="secondary" href="https://github.com/han-wangze/workflow-optimization-tools" target="_blank" rel="noopener noreferrer">README 与源码</a>
-          </div>
-        </article>
-      </div>
-    </div>
-
-    <div class="proj-block">
-      <div class="proj-head">
-        <h3>研究与调查</h3>
-      </div>
-      <div class="rcards two">
-        <article class="rcard">
-          <div class="rt">人工智能采用与企业多元化</div>
-          <div class="tags">
-            <span class="tag">毕业论文</span>
-            <span class="tag">A 股面板</span>
-            <span class="tag">双向固定效应</span>
-            <span class="tag">多期 DID</span>
-            <span class="tag">PSM</span>
-          </div>
-          <div class="rd">基于 2010–2024 年中国 A 股非金融上市公司数据（4,489 家、39,853 个企业—年度观测），以经营分部收入构造相关与不相关多元化指标，识别 AI 采用对企业多元化结构的因果效应；论文结果显示效应主要体现在不相关多元化。<b>我的工作：</b>独立完成选题、数据处理与实证分析。</div>
-          <div class="project-links">
-            <a href="research.html#quant">研究摘要</a>
-          </div>
-        </article>
-
-        <article class="rcard">
-          <div class="rt">一刻钟便民生活圈“小修小补”消费调查</div>
-          <div class="tags">
-            <span class="tag">居民问卷 727 份</span>
-            <span class="tag">从业者量表 14 份</span>
-            <span class="tag">腾飞杯二等奖</span>
-          </div>
-          <div class="rd">调查居民对社区“小修小补”服务的使用与满意度。分析显示，社区支持、价格透明度和寻找服务的时间成本与居民满意度相关；从业者样本较小，仅作描述性统计。<b>我的工作：</b>主导 727 份问卷的设计、投放与统计分析。</div>
-          <div class="project-links">
-            <a href="research.html#survey">研究设计与限制</a>
-          </div>
-        </article>
-      </div>
-    </div>
-
-    <div class="proj-block">
-      <div class="proj-head">
-        <h3>案例与课程研究</h3>
-        <div class="proj-mini">5 份：空间计算（2）·广告案例分析（2）·财政研究（1） · <a href="research.html#case">查看归档 →</a></div>
-      </div>
+      <article class="rcard">
+        <div class="rt">一刻钟便民生活圈「小修小补」消费调查</div>
+        <div class="tags">
+          <span class="tag">居民问卷 727 份</span>
+          <span class="tag">从业者量表 14 份</span>
+          <span class="tag">腾飞杯二等奖</span>
+        </div>
+        <div class="rd">面向社区居民与从业者的双渠道问卷，用 SPSS 做信效度检验与多元回归，主要看社区支持、价格透明度、找人的时间成本这几项跟满意度有没有关系。</div>
+        <p class="evidence">主导问卷设计、投放与统计；供给端样本小，只做描述统计。</p>
+        <div class="project-links">
+          <a href="research.html#survey">研究设计与限制</a>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<section id="more" class="alt">
+<section id="more">
   <div class="wrap">
     <div class="sec-head">
-      <div class="k">其他经历</div>
+      <div class="k">05</div>
       <h2>其他经历</h2>
     </div>
     <div class="more">
+      <details class="mgroup">
+        <summary>案例研究<span class="cnt">7 份：2 篇计量课程论文 · 5 份案例分析与文献综述</span><span class="plus"></span></summary>
+        <div class="mrow">
+          <div class="mw">2024.11</div>
+          <div>
+            <div class="mt">数字经济发展水平对商贸流通业效率的影响</div>
+            <div class="md">课程论文 22 页 · 熵权法测数字经济、DEA 测流通效率，再引入工具变量处理内生性。结论：两者显著正相关，技术水平和电子商务是两条中介路径。</div>
+          </div>
+        </div>
+        <div class="mrow">
+          <div class="mw">2024.11</div>
+          <div>
+            <div class="mt">社会消费品零售总额变化趋势及与财政支出的相关性</div>
+            <div class="md">课程论文 16 页 · 2000–2023 年全国年度序列，配合序列相关与平稳性检验。结论：财政支出与居民收入均有显著正向影响，并给出未来 5 年区间估计。</div>
+          </div>
+        </div>
+        <div class="mrow">
+          <div class="mw">文献综述</div>
+          <div>
+            <div class="mt">空间计算起源与发展</div>
+            <div class="md">13 页 · 以 Web of Science 文献计量切入，梳理四层技术框架。结论：领域已从工程计算扩到消费端，但受成熟度、自然交互与实时渲染三类瓶颈约束。</div>
+          </div>
+        </div>
+        <div class="mrow">
+          <div class="mw">课程论文</div>
+          <div>
+            <div class="mt">空间计算在物流管理中的运用</div>
+            <div class="md">13 页 · 小组合作。把技术映射到实时货物跟踪、路径规划、仓库自动化。结论：应用空间明确，受技术成熟度、经济成本与数据安全三重约束。</div>
+          </div>
+        </div>
+        <div class="mrow">
+          <div class="mw">案例分析</div>
+          <div>
+            <div class="mt">旺旺魔性广告为何洗脑</div>
+            <div class="md">6 页 · 从重复、生活化叙事与儿童视角、IP 形象运营拆解「魔性」。结论：形式看似过时，实质是对细分客群与消费心理的把握。</div>
+          </div>
+        </div>
+        <div class="mrow">
+          <div class="mw">案例分析</div>
+          <div>
+            <div class="mt">「五个女博士」广告争议案例</div>
+            <div class="md">7 页 · 用扎根理论提炼的框架比较广告冒犯度与消费者容忍度。结论：「贩卖焦虑」与自建的高学术形象冲突，长期会损害品牌态度；对购买行为的影响未做实验检验。</div>
+          </div>
+        </div>
+        <div class="mrow">
+          <div class="mw">文献综述</div>
+          <div>
+            <div class="mt">国家、财政、经济之间的关系</div>
+            <div class="md">6 页 · 界定概念范畴，梳理三者相互作用。结论：财政支出产出弹性存在地区差异，教育与科技支出对增长的促进作用更显著。</div>
+          </div>
+        </div>
+      </details>
       <details class="mgroup">
         <summary>学生工作<span class="cnt">优思新媒体 · 青少年发展中心 · 团工委 · 勤工助学办公室</span><span class="plus"></span></summary>
         <div class="mrow">
@@ -467,7 +471,8 @@
   <div class="wrap">
     <div class="sitemap" style="margin-top:0">
       <div class="sg"><b>实习</b><a href="experience-cyou.html">搜狐畅游</a><a href="experience-zyf.html">中服云</a></div>
-      <div class="sg"><b>项目</b><a href="weschedule.html">产品项目</a><a href="#data">数据分析与工具</a><a href="research.html#quant">实证研究</a><a href="research.html#survey">社会调查</a><a href="research.html#case">案例与课程研究</a></div>
+      <div class="sg"><b>作品</b><a href="#market">市场研究</a><a href="#data">数据分析</a><a href="weschedule.html">产品项目</a><a href="#empirical">实证研究与社会调查</a></div>
+      <div class="sg"><b>研究</b><a href="research.html#quant">实证研究</a><a href="research.html#survey">社会调查</a><a href="research.html#case">案例研究</a></div>
       <div class="sg"><b>源码</b><a href="https://github.com/han-wangze/hanwangze" target="_blank" rel="noopener noreferrer">本站源码</a></div>
     </div>
     <div style="margin-top:16px">韩王泽 · 个人主页 · © 2026</div>
