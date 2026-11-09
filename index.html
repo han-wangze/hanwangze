@@ -101,7 +101,10 @@
   .rcard .rt{font-weight:800;font-size:15px;line-height:1.45}
   .rcard .rmeta{font-size:12.5px;color:var(--muted);margin-top:-5px}
   .rcard .rd{font-size:13.5px;color:var(--muted);flex:1}
+  .rcard .rd p + p{margin-top:7px}
   .rcard .rd b{color:var(--ink)}
+  .sec-foot{margin-top:12px;font-size:13px;color:var(--muted)}
+  .sec-foot a{color:var(--primary);font-weight:700}
   .rcard .rf{font-size:13px;font-weight:700;color:var(--primary)}
   .rcard .evidence{font-size:12.5px;color:var(--muted);padding-top:6px;border-top:1px solid var(--line)}
   .project-links{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:auto;padding-top:4px;font-size:13px;font-weight:700}
@@ -159,7 +162,7 @@
           <a href="#empirical">实证研究与社会调查</a>
         </div>
       </div>
-      <a href="research.html">研究作品</a>
+      <a href="research.html">研究归档</a>
       <a href="https://github.com/han-wangze" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
   </div>
@@ -229,8 +232,12 @@
           <span class="tag">scikit-learn</span>
           <span class="tag">时间切分验证</span>
         </div>
-        <div class="rd">基于 2,526 款游戏的早期评论数据，构建口碑下降风险预测模型；用按首条评论年份切分的时间验证，评估模型对后续年份游戏的样本外排序能力。</div>
-        <p class="evidence">数据截至 2023-11，未用 2024 年后的游戏做外部验证。</p>
+        <div class="rd">
+          <p><b>问题：</b>对首月好评的游戏，能不能用前 30 天的评论，提前排出后续更可能跌出好评档的作品？</p>
+          <p><b>方法：</b>以数据集里的首条评论时间为起点，前 30 天构造特征、第 30–365 天观察变化；L2 正则化逻辑回归，按首条评论年份做时间切分测试。</p>
+          <p><b>结果：</b>测试集 AUC 0.886、AP 0.343；风险排序前 10% 的游戏里 30.2% 后来跌出好评档，约为基准率的 5 倍；滚动 7 折 AUC 中位 0.861。</p>
+        </div>
+        <p class="evidence">看板可查样本外游戏的风险排序、前后期好评率与实际结果；数据截至 2023-11。</p>
         <div class="project-links">
           <a href="https://han-wangze.github.io/steam-review-decline/" target="_blank" rel="noopener noreferrer">在线看板</a>
           <a class="secondary" href="https://github.com/han-wangze/steam-review-decline" target="_blank" rel="noopener noreferrer">README 与源码</a>
@@ -244,7 +251,11 @@
           <span class="tag">pandas</span>
           <span class="tag">集中度与分层指标</span>
         </div>
-        <div class="rd">处理 Sensor Tower 五年榜单导出，算出集中度、产品分层、新品表现和跨年轨迹，输出 Excel 底表给四份年度报告用。口径规则写在代码里，字段说明单独成文。</div>
+        <div class="rd">
+          <p><b>问题：</b>报告要对每个品类给出「值不值得进」的判断，但榜单导出只有排名和规模，看不出结构。</p>
+          <p><b>方法：</b>五年榜单走同一套 Python 流程，算集中度、分层增长贡献、新品渗透和跨年轨迹；口径规则写进代码——总量与份额只在排序轴上算，跨年在榜只用固定 Top N。</p>
+          <p><b>产出：</b>30 余项指标的 Excel 底表与字段说明，供四份年度报告直接取数。</p>
+        </div>
         <p class="evidence">原始数据不随仓库发布。</p>
         <div class="project-links">
           <a class="secondary" href="https://github.com/han-wangze/game-structure-analysis-tools" target="_blank" rel="noopener noreferrer">README、字段说明与源码</a>
@@ -258,7 +269,11 @@
           <span class="tag">SQLite</span>
           <span class="tag">Apple RSS</span>
         </div>
-        <div class="rd">每 12 小时抓取美中日韩 App Store 免费游戏榜 Top100，存在 SQLite 里，生成三页静态站和 14 天分析报告，常用问题能直接跑 SQL 查。</div>
+        <div class="rd">
+          <p><b>问题：</b>Apple 只提供当前榜快照，没有历史接口；想知道某个榜日进了哪些新游戏、后来还在不在榜，只能自己按天存。</p>
+          <p><b>方法：</b>每 12 小时抓一次中美日韩 Top 100，用 Apple 公开接口取榜单与产品信息，名次和产品资料按榜日存进 SQLite。</p>
+          <p><b>产出：</b>三页静态页——当日榜、前一榜日、周报；展示首次进榜、名次变化、上架时长与品类构成，玩法简介、玩法类型和中文译名由 LLM 辅助生成。</p>
+        </div>
         <p class="evidence">16 个榜日快照；129 项数字断言可逐条回查。</p>
         <div class="project-links">
           <a href="https://han-wangze.github.io/game-radar/" target="_blank" rel="noopener noreferrer">在线榜单</a>
@@ -273,7 +288,11 @@
           <span class="tag">pandas</span>
           <span class="tag">批处理</span>
         </div>
-        <div class="rd">实习时每周要手动比对榜单找新游、翻 B 站看 UP 主发了什么、统计一批问卷。后来分别写成三个脚本，跑一次出结果。</div>
+        <div class="rd">
+          <p><b>问题：</b>每周要手动比对榜单找新游、翻 B 站看 UP 主发了什么、统计一批问卷，重复且容易抄错。</p>
+          <p><b>方法：</b>三个独立脚本，各自一个入口、一个输入目录、一个输出文件；榜单两种导出格式自动识别，B 站按时间窗抓、翻到更早的就停，问卷按同一套分母算指标。</p>
+          <p><b>产出：</b>本周新品清单与去重表、投稿 CSV、问卷统计表，跑一次出结果。</p>
+        </div>
         <p class="evidence">输入数据需自备。</p>
         <div class="project-links">
           <a class="secondary" href="https://github.com/han-wangze/workflow-optimization-tools" target="_blank" rel="noopener noreferrer">README 与源码</a>
@@ -353,6 +372,7 @@
         </div>
       </article>
     </div>
+    <div class="sec-foot">全部 9 份研究：论文 1 · 调查 1 · 课程论文 2 · 案例 5 → <a href="research.html">查看归档</a></div>
   </div>
 </section>
 
