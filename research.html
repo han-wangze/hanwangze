@@ -107,6 +107,17 @@
   .mini .md{font-size:13.5px;color:var(--muted);flex:1}
   .mini .md b{color:var(--ink);font-weight:600}
   .mini .mf{font-size:12.5px;color:var(--primary);font-weight:600}
+  /* 案例研究：单列全宽 + 分点 */
+  #case .list{grid-template-columns:1fr}
+  #case .mini{gap:10px;padding:18px 20px}
+  #case .cpts{display:grid;gap:9px}
+  #case .cpt{display:grid;grid-template-columns:132px 1fr;gap:4px 16px;align-items:start}
+  #case .ck{color:var(--primary);font-weight:700;font-size:13px;line-height:1.65}
+  #case .cv{font-size:13.5px;color:var(--muted);line-height:1.65}
+  #case .cpt.plain{grid-template-columns:1fr}
+  #case .cpt.plain .cv::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--primary);vertical-align:middle;margin-right:9px}
+  #case .clead{font-size:13.5px;color:var(--ink);font-weight:700}
+  @media(max-width:640px){#case .cpt{grid-template-columns:1fr;gap:1px}}
   footer{padding:36px 0 56px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
   .sitemap{margin-top:0;font-size:14px;color:var(--muted);line-height:2}
   .sitemap b{color:var(--ink);font-weight:600}
@@ -224,22 +235,39 @@
       <div class="mini">
         <div class="mt">旺旺魔性广告为何洗脑</div>
         <div class="mm"><span class="pill b">案例分析</span></div>
-        <div class="md">在广告策略上：高频重复（加工流畅性、条件反射、曝光效应）、故事营销（童趣叙事、亲情友情联结）、CNY 营销（「新年就要旺」的心理暗示，甚至曾因「迷信内容」被叫停）、IP 打造（旺仔形象多媒介延伸）、精准目标群体（以儿童为中心向家庭扩散）、品牌价值多元化（节日主题广告）<br>心理机制上：故事营销：专注状态降低批判性思考，提升沉浸与认同；顾客心理所有权：儿童视角的「我就要吃」塑造拥有感，提升产品价值评价；心理契约：广告传达的家庭幸福等主题构建情感信任，促进忠诚。</div>
+        <div class="cpts">
+          <div class="cpt"><span class="ck">在广告策略上：</span><span class="cv">高频重复（加工流畅性、条件反射、曝光效应）、故事营销（童趣叙事、亲情友情联结）、CNY 营销（「新年就要旺」的心理暗示，甚至曾因「迷信内容」被叫停）、IP 打造（旺仔形象多媒介延伸）、精准目标群体（以儿童为中心向家庭扩散）、品牌价值多元化（节日主题广告）</span></div>
+          <div class="cpt"><span class="ck">心理机制上：</span><span class="cv">故事营销：专注状态降低批判性思考，提升沉浸与认同；顾客心理所有权：儿童视角的「我就要吃」塑造拥有感，提升产品价值评价；心理契约：广告传达的家庭幸福等主题构建情感信任，促进忠诚。</span></div>
+        </div>
       </div>
       <div class="mini">
         <div class="mt">「五个女博士」广告争议案例</div>
         <div class="mm"><span class="pill b">案例分析</span></div>
-        <div class="md">失败原因拆解：产品效用损失：低俗广告与消费者心中「北大女博士、高科技」的品牌形象产生撕裂，引发对产品本身的质疑；心理效用损失：购买产品等于迎合广告中歇斯底里的女性刻板形象，与自我认同冲突；体验效用损失：电梯封闭空间内的大音量浮夸表演构成强制性侵扰；情感损失：丑化女性、贩卖容貌年龄焦虑，直接造成伤害感。</div>
+        <div class="clead">失败原因拆解：</div>
+        <div class="cpts">
+          <div class="cpt"><span class="ck">产品效用损失：</span><span class="cv">低俗广告与消费者心中「北大女博士、高科技」的品牌形象产生撕裂，引发对产品本身的质疑；</span></div>
+          <div class="cpt"><span class="ck">心理效用损失：</span><span class="cv">购买产品等于迎合广告中歇斯底里的女性刻板形象，与自我认同冲突；</span></div>
+          <div class="cpt"><span class="ck">体验效用损失：</span><span class="cv">电梯封闭空间内的大音量浮夸表演构成强制性侵扰；</span></div>
+          <div class="cpt"><span class="ck">情感损失：</span><span class="cv">丑化女性、贩卖容貌年龄焦虑，直接造成伤害感。</span></div>
+        </div>
       </div>
       <div class="mini">
         <div class="mt">空间计算在物流管理中的运用</div>
         <div class="mm"><span class="pill b">课程论文</span><span class="pill o">小组合作</span></div>
-        <div class="md">空间计算是将数字内容与现实空间信息融合、支持人机虚实交互的计算范式。在物流领域的应用包括实物实时跟踪与可视化（数字孪生、GPS+IoT）、路径规划与运输管理（京东物流 GIS 案例）、智能仓储（自动入库分拣、库存优化、布局仿真）等，同时面临三维渲染在大型物流场景中的加载卡顿、嘈杂环境下人机交互不准等挑战。</div>
+        <div class="cpts">
+          <div class="cpt plain"><span class="cv">空间计算是将数字内容与现实空间信息融合、支持人机虚实交互的计算范式。</span></div>
+          <div class="cpt plain"><span class="cv">在物流领域的应用包括实物实时跟踪与可视化（数字孪生、GPS+IoT）、路径规划与运输管理（京东物流 GIS 案例）、智能仓储（自动入库分拣、库存优化、布局仿真）等，</span></div>
+          <div class="cpt plain"><span class="cv">同时面临三维渲染在大型物流场景中的加载卡顿、嘈杂环境下人机交互不准等挑战。</span></div>
+        </div>
       </div>
       <div class="mini">
         <div class="mt">国家、财政、经济之间的关系</div>
         <div class="mm"><span class="pill b">文献综述</span></div>
-        <div class="md">经济决定财政：经济发展水平决定财政收支——经济越好，税基越大、收入越多；经济冷热也决定财政政策取向（扩张或紧缩）。<br>财政反作用于经济：政府通过公共投资、税收等手段调控总需求；财政支出规模与经济增长存在非线性关系；财政政策不完善也会带来负面影响<br>经济是政府绩效与官员晋升的评价依据</div>
+        <div class="cpts">
+          <div class="cpt"><span class="ck">经济决定财政：</span><span class="cv">经济发展水平决定财政收支——经济越好，税基越大、收入越多；经济冷热也决定财政政策取向（扩张或紧缩）。</span></div>
+          <div class="cpt"><span class="ck">财政反作用于经济：</span><span class="cv">政府通过公共投资、税收等手段调控总需求；财政支出规模与经济增长存在非线性关系；财政政策不完善也会带来负面影响</span></div>
+          <div class="cpt plain"><span class="cv">经济是政府绩效与官员晋升的评价依据</span></div>
+        </div>
       </div>
     </div>
   </div>
