@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SkinFlow · 韩王泽</title>
+<meta name="description" content="SkinFlow：根据约 30 字段问卷和已有产品生成早晚护肤方案，含成分冲突检测、缺口推荐、方案存档与对话式改需求。数据层覆盖 8,986 条原料目录核验，判定用属性位 + 三层规则，交付为 Dify 工作流与已上线的 Web 应用。" />
+<meta name="author" content="韩王泽" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<meta name="theme-color" content="#3730a3" />
+<link rel="canonical" href="https://han-wangze.github.io/hanwangze/skinflow.html" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="韩王泽 · 个人主页" />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:title" content="SkinFlow · 护肤方案规划助手" />
+<meta property="og:description" content="问卷 30 字段 → 早晚方案 + 缺口。数据层 8,986 条原料目录核验、30 张成分卡；判定用 5 个属性位 + 三层规则；交付为 Dify 工作流（16 节点）与已上线 Web 应用（FastAPI + Next.js）。" />
+<meta property="og:url" content="https://han-wangze.github.io/hanwangze/skinflow.html" />
+<meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+  :root{
+    --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
+    --primary:#3730a3; --primary-d:#312e81; --accent:#0f766e; --signal:#b45309;
+    --ok:#16a34a; --warn:#f59e0b; --line:#e5e7eb;
+    --shadow:0 1px 3px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(12px);
+    background:rgba(247,248,251,.82);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:var(--primary)}
+  .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+  .navlinks a:hover{color:var(--primary)}
+  .navdrop{position:relative;display:flex}
+  .navdrop>a{display:inline-flex;align-items:center;gap:6px}
+  .navdrop .caret{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid currentColor;opacity:.55;margin-top:2px}
+  .navdrop .menu{position:absolute;top:100%;left:0;min-width:180px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:6px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .15s,transform .15s,visibility .15s;z-index:70}
+  .navdrop:hover .menu{opacity:1;visibility:visible;transform:translateY(0)}
+  .navdrop .menu a{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:8px;font-size:13.5px;color:var(--ink);white-space:nowrap}
+  .navdrop .menu a:hover{background:#eef2ff;color:var(--primary)}
+  @media(max-width:760px){.navdrop .menu,.navdrop .caret{display:none}}
+  @media(max-width:760px){nav .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 20px;gap:2px 0}.navlinks{display:flex;flex-wrap:wrap;font-size:13px;gap:14px;padding-bottom:4px}.navlinks a{padding:8px 2px;min-height:44px;display:inline-flex;align-items:center}}
+  header.hero{padding:72px 0 56px;background:
+    radial-gradient(1200px 400px at 80% -10%,rgba(55,48,163,.12),transparent),
+    radial-gradient(900px 360px at 0% 0%,rgba(15,118,110,.10),transparent);}
+  .hero h1{font-size:42px;line-height:1.18;font-weight:800;letter-spacing:-.5px}
+  .hero h1 .grad{color:var(--primary)}
+  .hero p.sub{margin-top:16px;font-size:17.5px;color:var(--muted);max-width:700px}
+  .hero p.role{margin-top:14px;font-size:14.5px;color:var(--ink);font-weight:600}
+  .hero p.role span{color:var(--muted);font-weight:400}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
+    padding:8px 14px;font-size:13px;display:flex;gap:8px;align-items:center}
+  .badge b{color:var(--signal)}
+  .cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:600;font-size:15px;transition:.15s}
+  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(55,48,163,.35)}
+  .btn.primary:hover{background:var(--primary-d)}
+  .btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--primary);color:var(--primary)}
+  section{padding:56px 0}
+  .sec-head{margin-bottom:28px}
+  .sec-head .k{font-size:13px;font-weight:700;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase}
+  .sec-head h2{font-size:28px;font-weight:800;margin-top:6px;letter-spacing:-.3px}
+  .sec-head p{color:var(--muted);margin-top:8px;max-width:700px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+  .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
+  .shot{margin:0;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+  .shot img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center;display:block}
+  .shot img.top{object-position:top center}
+  .shot figcaption{padding:10px 12px;font-size:13px;color:var(--muted);text-align:center;line-height:1.55}
+  @media(max-width:720px){.shots{grid-template-columns:1fr}.shot figcaption{font-size:12px;padding:8px 6px}}
+  .figure{margin:0 0 18px;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+  .figure img{width:100%;height:auto;display:block}
+  .figure figcaption{padding:10px 14px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  .arch{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);overflow-x:auto;margin-bottom:18px}
+  .arch svg{width:100%;height:auto;min-width:660px;display:block}
+  .flow-step{fill:#eef2ff;stroke:var(--primary);stroke-width:1.5}
+  .flow-step.t{fill:#ecfeff;stroke:var(--accent)}
+  .flow-arrow{stroke:#9ca3af;stroke-width:2;fill:none}
+  .flow-label{font-size:13px;fill:var(--ink);font-weight:600}
+  .flow-sub{font-size:11px;fill:var(--muted)}
+  .dec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);margin-bottom:16px}
+  .dec:last-child{margin-bottom:0}
+  .dec-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .dec-n{font-size:12px;font-weight:800;color:var(--primary);background:#eef2ff;border-radius:6px;padding:3px 8px;letter-spacing:.5px}
+  .dec-top h3{font-size:17px;font-weight:800}
+  .dec-src{margin-top:8px;font-size:13px;color:var(--muted)}
+  .dec-body{margin-top:14px;background:#f8fafc;border-left:3px solid var(--primary);border-radius:0 10px 10px 0;padding:14px 16px}
+  .dec-body p{font-size:14px;color:#4b5563}
+  .dec-body p+p{margin-top:8px}
+  .tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);font-size:14px}
+  .tbl thead th{background:#f8fafc;font-size:12.5px;font-weight:700;color:var(--muted);text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);letter-spacing:.3px}
+  .tbl tbody td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:#374151}
+  .tbl tbody tr:last-child td{border-bottom:none}
+  .tbl b{color:var(--ink)}
+  .tbl .num{font-variant-numeric:tabular-nums;font-weight:700;color:var(--signal);white-space:nowrap}
+  .tbl-wrap{overflow-x:auto;border-radius:12px}
+  .pre{background:#f8fafc;border-left:3px solid var(--primary);border-radius:0 10px 10px 0;padding:16px 18px;overflow-x:auto;margin:0 0 18px}
+  .pre code{background:none;padding:0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:12.8px;line-height:1.75;color:#334155;white-space:pre}
+  .note{margin-top:18px;font-size:13.5px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .fix{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:16px}
+  .fix li{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--signal);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
+  .fix li b{color:var(--ink)}
+  .fix li .m{font-size:12.5px;color:var(--muted);margin-top:5px}
+  .backrow{padding:14px 0 0;font-size:14px;font-weight:600}
+  .backrow a{color:var(--primary)}
+  footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
+  .sitemap{margin-top:0;font-size:14px;color:var(--muted);line-height:2}
+  .sitemap b{color:var(--ink);font-weight:600}
+  .sitemap a{color:var(--muted);border-bottom:1px solid transparent;transition:.15s}
+  .sitemap a:hover{color:var(--primary);border-bottom-color:var(--primary)}
+  .toc{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;font-size:13.5px;color:var(--muted)}
+  .toc b{color:var(--ink);font-weight:600}
+  .toc a{color:var(--muted);border-bottom:1px solid transparent;transition:.15s}
+  .toc a:hover{color:var(--primary);border-bottom-color:var(--primary)}
+  code{background:#f1f5f9;padding:2px 6px;border-radius:5px;font-size:.9em}
+  h1,h2,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif}
+  @media(max-width:760px){
+    .hero{padding:44px 0 32px}
+    .hero h1{font-size:31px}
+    .hero p.sub{font-size:15.5px}
+    .badge{font-size:12px;padding:7px 11px}
+    section{padding:40px 0}
+    .sec-head h2{font-size:22px;line-height:1.35}
+    .arch{padding:12px;overflow-x:auto}
+    .arch svg{min-width:600px;width:600px}
+    .tbl{font-size:13px}
+    .tbl thead th,.tbl tbody td{padding:9px 10px}
+    .pre{padding:12px 12px}
+    .pre code{font-size:11.5px}
+    .dec{padding:16px}
+    .dec-top h3{font-size:15.5px}
+    .dec-body{padding:12px}
+    .dec-body p{font-size:13.5px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>韩王泽</div>
+    <div class="navlinks">
+      <a href="index.html">首页</a>
+      <div class="navdrop">
+        <a href="index.html#product">作品<span class="caret"></span></a>
+        <div class="menu">
+          <a href="index.html#market">市场研究与业务分析</a>
+          <a href="index.html#data">数据分析与建模</a>
+          <a href="index.html#product">产品设计与开发</a>
+          <a href="index.html#empirical">实证研究与社会调查</a>
+        </div>
+      </div>
+      <a href="research.html">研究归档</a>
+      <a href="https://github.com/han-wangze" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>SkinFlow</h1>
+    <p class="sub">根据约 30 个字段的问卷和用户已有产品，生成早晚护肤方案：每步做什么、为什么、哪两样不能一起用、还缺什么。已上线。</p>
+    <p class="role">我的工作 <span>数据搜集与核验 · 判定规则与引擎 · Dify 工作流 · 后端与前端 · 评测</span></p>
+    <div class="badges">
+      <span class="badge"><b>8,986 条</b> 原料目录核验</span>
+      <span class="badge"><b>435 对 → 10 条</b> 判定规则</span>
+      <span class="badge"><b>16 节点</b> Dify 工作流</span>
+      <span class="badge"><b>16 / 16</b> 判定专项实跑</span>
+      <span class="badge"><b>4 次</b> 线上发布</span>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="https://skinflow-plan.app.workbuddy.host/?sharecode=Y2YZZFH6J6" target="_blank" rel="noopener noreferrer">打开在线应用</a>
+      <a class="btn ghost" href="#data">从数据层看起</a>
+    </div>
+    <div class="toc">
+      <b>本页内容</b>
+      <a href="#shots">界面</a>
+      <a href="#what">系统做什么</a>
+      <a href="#scope">工作范围</a>
+      <a href="#data">数据层</a>
+      <a href="#rules">判定规则</a>
+      <a href="#delivery">交付形态</a>
+      <a href="#eval">评测</a>
+      <a href="#eng">后端与前端</a>
+      <a href="#out">产出与修复</a>
+    </div>
+  </div>
+</header>
+
+<section id="shots" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="shots">
+      <figure class="shot">
+        <img src="img/skinflow/confirm-card.webp" alt="对话改需求的确认卡" />
+        <figcaption>改需求：会连带清掉什么，在点确认之前列出来</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="img/skinflow/history.webp" alt="历史方案详情" />
+        <figcaption>方案存档：带快照编号，「待购买」标签区分已购与候选</figcaption>
+      </figure>
+      <figure class="shot">
+        <img class="top" src="img/skinflow/space.webp" alt="个人空间" />
+        <figcaption>个人空间：今日步骤、当前方案、问卷摘要</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="what">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">项目背景</div>
+      <h2>30 字段问卷 → 早晚方案 + 缺口</h2>
+    </div>
+    <div class="arch">
+      <svg viewBox="0 0 880 200" role="img" aria-label="输入与输出">
+        <rect class="flow-step" x="8" y="34" width="300" height="132" rx="12"/>
+        <text class="flow-label" x="28" y="62">输入</text>
+        <text class="flow-sub" x="28" y="88">问卷 30 字段：肤质 / 困扰 / 敏感 / 预算 / 早晚步数</text>
+        <text class="flow-sub" x="28" y="110">已有产品清单（可空）</text>
+        <text class="flow-sub" x="28" y="132">过敏成分、是否保守处理</text>
+        <path class="flow-arrow" d="M312 100 H400" marker-end="url(#ar)"/>
+        <rect class="flow-step t" x="404" y="34" width="468" height="132" rx="12"/>
+        <text class="flow-label" x="424" y="62">输出</text>
+        <text class="flow-sub" x="424" y="88">早上 3 步、晚上 2 步，每步一句理由</text>
+        <text class="flow-sub" x="424" y="110">冲突清单（A醇 × VC → 拆早晚）+ 缺口品类 + 预算内候选</text>
+        <text class="flow-sub" x="424" y="132">方案快照（我的空间，可按编号回看）</text>
+        <defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#9ca3af"/></marker></defs>
+      </svg>
+    </div>
+    <p>用户是两类人：手上没有产品、不知道先买哪几样；或者已经买了几瓶、不知道能不能叠、先涂哪个。</p>
+    <p style="margin-top:12px">系统把问卷折成一组约束（目标、预算、早晚步数、是否保守处理），在自建产品目录里做筛选和排期，输出上面四类结果。助手在旁边做两件事：解释方案里的每一步；接收“想改某几项需求”的话，转成待确认的修改。</p>
+  </div>
+</section>
+
+<section id="scope" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">工作范围</div>
+      <h2>从数据到上线，五个部分</h2>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th style="width:22%">部分</th><th>产出</th><th style="width:26%">关键数字</th></tr></thead>
+        <tbody>
+          <tr><td><b>数据搜集与核验</b></td><td>原料目录、法规三表、成分卡、口语别名、缺口规则</td><td class="num">8,986 条目录</td></tr>
+          <tr><td><b>判定规则与引擎</b></td><td>属性位体系、三层判定、三态输出、排期与缺口算法</td><td class="num">435 对 → 10 条规则</td></tr>
+          <tr><td><b>Dify 工作流</b></td><td>判定 demo、引导问答、生成与自检脚本</td><td class="num">2 个工作流 / 16 节点</td></tr>
+          <tr><td><b>后端与前端</b></td><td>FastAPI 服务、Next.js 前端、云存档、对话改需求</td><td class="num">14 个模块 / 4 次发布</td></tr>
+          <tr><td><b>评测</b></td><td>数据闸门、一致性比对、判定专项、裸模型对照</td><td class="num">36 项闸门 / 16 例实跑</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="data">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">数据层</div>
+      <h2>8,986 条目录 + 法规三表 + 30 张成分卡</h2>
+      <p>判定表不是凭空写的：每条成分先落到目录序号和法规条款，再谈规则。</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>数据</th><th style="width:14%">规模</th><th>来源</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td><b>已使用化妆品原料目录</b></td><td class="num">8,986 条</td><td>中检院开放查询接口，90 次分页抓取</td><td>成分是否合法收录、目录序号</td></tr>
+          <tr><td><b>化妆品安全技术规范</b></td><td class="num">563 页</td><td>药监局公告附件 PDF</td><td>限用 47 / 准用防腐剂 51 / 准用防晒剂 27</td></tr>
+          <tr><td><b>成分卡</b></td><td class="num">30 张</td><td>逐条整理，每条标来源与证据等级</td><td>名称、INCI、别名、孕期/光敏、功效标签</td></tr>
+          <tr><td><b>判定属性位</b></td><td class="num">30 组</td><td>从成分卡派生</td><td>刺激 / 时段 / 剥脱 / 光敏 / 缓冲</td></tr>
+          <tr><td><b>口语别名</b></td><td class="num">70 条</td><td>手动整理</td><td>“洗面奶”“刷酸”“小白瓶”→ 品类或成分</td></tr>
+          <tr><td><b>产品目录</b></td><td class="num">样本 50 款</td><td>人工核验，字段按全量设计</td><td>排期与缺口筛选</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin:22px 0 10px;font-size:14px;color:var(--muted)">成分卡长这样（视黄醇，节选主要字段）：</p>
+    <div class="pre"><code>{
+  "id": "ING-002",
+  "cn_name": "视黄醇",
+  "inci_name": "RETINOL",
+  "aliases": ["A醇", "维生素A醇", "Retinol"],
+  "nmpa": { "catalog": "I", "seq": "06162" },
+  "role": "active",
+  "efficacy_tags": ["促进代谢", "抗老"],
+  "typical_conc_range": "0.1-0.5%",
+  "pm_only": true,
+  "phototoxic": false,
+  "pregnancy_flag": "avoid",
+  "sensitive_caution": true,
+  "evidence": [
+    { "claim": "收录于《已使用化妆品原料目录》I，序号 06162", "level": "A",
+      "source": "hzpsys.nidc.org.cn 实时查询" },
+    { "claim": "起效需转化为视黄酸、建议夜间使用并建立耐受", "level": "B",
+      "source": "皮肤科外用维A类共识性用法" }
+  ]
+}</code></div>
+
+    <div class="dec">
+      <div class="dec-top"><span class="dec-n">01</span><h3>属性位从成分卡派生，不手工维护两套</h3></div>
+      <div class="dec-body">
+        <p>30 张成分卡各自带一节属性标注，判定用的属性位由这些标注派生，不另写一份表。加新成分只改一处，属性位和规则自动生效。</p>
+      </div>
+      <div class="dec-src">目录核对结果另存 <code>nmpa_check.json</code>，含 30 条成分的原始响应，可回溯每条序号。</div>
+    </div>
+  </div>
+</section>
+
+<section id="rules" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">判定规则</div>
+      <h2>5 个属性位 + 三层判定 + 三态输出</h2>
+    </div>
+
+    <div class="arch">
+      <svg viewBox="0 0 880 190" role="img" aria-label="判定链路">
+        <rect class="flow-step" x="6" y="50" width="128" height="88" rx="10"/>
+        <text class="flow-label" x="20" y="76">成分原文</text>
+        <text class="flow-sub" x="20" y="98">“小白瓶”</text>
+        <text class="flow-sub" x="20" y="116">“A醇”</text>
+        <path class="flow-arrow" d="M138 94 H168" marker-end="url(#a2)"/>
+        <rect class="flow-step" x="172" y="50" width="128" height="88" rx="10"/>
+        <text class="flow-label" x="186" y="76">归一化</text>
+        <text class="flow-sub" x="186" y="98">70 条别名</text>
+        <text class="flow-sub" x="186" y="116">→ 成分 ID</text>
+        <path class="flow-arrow" d="M304 94 H334" marker-end="url(#a2)"/>
+        <rect class="flow-step" x="338" y="50" width="140" height="88" rx="10"/>
+        <text class="flow-label" x="352" y="76">属性位</text>
+        <text class="flow-sub" x="352" y="98">刺激 / 时段 / 剥脱</text>
+        <text class="flow-sub" x="352" y="116">光敏 / 缓冲</text>
+        <path class="flow-arrow" d="M482 94 H512" marker-end="url(#a2)"/>
+        <rect class="flow-step t" x="516" y="42" width="158" height="104" rx="10"/>
+        <text class="flow-label" x="530" y="68">三层判定</text>
+        <text class="flow-sub" x="530" y="90">① 拦截：禁用 / 处方</text>
+        <text class="flow-sub" x="530" y="108">② 特例：机制性关系</text>
+        <text class="flow-sub" x="530" y="126">③ 属性规则：通用</text>
+        <path class="flow-arrow" d="M678 94 H708" marker-end="url(#a2)"/>
+        <rect class="flow-step" x="712" y="50" width="76" height="88" rx="10"/>
+        <text class="flow-label" x="724" y="76">三态</text>
+        <text class="flow-sub" x="724" y="98">冲突</text>
+        <text class="flow-sub" x="724" y="116">没把握</text>
+        <path class="flow-arrow" d="M792 94 H818" marker-end="url(#a2)"/>
+        <rect class="flow-step" x="822" y="50" width="52" height="88" rx="10"/>
+        <text class="flow-label" x="832" y="76">输出</text>
+        <text class="flow-sub" x="832" y="98">排期</text>
+        <text class="flow-sub" x="832" y="116">缺口</text>
+        <defs><marker id="a2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#9ca3af"/></marker></defs>
+      </svg>
+    </div>
+
+    <figure class="figure">
+      <img src="img/skinflow/conflict.webp" alt="结果页：VC 排在晨间，视黄醇排在晚间" />
+      <figcaption>同一品牌的 10% VC 精华与视黄醇精华：VC 排在晨间第 2 步，视黄醇排在晚间第 2 步；注意事项里写明“检测到刺激叠加，已按判定分配到不同时段”。</figcaption>
+    </figure>
+
+    <div class="dec">
+      <div class="dec-top"><span class="dec-n">01</span><h3>规则写在属性上，不写成分配对</h3></div>
+      <div class="dec-body">
+        <p>30 个成分两两组合是 435 对，逐个写规则写不完也维护不了。改成先给每个成分打 5 个属性位，规则写在属性上：两条“剥脱”不同晚，含“光敏”只在早，含“刺激”必须有“缓冲”。规则从 435 条降到 10 条；加新成分只需标属性，不改规则。</p>
+      </div>
+    </div>
+    <div class="dec">
+      <div class="dec-top"><span class="dec-n">02</span><h3>第三态是“没把握”</h3></div>
+      <div class="dec-body">
+        <p>输出三种：冲突、查证可同次、没把握。规则没覆盖到的组合落到第三态，在方案里单列，不并入“可以一起用”。漏判冲突的代价不对称，所以默认取“没把握”。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="delivery">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">交付形态</div>
+      <h2>Dify 工作流 16 节点；Web 应用与接口同源部署</h2>
+    </div>
+
+    <div class="arch">
+      <svg viewBox="0 0 880 250" role="img" aria-label="两层结构">
+        <rect class="flow-step" x="120" y="20" width="280" height="96" rx="12"/>
+        <text class="flow-label" x="140" y="48">Dify 工作流</text>
+        <text class="flow-sub" x="140" y="72">判定 demo 5 节点</text>
+        <text class="flow-sub" x="140" y="92">引导问答 16 节点</text>
+        <rect class="flow-step" x="480" y="20" width="280" height="96" rx="12"/>
+        <text class="flow-label" x="500" y="48">Web 应用</text>
+        <text class="flow-sub" x="500" y="72">FastAPI + Next.js</text>
+        <text class="flow-sub" x="500" y="92">单端口同源部署</text>
+        <path class="flow-arrow" d="M260 120 V152 H440" />
+        <path class="flow-arrow" d="M620 120 V152 H440" />
+        <path class="flow-arrow" d="M440 152 V168" marker-end="url(#a3)"/>
+        <rect class="flow-step t" x="200" y="172" width="480" height="60" rx="12"/>
+        <text class="flow-label" x="220" y="198">数据 + 判定引擎</text>
+        <text class="flow-sub" x="220" y="220">同一份规则表：属性位、三层判定、缺口规则</text>
+        <defs><marker id="a3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#9ca3af"/></marker></defs>
+      </svg>
+    </div>
+
+    <figure class="figure">
+      <img src="img/skinflow/dify-judge.webp" alt="Dify 判定 demo：5 个节点" />
+      <figcaption>判定 demo：开始 → 切产品（模型）→ 判定（代码）→ 说人话（模型）→ 结束</figcaption>
+    </figure>
+
+    <div class="grid2">
+      <figure class="figure">
+        <img src="img/skinflow/dify-chatflow-left.webp" alt="引导问答工作流左半" />
+        <figcaption>引导问答（一）：抽槽位 → 分类 → 四路分支</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="img/skinflow/dify-chatflow-right.webp" alt="引导问答工作流右半" />
+        <figcaption>引导问答（二）：四条分支各自的去向</figcaption>
+      </figure>
+    </div>
+
+    <div class="tbl-wrap" style="margin-top:18px">
+      <table class="tbl">
+        <thead><tr><th style="width:26%">节点类型</th><th style="width:12%">数量</th><th>具体节点</th></tr></thead>
+        <tbody>
+          <tr><td><b>模型节点（LLM）</b></td><td class="num">3</td><td>抽槽位、切产品、说人话</td></tr>
+          <tr><td><b>代码节点</b></td><td class="num">7</td><td>合并槽位、记录槽位（四路各一）、冲突判定、缺口推荐</td></tr>
+          <tr><td><b>回答节点</b></td><td class="num">4</td><td>正式回答、追问、建议就医、缺口回答</td></tr>
+          <tr><td><b>控制节点</b></td><td class="num">2</td><td>开始、条件分支（四路）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">16 个节点里只有 3 个调模型，判定全在代码节点里——和 Web 版共用同一份规则表。</p>
+
+    <div class="dec" style="margin-top:18px">
+      <div class="dec-top"><span class="dec-n">01</span><h3>工作流由脚本从数据表生成</h3></div>
+      <div class="dec-body">
+        <p>两个 Dify 应用不是手工点的：<code>build_dsl.py</code> 与 <code>build_chatflow_dsl.py</code> 从 <code>data/</code> 生成，生成前跑 36 项数据检查，生成后自检节点顺序、连线、变量引用与代码往返一致。</p>
+        <p>改规则不用进 Dify 界面：改数据表、重跑四个脚本、重新导入即可。规则能回归，工作流也能回归。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="eval" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">评测</div>
+      <h2>36 项数据闸门、11 场景一致性、判定专项 16/16</h2>
+    </div>
+
+    <div class="arch">
+      <svg viewBox="0 0 880 170" role="img" aria-label="与裸模型对照">
+        <text class="flow-label" x="6" y="46">判定专项 16 例</text>
+        <rect x="170" y="28" width="560" height="24" rx="6" fill="#eef2ff"/>
+        <rect x="170" y="28" width="560" height="24" rx="6" fill="var(--primary)"/>
+        <text class="flow-label" x="746" y="46" fill="var(--primary)">16 / 16</text>
+        <text class="flow-label" x="6" y="98">裸模型基线 10 例</text>
+        <rect x="170" y="80" width="560" height="24" rx="6" fill="#eef2ff"/>
+        <rect x="170" y="80" width="280" height="24" rx="6" fill="#c7d2fe"/>
+        <text class="flow-label" x="466" y="98" fill="#6b7280">5 / 10</text>
+        <text class="flow-sub" x="174" y="132">↑ 在「A醇 × VC」上直接答「可以一起用」；把小白瓶猜成烟酰胺</text>
+      </svg>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th style="width:22%">层</th><th>做法</th><th style="width:24%">结果</th></tr></thead>
+        <tbody>
+          <tr><td><b>数据闸门</b></td><td>36 项检查，不通过不允许生成工作流</td><td>通过才生成</td></tr>
+          <tr><td><b>一致性</b></td><td>Dify 里的代码节点 vs 本地判定器，11 场景逐条比对</td><td>一致</td></tr>
+          <tr><td><b>判定专项</b></td><td>16 例在 Dify 里实跑</td><td class="num">16 / 16</td></tr>
+          <tr><td><b>对照实验</b></td><td>同一套用例跑裸模型</td><td class="num">5 / 10</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">16/16 只说明链路没退化：用例是自己写的，关键词也按引擎实际输出校对过，它不衡量系统好坏。有区分力的是同题对照里裸模型的 5/10——它在最该防的两条上都答错了。</p>
+  </div>
+</section>
+
+<section id="eng">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">后端与前端</div>
+      <h2>FastAPI 14 个模块 + Next.js 前端</h2>
+      <p>判定、对话、存档、限额分开成模块，前端只负责收集答案和展示结果。</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th style="width:30%">模块</th><th>职责</th></tr></thead>
+        <tbody>
+          <tr><td><code>engine.py</code></td><td>排期、冲突、缺口、预算判定</td></tr>
+          <tr><td><code>constraints.py</code></td><td>问卷答案折算成约束</td></tr>
+          <tr><td><code>answers_v2.py</code></td><td>30 字段问卷映射与分支裁剪</td></tr>
+          <tr><td><code>assistant.py</code></td><td>意图路由、改需求、越界拦截</td></tr>
+          <tr><td><code>llm.py</code> / <code>prompts.py</code></td><td>只写文案的润色层与三套提示词</td></tr>
+          <tr><td><code>store.py</code></td><td>方案存档（本地文件 / 云服务双实现）</td></tr>
+          <tr><td><code>ratelimit.py</code></td><td>每 IP 30 次/小时、全站 40 次/天</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="dec" style="margin-top:20px">
+      <div class="dec-top"><span class="dec-n">01</span><h3>润色层失败不影响方案返回</h3></div>
+      <div class="dec-body">
+        <p>模型拿到的是算完的方案，只能按步骤 id 换文字。无 key、超时、限额、返回非 JSON、文案不合格，五种情况都退回规则文案，接口始终返回完整方案。</p>
+      </div>
+    </div>
+    <div class="dec">
+      <div class="dec-top"><span class="dec-n">02</span><h3>改需求走“提议—确认”两段</h3></div>
+      <div class="dec-body">
+        <p>模型给结构化修改，前端按问卷真实选项复验一遍；改肤质会连带清掉追问答案，这一步先算好、列在确认卡上。可改字段固定 10 个，值必须逐字命中选项，多选必须是完整列表。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="out" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">产出</div>
+      <h2>链接、规模、三次修复</h2>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th style="width:22%">项</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td><b>在线应用</b></td><td><a href="https://skinflow-plan.app.workbuddy.host/?sharecode=Y2YZZFH6J6" target="_blank" rel="noopener noreferrer" style="color:var(--primary)">skinflow-plan.app.workbuddy.host</a></td></tr>
+          <tr><td><b>Dify 工作流</b></td><td>判定 demo（5 节点）/ 引导问答（16 节点）</td></tr>
+          <tr><td><b>代码</b></td><td>后端 14 个模块 · 前端 20+ 组件 · 32 次提交</td></tr>
+          <tr><td><b>测试</b></td><td>38 条状态机 · 12 条改需求单测 · 4 支浏览器验收 · 9+2 冒烟</td></tr>
+          <tr><td><b>文档</b></td><td>25 条决策记录，每条含背景、选项、理由、证据</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul class="fix">
+      <li>
+        <b>分支残留</b>：把“有明确目标”改回“没有”，被藏起来的旧答案仍在参与计算。
+        <div class="m">原因：隐屏字段未裁掉 → 改法：加裁剪步骤；同一函数顺带用来预告“改这一项会清掉什么”。</div>
+      </li>
+      <li>
+        <b>词表漏判</b>：“我是干皮不是油皮”不含“改”字，被当成普通提问答了一段成分知识。
+        <div class="m">原因：意图词表过窄 → 改法：扩词表，同时补上知识问句的反向拦截。</div>
+      </li>
+      <li>
+        <b>多选接口 500</b>：第一次上线改多选直接报错。
+        <div class="m">原因：响应模型只允许字符串 → 改法：放宽 schema，并把“多选必须是完整列表”写进闸门。</div>
+      </li>
+    </ul>
+
+    <div class="backrow"><a href="index.html#product">← 返回作品列表</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="sitemap">
+      <div><b>站点</b><a href="index.html">首页</a><a href="index.html#market">市场研究</a><a href="index.html#data">数据分析</a><a href="index.html#product">产品开发</a><a href="index.html#empirical">实证研究</a><a href="research.html">研究归档</a></div>
+    </div>
+    <p style="margin-top:16px">© 2026 韩王泽 · SkinFlow 为课程项目，方案不构成医学建议。</p>
+  </div>
+</footer>
+
+</body>
+</html>
