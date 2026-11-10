@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>知识库整理工具 · 韩王泽</title>
+<meta name="description" content="给自己用的知识库整理脚本：先量化盘点，确认后再按风险从低到高分批归档、重建入口文档。" />
+<meta name="author" content="韩王泽" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<meta name="theme-color" content="#3730a3" />
+<link rel="canonical" href="https://han-wangze.github.io/hanwangze/kb-organizer.html" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="韩王泽 · 个人主页" />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:title" content="知识库整理工具 · 韩王泽" />
+<meta property="og:description" content="先量化盘点，确认后再按风险从低到高分批归档、重建入口文档。" />
+<meta property="og:url" content="https://han-wangze.github.io/hanwangze/kb-organizer.html" />
+<meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="韩王泽个人主页：教育经历、实习经历与项目作品" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="知识库整理工具 · 韩王泽" />
+<meta name="twitter:description" content="先量化盘点，确认后再按风险从低到高分批归档、重建入口文档。" />
+<meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
+<style>
+  :root{
+    --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
+    --primary:#3730a3; --primary-d:#312e81; --accent:#0f766e; --signal:#b45309;
+    --ok:#16a34a; --warn:#f59e0b; --line:#e5e7eb;
+    --shadow:0 1px 3px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(12px);
+    background:rgba(247,248,251,.82);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:var(--primary)}
+  .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted)}
+  .navlinks a:hover{color:var(--primary)}
+  .navlinks a.on{color:var(--primary);font-weight:600}
+  .navdrop{position:relative;display:flex}
+  .navdrop>a{display:inline-flex;align-items:center;gap:6px}
+  .navdrop .caret{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid currentColor;opacity:.55;margin-top:2px}
+  .navdrop .menu{position:absolute;top:100%;left:0;min-width:180px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:6px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .15s,transform .15s,visibility .15s;z-index:70}
+  .navdrop:hover .menu{opacity:1;visibility:visible;transform:translateY(0)}
+  .navdrop .menu a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border-radius:8px;font-size:13.5px;color:var(--ink);white-space:nowrap}
+  .navdrop .menu a:hover{background:#eef2ff;color:var(--primary)}
+  .navdrop .menu a.on{background:#eef2ff;color:var(--primary);font-weight:600}
+  .navdrop .menu .tag{font-size:12px;color:var(--muted)}
+  @media(max-width:760px){.navdrop .menu,.navdrop .caret{display:none}}
+  @media(max-width:760px){nav .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 20px;gap:2px 0}.navlinks{display:flex;flex-wrap:wrap;font-size:13px;gap:14px;padding-bottom:4px}.navlinks a{padding:8px 2px;min-height:44px;display:inline-flex;align-items:center}}
+  header.hero{padding:64px 0 48px;background:
+    radial-gradient(1200px 400px at 80% -10%,rgba(55,48,163,.12),transparent),
+    radial-gradient(900px 360px at 0% 0%,rgba(15,118,110,.10),transparent);}
+  .hero h1{font-size:38px;line-height:1.2;font-weight:800;letter-spacing:-.5px}
+  .hero h1 .grad{color:var(--primary)}
+  .hero p.sub{margin-top:16px;font-size:17px;color:var(--muted);max-width:740px}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
+    padding:8px 14px;font-size:13px;display:flex;gap:8px;align-items:center}
+  .badge b{color:var(--signal)}
+  .cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:12px;font-weight:600;font-size:14px;transition:.15s}
+  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(55,48,163,.35)}
+  .btn.primary:hover{background:var(--primary-d)}
+  .btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--primary);color:var(--primary)}
+  section{padding:48px 0}
+  section.alt{background:linear-gradient(180deg,rgba(55,48,163,.035),transparent)}
+  .sec-head{margin-bottom:26px}
+  .sec-head .k{font-size:13px;font-weight:700;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase}
+  .sec-head h2{font-size:26px;font-weight:800;margin-top:6px;letter-spacing:-.3px}
+  .sec-head p{color:var(--muted);margin-top:8px;max-width:740px;font-size:15px}
+  .note{font-size:13.5px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);margin-top:16px}
+  .note b{color:var(--ink)}
+  .paper{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
+  .paper .pt{font-weight:800;font-size:17px;line-height:1.45}
+  .paper p{font-size:13.5px;color:var(--muted);margin-top:10px}
+  .paper p b{color:var(--ink);font-weight:600}
+  .dtab{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+  .dtab th,.dtab td{border-bottom:1px solid var(--line);padding:11px 13px;text-align:left;vertical-align:top}
+  .dtab th{background:#eef2ff;color:var(--primary);font-weight:700;font-size:12.5px}
+  .dtab tr:last-child td{border-bottom:0}
+  .dtab td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
+  @media(max-width:640px){.dtab td:first-child{white-space:normal}.dtab th,.dtab td{padding:9px 10px;font-size:12.5px}}
+  .steps{list-style:none;counter-reset:st}
+  .steps li{position:relative;padding:13px 16px 13px 48px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow);font-size:13.5px;color:var(--muted)}
+  .steps li::before{counter-increment:st;content:counter(st);position:absolute;left:15px;top:13px;width:22px;height:22px;border-radius:7px;background:#eef2ff;color:var(--primary);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center}
+  .steps li b{color:var(--ink)}
+  .lead{font-size:14px;color:var(--muted);max-width:760px;margin-bottom:20px}
+  footer{padding:36px 0 56px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
+  .sitemap{margin-top:0;font-size:14px;color:var(--muted);line-height:2}
+  .sitemap b{color:var(--ink);font-weight:600}
+  .sitemap a{color:var(--muted);border-bottom:1px solid transparent;transition:.15s}
+  .sitemap a:hover{color:var(--primary);border-bottom-color:var(--primary)}
+  .sitemap .sg{margin-bottom:8px}
+  .sitemap .sg:last-child{margin-bottom:0}
+  .sitemap .sg b{display:inline-block;min-width:88px;color:var(--ink);font-weight:700}
+  .sitemap .sg a{margin-right:16px}
+  h1,h2,.paper .pt,.sec-head h2{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>韩王泽</div>
+        <div class="navlinks">
+      <a href="index.html">首页</a>
+      <div class="navdrop">
+        <a href="index.html#market">作品<span class="caret"></span></a>
+        <div class="menu">
+          <a href="index.html#market">市场研究与业务分析</a>
+          <a href="index.html#data">数据分析与建模</a>
+          <a href="index.html#product">产品设计与开发</a>
+          <a href="index.html#empirical">实证研究与社会调查</a>
+        </div>
+      </div>
+      <a href="research.html">研究归档</a>
+      <a href="https://github.com/han-wangze" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>知识库整理工具</h1>
+    <p class="sub">给自己用的一个脚本工具。先只读盘点、把散乱程度量化，确认后再按风险从低到高分批归档，最后重建入口文档。</p>
+    <div class="badges">
+      <span class="badge">Python 脚本</span>
+      <span class="badge">知识库开放接口</span>
+      <span class="badge">批量处理</span>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="index.html#more">← 返回主页</a>
+    </div>
+  </div>
+</header>
+
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">01</div>
+      <h2>它解决什么</h2>
+    </div>
+    <p class="lead">个人知识库用久了，条目会散在根目录，文件夹建好了却是空的，标题带着平台生成的一长串 ID、副本后缀和重名编号。这些不影响单条内容能不能打开，但整个库会没法扫读，检索也只能一层层翻文件夹。</p>
+    <div class="paper">
+      <div class="pt">重心在归档动作，不在分类方案</div>
+      <p>多数库的问题，是结构早就建好了、内容却没被搬进去。所以工具分两半：<b>先只读诊断</b>，把散乱程度算成能横向比的指标；<b>拿到确认后再写入</b>，用脚本把根目录的散落条目真正归到文件夹里。</p>
+    </div>
+    <div class="paper">
+      <div class="pt">按技能（Skill）的格式组织</div>
+      <p>一份说明文件写清什么时候触发、每个阶段做什么、哪些操作要先问过使用者；执行逻辑拆成几个 Python 脚本，结构规范和接口限制单独放在参考文档里。本页是把它翻成能直接扫懂的样子，源码未公开。</p>
+    </div>
+  </div>
+</section>
+
+<section id="diagnose" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">02</div>
+      <h2>先盘点：六个可量化维度</h2>
+      <p>把整棵目录树抓下来，每个库算同一组指标。命中阈值的那一项，直接对应一个整理动作。</p>
+    </div>
+    <table class="dtab">
+      <tr><th>看什么</th><th>怎么算</th><th>指向的动作</th></tr>
+      <tr><td>根目录散落</td><td>根目录文件占比 ≥ 30%</td><td>内容没归位，按标题归到已有文件夹</td></tr>
+      <tr><td>空文件夹</td><td>子项数为 0</td><td>填内容，或改名标记待删</td></tr>
+      <tr><td>层级与夹数</td><td>最深 &gt; 4 层，或一级夹 &gt; 6 个</td><td>压平中间层、合并一级夹</td></tr>
+      <tr><td>标题噪音</td><td>命中长 ID / 副本 / 重名编号</td><td>批量去后缀，撞名自动加序号</td></tr>
+      <tr><td>重复导入</td><td>同标题出现 ≥ 2 次</td><td>标记 _dup，交使用者在客户端删</td></tr>
+      <tr><td>标签使用</td><td>带标签文件占比 &lt; 20%</td><td>补主题、用途、状态三类标签</td></tr>
+    </table>
+    <div class="note"><b>目标结构</b>　一级夹不超过 6 个、最深 3 层；先分「别人给的 / 我产出的」，再分主题。文件夹用两位编号，根目录只留入口文档、收件箱和少数正在用的文件。</div>
+  </div>
+</section>
+
+<section id="execute">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">03</div>
+      <h2>再执行：风险从低到高</h2>
+      <p>每步先出预览、复核一遍再往下走；写入类操作默认不直接生效。</p>
+    </div>
+    <ol class="steps">
+      <li><b>洗标题噪音。</b>去掉长 ID、副本和重名后缀，同目录撞名自动加序号。默认只列预览清单，加确认参数才真正改名。</li>
+      <li><b>填空壳。</b>按标题关键词把根目录散落文件归到已有文件夹，先打印匹配表，重点看「无匹配」和「冲突」两栏，避免漏掉或错放。</li>
+      <li><b>合并库。</b>不可逆性最高，单独确认。文件能跨库移动，文件夹不行，只能先在目标库建好夹、再逐条搬文件。</li>
+      <li><b>重生成入口。</b>目录由脚本从实际结构生成，人只补「这库回答什么问题」「按场景跳转」这类不随条目数变化的判断。旧入口改名归档，不删。</li>
+    </ol>
+    <p class="lead" style="margin:18px 0 0">这么分步，是因为手写目录会过期：一次盘点里，某库入口文档写着 74 条、实际 97 条，另一个库还索引着已经删掉的文件夹。</p>
+  </div>
+</section>
+
+<section id="limits" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">04</div>
+      <h2>已知边界</h2>
+      <p>这些限制来自接口本身，写在这里免得被当成工具没做完。</p>
+    </div>
+    <div class="paper">
+      <div class="pt">没有删除接口，写入撤不回</div>
+      <p>知识库、文件夹、文件都删不掉，改名和移动也撤不回。所以重复项和空壳只能改成 <b>_dup</b>、<b>99_待删</b> 这类标记，交使用者在客户端手动删；合并库要单独拿到确认。</p>
+    </div>
+    <div class="paper">
+      <div class="pt">请求有限制</div>
+      <p>单次移动最多 10 条，连续请求会触发限流。脚本按 10 条切批、请求之间留间隔，失败按 5 / 10 / 15 秒退避重试；条目 ID 必须原样使用，截断会报无效。</p>
+    </div>
+    <div class="paper">
+      <div class="pt">改动范围</div>
+      <p>只调整结构，不改动条目正文。用途是让库重新可扫读、可归档，不做内容层面的摘要或重写。</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="sitemap">
+      <div class="sg"><b>实习</b><a href="experience-cyou.html">搜狐畅游</a><a href="experience-zyf.html">中服云</a></div>
+      <div class="sg"><b>项目</b><a href="weschedule.html">产品项目</a><a href="research.html#quant">实证研究</a><a href="research.html#survey">社会调查</a><a href="research.html#case">案例研究</a></div>
+      <div class="sg"><b>更多</b><a href="index.html">首页</a><a href="https://github.com/han-wangze/hanwangze" target="_blank" rel="noopener">本站源码</a></div>
+    </div>
+    <div style="margin-top:16px">韩王泽 · 个人主页</div>
+    <div style="margin-top:6px">wangzehan@link.cuhk.edu.cn · © 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
