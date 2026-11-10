@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Steam 早期评论与后续口碑变化 · 韩王泽</title>
+<meta name="description" content="Steam 早期评论研究：用首条评论后 30 天的评论结构，预测第 30–365 天新增评论形成的档位是否低于首月。2,526 款样本，按首条评论年份做时间切分，测试集 AUC 0.886（单特征已到 0.872），滚动 7 折中位 0.861。历史数据上的探索性研究。" />
+<meta name="author" content="韩王泽" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<meta name="theme-color" content="#3730a3" />
+<link rel="canonical" href="https://han-wangze.github.io/hanwangze/steam-review.html" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="韩王泽 · 个人主页" />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:title" content="Steam 早期评论与后续口碑变化" />
+<meta property="og:description" content="用首条评论后 30 天的评论结构预测后续档位是否低于首月。2,526 款、时间切分 AUC 0.886（单特征 0.872）、滚动 7 折中位 0.861，附标签口径与样本边界。" />
+<meta property="og:url" content="https://han-wangze.github.io/hanwangze/steam-review.html" />
+<meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Steam 早期评论与后续口碑变化 · 项目详情" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Steam 早期评论与后续口碑变化" />
+<meta name="twitter:description" content="2,526 款样本、时间切分 AUC 0.886（单特征 0.872）、滚动 7 折中位 0.861；附标签口径、筛选漏斗与样本边界。" />
+<meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
+<style>
+  :root{
+    --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
+    --primary:#3730a3; --primary-d:#312e81; --accent:#0f766e; --signal:#b45309;
+    --ok:#16a34a; --warn:#f59e0b; --line:#e5e7eb;
+    --shadow:0 1px 3px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(12px);
+    background:rgba(247,248,251,.82);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:var(--primary)}
+  .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+  .navlinks a:hover{color:var(--primary)}
+  .navdrop{position:relative;display:flex}
+  .navdrop>a{display:inline-flex;align-items:center;gap:6px}
+  .navdrop .caret{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid currentColor;opacity:.55;margin-top:2px}
+  .navdrop .menu{position:absolute;top:100%;left:0;min-width:180px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:6px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .15s,transform .15s,visibility .15s;z-index:70}
+  .navdrop:hover .menu{opacity:1;visibility:visible;transform:translateY(0)}
+  .navdrop .menu a{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:8px;font-size:13.5px;color:var(--ink);white-space:nowrap}
+  .navdrop .menu a:hover{background:#eef2ff;color:var(--primary)}
+  @media(max-width:760px){.navdrop .menu,.navdrop .caret{display:none}}
+  @media(max-width:760px){nav .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 20px;gap:2px 0}.navlinks{display:flex;flex-wrap:wrap;font-size:13px;gap:14px;padding-bottom:4px}.navlinks a{padding:8px 2px;min-height:44px;display:inline-flex;align-items:center}}
+  header.hero{padding:72px 0 56px;background:
+    radial-gradient(1200px 400px at 80% -10%,rgba(55,48,163,.12),transparent),
+    radial-gradient(900px 360px at 0% 0%,rgba(15,118,110,.10),transparent);}
+  .hero h1{font-size:42px;line-height:1.18;font-weight:800;letter-spacing:-.5px}
+  .hero p.sub{margin-top:16px;font-size:17.5px;color:var(--muted);max-width:700px}
+  .hero p.role{margin-top:14px;font-size:14.5px;color:var(--ink);font-weight:600}
+  .hero p.role span{color:var(--muted);font-weight:400}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
+    padding:8px 14px;font-size:13px;display:flex;gap:8px;align-items:center}
+  .badge b{color:var(--signal)}
+  .cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:600;font-size:15px;transition:.15s}
+  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(55,48,163,.35)}
+  .btn.primary:hover{background:var(--primary-d)}
+  .btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--primary);color:var(--primary)}
+  section{padding:56px 0}
+  section.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .sec-head{margin-bottom:28px}
+  .sec-head .k{font-size:13px;font-weight:700;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase}
+  .sec-head h2{font-size:28px;font-weight:800;margin-top:6px;letter-spacing:-.3px}
+  .sec-head p{color:var(--muted);margin-top:8px;max-width:700px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr}}
+  .stat .n{font-size:34px;font-weight:800;color:var(--signal);line-height:1.1}
+  .stat .l{margin-top:8px;font-size:14px;color:var(--muted)}
+  .stat .d{margin-top:6px;font-size:12px;color:var(--muted)}
+  .arch{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);overflow-x:auto;margin-bottom:18px}
+  .arch svg{width:100%;height:auto;min-width:660px;display:block}
+  .flow-step{fill:#eef2ff;stroke:var(--primary);stroke-width:1.5}
+  .flow-step.t{fill:#ecfeff;stroke:var(--accent)}
+  .flow-arrow{stroke:#9ca3af;stroke-width:2;fill:none}
+  .flow-label{font-size:13px;fill:var(--ink);font-weight:600}
+  .flow-sub{font-size:11px;fill:var(--muted)}
+  .dec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);margin-bottom:16px}
+  .dec:last-child{margin-bottom:0}
+  .dec-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .dec-n{font-size:12px;font-weight:800;color:var(--primary);background:#eef2ff;border-radius:6px;padding:3px 8px;letter-spacing:.5px}
+  .dec-top h3{font-size:17px;font-weight:800}
+  .dec-src{margin-top:8px;font-size:13px;color:var(--muted)}
+  .dec-body{margin-top:14px;background:#f8fafc;border-left:3px solid var(--primary);border-radius:0 10px 10px 0;padding:14px 16px}
+  .dec-body p{font-size:14px;color:#4b5563}
+  .dec-body p+p{margin-top:8px}
+  .tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);font-size:14px}
+  .tbl thead th{background:#f8fafc;font-size:12.5px;font-weight:700;color:var(--muted);text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);letter-spacing:.3px}
+  .tbl tbody td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:#374151}
+  .tbl tbody tr:last-child td{border-bottom:none}
+  .tbl b{color:var(--ink)}
+  .tbl .num{font-variant-numeric:tabular-nums;font-weight:700;color:var(--signal);white-space:nowrap}
+  .tbl-wrap{overflow-x:auto;border-radius:12px;margin-bottom:14px}
+  .note{margin-top:18px;font-size:13.5px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .backrow{padding:14px 0 0;font-size:14px;font-weight:600}
+  .backrow a{color:var(--primary)}
+  footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
+  .sitemap{margin-top:0;font-size:14px;color:var(--muted);line-height:2}
+  .sitemap .sg{margin-bottom:8px}
+  .sitemap .sg:last-child{margin-bottom:0}
+  .sitemap .sg b{display:inline-block;min-width:88px;color:var(--ink);font-weight:700}
+  .sitemap .sg a{margin-right:16px}
+  .sitemap b{color:var(--ink);font-weight:600}
+  .sitemap a{color:var(--muted);border-bottom:1px solid transparent;transition:.15s}
+  .sitemap a:hover{color:var(--primary);border-bottom-color:var(--primary)}
+  .toc{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;font-size:13.5px;color:var(--muted)}
+  .toc b{color:var(--ink);font-weight:600}
+  .toc a{color:var(--muted);border-bottom:1px solid transparent;transition:.15s}
+  .toc a:hover{color:var(--primary);border-bottom-color:var(--primary)}
+  code{background:#f1f5f9;padding:2px 6px;border-radius:5px;font-size:.9em}
+  h1,h2,.sec-head h2,.dec-top h3{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif}
+  @media(max-width:760px){
+    .hero{padding:44px 0 32px}
+    .hero h1{font-size:31px}
+    .hero p.sub{font-size:15.5px}
+    .badge{font-size:12px;padding:7px 11px}
+    section{padding:40px 0}
+    .sec-head h2{font-size:22px;line-height:1.35}
+    .arch{padding:12px;overflow-x:auto}
+    .arch svg{min-width:600px;width:600px}
+    .tbl{font-size:13px}
+    .tbl thead th,.tbl tbody td{padding:9px 10px}
+    .dec{padding:16px}
+    .dec-top h3{font-size:15.5px}
+  }
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>韩王泽</div>
+    <div class="navlinks">
+      <a href="index.html">首页</a>
+      <div class="navdrop">
+        <a href="index.html#product">作品<span class="caret"></span></a>
+        <div class="menu">
+          <a href="index.html#market">市场研究与业务分析</a>
+          <a href="index.html#data">数据分析与建模</a>
+          <a href="index.html#product">产品设计与开发</a>
+          <a href="index.html#empirical">实证研究与社会调查</a>
+        </div>
+      </div>
+      <a href="research.html">研究归档</a>
+      <a href="https://github.com/han-wangze" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Steam 早期评论与后续口碑变化</h1>
+    <p class="sub">用一款游戏首条评论后 30 天的评论结构，判断第 30–365 天新增评论形成的档位是否会低于首月。</p>
+    <p class="role">项目性质 <span>历史数据上的探索性研究；未在生产环境试过，也没有在 2024 年之后的新游戏上做过外部验证</span></p>
+    <div class="badges">
+      <span class="badge"><b>2,526</b> 款样本</span>
+      <span class="badge"><b>AUC 0.886</b> · 单特征 0.872</span>
+      <span class="badge"><b>滚动 7 折中位 0.861</b></span>
+      <span class="badge"><b>数据截至</b> 2023-11</span>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="https://han-wangze.github.io/steam-review-decline/" target="_blank" rel="noopener noreferrer">在线看板</a>
+      <a class="btn ghost" href="https://github.com/han-wangze/steam-review-decline" target="_blank" rel="noopener noreferrer">README 与源码</a>
+    </div>
+    <div class="toc">
+      <b>本页内容</b>
+      <a href="#question">研究问题</a>
+      <a href="#data">数据与样本</a>
+      <a href="#method">怎么验证</a>
+      <a href="#results">结果</a>
+      <a href="#compare">对照</a>
+      <a href="#limits">边界</a>
+    </div>
+  </div>
+</header>
+
+<section id="question">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">01</div>
+      <h2>研究问题</h2>
+      <p>发行方在首月末要判断口碑是稳住了还是在往下走，眼下主要靠人工盯好评率。</p>
+    </div>
+    <div class="arch">
+      <svg viewBox="0 0 880 160" role="img" aria-label="早期窗口构造特征、后期窗口构造标签，两段不重叠">
+        <text class="flow-label" x="14" y="34">t0 = 该游戏在数据集中的首条评论时间（不是发行日期）</text>
+        <rect class="flow-step" x="14" y="50" width="330" height="62" rx="10"/>
+        <text class="flow-label" x="30" y="76">前 30 天 · 构造特征</text>
+        <text class="flow-sub" x="30" y="98">12 个特征全部来自这段评论</text>
+        <rect class="flow-step t" x="386" y="50" width="480" height="62" rx="10"/>
+        <text class="flow-label" x="402" y="76">第 30–365 天 · 构造标签</text>
+        <text class="flow-sub" x="402" y="98">后期新增评论形成的档位，是否低于首月档位</text>
+        <path class="flow-arrow" d="M348 81 H380" marker-end="url(#srArrow)"/>
+        <text class="flow-sub" x="660" y="140" text-anchor="end">两个窗口不重叠：早期好评率不进入标签</text>
+        <defs><marker id="srArrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#9ca3af"/></marker></defs>
+      </svg>
+    </div>
+    <div class="grid2">
+      <div class="card"><b>输入</b><p style="margin-top:6px;color:var(--muted);font-size:14px">一款游戏首条评论后 30 天内的评论结构</p></div>
+      <div class="card"><b>输出</b><p style="margin-top:6px;color:var(--muted);font-size:14px">第 30–365 天新增评论形成的档位，是否低于首月档位</p></div>
+    </div>
+    <div class="dec" style="margin-top:16px">
+      <div class="dec-top"><span class="dec-n">口径</span><h3>标签是研究构造，不等于 Steam 商店页展示的评价档位</h3></div>
+      <div class="dec-body">
+        <p>商店页展示的是基于全部（或近期）评论的累计结果；这里刻意把两个窗口切开，是为了让特征与标签在时间上不重叠——否则早期好评率本身就是标签的一部分。</p>
+        <p>预测的是「后期新增评论形成的档位是否低于首月」，不是「商店页标签会不会变」。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="data" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">02</div>
+      <h2>数据与样本</h2>
+      <p>样本来自公开的 Steam 评论数据集，经过筛选后只留下首月就有真实讨论的游戏。</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th style="width:24%">数据</th><th>规模</th><th style="width:26%">用途</th></tr></thead>
+        <tbody>
+          <tr><td><b>评论</b></td><td>HuggingFace <code>adde023/steam-reviews</code>，1.139 亿条（113,883,717 行），663 个分片取步长 3 共 221 个</td><td>特征与标签</td></tr>
+          <tr><td><b>元数据</b></td><td>HuggingFace <code>FronkonGames/steam-games-dataset</code>，12.4 万款，只取 appID + 发行日期</td><td>筛掉观察窗不完整的样本</td></tr>
+          <tr><td><b>许可</b></td><td>CC BY-NC 4.0</td><td>仓库只存聚合后的统计量，不重分发评论原文</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>筛选步骤（自上而下）</th><th style="width:20%">本步剔除</th><th style="width:20%">剩余</th></tr></thead>
+        <tbody>
+          <tr><td>聚合出有评论记录的游戏</td><td class="num">—</td><td class="num">35,487</td></tr>
+          <tr><td>剔除跨分片脏数据</td><td class="num">1</td><td class="num">35,486</td></tr>
+          <tr><td>首月评论 &lt;10 条</td><td class="num">22,828</td><td class="num">12,658</td></tr>
+          <tr><td>365 天内评论 &lt;100 条</td><td class="num">7,196</td><td class="num">5,462</td></tr>
+          <tr><td>观察窗不完整</td><td class="num">792</td><td class="num">4,670</td></tr>
+          <tr><td>首月已非好评档</td><td class="num">834</td><td class="num">3,836</td></tr>
+          <tr><td>第 30–365 天评论 &lt;50 条</td><td class="num">192</td><td class="num">3,644</td></tr>
+          <tr><td>无发行日期</td><td class="num">415</td><td class="num">3,229</td></tr>
+          <tr><td>首条评论距发行日 &gt;30 天</td><td class="num">703</td><td class="num">2,526</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">最大的一次剔除是「首月评论不足 10 条」，占 64%——研究只针对首月就有真实讨论的游戏，不适用于无人问津的小体量作品。最终 2,526 款，占聚合起点的 7.1%。</p>
+    <div class="dec" style="margin-top:16px">
+      <div class="dec-top"><span class="dec-n">口径</span><h3>t0 取数据集中的首条评论时间，不是发行日期</h3></div>
+      <div class="dec-body">
+        <p>评论数据本身不含发行日期，元数据约 88% 能匹配上；用首条评论让每款游戏的时间起点都来自同一份数据。实测中位偏差 0 天，95% 在 3 天以内，偏差超过 30 天的 703 款被剔除。</p>
+        <p>因此严格表述是「以首条评论为起点的前 30 天」；对多数游戏它约等于上线首月，但两者不完全等价。</p>
+      </div>
+    </div>
+    <div class="grid3" style="margin-top:16px">
+      <div class="card stat"><div class="n">35,487</div><div class="l">款聚合起点的游戏</div></div>
+      <div class="card stat"><div class="n">215</div><div class="l">个降档（8.5%）</div></div>
+      <div class="card stat"><div class="n">7.1%</div><div class="l">进入最终分析</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">03</div>
+      <h2>怎么验证</h2>
+    </div>
+    <div class="arch">
+      <svg viewBox="0 0 880 130" role="img" aria-label="按首条评论年份切分训练集与测试集">
+        <text class="flow-sub" x="14" y="28">按首条评论年份切分，不随机切分</text>
+        <rect class="flow-step" x="14" y="42" width="410" height="66" rx="10"/>
+        <text class="flow-label" x="30" y="68">≤ 2018 · 训练集</text>
+        <text class="flow-sub" x="30" y="90">1,128 款 / 130 个正例</text>
+        <rect class="flow-step t" x="456" y="42" width="410" height="66" rx="10"/>
+        <text class="flow-label" x="472" y="68">2019–2022 · 测试集</text>
+        <text class="flow-sub" x="472" y="90">1,398 款 / 85 个正例</text>
+        <path class="flow-arrow" d="M430 75 H450" marker-end="url(#srSplit)"/>
+        <defs><marker id="srSplit" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#9ca3af"/></marker></defs>
+      </svg>
+    </div>
+    <div class="dec">
+      <div class="dec-top"><span class="dec-n">01</span><h3>为什么不用随机切分</h3></div>
+      <div class="dec-body">
+        <p>随机切分会把后续年份的游戏泄漏进训练集。没有单独的验证段：未做超参数搜索，模型配置在评估前固定，测试集只评估一次。</p>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:16px">
+      <b>特征一览 · 12 个，全部来自前 30 天</b>
+      <div class="grid2" style="margin-top:12px;font-size:14px;color:var(--muted)">
+        <div><b style="color:var(--ink)">口碑</b>：首月好评率</div>
+        <div><b style="color:var(--ink)">关注度</b>：首月评论量、首周评论量、首周占比、持续获评比</div>
+        <div><b style="color:var(--ink)">玩家画像</b>：评论者游戏时长中位与 P90、账号拥有游戏数</div>
+        <div><b style="color:var(--ink)">评论形态</b>：第一大语言占比、语言种类数、文本长度中位、有时长记录的比例</div>
+      </div>
+      <p style="margin-top:12px;font-size:13px;color:var(--muted)">窗口边界由聚合层保证，全量统计不进入特征，并有断言检查。</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>标签口径</th><th>单特征 AUC</th><th>全模型 AUC</th><th>增量</th></tr></thead>
+        <tbody>
+          <tr><td>全量评论（观察期浮动）</td><td class="num">0.900</td><td class="num">0.901</td><td class="num">+0.001</td></tr>
+          <tr><td>365 天累计（早期窗口包含在标签内）</td><td class="num">0.926</td><td class="num">0.929</td><td class="num">+0.003</td></tr>
+          <tr><td><b>第 30–365 天（与特征窗口不重叠）</b></td><td class="num"><b>0.872</b></td><td class="num"><b>0.886</b></td><td class="num"><b>+0.014</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">中间一行数字最高，但早期好评率本身就是标签的一部分，模型等于在复述输入。换成不重叠口径后，任务本身变难（单特征从 0.926 降到 0.872），模型才出现可见的增量。这是本研究采用的口径。</p>
+    <p class="note">模型为 Logistic Regression（L2，C=1.0，12 个特征），Random Forest 作对照；不使用类别权重——实测它让 AUC 不变（0.886）而校准误差从 0.050 恶化到 0.253。</p>
+  </div>
+</section>
+
+<section id="results" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">04</div>
+      <h2>结果</h2>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>模型</th><th>AUC</th><th>AP</th><th>前 10% 命中率</th><th>lift</th><th>校准误差</th></tr></thead>
+        <tbody>
+          <tr><td>常数基线</td><td class="num">0.500</td><td class="num">0.061</td><td class="num">6.1%</td><td class="num">1.0</td><td class="num">0.054</td></tr>
+          <tr><td>单特征（首月好评率）</td><td class="num">0.872</td><td class="num">0.327</td><td class="num">28.8%</td><td class="num">4.7</td><td class="num">—</td></tr>
+          <tr><td><b>全特征 Logistic Regression</b></td><td class="num"><b>0.886</b></td><td class="num"><b>0.343</b></td><td class="num"><b>30.2%</b></td><td class="num"><b>5.0</b></td><td class="num"><b>0.050</b></td></tr>
+          <tr><td>全特征 Random Forest</td><td class="num">0.866</td><td class="num">0.319</td><td class="num">30.9%</td><td class="num">5.1</td><td class="num">0.046</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">降档的正例只占 8.5%，一律猜「不降」也能蒙对绝大多数，所以这张表不看准确率（accuracy），看的是能不能把真正会降档的游戏排在前面。前 10% 命中率是按预测分数排序取前 139 款；全模型 AUC 的 95% 区间为 0.856–0.915，来自 500 次 bootstrap 重采样。</p>
+    <div class="tbl-wrap" style="margin-top:16px">
+      <table class="tbl">
+        <thead><tr><th>消融 · 用哪些特征</th><th>AUC</th><th>AP</th></tr></thead>
+        <tbody>
+          <tr><td>仅好评率</td><td class="num">0.872</td><td class="num">0.327</td></tr>
+          <tr><td>好评率 + 评论量</td><td class="num">0.884</td><td class="num">0.295</td></tr>
+          <tr><td>去掉好评率（其余 11 个）</td><td class="num">0.674</td><td class="num">0.112</td></tr>
+          <tr><td>去掉评论量系列 3 个（其余 9 个）</td><td class="num">0.885</td><td class="num">0.346</td></tr>
+          <tr><td><b>全特征</b></td><td class="num"><b>0.886</b></td><td class="num"><b>0.343</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">去掉最强的特征后仍有 0.674，说明其余特征携带独立信息；去掉评论量几乎不变，说明它在已知好评率时边际贡献很小。</p>
+    <div class="tbl-wrap" style="margin-top:16px">
+      <table class="tbl">
+        <thead><tr><th colspan="7">滚动切分逐年 AUC（每个起点只用过去预测下一年，共 7 折）</th></tr></thead>
+        <tbody>
+          <tr><td>2016</td><td class="num">0.846</td><td>2017</td><td class="num">0.861</td><td>2018</td><td class="num">0.858</td><td>2019</td><td class="num">0.911</td></tr>
+          <tr><td>2020</td><td class="num">0.850</td><td>2021</td><td class="num">0.878</td><td>2022</td><td class="num">0.909</td><td>中位</td><td class="num">0.861</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">范围 0.846–0.911，七折中没有一折低于 0.8。</p>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">05</div>
+      <h2>对照</h2>
+    </div>
+    <div class="grid2">
+      <div class="card stat"><div class="n">0.872</div><div class="l">只用首月好评率一个特征</div></div>
+      <div class="card stat"><div class="n">0.886</div><div class="l">全模型（12 个特征）</div><div class="d">增量 0.014</div></div>
+    </div>
+    <p class="note">首月好评率一个特征就承载了大部分可预测信息，其余 11 个提供的是边际补充。</p>
+    <div class="tbl-wrap" style="margin-top:16px">
+      <table class="tbl">
+        <thead><tr><th>首月好评率 ＼ 首月评论量</th><th>10–100 条</th><th>100–400 条</th><th>400+ 条</th></tr></thead>
+        <tbody>
+          <tr><td>低（均值 0.791）</td><td class="num">29.9%</td><td class="num">20.3%</td><td class="num">12.4%</td></tr>
+          <tr><td>中（均值 0.908）</td><td class="num">5.5%</td><td class="num">1.4%</td><td class="num">0.0%</td></tr>
+          <tr><td>高（均值 0.975）</td><td class="num">1.1%</td><td class="num">0.0%</td><td class="num">0.0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">表中为降档率。好评率高的游戏几乎不降档，评论量与它无关；评论量的差异只在中低好评率组明显。大部分样本处在「不需要预测」的区域。</p>
+    <div class="dec" style="margin-top:16px">
+      <div class="dec-top"><span class="dec-n">边界</span><h3>跨年基准率有变化，处理方式与残余偏差</h3></div>
+      <div class="dec-body">
+        <p>训练段降档率 11.5%，测试段 6.1%，2019→2020 之间有一次台阶式下降（8.5%→5.5%）。排除了评论量变化（后期评论数中位基本持平），样本结构变化只能解释一部分。没有设计能识别成因的检验，可能来自评价习惯、样本构成或平台规则，当前数据无法区分——这里只把它当作需要处理的分布变化，不当作已证实的行业趋势。</p>
+        <p>处理方式是按年用上一年实际降档率做先验校正，测试段校准误差从 0.050 降到 0.022，但断点当年仍会高估 3–4 个百分点。</p>
+      </div>
+    </div>
+    <div class="tbl-wrap" style="margin-top:16px">
+      <table class="tbl">
+        <thead><tr><th>决策阈值</th><th>复核比例</th><th>命中率</th><th>抓到降档</th></tr></thead>
+        <tbody>
+          <tr><td class="num">5%</td><td class="num">33.0%</td><td class="num">16.3%</td><td class="num">75 / 85</td></tr>
+          <tr><td class="num">10%</td><td class="num">21.9%</td><td class="num">22.2%</td><td class="num">68 / 85</td></tr>
+          <tr><td class="num">20%</td><td class="num">13.0%</td><td class="num">28.6%</td><td class="num">52 / 85</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">在阈值 ≤30% 的区间内，模型净收益高于「全部复核」；超过 30% 后两者都不如不筛。</p>
+    <p class="note">另把「会不会掉」换成「会掉几个点」试过 Ridge 回归：Spearman 0.309、MAE 3.3 个百分点。方向比幅度更容易预测，这也是选择二分类而非回归的原因。</p>
+  </div>
+</section>
+
+<section id="limits" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">06</div>
+      <h2>边界</h2>
+    </div>
+    <div class="card">
+      <ul style="margin-left:18px;font-size:14px;color:#4b5563;line-height:1.9">
+        <li>标签是研究构造，不等于商店页展示的档位。</li>
+        <li><code>t0</code> 是首条评论时间，不是发行日期。</li>
+        <li>只覆盖有早期讨论的游戏：35,487 款中筛出 2,526 款（7.1%），小体量作品被排除。</li>
+        <li>数据止于 2023-11；2023 年发行的游戏不在样本内，也没有在 2024 年之后的新游戏上做过外部验证。</li>
+        <li>不预测销量或收入（数据里没有这类字段，评论只作关注度与满意度的代理）；不估计干预效果；只覆盖 PC Steam。</li>
+        <li>所有结论都是相关性，无法识别因果；未做独立游戏与 3A 的品类分层。</li>
+        <li>分片抽样只验证了时间与评论量分布，分片不带品类标签，品类结构是否偏斜未验证。</li>
+      </ul>
+    </div>
+    <div class="backrow"><a href="https://github.com/han-wangze/steam-review-decline" target="_blank" rel="noopener noreferrer">README 与源码 →</a>　<a href="index.html#data">返回首页作品区 →</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="sitemap">
+      <div class="sg"><b>实习</b><a href="experience-cyou.html">搜狐畅游</a><a href="experience-zyf.html">中服云</a></div>
+      <div class="sg"><b>作品</b><a href="index.html#market">市场研究</a><a href="index.html#data">数据分析</a><a href="steam-review.html">Steam 口碑预测</a><a href="game-radar.html">Game Radar</a><a href="weschedule.html">产品项目</a><a href="index.html#empirical">实证研究与社会调查</a></div>
+      <div class="sg"><b>研究</b><a href="research.html#quant">实证研究</a><a href="research.html#survey">社会调查</a><a href="research.html#case">案例研究</a></div>
+      <div class="sg"><b>更多</b><a href="index.html">首页</a><a href="https://github.com/han-wangze/hanwangze" target="_blank" rel="noopener noreferrer">本站源码</a></div>
+    </div>
+    <div style="margin-top:16px">韩王泽 · 个人主页</div>
+    <div style="margin-top:6px">wangzehan@link.cuhk.edu.cn · 技术文档见各项目 README · © 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>

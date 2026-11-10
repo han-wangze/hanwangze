@@ -247,11 +247,12 @@
           <span class="tag">时间切分验证</span>
         </div>
         <div class="rd">
-          <p><b>问题：</b>对首月好评的游戏，能不能用前 30 天的评论，提前排出后续更可能跌出好评档的作品？</p>
+          <p><b>问题：</b>对首月好评的游戏，能不能用前 30 天的评论，提前排出后续更可能低于首月档位的作品？</p>
           <p><b>方法：</b>以数据集里的首条评论时间为起点，前 30 天构造特征、第 30–365 天观察变化；L2 正则化逻辑回归，按首条评论年份做时间切分测试。</p>
-          <p><b>结果：</b>测试集 AUC 0.886、AP 0.343；风险排序前 10% 的游戏里 30.2% 后来跌出好评档，约为基准率的 5 倍；滚动 7 折 AUC 中位 0.861。</p>
+          <p><b>结果：</b>测试集 AUC 0.886、AP 0.343；风险排序前 10% 的游戏里 30.2% 后来低于首月档位，约为基准率的 5 倍；滚动 7 折 AUC 中位 0.861。</p>
         </div>
         <div class="project-links">
+          <a href="steam-review.html">项目说明</a>
           <a href="https://han-wangze.github.io/steam-review-decline/" target="_blank" rel="noopener noreferrer">在线看板</a>
           <a class="secondary" href="https://github.com/han-wangze/steam-review-decline" target="_blank" rel="noopener noreferrer">README 与源码</a>
         </div>
@@ -270,6 +271,7 @@
           <p><b>产出：</b>三页静态页——当日榜、前一榜日、周报；展示首次进榜、名次变化、上架时长与品类构成，玩法简介、玩法类型和中文译名由 LLM 辅助生成。</p>
         </div>
         <div class="project-links">
+          <a href="game-radar.html">项目说明</a>
           <a href="https://han-wangze.github.io/game-radar/" target="_blank" rel="noopener noreferrer">在线榜单</a>
           <a class="secondary" href="https://github.com/han-wangze/game-radar" target="_blank" rel="noopener noreferrer">README 与源码</a>
         </div>
@@ -475,7 +477,7 @@
   <div class="wrap">
     <div class="sitemap" style="margin-top:0">
       <div class="sg"><b>实习</b><a href="experience-cyou.html">搜狐畅游</a><a href="experience-zyf.html">中服云</a></div>
-      <div class="sg"><b>作品</b><a href="#market">市场研究</a><a href="#data">数据分析</a><a href="weschedule.html">产品项目</a><a href="#empirical">实证研究与社会调查</a></div>
+      <div class="sg"><b>作品</b><a href="#market">市场研究</a><a href="#data">数据分析</a><a href="steam-review.html">Steam 口碑预测</a><a href="game-radar.html">Game Radar</a><a href="weschedule.html">产品项目</a><a href="#empirical">实证研究与社会调查</a></div>
       <div class="sg"><b>研究</b><a href="research.html#quant">实证研究</a><a href="research.html#survey">社会调查</a><a href="research.html#case">案例研究</a></div>
       <div class="sg"><b>源码</b><a href="https://github.com/han-wangze/hanwangze" target="_blank" rel="noopener noreferrer">本站源码</a></div>
     </div>

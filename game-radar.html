@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Game Radar｜中美日韩 App Store 免费游戏榜追踪 · 韩王泽</title>
+<meta name="description" content="Game Radar：每 12 小时抓取中美日韩 App Store 免费游戏榜 Top 100，把首次进榜产品存成 SQLite 台账，产出当日榜、前一榜日、周报三页静态站。截至 2026-11-09 连续 18 个榜日、7,200 条榜位、缺日 0；分析口径写成 7 个可复算的 SQL 查询。" />
+<meta name="author" content="韩王泽" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<meta name="theme-color" content="#3730a3" />
+<link rel="canonical" href="https://han-wangze.github.io/hanwangze/game-radar.html" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="韩王泽 · 个人主页" />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:title" content="Game Radar｜中美日韩 App Store 免费游戏榜追踪" />
+<meta property="og:description" content="每 12 小时抓四国免费榜 Top100，存成 SQLite 台账并产出三页静态站。截至 2026-11-09 连续 18 个榜日、7,200 条榜位、缺日 0，附首次进榜与留榜的口径 SQL。" />
+<meta property="og:url" content="https://han-wangze.github.io/hanwangze/game-radar.html" />
+<meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Game Radar 免费游戏榜追踪 · 项目详情" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Game Radar｜中美日韩 App Store 免费游戏榜追踪" />
+<meta name="twitter:description" content="每 12 小时抓四国免费榜 Top100 存成 SQLite 台账，产出三页静态站；截至 2026-11-09 连续 18 个榜日、7,200 条榜位、缺日 0，附口径 SQL。" />
+<meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
+<style>
+  :root{
+    --bg:#f7f8fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
+    --primary:#3730a3; --primary-d:#312e81; --accent:#0f766e; --signal:#b45309;
+    --ok:#16a34a; --warn:#f59e0b; --line:#e5e7eb;
+    --shadow:0 1px 3px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(12px);
+    background:rgba(247,248,251,.82);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:var(--primary)}
+  .navlinks{display:flex;gap:18px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+  .navlinks a:hover{color:var(--primary)}
+  .navdrop{position:relative;display:flex}
+  .navdrop>a{display:inline-flex;align-items:center;gap:6px}
+  .navdrop .caret{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid currentColor;opacity:.55;margin-top:2px}
+  .navdrop .menu{position:absolute;top:100%;left:0;min-width:180px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:6px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .15s,transform .15s,visibility .15s;z-index:70}
+  .navdrop:hover .menu{opacity:1;visibility:visible;transform:translateY(0)}
+  .navdrop .menu a{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:8px;font-size:13.5px;color:var(--ink);white-space:nowrap}
+  .navdrop .menu a:hover{background:#eef2ff;color:var(--primary)}
+  @media(max-width:760px){.navdrop .menu,.navdrop .caret{display:none}}
+  @media(max-width:760px){nav .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 20px;gap:2px 0}.navlinks{display:flex;flex-wrap:wrap;font-size:13px;gap:14px;padding-bottom:4px}.navlinks a{padding:8px 2px;min-height:44px;display:inline-flex;align-items:center}}
+  header.hero{padding:72px 0 56px;background:
+    radial-gradient(1200px 400px at 80% -10%,rgba(55,48,163,.12),transparent),
+    radial-gradient(900px 360px at 0% 0%,rgba(15,118,110,.10),transparent);}
+  .hero h1{font-size:38px;line-height:1.2;font-weight:800;letter-spacing:-.5px}
+  .hero p.sub{margin-top:16px;font-size:17.5px;color:var(--muted);max-width:720px}
+  .hero p.role{margin-top:14px;font-size:14.5px;color:var(--ink);font-weight:600}
+  .hero p.role span{color:var(--muted);font-weight:400}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
+    padding:8px 14px;font-size:13px;display:flex;gap:8px;align-items:center}
+  .badge b{color:var(--signal)}
+  .cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:600;font-size:15px;transition:.15s}
+  .btn.primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(55,48,163,.35)}
+  .btn.primary:hover{background:var(--primary-d)}
+  .btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--primary);color:var(--primary)}
+  section{padding:56px 0}
+  section.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .sec-head{margin-bottom:28px}
+  .sec-head .k{font-size:13px;font-weight:700;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase}
+  .sec-head h2{font-size:28px;font-weight:800;margin-top:6px;letter-spacing:-.3px}
+  .sec-head p{color:var(--muted);margin-top:8px;max-width:720px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr}}
+  .stat .n{font-size:34px;font-weight:800;color:var(--signal);line-height:1.1}
+  .stat .l{margin-top:8px;font-size:14px;color:var(--muted)}
+  .stat .d{margin-top:6px;font-size:12px;color:var(--muted)}
+  .arch{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);overflow-x:auto;margin-bottom:18px}
+  .arch svg{width:100%;height:auto;min-width:660px;display:block}
+  .flow-step{fill:#eef2ff;stroke:var(--primary);stroke-width:1.5}
+  .flow-step.t{fill:#ecfeff;stroke:var(--accent)}
+  .flow-arrow{stroke:#9ca3af;stroke-width:2;fill:none}
+  .flow-label{font-size:13px;fill:var(--ink);font-weight:600}
+  .flow-sub{font-size:11px;fill:var(--muted)}
+  .dec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);margin-bottom:16px}
+  .dec:last-child{margin-bottom:0}
+  .dec-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .dec-n{font-size:12px;font-weight:800;color:var(--primary);background:#eef2ff;border-radius:6px;padding:3px 8px;letter-spacing:.5px}
+  .dec-top h3{font-size:17px;font-weight:800}
+  .dec-src{margin-top:8px;font-size:13px;color:var(--muted)}
+  .dec-body{margin-top:14px;background:#f8fafc;border-left:3px solid var(--primary);border-radius:0 10px 10px 0;padding:14px 16px}
+  .dec-body p{font-size:14px;color:#4b5563}
+  .dec-body p+p{margin-top:8px}
+  .tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);font-size:14px}
+  .tbl thead th{background:#f8fafc;font-size:12.5px;font-weight:700;color:var(--muted);text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);letter-spacing:.3px}
+  .tbl tbody td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:#374151}
+  .tbl tbody tr:last-child td{border-bottom:none}
+  .tbl b{color:var(--ink)}
+  .tbl .num{font-variant-numeric:tabular-nums;font-weight:700;color:var(--signal);white-space:nowrap}
+  .tbl-wrap{overflow-x:auto;border-radius:12px;margin-bottom:14px}
+  .pre{background:#f8fafc;border-left:3px solid var(--primary);border-radius:0 10px 10px 0;padding:16px 18px;overflow-x:auto;margin:0 0 18px}
+  .pre code{background:none;padding:0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:12.8px;line-height:1.75;color:#334155;white-space:pre}
+  .note{margin-top:18px;font-size:13.5px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .backrow{padding:14px 0 0;font-size:14px;font-weight:600}
+  .backrow a{color:var(--primary)}
+  footer{padding:40px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
+  .sitemap{margin-top:0;font-size:14px;color:var(--muted);line-height:2}
+  .sitemap .sg{margin-bottom:8px}
+  .sitemap .sg:last-child{margin-bottom:0}
+  .sitemap .sg b{display:inline-block;min-width:88px;color:var(--ink);font-weight:700}
+  .sitemap .sg a{margin-right:16px}
+  .sitemap b{color:var(--ink);font-weight:600}
+  .sitemap a{color:var(--muted);border-bottom:1px solid transparent;transition:.15s}
+  .sitemap a:hover{color:var(--primary);border-bottom-color:var(--primary)}
+  .toc{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;font-size:13.5px;color:var(--muted)}
+  .toc b{color:var(--ink);font-weight:600}
+  .toc a{color:var(--muted);border-bottom:1px solid transparent;transition:.15s}
+  .toc a:hover{color:var(--primary);border-bottom-color:var(--primary)}
+  code{background:#f1f5f9;padding:2px 6px;border-radius:5px;font-size:.9em}
+  .pre code{background:none;padding:0}
+  h1,h2,.sec-head h2,.dec-top h3{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif}
+  @media(max-width:760px){
+    .hero{padding:44px 0 32px}
+    .hero h1{font-size:27px}
+    .hero p.sub{font-size:15.5px}
+    .badge{font-size:12px;padding:7px 11px}
+    section{padding:40px 0}
+    .sec-head h2{font-size:22px;line-height:1.35}
+    .arch{padding:12px;overflow-x:auto}
+    .arch svg{min-width:600px;width:600px}
+    .tbl{font-size:13px}
+    .tbl thead th,.tbl tbody td{padding:9px 10px}
+    .pre{padding:12px}
+    .pre code{font-size:11px}
+    .dec{padding:16px}
+    .dec-top h3{font-size:15.5px}
+  }
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>韩王泽</div>
+    <div class="navlinks">
+      <a href="index.html">首页</a>
+      <div class="navdrop">
+        <a href="index.html#product">作品<span class="caret"></span></a>
+        <div class="menu">
+          <a href="index.html#market">市场研究与业务分析</a>
+          <a href="index.html#data">数据分析与建模</a>
+          <a href="index.html#product">产品设计与开发</a>
+          <a href="index.html#empirical">实证研究与社会调查</a>
+        </div>
+      </div>
+      <a href="research.html">研究归档</a>
+      <a href="https://github.com/han-wangze" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Game Radar｜中美日韩 App Store 免费游戏榜追踪</h1>
+    <p class="sub">每 12 小时抓一次美国、中国、日本、韩国的免费游戏榜 Top 100，把「第一次进榜」的产品存成可回看的台账，产出三页静态站和一份可逐条复算的分析。在线版是最近一次本地构建的快照，不是实时榜单。</p>
+    <p class="role">数据面板 <span>截至 2026-11-09，连续 18 个榜日、缺日 0</span></p>
+    <div class="badges">
+      <span class="badge"><b>可运行</b></span>
+      <span class="badge"><b>18 个榜日</b> · 7,200 条榜位</span>
+      <span class="badge"><b>缺日 0</b></span>
+      <span class="badge"><b>纯标准库</b></span>
+      <span class="badge"><b>Python 3.10+</b></span>
+      <span class="badge"><b>SQL · 7 个分析查询</b></span>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="https://han-wangze.github.io/game-radar/" target="_blank" rel="noopener noreferrer">在线榜单</a>
+      <a class="btn ghost" href="https://github.com/han-wangze/game-radar" target="_blank" rel="noopener noreferrer">README 与源码</a>
+    </div>
+    <div class="toc">
+      <b>本页内容</b>
+      <a href="#why">解决什么</a>
+      <a href="#tech">数据与技术</a>
+      <a href="#pages">三页产出</a>
+      <a href="#results">结果</a>
+      <a href="#limits">口径与局限</a>
+      <a href="#sql">SQL 片段</a>
+    </div>
+  </div>
+</header>
+
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">01</div>
+      <h2>解决什么</h2>
+      <p>Apple 只提供当前榜快照，没有历史接口。想回看「某天有哪些新面孔、后来还在不在榜」，只能自己把每天的数据存下来。</p>
+    </div>
+    <div class="grid3">
+      <div class="card"><b>榜单不解释玩法</b><p style="margin-top:6px;color:var(--muted);font-size:14px">只给产品名和名次。</p></div>
+      <div class="card"><b>四国商店介绍多语种</b><p style="margin-top:6px;color:var(--muted);font-size:14px">日、韩、英、中文，中文读者看不懂相当一部分。</p></div>
+      <div class="card"><b>逐个点商店页补不齐</b><p style="margin-top:6px;color:var(--muted);font-size:14px">能补信息，但没法按天回看，也没法和其他市场并排比。</p></div>
+    </div>
+    <div class="dec" style="margin-top:16px">
+      <div class="dec-top"><span class="dec-n">01</span><h3>为什么用公开榜单自己做</h3></div>
+      <div class="dec-body">
+        <p>数据公开、免费、无需授权，每次抓取都能落盘对账。商业监测工具也有类似看板，但底层数据和判定口径不打开，使用者无从核对；用公开接口做，每个数字都能追到一条 SQL。</p>
+      </div>
+    </div>
+    <p class="note">台账里同时列：当天／当周第一次进榜的产品，每个产品的玩法一句话、玩法类型、中文译名、品类和上架天数，以及上一榜日进来的产品现在还在不在榜。</p>
+  </div>
+</section>
+
+<section id="tech" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">02</div>
+      <h2>数据与技术</h2>
+      <p>采集到建页是本地跑的一条链，不依赖后端服务。</p>
+    </div>
+    <div class="arch">
+      <svg viewBox="0 0 920 150" role="img" aria-label="采集、入库、生成标签、告警、重建三页的链路">
+        <rect class="flow-step" x="10" y="46" width="150" height="60" rx="10"/>
+        <text class="flow-label" x="24" y="70">每 12 小时抓一次</text>
+        <text class="flow-sub" x="24" y="89">四国 Top100 + 详情</text>
+        <rect class="flow-step t" x="192" y="46" width="140" height="60" rx="10"/>
+        <text class="flow-label" x="206" y="70">SQLite（WAL）</text>
+        <text class="flow-sub" x="206" y="89">按榜日落盘</text>
+        <rect class="flow-step" x="364" y="46" width="160" height="60" rx="10"/>
+        <text class="flow-label" x="378" y="70">生成中文标签</text>
+        <text class="flow-sub" x="378" y="89">玩法 / 类型 / 译名</text>
+        <rect class="flow-step" x="556" y="46" width="150" height="60" rx="10"/>
+        <text class="flow-label" x="570" y="70">健康检查与告警</text>
+        <text class="flow-sub" x="570" y="89">缺日 / 条数 / 名次</text>
+        <rect class="flow-step t" x="738" y="46" width="172" height="60" rx="10"/>
+        <text class="flow-label" x="752" y="70">重建三页</text>
+        <text class="flow-sub" x="752" y="89">当日 / 前一榜日 / 周报</text>
+        <path class="flow-arrow" d="M162 76 H190" marker-end="url(#grArrow)"/>
+        <path class="flow-arrow" d="M334 76 H362" marker-end="url(#grArrow)"/>
+        <path class="flow-arrow" d="M526 76 H554" marker-end="url(#grArrow)"/>
+        <path class="flow-arrow" d="M708 76 H736" marker-end="url(#grArrow)"/>
+        <defs><marker id="grArrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#9ca3af"/></marker></defs>
+      </svg>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th style="width:16%">项</th><th>口径</th></tr></thead>
+        <tbody>
+          <tr><td><b>来源</b></td><td>Apple RSS <code>topfreeapplications</code>（<code>genre=6014</code> 为 Games 顶级类）+ <code>lookup</code> 详情</td></tr>
+          <tr><td><b>范围</b></td><td>四国 × 免费游戏榜 Top100 × 每 12 小时一次</td></tr>
+          <tr><td><b>面板</b></td><td>截至 2026-11-09，连续 18 个榜日（10-23→11-09），7,200 条榜位、缺日 0；窗口内 514 个产品、672 条「产品 × 店面」</td></tr>
+          <tr><td><b>存储</b></td><td><code>fact_rank</code> 榜位、<code>fact_metric</code> 评分快照、<code>dim_app</code> / <code>dim_app_country</code> 产品与店面、<code>fact_tag</code> 标签、<code>job_log</code> 抓取记录</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="dec">
+      <div class="dec-top"><span class="dec-n">01</span><h3>模型只用在三处</h3></div>
+      <div class="dec-body">
+        <p>玩法一句话（≤40 字）、玩法类型短语（≤12 字，如「三消+家装」「水排序」）、中文译名；日韩介绍另有单独译文脚本。生成结果带 <code>descr_country</code> / <code>descr_sha1</code> 记录依据的是哪国、哪份描述；同一份描述不重复生成，人工标签不被覆盖，写不出就留空。</p>
+      </div>
+    </div>
+    <p class="note">Python；SQLite（WAL）；<code>deepseek-chat</code> 可选（没有 key 时台账、页面、分析照常生成，只是卡片缺玩法与译名）；三页静态站样式脚本内联，无运行时服务。</p>
+  </div>
+</section>
+
+<section id="pages">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">03</div>
+      <h2>三页产出</h2>
+      <p>三页各自是完整的一屏，双击就能打开，页面之间互相链接。</p>
+    </div>
+    <div class="grid3">
+      <div class="card"><b>当日榜</b><p style="margin-top:6px;color:var(--muted);font-size:14px">首次进榜 / 上次进榜产品的名次变化 / 当前榜单构成（上架时长分布、品类席位前 5）。</p></div>
+      <div class="card"><b>前一榜日</b><p style="margin-top:6px;color:var(--muted);font-size:14px">同一套结构，按该榜日截点重算。</p></div>
+      <div class="card"><b>周报</b><p style="margin-top:6px;color:var(--muted);font-size:14px">最近一个 7 榜日齐全的已结束自然周：本周首次进榜、进榜名次分布、与上周对照、口径。</p></div>
+    </div>
+    <p class="note">每张卡常显玩法一句话、玩法类型、中文译名、品类、上架天数、厂商与进榜名次；展开可看商店介绍预览（前 320 字，末尾回链 App Store 看全文）、日韩介绍的中文译文和首张截图。日报各组默认展开；周报只展开「新上架（≤30 天）」，并按首次进榜市场再分四段；周报按产品去重，同一款跨多国进榜只列一次。</p>
+    <div class="cta" style="margin-top:22px">
+      <a class="btn ghost" href="https://han-wangze.github.io/game-radar/" target="_blank" rel="noopener noreferrer">去在线站看三页实样 →</a>
+    </div>
+  </div>
+</section>
+
+<section id="results" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">04</div>
+      <h2>结果</h2>
+    </div>
+    <div class="grid3">
+      <div class="card stat"><div class="n">272</div><div class="l">条首次进榜事件（18 榜日累计）</div></div>
+      <div class="card stat"><div class="n">235</div><div class="l">款去重产品</div></div>
+      <div class="card stat"><div class="n">78</div><div class="l">款最近一个完整自然周（11-02→11-08）</div></div>
+    </div>
+    <p class="note">数字卡为台账累计（截至 2026-11-09）；下表是 14 天窗口（10-23→11-05，5,600 条榜位、479 个在榜产品），两个窗口不混算。</p>
+    <div class="tbl-wrap" style="margin-top:16px">
+      <table class="tbl">
+        <thead><tr><th style="width:18%">结论</th><th>数字</th></tr></thead>
+        <tbody>
+          <tr><td><b>首次进榜</b></td><td>229 次，去重 198 款；日本 73 / 韩国 71 / 中国 46 / 美国 39；182 次（79.5%）首日就在 50 名开外</td></tr>
+          <tr><td><b>留榜</b></td><td>固定暴露期的 143 条 cohort：D+7 连续在榜 23.8%，第 7 天当天在榜 48.3%——相差的 24.5 个百分点对应 35 条掉出后又回来的产品，「还在不在」和「站没站住」是两件事</td></tr>
+          <tr><td><b>品类席位</b></td><td>Puzzle 在美国、日本、韩国占 44% / 40% / 36% 的席位；中国是 Action 占 19 席</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">台账累计（截至 11-09）：18 个榜日累计 272 条首次进榜事件、235 款去重产品；最近一个完整自然周（11-02→11-08）78 款，其中新上架 22 款、进榜前 30 位 14 款。以上是台账能支持的观察，不从名次反推下载量或收入。</p>
+  </div>
+</section>
+
+<section id="limits">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">05</div>
+      <h2>口径与局限</h2>
+      <p>台账里的每个数字都能用一条 SQL 重算。</p>
+    </div>
+    <div class="dec">
+      <div class="dec-top"><span class="dec-n">口径</span><h3>「首次进榜」怎么定义</h3></div>
+      <div class="dec-body">
+        <p>产品在可观测窗口内第一次出现在该市场 Top100；面板起点那天已经在榜的按左删失排除，不计入首次进榜。</p>
+      </div>
+    </div>
+    <div class="card">
+      <b>局限</b>
+      <ul style="margin:10px 0 0 18px;font-size:14px;color:#4b5563;line-height:1.9">
+        <li>只有免费榜 Top100，榜外新品不可见。</li>
+        <li>Apple 不公开榜单算法，名次是结果不是原因，不能反推下载量、收入或用户规模。</li>
+        <li>单日数据无法回补，因此每 12 小时抓一次、一天两班互为冗余。</li>
+        <li>品类来自 Apple <code>sub_genre</code>，与「玩法」不是一套粒度，两者不能平移比较；<code>Unclassified</code> 是上游缺失，不是零。</li>
+        <li>玩法、类型、译名、译文由模型依据商店介绍生成，介绍含糊时输出也含糊或留空。</li>
+        <li>累计评价份额与品类集中度（前四名占比）是存档数字，依赖会被后续抓取覆盖的字段，不参与可复现校验。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="sql" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k">06</div>
+      <h2>SQL 片段</h2>
+    </div>
+    <div class="dec">
+      <div class="dec-top"><span class="dec-n">01</span><h3>判断「真新进榜」时先把老产品剔掉</h3></div>
+      <div class="dec-src">面板第一天就在榜的产品不算新进榜——它们是左删失，得先排除，否则一开榜就把整批老产品报成新面孔。</div>
+      <div class="pre"><code>           -- 连续段编号：同一段内 (日期序数 - 行号) 恒定，换段即变
+           CAST(julianday(snap_date) AS INTEGER) - rn AS island_id
+...
+       COUNT(*) OVER (PARTITION BY country, chart, app_id, island_id) AS streak_days,
+       CASE WHEN prev_rank IS NULL THEN 1 ELSE 0 END AS is_new_entry,
+       CASE WHEN prev_rank IS NOT NULL AND gap_days &gt; 1 THEN 1 ELSE 0 END AS is_reentry,
+       CASE WHEN first_seen = (SELECT MIN(snap_date) FROM fact_rank) THEN 1 ELSE 0 END AS is_censored,</code></div>
+      <div class="dec-body"><p>真新进榜 = <code>is_new_entry = 1</code> 且 <code>is_censored = 0</code>。连续在榜天数用 gaps-and-islands 算，掉榜一次即重算；断档后回来的产品另记为 <code>is_reentry</code>，不并进新游。</p></div>
+    </div>
+    <div class="dec">
+      <div class="dec-top"><span class="dec-n">02</span><h3>同一个「留榜」为什么有两个百分比</h3></div>
+      <div class="dec-src">「第 7 天还在榜」和「连续 7 天都在榜」是两件事。前者会掉榜后又回来、非单调；后者掉了就断了，才能画成衰减曲线。两种都算，是因为前者常被误当成留存。</div>
+      <div class="pre"><code>    SELECT 'fixed7' AS basis, k AS days_since_entry,
+           SUM(observable)                                    AS n_at_risk,
+           SUM(observable AND still_continuous)                AS n_continuous,
+           ROUND(1.0 * SUM(observable AND still_continuous)
+                 / NULLIF(SUM(observable), 0), 3)              AS p_continuous,
+           SUM(observable AND in_rank)                         AS n_point,
+           ROUND(1.0 * SUM(observable AND in_rank)
+                 / NULLIF(SUM(observable), 0), 3)              AS p_point,
+           SUM(observable AND in_rank AND NOT still_continuous) AS n_back,
+           SUM(NOT observable)                                 AS n_censored
+      FROM calc WHERE in_fixed7 AND k &lt;= 7 GROUP BY k</code></div>
+      <div class="dec-body"><p><code>fixed7</code> 只取「进榜后至少能观察 7 天」的那批，k=1..7 共用同一个分母。<code>p_continuous</code> 是连续在榜（画曲线用），<code>p_point</code> 是第 k 天当天在榜，<code>n_back</code> 是中间掉过榜又回来的条数——对应结果表里的 23.8% / 48.3% / 35 条。</p></div>
+    </div>
+    <p class="note">两段均摘自仓库 <code>sql/02_rank_moves.sql</code> 与 <code>sql/07_cohort_survival.sql</code>；七个查询各自对应报告里的一个数字口径，完整 SQL 与断言见源码。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="sitemap">
+      <div class="sg"><b>实习</b><a href="experience-cyou.html">搜狐畅游</a><a href="experience-zyf.html">中服云</a></div>
+      <div class="sg"><b>作品</b><a href="index.html#market">市场研究</a><a href="index.html#data">数据分析</a><a href="steam-review.html">Steam 口碑预测</a><a href="game-radar.html">Game Radar</a><a href="weschedule.html">产品项目</a><a href="index.html#empirical">实证研究与社会调查</a></div>
+      <div class="sg"><b>研究</b><a href="research.html#quant">实证研究</a><a href="research.html#survey">社会调查</a><a href="research.html#case">案例研究</a></div>
+      <div class="sg"><b>更多</b><a href="index.html">首页</a><a href="https://github.com/han-wangze/hanwangze" target="_blank" rel="noopener noreferrer">本站源码</a></div>
+    </div>
+    <div style="margin-top:16px">韩王泽 · 个人主页</div>
+    <div style="margin-top:6px">wangzehan@link.cuhk.edu.cn · 技术文档见各项目 README · © 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
