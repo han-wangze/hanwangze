@@ -111,13 +111,11 @@
   #case .list{grid-template-columns:1fr}
   #case .mini{gap:10px;padding:18px 20px}
   #case .cpts{display:grid;gap:9px}
-  #case .cpt{display:grid;grid-template-columns:132px 1fr;gap:4px 16px;align-items:start}
-  #case .ck{color:var(--primary);font-weight:700;font-size:13px;line-height:1.65}
-  #case .cv{font-size:13.5px;color:var(--muted);line-height:1.65}
-  #case .cpt.plain{grid-template-columns:1fr}
-  #case .cpt.plain .cv::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--primary);vertical-align:middle;margin-right:9px}
-  #case .clead{font-size:13.5px;color:var(--ink);font-weight:700}
-  @media(max-width:640px){#case .cpt{grid-template-columns:1fr;gap:1px}}
+  #case .cpt{font-size:13.5px;color:var(--muted);line-height:1.65}
+  #case .cpt::before,#case .clead::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--primary);vertical-align:middle;margin-right:9px}
+  #case .ck{color:inherit;font-weight:inherit}
+  #case .cv{color:inherit}
+  #case .clead{font-size:13.5px;color:var(--muted);font-weight:inherit}
   footer{padding:36px 0 56px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
   .sitemap{margin-top:0;font-size:14px;color:var(--muted);line-height:2}
   .sitemap b{color:var(--ink);font-weight:600}
