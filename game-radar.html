@@ -209,12 +209,6 @@
       <div class="card"><b>四国商店介绍多语种</b><p style="margin-top:6px;color:var(--muted);font-size:14px">日、韩、英、中文，中文读者看不懂相当一部分。</p></div>
       <div class="card"><b>逐个点商店页补不齐</b><p style="margin-top:6px;color:var(--muted);font-size:14px">能补信息，但没法按天回看，也没法和其他市场并排比。</p></div>
     </div>
-    <div class="dec" style="margin-top:16px">
-      <div class="dec-top"><span class="dec-n">01</span><h3>为什么用公开榜单自己做</h3></div>
-      <div class="dec-body">
-        <p>数据公开、免费、无需授权，每次抓取都能落盘对账。商业监测工具也有类似看板，但底层数据和判定口径不打开，使用者无从核对；用公开接口做，每个数字都能追到一条 SQL。</p>
-      </div>
-    </div>
     <p class="note">台账里同时列：当天／当周第一次进榜的产品，每个产品的玩法一句话、玩法类型、中文译名、品类和上架天数，以及上一榜日进来的产品现在还在不在榜。</p>
   </div>
 </section>
@@ -262,7 +256,7 @@
       </table>
     </div>
     <div class="dec">
-      <div class="dec-top"><span class="dec-n">01</span><h3>模型只用在三处</h3></div>
+      <div class="dec-top"><h3>模型只用在三处</h3></div>
       <div class="dec-body">
         <p>玩法一句话（≤40 字）、玩法类型短语（≤12 字，如「三消+家装」「水排序」）、中文译名；日韩介绍另有单独译文脚本。生成结果带 <code>descr_country</code> / <code>descr_sha1</code> 记录依据的是哪国、哪份描述；同一份描述不重复生成，人工标签不被覆盖，写不出就留空。</p>
       </div>
