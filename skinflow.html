@@ -89,6 +89,12 @@
   .flow-arrow{stroke:#9ca3af;stroke-width:2;fill:none}
   .flow-label{font-size:13px;fill:var(--ink);font-weight:600}
   .flow-sub{font-size:11px;fill:var(--muted)}
+  .flow-llm{fill:#eef2ff;stroke:var(--primary);stroke-width:1.5}
+  .flow-code{fill:#ecfeff;stroke:var(--accent);stroke-width:1.5}
+  .flow-ctrl{fill:#f1f5f9;stroke:#64748b;stroke-width:1.5}
+  .flow-answer{fill:#fffbeb;stroke:#b45309;stroke-width:1.5}
+  .flow-kind{font-size:10px;fill:var(--muted)}
+  .flow-branch{font-size:11px;fill:var(--primary);font-weight:600}
   .dec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);margin-bottom:16px}
   .dec:last-child{margin-bottom:0}
   .dec-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
@@ -422,16 +428,104 @@
       <figcaption>判定 demo：开始 → 切产品（模型）→ 判定（代码）→ 说人话（模型）→ 结束</figcaption>
     </figure>
 
-    <div class="grid2">
-      <figure class="figure">
-        <img src="img/skinflow/dify-chatflow-left.webp" alt="引导问答工作流左半" />
-        <figcaption>引导问答（一）：抽槽位 → 分类 → 四路分支</figcaption>
-      </figure>
-      <figure class="figure">
-        <img src="img/skinflow/dify-chatflow-right.webp" alt="引导问答工作流右半" />
-        <figcaption>引导问答（二）：四条分支各自的去向</figcaption>
-      </figure>
+    <div class="arch">
+      <svg viewBox="0 0 900 120" role="img" aria-label="判定 demo 工作流五个节点线性串联">
+        <defs>
+          <marker id="fjudge" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0 0 L8 4 L0 8 z" fill="#9ca3af"/>
+          </marker>
+        </defs>
+        <rect class="flow-ctrl" x="10" y="30" width="140" height="56" rx="10"/>
+        <text class="flow-label" x="80" y="52" text-anchor="middle">开始</text>
+        <text class="flow-kind" x="80" y="70" text-anchor="middle">控制 · question</text>
+
+        <rect class="flow-llm" x="190" y="30" width="140" height="56" rx="10"/>
+        <text class="flow-label" x="260" y="52" text-anchor="middle">切产品</text>
+        <text class="flow-kind" x="260" y="70" text-anchor="middle">模型 · deepseek-flash</text>
+
+        <rect class="flow-code" x="370" y="30" width="140" height="56" rx="10"/>
+        <text class="flow-label" x="440" y="52" text-anchor="middle">判定</text>
+        <text class="flow-kind" x="440" y="70" text-anchor="middle">代码 · 冲突规则</text>
+
+        <rect class="flow-llm" x="550" y="30" width="140" height="56" rx="10"/>
+        <text class="flow-label" x="620" y="52" text-anchor="middle">说人话</text>
+        <text class="flow-kind" x="620" y="70" text-anchor="middle">模型 · deepseek-flash</text>
+
+        <rect class="flow-answer" x="730" y="30" width="140" height="56" rx="10"/>
+        <text class="flow-label" x="800" y="52" text-anchor="middle">结束</text>
+        <text class="flow-kind" x="800" y="70" text-anchor="middle">输出 4 个字段</text>
+
+        <path class="flow-arrow" d="M150 58 H186" marker-end="url(#fjudge)"/>
+        <path class="flow-arrow" d="M330 58 H366" marker-end="url(#fjudge)"/>
+        <path class="flow-arrow" d="M510 58 H546" marker-end="url(#fjudge)"/>
+        <path class="flow-arrow" d="M690 58 H726" marker-end="url(#fjudge)"/>
+      </svg>
     </div>
+    <p class="note">判定 demo：5 个节点，只有「切产品」「说人话」调模型，冲突判定在代码节点里——与 Web 版共用同一份规则表。</p>
+
+    <div class="arch">
+      <svg viewBox="0 0 900 470" role="img" aria-label="引导问答工作流主干与四路分支">
+        <defs>
+          <marker id="fchat" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0 0 L8 4 L0 8 z" fill="#9ca3af"/>
+          </marker>
+        </defs>
+
+        <rect class="flow-ctrl" x="20" y="20" width="130" height="48" rx="10"/>
+        <text class="flow-label" x="85" y="41" text-anchor="middle">开始</text>
+        <text class="flow-kind" x="85" y="57" text-anchor="middle">控制</text>
+        <rect class="flow-llm" x="190" y="20" width="130" height="48" rx="10"/>
+        <text class="flow-label" x="255" y="41" text-anchor="middle">抽槽位</text>
+        <text class="flow-kind" x="255" y="57" text-anchor="middle">模型</text>
+        <rect class="flow-code" x="360" y="20" width="130" height="48" rx="10"/>
+        <text class="flow-label" x="425" y="41" text-anchor="middle">合并槽位</text>
+        <text class="flow-kind" x="425" y="57" text-anchor="middle">代码</text>
+        <rect class="flow-ctrl" x="530" y="20" width="130" height="48" rx="10"/>
+        <text class="flow-label" x="595" y="41" text-anchor="middle">分流</text>
+        <text class="flow-kind" x="595" y="57" text-anchor="middle">条件分支 · 4 路</text>
+        <path class="flow-arrow" d="M150 44 H186" marker-end="url(#fchat)"/>
+        <path class="flow-arrow" d="M320 44 H356" marker-end="url(#fchat)"/>
+        <path class="flow-arrow" d="M490 44 H526" marker-end="url(#fchat)"/>
+
+        <path class="flow-arrow" d="M595 68 V92 H110 V116" marker-end="url(#fchat)"/>
+        <path class="flow-arrow" d="M595 68 V92 H330 V116" marker-end="url(#fchat)"/>
+        <path class="flow-arrow" d="M595 68 V92 H550 V116" marker-end="url(#fchat)"/>
+        <path class="flow-arrow" d="M595 68 V92 H770 V116" marker-end="url(#fchat)"/>
+
+        <text class="flow-branch" x="110" y="86" text-anchor="middle">out_of_scope</text>
+        <text class="flow-branch" x="330" y="86" text-anchor="middle">need_ask</text>
+        <text class="flow-branch" x="550" y="86" text-anchor="middle">no_products</text>
+        <text class="flow-branch" x="770" y="86" text-anchor="middle">else</text>
+
+        <rect class="flow-code" x="20" y="120" width="180" height="44" rx="10"/>
+        <text class="flow-label" x="110" y="147" text-anchor="middle" style="font-size:12px">记录越界 → 建议就医</text>
+
+        <rect class="flow-code" x="240" y="120" width="180" height="44" rx="10"/>
+        <text class="flow-label" x="330" y="147" text-anchor="middle" style="font-size:12px">记录槽位 → 追问</text>
+
+        <rect class="flow-code" x="460" y="120" width="180" height="44" rx="10"/>
+        <text class="flow-label" x="550" y="140" text-anchor="middle" style="font-size:11px">记录槽位-缺口</text>
+        <text class="flow-kind" x="550" y="156" text-anchor="middle">→ 缺口推荐 → 回答</text>
+
+        <rect class="flow-code" x="680" y="120" width="200" height="44" rx="10"/>
+        <text class="flow-label" x="780" y="140" text-anchor="middle" style="font-size:11px">槽位齐全</text>
+        <text class="flow-kind" x="780" y="156" text-anchor="middle">走下方主链</text>
+
+        <path class="flow-arrow" d="M780 164 V196 H450 V220" marker-end="url(#fchat)"/>
+
+        <rect class="flow-llm" x="360" y="224" width="180" height="44" rx="10"/>
+        <text class="flow-label" x="450" y="251" text-anchor="middle" style="font-size:12px">切产品 → 判定 → 说人话</text>
+
+        <path class="flow-arrow" d="M450 268 V296" marker-end="url(#fchat)"/>
+        <rect class="flow-answer" x="360" y="300" width="180" height="44" rx="10"/>
+        <text class="flow-label" x="450" y="327" text-anchor="middle" style="font-size:12px">回答</text>
+
+        <text class="flow-sub" x="20" y="392" style="font-size:11px">四路条件（yml 原词）：out_of_scope 不为空 · needs_asking is true · has_products is false · else</text>
+        <text class="flow-sub" x="20" y="416" style="font-size:11px">16 个节点：3 模型 · 7 代码/赋值 · 4 回答 · 2 控制；判定全在代码节点，与 Web 版共用规则表。</text>
+        <text class="flow-sub" x="20" y="440" style="font-size:11px">配色：靛蓝＝模型　青绿＝代码/赋值　灰＝控制　琥珀＝回答</text>
+      </svg>
+    </div>
+    <p class="note">引导问答：抽槽位 → 合并槽位 → 分流，按 out_of_scope / needs_asking / has_products 判成四路；只有走主链的一路再依次调「切产品 → 判定 → 说人话」。</p>
 
     <div class="tbl-wrap" style="margin-top:18px">
       <table class="tbl">
