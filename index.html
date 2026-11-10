@@ -71,9 +71,12 @@
   .hero .contact a:hover{color:var(--primary)}
   .tagline{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
   .tagline .t{display:inline-flex;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;color:var(--ink)}
-  .tagline .t b{color:var(--primary);font-weight:700}
-  .tagline.jumps .t{color:var(--primary)}
-  .tagline.jumps a.t:hover{border-color:var(--primary);background:#eef2ff}
+  .jumpnav{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin-top:22px;padding:12px 16px;
+    background:rgba(55,48,163,.05);border:1px solid var(--line);border-left:3px solid var(--primary);border-radius:12px;font-size:13.5px}
+  .jumpnav .jl{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.3px}
+  .jumpnav a{color:var(--primary);font-weight:600;display:inline-flex;align-items:center;gap:6px}
+  .jumpnav a::after{content:"→";font-weight:400}
+  .jumpnav a:hover{text-decoration:underline}
   .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
   .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;
     padding:8px 14px;font-size:13px;display:flex;gap:8px;align-items:center}
@@ -184,16 +187,17 @@
       <a href="https://github.com/han-wangze" target="_blank" rel="noopener noreferrer"><span class="em">💻</span> github.com/han-wangze</a>
     </div>
     <div class="tagline" aria-label="项目涉及方向">
-      <span class="t"><b>市场研究</b></span>
+      <span class="t">市场研究</span>
       <span class="t">Python 数据分析</span>
       <span class="t">机器学习</span>
       <span class="t">微信小程序产品开发</span>
     </div>
-    <div class="tagline jumps" aria-label="页面分区导航">
-      <a class="t" href="#market">市场研究与业务分析</a>
-      <a class="t" href="#data">数据分析与建模</a>
-      <a class="t" href="#product">产品设计与开发</a>
-      <a class="t" href="#empirical">实证研究与社会调查</a>
+    <div class="jumpnav" aria-label="页面分区导航">
+      <span class="jl">快速跳转</span>
+      <a href="#market">市场研究与业务分析</a>
+      <a href="#data">数据分析与建模</a>
+      <a href="#product">产品设计与开发</a>
+      <a href="#empirical">实证研究与社会调查</a>
     </div>
   </div>
 </header>
@@ -259,7 +263,7 @@
           <span class="tag">Apple RSS</span>
         </div>
         <div class="rd">
-          <p><b>问题：</b>Apple 只提供当前榜快照，没有历史接口；想知道某个榜日进了哪些新游戏、后来还在不在榜，只能自己按天存。</p>
+          <p><b>问题：</b>如何快速、便捷获取新游上榜及其变动信息，辅助市场扫描？</p>
           <p><b>方法：</b>每 12 小时抓一次中美日韩 Top 100，用 Apple 公开接口取榜单与产品信息，名次和产品资料按榜日存进 SQLite。</p>
           <p><b>产出：</b>三页静态页——当日榜、前一榜日、周报；展示首次进榜、名次变化、上架时长与品类构成，玩法简介、玩法类型和中文译名由 LLM 辅助生成。</p>
         </div>
@@ -270,18 +274,19 @@
       </article>
 
       <article class="rcard">
-        <div class="rt">手游榜单结构分析工具</div>
+        <div class="rt">手游市场结构分析工具</div>
         <div class="tags">
           <span class="tag">Python</span>
           <span class="tag">pandas</span>
           <span class="tag">集中度与分层指标</span>
         </div>
         <div class="rd">
-          <p><b>问题：</b>报告要对每个品类给出「值不值得进」的判断，但榜单导出只有排名和规模，看不出结构。</p>
-          <p><b>方法：</b>五年榜单走同一套 Python 流程，算集中度、分层增长贡献、新品渗透和跨年轨迹；口径规则写进代码——总量与份额只在排序轴上算，跨年在榜只用固定 Top N。</p>
-          <p><b>产出：</b>30 余项指标的 Excel 底表与字段说明，供四份年度报告直接取数。</p>
+          <p><b>问题：</b>如何利用从Sensor Tower导出的原始数据，建立合适的数据指标体系辅助分析和判断？</p>
+          <p><b>方法：</b>指标覆盖集中度、分层增长贡献、新品与存量表现、产品模型分布、发行商结构与跨年留存；口径写进代码——总量与份额只在排序轴上算，过滤非游戏行，跨年在榜用固定 Top N，不跨数据集拼接。</p>
+          <p><b>产出：</b>几个 Python 脚本，按维度内结构、五年趋势、跨年队列、多国 CR 与在榜分类分开，各自输出 Excel 底表与图表。</p>
         </div>
         <div class="project-links">
+          <a href="experience-cyou.html#tools">查看详情</a>
           <a class="secondary" href="https://github.com/han-wangze/game-structure-analysis-tools" target="_blank" rel="noopener noreferrer">README、字段说明与源码</a>
         </div>
       </article>
@@ -314,12 +319,6 @@
           <a class="secondary" href="https://github.com/han-wangze/weschedule" target="_blank" rel="noopener noreferrer">GitHub 源码</a>
         </div>
       </article>
-    </div>
-    <div class="inline-row">
-      <b>中服云功能测试</b>
-      <span class="sep">｜</span>
-      <span>在工厂设备运维平台上做功能测试。45 条缺陷里有几个会出事的：删一条采购计划会把整批清空，已审核单据的单价还能直接改、不留痕。</span>
-      <a href="experience-zyf.html">查看 →</a>
     </div>
   </div>
 </section>
@@ -370,35 +369,7 @@
     </div>
     <div class="more">
       <details class="mgroup">
-        <summary>案例研究<span class="cnt">计量课程论文 · 案例研究</span><span class="plus"></span></summary>
-        <div class="mrow">
-          <div class="mw">2024.11</div>
-          <div>
-            <div class="mt">数字经济发展水平对商贸流通业效率的影响</div>
-            <div class="md">熵权法测数字经济、DEA 测流通效率，再引入工具变量处理内生性。结论：两者显著正相关，技术水平和电子商务是两条中介路径。</div>
-          </div>
-        </div>
-        <div class="mrow">
-          <div class="mw">2024.11</div>
-          <div>
-            <div class="mt">社会消费品零售总额变化趋势及与财政支出的相关性</div>
-            <div class="md">2000–2023 年全国年度序列，配合序列相关与平稳性检验。结论：财政支出与居民收入均有显著正向影响，并给出未来 5 年区间估计。</div>
-          </div>
-        </div>
-        <div class="mrow">
-          <div class="mw">文献综述</div>
-          <div>
-            <div class="mt">空间计算起源与发展</div>
-            <div class="md">以 Web of Science 文献计量切入，梳理四层技术框架。结论：领域已从工程计算扩到消费端，但受成熟度、自然交互与实时渲染三类瓶颈约束。</div>
-          </div>
-        </div>
-        <div class="mrow">
-          <div class="mw">课程论文</div>
-          <div>
-            <div class="mt">空间计算在物流管理中的运用</div>
-            <div class="md">小组合作。把技术映射到实时货物跟踪、路径规划、仓库自动化。结论：应用空间明确，受技术成熟度、经济成本与数据安全三重约束。</div>
-          </div>
-        </div>
+        <summary>案例研究<span class="plus"></span></summary>
         <div class="mrow">
           <div class="mw">案例分析</div>
           <div>
@@ -411,6 +382,13 @@
           <div>
             <div class="mt">「五个女博士」广告争议案例</div>
             <div class="md">用扎根理论提炼的框架比较广告冒犯度与消费者容忍度。结论：「贩卖焦虑」与自建的高学术形象冲突，长期会损害品牌态度；对购买行为的影响未做实验检验。</div>
+          </div>
+        </div>
+        <div class="mrow">
+          <div class="mw">课程论文</div>
+          <div>
+            <div class="mt">空间计算在物流管理中的运用</div>
+            <div class="md">小组合作。把技术映射到实时货物跟踪、路径规划、仓库自动化。结论：应用空间明确，受技术成熟度、经济成本与数据安全三重约束。</div>
           </div>
         </div>
         <div class="mrow">
