@@ -217,7 +217,6 @@
       <a href="#smart">冲突检测与提醒</a>
       <a href="#tech">解析质量</a>
       <a href="#position">定位假设与风险</a>
-      <a href="#devlog">实现中的问题与修复</a>
     </div>
     <div class="toc" style="border-top:none;padding-top:0;margin-top:8px">
       <b>这个项目的另外三页</b>
@@ -419,23 +418,6 @@
         </ul>
         <p style="margin-top:12px">开放题里有受访者提出"课表录入""朋友共享日程"，也有人写"现有 app 用得顺手、智能工具需求不强"。前者是需求线索、后者是转化阻力。它们是用户自己写下的话，尚未纳入当前版本，也不代表已排期的功能。</p>
       </div>
-    </div>
-  </section>
-
-  
-
-  <section id="devlog" style="background:#fff;border-top:1px solid var(--line)">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="k">实现中的问题与修复</div>
-        <h2>三个故障，和怎么定位的</h2>
-        <p>小程序与云开发由本人部署（编码过程借助 AI 辅助）；这三处故障的定位与修改由本人完成。</p>
-      </div>
-      <ul class="log">
-        <li><b>提醒锚点算错一天</b>：云函数运行在 UTC，北京时间 00:00–08:00 之间"今天"会被算成前一天，日程锚点落到过去，提醒不会触发。<span class="meta">改法：显式 +8 小时后再取日期；靠日志 scanned=12 / sent=0 反查到这一步</span></li>
-        <li><b>两处静默失败</b>：新建日程写入时少了 <code>reminded</code> 字段，提醒扫描把它当成"已提醒"跳过，日程建好了却永远不进队列；<code>location</code> 为空的日程仍在列表里渲染 null。<span class="meta">改法：写入时显式 <code>reminded: false</code>；空值不渲染</span></li>
-        <li><b>剪贴板读取"点了同意也不生效"</b>：两个问题叠在一起：隐私授权 API 名写错，自定义弹窗其实从未注册；回调里回传的 buttonId 在页面上又不存在，微信判定无效，授权态于是存不下来。<span class="meta">改法：修正 API 名，弹窗里改成真实的同意按钮并回传它的 id</span></li>
-      </ul>
     </div>
   </section>
 
