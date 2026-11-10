@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>知识库整理工具 · 韩王泽</title>
-<meta name="description" content="给自己用的知识库整理脚本：先量化盘点，确认后再按风险从低到高分批归档、重建入口文档。" />
+<title>知识库整理 skill · 韩王泽</title>
+<meta name="description" content="给自己用的知识库整理 skill：对接 ima 开放接口，先量化盘点，再按风险从低到高分批归档、重建入口文档。" />
 <meta name="author" content="韩王泽" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="favicon.ico" sizes="32x32" />
@@ -14,16 +14,16 @@
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="韩王泽 · 个人主页" />
 <meta property="og:locale" content="zh_CN" />
-<meta property="og:title" content="知识库整理工具 · 韩王泽" />
-<meta property="og:description" content="先量化盘点，确认后再按风险从低到高分批归档、重建入口文档。" />
+<meta property="og:title" content="知识库整理 skill · 韩王泽" />
+<meta property="og:description" content="对接 ima 开放接口，先量化盘点，再按风险从低到高分批归档、重建入口文档。" />
 <meta property="og:url" content="https://han-wangze.github.io/hanwangze/kb-organizer.html" />
 <meta property="og:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="韩王泽个人主页：教育经历、实习经历与项目作品" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="知识库整理工具 · 韩王泽" />
-<meta name="twitter:description" content="先量化盘点，确认后再按风险从低到高分批归档、重建入口文档。" />
+<meta name="twitter:title" content="知识库整理 skill · 韩王泽" />
+<meta name="twitter:description" content="对接 ima 开放接口，先量化盘点，再按风险从低到高分批归档、重建入口文档。" />
 <meta name="twitter:image" content="https://han-wangze.github.io/hanwangze/og.png" />
 <style>
   :root{
@@ -96,6 +96,7 @@
   .steps li::before{counter-increment:st;content:counter(st);position:absolute;left:15px;top:13px;width:22px;height:22px;border-radius:7px;background:#eef2ff;color:var(--primary);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center}
   .steps li b{color:var(--ink)}
   .lead{font-size:14px;color:var(--muted);max-width:760px;margin-bottom:20px}
+  .lead code{font-family:Consolas,Menlo,monospace;font-size:12.5px;background:#eef2ff;color:var(--primary);padding:1px 5px;border-radius:4px}
   footer{padding:36px 0 56px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
   .sitemap{margin-top:0;font-size:14px;color:var(--muted);line-height:2}
   .sitemap b{color:var(--ink);font-weight:600}
@@ -132,11 +133,11 @@
 
 <header class="hero">
   <div class="wrap">
-    <h1>知识库整理工具</h1>
-    <p class="sub">给自己用的一个脚本工具。先只读盘点、把散乱程度量化，确认后再按风险从低到高分批归档，最后重建入口文档。</p>
+    <h1>知识库整理 skill</h1>
+    <p class="sub">给 ima 个人知识库写的一套整理脚本：先只读盘点、把散乱程度量化，确认后再按风险从低到高分批归档，最后重建入口文档。</p>
     <div class="badges">
       <span class="badge">Python 脚本</span>
-      <span class="badge">知识库开放接口</span>
+      <span class="badge">ima 开放接口</span>
       <span class="badge">批量处理</span>
     </div>
     <div class="cta">
@@ -151,14 +152,14 @@
       <div class="k">01</div>
       <h2>它解决什么</h2>
     </div>
-    <p class="lead">个人知识库用久了，条目会散在根目录，文件夹建好了却是空的，标题带着平台生成的一长串 ID、副本后缀和重名编号。这些不影响单条内容能不能打开，但整个库会没法扫读，检索也只能一层层翻文件夹。</p>
+    <p class="lead">个人知识库用久了，条目会散在根目录，文件夹建好了却是空的，标题还带着整体导入时留下的一长串十六进制 ID、<code>-副本</code>、<code>(1)</code> 这类后缀。单条内容照常能打开，但整个库没法扫读，检索也只能一层层翻文件夹。</p>
     <div class="paper">
       <div class="pt">重心在归档动作，不在分类方案</div>
-      <p>多数库的问题，是结构早就建好了、内容却没被搬进去。所以工具分两半：<b>先只读诊断</b>，把散乱程度算成能横向比的指标；<b>拿到确认后再写入</b>，用脚本把根目录的散落条目真正归到文件夹里。</p>
+      <p>常见的状况是，结构早就建好了、内容却没被搬进去。所以脚本分两步走：<b>先只读诊断</b>，把散乱程度算成能横向比的指标；<b>拿到确认后再写入</b>，用脚本把根目录的散落条目归到文件夹里。</p>
     </div>
     <div class="paper">
-      <div class="pt">按技能（Skill）的格式组织</div>
-      <p>一份说明文件写清什么时候触发、每个阶段做什么、哪些操作要先问过使用者；执行逻辑拆成几个 Python 脚本，结构规范和接口限制单独放在参考文档里。本页是把它翻成能直接扫懂的样子，源码未公开。</p>
+      <div class="pt">一份说明文件 + 几个 Python 脚本</div>
+      <p>说明文件写明什么情况下用、每个阶段做什么、哪些操作要先问过使用者；执行逻辑拆成盘点、洗标题、批量归档、重生成入口等几个独立脚本。结构规范和踩过的接口限制另放在一份参考文档里。</p>
     </div>
   </div>
 </section>
@@ -179,7 +180,8 @@
       <tr><td>重复导入</td><td>同标题出现 ≥ 2 次</td><td>标记 _dup，交使用者在客户端删</td></tr>
       <tr><td>标签使用</td><td>带标签文件占比 &lt; 20%</td><td>补主题、用途、状态三类标签</td></tr>
     </table>
-    <div class="note"><b>目标结构</b>　一级夹不超过 6 个、最深 3 层；先分「别人给的 / 我产出的」，再分主题。文件夹用两位编号，根目录只留入口文档、收件箱和少数正在用的文件。</div>
+    <div class="note"><b>阈值口径</b>　上表判定线是盘点脚本内置的默认参数，命中即触发一条整理建议；脚本把它们写成固定值（如根目录占比 30%、最深 4 层），没有做按库自适应，也不是通行标准。</div>
+    <div class="note"><b>目标结构</b>　一级夹不超过 6 个、最深 3 层；先分「别人给的 / 我产出的」，再分主题。文件夹用两位编号，根目录只留入口文档、收件箱文件夹和少数正在用的文件。</div>
   </div>
 </section>
 
@@ -188,15 +190,14 @@
     <div class="sec-head">
       <div class="k">03</div>
       <h2>再执行：风险从低到高</h2>
-      <p>每步先出预览、复核一遍再往下走；写入类操作默认不直接生效。</p>
+      <p>按风险从低到高排，代价越小的越先做；每步先看预览，确认无误再往下走。</p>
     </div>
     <ol class="steps">
       <li><b>洗标题噪音。</b>去掉长 ID、副本和重名后缀，同目录撞名自动加序号。默认只列预览清单，加确认参数才真正改名。</li>
       <li><b>填空壳。</b>按标题关键词把根目录散落文件归到已有文件夹，先打印匹配表，重点看「无匹配」和「冲突」两栏，避免漏掉或错放。</li>
       <li><b>合并库。</b>不可逆性最高，单独确认。文件能跨库移动，文件夹不行，只能先在目标库建好夹、再逐条搬文件。</li>
-      <li><b>重生成入口。</b>目录由脚本从实际结构生成，人只补「这库回答什么问题」「按场景跳转」这类不随条目数变化的判断。旧入口改名归档，不删。</li>
+      <li><b>重生成入口。</b>手写目录会过期：目录由脚本从实际结构生成，人只补「这库回答什么问题」「按场景跳转」这类不随条目数变化的判断。旧入口改名归档，不删。</li>
     </ol>
-    <p class="lead" style="margin:18px 0 0">这么分步，是因为手写目录会过期：一次盘点里，某库入口文档写着 74 条、实际 97 条，另一个库还索引着已经删掉的文件夹。</p>
   </div>
 </section>
 
@@ -205,15 +206,15 @@
     <div class="sec-head">
       <div class="k">04</div>
       <h2>已知边界</h2>
-      <p>这些限制来自接口本身，写在这里免得被当成工具没做完。</p>
+      <p>ima 开放接口自身的限制，决定了这套脚本能做什么、不能做什么。</p>
     </div>
     <div class="paper">
       <div class="pt">没有删除接口，写入撤不回</div>
-      <p>知识库、文件夹、文件都删不掉，改名和移动也撤不回。所以重复项和空壳只能改成 <b>_dup</b>、<b>99_待删</b> 这类标记，交使用者在客户端手动删；合并库要单独拿到确认。</p>
+      <p>接口不提供删除，知识库、文件夹、文件都删不掉，改名和移动也撤不回。所以重复项和空壳只能改成 <b>_dup</b>、<b>99_待删</b> 这类标记，交使用者在客户端手动删；合并库要单独拿到确认。</p>
     </div>
     <div class="paper">
-      <div class="pt">请求有限制</div>
-      <p>单次移动最多 10 条，连续请求会触发限流。脚本按 10 条切批、请求之间留间隔，失败按 5 / 10 / 15 秒退避重试；条目 ID 必须原样使用，截断会报无效。</p>
+      <div class="pt">接口限额与重试</div>
+      <p>单次移动最多 10 条，超过直接报错；连续请求会触发限流。脚本按 10 条切批、请求之间留间隔，失败按 5 / 10 / 15 秒退避重试。</p>
     </div>
     <div class="paper">
       <div class="pt">改动范围</div>
